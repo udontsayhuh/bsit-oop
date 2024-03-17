@@ -85,18 +85,19 @@ class Program
         convertible_car myConvertible = new convertible_car("nissan", "Murano", 2022, "R341-AA89");
         Console.WriteLine($"Model: {myConvertible.Model}, Make: {myConvertible.Make}, Year: {myConvertible.Year}");
         Console.WriteLine($"Plate number: {myConvertible.Get_plate_num()}"); //encapsulation
-        myConvertible.Drive();
-        myConvertible.Stop();
         myConvertible.Accelerate();
         myConvertible.Retract_roof();
+        myConvertible.Drive();
+        myConvertible.Stop();
 
 
         // Polymorphed
         race_car myRace = new race_car("McLaren", "570S", 2015, "C0R3-0912");
         Console.WriteLine($"Model: {myRace.Model}, Make: {myRace.Make}, Year: {myRace.Year}");
         Console.WriteLine($"Plate number: {myRace.Get_plate_num()}"); //encapsulation
+        myRace.Accelerate(); //polymorphed trait
         myRace.Drive();
         myRace.Stop();
-        myRace.Accelerate(); //polymorphed trait
+
     }
 }
