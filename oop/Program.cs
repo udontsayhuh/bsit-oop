@@ -6,11 +6,23 @@
     public string Make;
     public int Year;
 
+    //PRIVATE ATTRIBUTE VIN: VEHICLE INFORMATION NUMBER
+    private string Vehicle_Info_Num;
+     
+    //GET-SET ENCAPSULATION
+    public string VIN
+    {
+        get { return Vehicle_Info_Num; }
+        set { Vehicle_Info_Num = value; }
+    }
+     
     //Constructor
-    public Car(string model, string make, int year) {
+    public Car(string model, string make, int year, string V_I_N) 
+    {
         Model = model;
         Make = make;
         Year = year;
+        Vehicle_Info_Num = V_I_N;
     }
 
     //Methods
@@ -20,6 +32,11 @@
 
     public void Stop() {
         Console.WriteLine("The car has stopped.");
+    }
+
+    public virtual void show_information()
+    {
+        Console,WriteLine($"Model: {Model}, Make: {Make}, Year: {Year}, Vehicle Information Number: {VIN}");
     }
 }
 
