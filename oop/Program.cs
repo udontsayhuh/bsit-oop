@@ -86,12 +86,14 @@ class Boat: Vihicle
 
 class Program {
     static void Main(string[] args) {
+        //car
         Car myCar = new Car("Toyota", "Corolla", 2023);
         Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}, Wheels: {myCar.wheels}");
         myCar.Start();
         myCar.Drive();
         myCar.Stop();
 
+        //airplane
         Console.WriteLine("");
         Airplane myAirplane = new Airplane();
         Console.WriteLine($"Airplane Wheels: {myAirplane.wheels}");
@@ -99,6 +101,7 @@ class Program {
         myAirplane.Drive();
         myAirplane.Stop();
 
+        //boat
         Console.WriteLine("");
         Boat myBoat = new Boat();
         Console.WriteLine($"Boat Wheels: {myBoat.wheels}");
