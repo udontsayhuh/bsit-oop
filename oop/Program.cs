@@ -29,9 +29,9 @@ class Car
     // Constructor
     public Car(string model, string make, int year)
     {
-        this.model = model;
-        this.make = make;
-        this.year = year;
+        Model = model;
+        Make = make;
+        Year = year;
     }
 
     // Abstraction: Abstract method for driving 
