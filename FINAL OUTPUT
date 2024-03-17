@@ -1,43 +1,41 @@
-//Abstraction: creating an abstract class for the car
+// Abstraction: creating an abstract class for the car
 class Car
 {
-    //test
-    //git
-    //Attributes
-    //Encapsulation: Making attributes private 
+    // Attributes
+    // Encapsulation: Making attributes private 
     private string model;
     private string make;
-    private int year; 
+    private int year;
 
-    //Encapsulation: Using properties to access private attributes
+    // Encapsulation: Using properties to access private attributes
     public string Model
     {
-        get {return model;}
-        set {model = value;}
+        get { return model; }
+        set { model = value; }
     }
 
     public string Make
     {
-        get {return make;}
-        set {make = value;}
+        get { return make; }
+        set { make = value; }
     }
 
     public int Year
     {
-        get {return year;}
-        set {year = value;}
+        get { return year; }
+        set { year = value; }
     }
 
-    //Constructor
+    // Constructor
     public Car(string model, string make, int year)
     {
-        Model = model;
-        Make = make;
-        Year = year;
+        this.model = model;
+        this.make = make;
+        this.year = year;
     }
 
-    //Abstraction: Abstract method for driving 
-    //Methods
+    // Abstraction: Abstract method for driving 
+    // Methods
     public virtual void Drive()
     {
         Console.WriteLine("The car is now running.");
@@ -49,25 +47,25 @@ class Car
     }
 }
 
-    //Inheritance: creating a car subclass
-    class SportsCar : Car
+// Inheritance: creating a car subclass
+class SportsCar : Car
 {
-    public SportsCar(string model, string make, int year) : base (model,make,year)
-    { 
+    public SportsCar(string model, string make, int year) : base(model, make, year)
+    {
     }
 
-    //Polymorphism: override drive method for car
+    // Polymorphism: override drive method for car
     public override void Drive()
     {
         Console.WriteLine("The Sports Car is now accelerating.");
     }
+
     public override void Stop()
     {
         Console.WriteLine("The Sports Car is now drifting.");
     }
-
 }
-    
+
 class Program
 {
     static void Main(string[] args)
