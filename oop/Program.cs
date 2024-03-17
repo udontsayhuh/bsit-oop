@@ -100,9 +100,5 @@ class Program
         // Invoking Drive and Stop methods for Motorcycle
         myMotorcycle.Drive();
         myMotorcycle.Stop();
-       
-
     }
-
 }
-
