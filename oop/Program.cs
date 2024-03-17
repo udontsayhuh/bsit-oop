@@ -14,7 +14,7 @@
     }
 
     //Methods
-    public void Drive() {
+    private void Drive() {
         Console.WriteLine("The car is now running.Test");
     }
 

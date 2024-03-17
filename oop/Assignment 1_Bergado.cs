@@ -1,74 +1,63 @@
-class Car
+using System;
+using System.Management.Instrumentation;
+
+class Vehicle  // Base class (parent) 
 {
-	//test
-	//git
-	//Attributes
-	public string Model;
-	public string Make;
-	public int Year;
+    public int Year;
+    public string Model;
+    public string Manufacturer;
 
-	//Constructor
-	public Car(string model, string make, int year)
-	{
-		Model = model;
-		Make = make;
-		Year = year;
-	}
+    public Vehicle(string model, string manufacturer)
+    {
+        Year = 2023;
+        Model = model;
+        Manufacturer = manufacturer;
+    }
 
-	//Methods
-	public void Drive()
-	{
-		Console.WriteLine("The car is now running.Test by carts");
-	}
 
-	public void Stop()
-	{
-		Console.WriteLine("The car has stopped.");
-	}
+    public virtual void CarSound()
+    {
+        Console.WriteLine("Vehicle Sound:");
+    }
+}
+
+class Car : Vehicle   // Derived class (child) 
+{
+    public Car(string model, string manufactuer) : base(model, manufactuer)
+    {
+    }
+
+
+    public override void CarSound()
+    {
+        Console.WriteLine("Broom Broom");
+    }
+}
+
+class Plane : Vehicle  // Derived class (child) 
+{
+    public Plane(string model, string manufacturer) : base(model, manufacturer)
+    {
+
+    }
+    public override void CarSound()
+    {
+        Console.WriteLine("Skrrt Skrrt");
+    }
 }
 
 class Program
 {
-	static void Main(string[] args)
-	{
-		Car myCar = new Car("Toyota", "Corolla", 2023);
-		Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
-		myCar.Drive();
-		myCar.Stop();
+    static void Main(string[] args)
+    {
+        Vehicle myVehicle = new Vehicle("Model", "Manufacturer");
+        Car myCar = new Car("Raize", "Toyota");
+        Plane myPlane = new Plane("A380", "Airbus");
 
-	}
-}
-class Car {
-    //test
-    //git
-    //Attributes
-    public string Model;
-    public string Make;
-    public int Year;
-
-    //Constructor
-    public Car(string model, string make, int year) {
-        Model = model;
-        Make = make;
-        Year = year;
-    }
-
-    //Methods
-    public void Drive() {
-        Console.WriteLine("The car is now running.Test");
-    }
-
-    public void Stop() {
-        Console.WriteLine("The car has stopped.");
-    }
-}
-
-class Program {
-    static void Main(string[] args) {
-        Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
-        myCar.Drive();
-        myCar.Stop();
-
+        Console.WriteLine(myCar.Manufacturer + "  " + myCar.Model + "  " + myCar.Year);
+        Console.WriteLine(myPlane.Manufacturer + "  " + myPlane.Model + "  " + myPlane.Year);
+        myVehicle.CarSound();
+        myCar.CarSound();
+        myPlane.CarSound();
     }
 }
