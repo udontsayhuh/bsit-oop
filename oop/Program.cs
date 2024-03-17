@@ -82,7 +82,7 @@ class Program
     static void Main(string[] args)
     {
         // Using polymorphism to create a Tricycle object
-        Vehicle myTricycle = new Tricycle("XYZ", "ABC", 2020);
+        Vehicle myTricycle = new Tricycle("Kawasaki", "10,000cc", 2019);
 
         // Using abstraction to access attributes
         Console.WriteLine($"Tricycle - Model: {myTricycle.GetModel()}, Make: {myTricycle.GetMake()}, Year: {myTricycle.GetYear()}");
