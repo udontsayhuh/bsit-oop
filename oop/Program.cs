@@ -5,8 +5,8 @@
     public string Model;
     public string Make;
     public int Year;
-
-    //Constructor
+    
+    //Constructoruyyuy
     public Car(string model, string make, int year) {
         Model = model;
         Make = make;
@@ -19,6 +19,11 @@
     }
 
     public void Stop() {
+        Console.WriteLine("The car has stopped.");
+    }
+    //Accelerate Added
+    public void Accelerate()
+    {
         Console.WriteLine("The car has stopped.");
     }
 }
