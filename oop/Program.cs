@@ -1,34 +1,65 @@
-﻿class Car {
+// Encapsulation
+public class Car
+//git
+//attributes
+{
+    public string Model { get; private set; }
+    public string Make { get; private set; }
+    public int Year { get; private set; }
 
-    //git
-    //Attributes
-    public string Model;
-    public string Make;
-    public int Year;
-
-    //Constructor
-    public Car(string model, string make, int year) {
+    // Constructor
+    public Car(string model, string make, int year)
+    {
         Model = model;
         Make = make;
         Year = year;
     }
 
-    //Methods
-    public void Drive() {
+    // Abstraction
+    public virtual void Drive()
+    {
         Console.WriteLine("The car is now running.");
     }
 
-    public void Stop() {
+    public virtual void Stop()
+    {
         Console.WriteLine("The car has stopped.");
     }
 }
 
-class Program {
-    static void Main(string[] args) {
-        Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
-        myCar.Drive();
-        myCar.Stop();
+// Inheritance
+public class Mslayer : Car
+{
+    public int CarCapacity { get; private set; }
+    public Mslayer(string model, string make, int year, int carCapacity) : base(model, make, year)
+    {
 
+    }
+    // Polymorphism
+    public override void Drive()
+    {
+        Console.WriteLine("The car is now running silently.");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Car myCar = new Car("Toyota", "Corolla", 2023);
+        DisplayCarInfo(myCar);
+
+        Mslayer myElectricCar = new Mslayer("Aventador", "Aventador S", 2017, 100);
+        DisplayCarInfo(myElectricCar);
+
+    }
+
+    // Abstraction
+    static void DisplayCarInfo(Car car)
+    {
+        Console.WriteLine($"Model: {car.Model}, Make: {car.Make}, Year: {car.Year}");
+        car.Drive();
+        car.Stop();
+        Console.WriteLine();
     }
 }
