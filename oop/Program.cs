@@ -89,5 +89,12 @@ class Program
         yourCar.Drive();
         yourCar.Stop();
         yourCar.Race();
+
+        //Polymorphism Test
+        Console.WriteLine("\nPolymorphism:");
+        Car hisCar = new Sports_car("Ford", "Mustang", 2015, "GRI-3767", false);
+        Car herCar = new Sports_car("Toyota", "Supra", 2019, "QBF-6399", true);
+        hisCar.Show_info();
+        herCar.Show_info();
     }
 }
