@@ -21,6 +21,10 @@
     public void Stop() {
         Console.WriteLine("The car has stopped.");
     }
+    public void Repair()
+    {
+        Console.WriteLine("The car is on repair.")
+    }
 }
 
 class Program {
@@ -29,6 +33,7 @@ class Program {
         Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
         myCar.Drive();
         myCar.Stop();
+        myCar.Repair();
 
     }
 }
