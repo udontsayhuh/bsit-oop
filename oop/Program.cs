@@ -48,11 +48,11 @@ class Car : Vehicle {
 
     //Polymorphism
     //Override inherited methods
-    public void move() {
+    public override void move() {
         Console.WriteLine($"The car, {model} {make} is now moving.\n");
     }
 
-    public void stop() {
+    public override void stop() {
         Console.WriteLine($"The car, {model} {make} has stopped.\n");
     }
 }
