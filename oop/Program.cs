@@ -73,13 +73,13 @@ class Program
     static void Main(string[] args)
     {
         Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.model}, Make: {myCar.make}, Year: {myCar.year}");
+        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
         myCar.Drive();
         myCar.Stop();
 
 
         SportsCar mySportsCar = new SportsCar("Nissan", "GT-R Skyline", 1957);
-        Console.WriteLine($"Model: {mySportsCar.model}, Make: {mySportsCar.make}, Year: {mySportsCar.year}");
+        Console.WriteLine($"Model: {mySportsCar.Model}, Make: {mySportsCar.Make}, Year: {mySportsCar.Year}");
         mySportsCar.Drive();
         mySportsCar.Stop();
     }
