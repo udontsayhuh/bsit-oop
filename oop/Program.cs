@@ -42,6 +42,20 @@ public class Mslayer : Car
     }
 }
 
+public class Another : Car
+{
+    public int CarCapacity { get; private set; }
+    public Another(string model, string make, int year, int carCapacity) : base(model, make, year)
+    {
+
+    }
+    // Polymorphism
+    public override void Drive()
+    {
+        Console.WriteLine("The car is now running very fast.");
+    }
+}
+
 class Program
 {
     static void Main(string[] args)
@@ -49,8 +63,11 @@ class Program
         Car myCar = new Car("Toyota", "Corolla", 2023);
         DisplayCarInfo(myCar);
 
-        Mslayer myElectricCar = new Mslayer("Aventador", "Aventador S", 2017, 100);
+        Mslayer myElectricCar = new Mslayer(" Lamborghini Aventador", "Aventador S", 2017, 100);
         DisplayCarInfo(myElectricCar);
+
+        Another myAnother = new Another("Porsche 911", "Porsche", 2023, 100);
+        DisplayCarInfo(myAnother);
 
     }
 
