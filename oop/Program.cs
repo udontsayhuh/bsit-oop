@@ -1,7 +1,5 @@
 ﻿class Car
 {
-
-    //git
     //Attributes
     public string Model;
     public string Make;
@@ -57,13 +55,41 @@ class Sports_car : Car
     //Methods
     public void Race()
     {
-        Console.WriteLine("The Car is now racing!! VROOOOOOM!");
+        Console.WriteLine("The car is now racing!! VROOOOOOM!");
     }
 
     public override void Show_info()
     {
         base.Show_info();
         Console.WriteLine($"Nitros Equiped?: {have_nitros}");
+    }
+}
+
+abstract class Electric_car : Car
+{
+    //Unique Attribute
+    public int Battery_percentage;
+
+    //Constructor
+    public Electric_car(string model, string make, int year, string aPlate_num, int battery_percentage) : base(model, make, year, aPlate_num)
+    {
+        Battery_percentage = battery_percentage;
+    }
+
+    //Abstract Method
+    public abstract void Charge_battery();
+}
+
+class Tesla : Electric_car
+{
+    public Tesla(string model, string make, int year, string aPlate_num, int battery_percentage) : base(model, make, year, aPlate_num, battery_percentage)
+    {
+
+    }
+
+    public override void Charge_battery()
+    {
+        Console.WriteLine("The car is now charging its battery.");
     }
 }
 
@@ -85,10 +111,10 @@ class Program
         //Inheritance Test
         Console.WriteLine("\nInheritance:");
         Sports_car yourCar = new Sports_car("Audi", "Lamborghini", 2024, "BLT-F4ST", true);
-        yourCar.Show_info();//Inherited from class Car
-        yourCar.Drive();
-        yourCar.Stop();
-        yourCar.Race();
+        yourCar.Show_info(); // ---+
+        yourCar.Drive();     //    |---> Inherited from class Car
+        yourCar.Stop();      // ---+
+        yourCar.Race();      // -------> Unique method
 
         //Polymorphism Test
         Console.WriteLine("\nPolymorphism:");
@@ -96,5 +122,13 @@ class Program
         Car herCar = new Sports_car("Toyota", "Supra", 2019, "QBF-6399", true);
         hisCar.Show_info();
         herCar.Show_info();
+
+        //Abstraction Test
+        Console.WriteLine("\nPolymorphism:");
+        //Electric_car carA = new Electric_car();  - error
+        Tesla carB = new Tesla("Tesla", "Tesla", 2020, "HDY-3486", 80);
     }
 }
+
+// GARCES, JOHN MARK A.
+// BSIT 2-1
