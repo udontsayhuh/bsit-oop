@@ -17,16 +17,19 @@ abstract class Car //abstract class
         plateNum = platenum;
     }
 
-    // abstract methods
+    // can define method as abstract
     public abstract void Drive();
-    public abstract void Stop(); 
 
+    // or virtual since this method be override in subclass
+    public virtual void Stop() {
+        Console.WriteLine("Screech!");
+    }
 }
 
 class Sedan : Car { // class "Sedan" inheriting from parent class "Car"
     public Sedan(string model, string make, int year, string platenum): base(model, make, year, platenum) { }
 
-    //Polymorphism -> method in this class overrides the method defined in parent class 
+    //Polymorphism implemented as method in this class overrides the method defined in parent class 
     public override void Drive() {
         Console.WriteLine("The car is now running.");
      }
