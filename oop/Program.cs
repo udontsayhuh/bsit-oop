@@ -5,27 +5,27 @@ class Car
     //git
     //Attributes
     //Encapsulation: Making attributes private 
-    private string Model;
-    private string Make;
-    private int Year; 
+    private string model;
+    private string make;
+    private int year; 
 
     //Encapsulation: Using properties to access private attributes
-    public string model
+    public string Model
     {
-        get {return Model;}
-        set {Model = value;}
+        get {return model;}
+        set {model = value;}
     }
 
-    public string make
+    public string Make
     {
-        get {return Make;}
-        set {Make = value;}
+        get {return make;}
+        set {make = value;}
     }
 
-    public int year
+    public int Year
     {
-        get {return Year;}
-        set {Year = value;}
+        get {return year;}
+        set {year = value;}
     }
 
     //Constructor
