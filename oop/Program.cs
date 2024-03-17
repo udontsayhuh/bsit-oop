@@ -29,6 +29,6 @@ class Program {
         Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
         myCar.Drive();
         myCar.Stop();
-
+        Console.WriteLine("Test");
     }
 }
