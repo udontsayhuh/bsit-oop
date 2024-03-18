@@ -4,6 +4,7 @@ abstract class Car {
     private string model;
     private string make;
     private int year;
+    private string money;
 
     // Encapsulated properties
     public string Model {
@@ -21,11 +22,17 @@ abstract class Car {
         set { year = value; }
     }
 
+    public string Money {
+        get { return money; }
+        set { money = value; }
+    }
+
     // Constructor
-    public Car(string model, string make, int year) {
+    public Car(string model, string make, int year, string money) {
         Model = model;
         Make = make;
         Year = year;
+        Money = money;
     }
 
     // Abstract method Drive
@@ -38,7 +45,7 @@ abstract class Car {
 // Derived class ElectricCar
 class ElectricCar : Car {
     // Constructor
-    public ElectricCar(string model, string make, int year) : base(model, make, year) {
+    public ElectricCar(string model, string make, int year, string money) : base(model, make, year, money) {
     }
 
     // Implementing Drive method
@@ -54,7 +61,7 @@ class ElectricCar : Car {
 // Derived class ManualCar
 class ManualCar : Car {
     // Constructor
-    public ManualCar(string model, string make, int year) : base(model, make, year) {
+    public ManualCar(string model, string make, int year, string price) : base(model, make, year, price) {
     }
 
     // Implementing Drive method
@@ -70,12 +77,12 @@ class ManualCar : Car {
 
 class Program {
     static void Main(string[] args) {
-        Car manuCar = new ManualCar("Suzuki", "Dzire", 2008);
-        Car electCar = new ElectricCar("Tesla", "Model S", 2023);
-        Console.WriteLine($"Model: {manuCar.Model}, Make: {manuCar.Make}, Year: {manuCar.Year}");
+        Car manuCar = new ManualCar("Suzuki", "Dzire", 2008, "$10,635");
+        Car electCar = new ElectricCar("Tesla", "Model S", 2023, "$94,990");
+        Console.WriteLine($"Model: {manuCar.Model}, Make: {manuCar.Make}, Year: {manuCar.Year}, Money: {manuCar.Money}");
         manuCar.Drive();
         manuCar.Stop();
-        Console.WriteLine($"Model: {electCar.Model}, Make: {electCar.Make}, Year: {electCar.Year}");
+        Console.WriteLine($"Model: {electCar.Model}, Make: {electCar.Make}, Year: {electCar.Year}, Money: {electCar.Money}");
         electCar.Drive();
         electCar.Stop();
     }
