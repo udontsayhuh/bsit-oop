@@ -1,6 +1,20 @@
-﻿class Car {
-    //test
-    //git
+﻿using System;
+
+namespace oop
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Car myCar = new Car("Toyota", "Corolla", 2023);
+            Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
+            myCar.Drive();
+            myCar.Stop();
+
+        }
+    }
+    class Car
+    {
     //Attributes
     public string Model;
     public string Make;
