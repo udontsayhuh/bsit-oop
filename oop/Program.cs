@@ -1,18 +1,18 @@
 ﻿// Abstract base class for Car
 abstract class Car {
     // Attributes
-    private string model;
-    private string make;
+    private string? model;
+    private string? make;
     private int year;
-    private string money;
+    private string? money;
 
     // Encapsulated properties
-    public string Model {
+    public string? Model {
         get { return model; }
         set { model = value; }
     }
 
-    public string Make {
+    public string? Make {
         get { return make; }
         set { make = value; }
     }
@@ -22,7 +22,7 @@ abstract class Car {
         set { year = value; }
     }
 
-    public string Money {
+    public string? Money {
         get { return money; }
         set { money = value; }
     }
