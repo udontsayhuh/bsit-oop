@@ -32,17 +32,15 @@ class Car : Vehicle {
     // Additional attributes
     private string number;
     private int speed;
-    private int winsRace;
     private int firstMovieRelease;
 
     // Constructor
-    public Car(string name, string make, int year, string number, int speed, int winsRace, int firstMovieRelease) {
+    public Car(string name, string make, int year, string number, int speed, int firstMovieRelease) {
         Name = name;
         Model = make; // Assigning 'make' to 'Model' for consistency
         Year = year;
         this.number = number;
         this.speed = speed;
-        this.winsRace = winsRace;
         this.firstMovieRelease = firstMovieRelease;
     }
 
@@ -60,12 +58,7 @@ class Car : Vehicle {
         Console.WriteLine($"The {Name} with number {number} has stopped.");
     }
 
-    // Additional methods to access and update winsRace and firstMovieRelease
-    public int WinsRace {
-        get { return winsRace; }
-        set { winsRace = value; }
-    }
-
+    // Property for accessing firstMovieRelease
     public int FirstMovieRelease {
         get { return firstMovieRelease; }
         set { firstMovieRelease = value; }
@@ -74,7 +67,7 @@ class Car : Vehicle {
 
 class Program {
     static void Main(string[] args) {
-        Car mcQueen = new Car("Lightning McQueen", "Chevrolet", 2006, "95", 200, 7, 2006);
+        Car mcQueen = new Car("Lightning McQueen", "Chevrolet", 2006, "95", 200, 2006);
         mcQueen.Model = "C6 Chevrolet Corvette"; // Updating the model
         Console.WriteLine("Name: " + mcQueen.Name);
         Console.WriteLine("Model: " + mcQueen.Model);
