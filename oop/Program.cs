@@ -1,6 +1,6 @@
 using System;
 
-// Encapsulation: Making attributes private and providing protected properties for access.
+// Encapsulation
 class Car {
     private string model;
     private string make;
@@ -28,7 +28,7 @@ class Car {
         protected set { year = value; }
     }
 
-    // Abstraction: Drive and Stop methods are abstracted as the behaviors of the Car.
+    // Abstraction
     public virtual void Drive() {
         Console.WriteLine("The car is now running.");
     }
@@ -38,12 +38,12 @@ class Car {
     }
 }
 
-// Inheritance: Truck class inherits from Car class.
+// Inheritance
 class Truck : Car {
     public Truck(string model, string make, int year) : base(model, make, year) {
     }
 
-    // Polymorphism: Override Drive method for Truck to provide specific behavior.
+    // Polymorphism
     public override void Drive() {
         Console.WriteLine("The truck is now moving.");
     }
