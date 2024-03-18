@@ -1,0 +1,93 @@
+using System.Diagnostics;
+using System.Transactions;
+using oop.cs;
+
+namespace oop.cs
+{
+
+
+        abstract class Car
+    {
+
+
+        //Attributes
+        public string Model;
+        public string Make;
+        public int Year;
+        
+
+        //properties
+        public string model
+        {
+            get { return Model; }
+            set { Model = value; }
+        }
+        public string make
+        {
+            get { return Make; }
+            set { Make = value; }
+
+        }
+        public int year
+        {
+            get { return Year; }
+            set { Year = value; }
+        }
+        //constructor 
+        public Car(string Model, string Make, int Year)
+        {
+            model = Model;
+            make = Make;
+            year = Year;
+        }
+        //Methods
+        public virtual void Drive()
+        {
+            
+        }
+
+        public virtual void Stop()
+        {
+            
+        }
+
+    }
+
+
+//inheritance
+        class SUV : Car
+        {
+            public SUV(string model, string make ,int year) : base(model,make, year)
+            {
+            Console.WriteLine("my car collection");
+            }
+        public override void Drive()
+        {
+            Console.WriteLine("test");
+        }
+   
+
+        public override void Stop()
+        {
+            Console.WriteLine("The car has stopped.");
+        }
+            
+        }
+class Program
+{
+    static void Main(string[] args)
+    {
+        Car myCar = new SUV("Toyota", "Corolla", 2023);
+        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
+        myCar.Drive();
+        myCar.Stop();
+
+    }
+}
+    
+
+
+} 
+
+
+
