@@ -1,5 +1,6 @@
 using System;
 
+// Abstract base class representing a vehicle
 abstract class Vehicle {
     private string model;
     private string make;
