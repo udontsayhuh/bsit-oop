@@ -10,8 +10,6 @@ abstract class Vehicle
     //inheritance
 class Car : Vehicle
 
-    //git
-    //Attributes
     public override string Model {get; set;}
     public override string Make {get; set;}
     public override int Year {get; set;}
