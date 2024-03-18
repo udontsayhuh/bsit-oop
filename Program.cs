@@ -32,16 +32,14 @@ class Car : Vehicle {
     // Additional attributes
     private string number;
     private int speed;
-    private int firstMovieRelease;
 
     // Constructor
-    public Car(string name, string make, int year, string number, int speed, int firstMovieRelease) {
+    public Car(string name, string make, int year, string number, int speed) {
         Name = name;
         Model = make; // Assigning 'make' to 'Model' for consistency
         Year = year;
         this.number = number;
         this.speed = speed;
-        this.firstMovieRelease = firstMovieRelease;
     }
 
     // Method overriding demonstrating Polymorphism
@@ -57,21 +55,15 @@ class Car : Vehicle {
     public void Stop() {
         Console.WriteLine($"The {Name} with number {number} has stopped.");
     }
-
-    // Property for accessing firstMovieRelease
-    public int FirstMovieRelease {
-        get { return firstMovieRelease; }
-        set { firstMovieRelease = value; }
-    }
 }
 
 class Program {
     static void Main(string[] args) {
-        Car mcQueen = new Car("Lightning McQueen", "Chevrolet", 2006, "95", 200, 2006);
-        mcQueen.Model = "C6 Chevrolet Corvette"; // Updating the model
+        Car mcQueen = new Car("Lightning McQueen", "Chevrolet", 2006 , "95", 200); // 2006 is the Release date of the first Cars movie
+        mcQueen.Model = "C6 Chevrolet Corvette (2005 to 2013 model years)"; // Updating the model
         Console.WriteLine("Name: " + mcQueen.Name);
         Console.WriteLine("Model: " + mcQueen.Model);
-        Console.WriteLine("Movie Year: " + mcQueen.FirstMovieRelease);
+        Console.WriteLine("Year: " + mcQueen.Year); // Using the Year property
         Console.WriteLine();
         mcQueen.StartEngine(); // Polymorphic behavior
         mcQueen.Drive();
