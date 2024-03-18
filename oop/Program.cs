@@ -41,7 +41,6 @@ class Car { // Create class called Car. This is the Parent class as well.
 class PoliceCar : Car {
     public PoliceCar(string model, string make, int year, string registeredOwner) : base(model, make, year, registeredOwner) { }
 
-
     public override void Speed(string speed) {  // Polymorphism. Overrides the Speed method from the parent class.
         base.Speed($"{speed}");
     }
@@ -62,8 +61,7 @@ abstract class SoundSystem : Car {
 }
 
 // Create another child class inheret from SoundSystem.
-class TaxiCar : SoundSystem
-{
+class TaxiCar : SoundSystem {
     public TaxiCar(string model, string make, int year, string registeredOwner) : base(model, make, year, registeredOwner) { }
     
     // Implementation of abstract method from SoundSystem class.
@@ -81,7 +79,6 @@ class TaxiCar : SoundSystem
             Console.WriteLine("Sound system is turned off!");
         }
     }
-
     public override void Play(bool IsNotPause) {
         if (IsNotPause) {
             Console.WriteLine("Music is playing!");
@@ -100,19 +97,19 @@ class Program {
     static void Main(string[] args) {
 
         Car myCar1 = new Car("Toyota", "Corolla", 2023, "Do Kyung Soo"); // Create an object of a Car class called myCar1.
-        Console.WriteLine($"Model: {myCar1.Model}, Make: {myCar1.Make}, Year: {myCar1.Year}");
+        Console.WriteLine($"Model: {myCar1.Model}, Make: {myCar1.Make}, Year: {myCar1.Year}, Owner: {myCar1.Registered_owner}");
         myCar1.Drive();
         myCar1.Speed("nomal");  // Polymorphism.
         myCar1.Stop();
 
         Car myCar2 = new PoliceCar("Toyota", "Innova", 2024, "Park Chan Yeol");
-        Console.WriteLine($"Model: {myCar2.Model}, Make: {myCar2.Make}, Year: {myCar2.Year}");
+        Console.WriteLine($"Model: {myCar2.Model}, Make: {myCar2.Make}, Year: {myCar2.Year}, Owner: {myCar2.Registered_owner}");
         myCar2.Drive();
         myCar2.Speed("high");   // Polymorphism.
         myCar2.Stop();
 
         TaxiCar myCar3 = new TaxiCar("Isuzu", "Crosswind ", 2025, "Oh Se Hun");    // Create an object of a TaxiCar class called myCar3.
-        Console.WriteLine($"Model: {myCar3.Model}, Make: {myCar3.Make}, Year: {myCar3.Year}");
+        Console.WriteLine($"Model: {myCar3.Model}, Make: {myCar3.Make}, Year: {myCar3.Year}, Owner: {myCar3.Registered_owner}");
         myCar3.Drive();
         myCar3.Speed("normal"); // Polymorphism.
         myCar3.SoundPowerButton(true);
