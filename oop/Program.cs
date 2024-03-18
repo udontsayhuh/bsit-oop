@@ -43,7 +43,7 @@ class ElectricCar : Car {
 
     // Implementing Drive method
     public override void Drive() {
-        Console.WriteLine("The electric car is now running.");
+        Console.WriteLine("The electric car is now up and running.");
     }
 
     // Implementing Stop method
@@ -59,7 +59,7 @@ class ManualCar : Car {
 
     // Implementing Drive method
     public override void Drive() {
-        Console.WriteLine("The manual car is now running.");
+        Console.WriteLine("The manual car is now up and running.");
     }
 
     // Implementing Stop method
