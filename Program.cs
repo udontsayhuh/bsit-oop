@@ -1,70 +1,87 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
+using System;
 
-abstract class Car
+
+ abstract class Car
 {
-    private string Model;
-    private string Make;
-    private int Year;
+   
+    private string model;
+    private string make;
+    private int year;
 
+    
     public Car(string model, string make, int year)
     {
-        Model = model;
-        Make = make;
-        Year = year;
+        this.model = model;
+        this.make = make;
+        this.year = year;
     }
 
-    public string GetModel()
+    
+    public string Model
     {
-        return Model;
+        get { return model; }
+        set { model = value; }
     }
-    public string GetMake()
+
+    public string Make
     {
-        return Make;
+        get { return make; }
+        set { make = value; }
     }
 
-    public int GetYear()
+    public int Year
     {
-        return Year;
+        get { return year; }
+        set { year = value; }
     }
 
-    //display car details using abstraction
-    public abstract void DisplayDetails();
-
-    public void Drive()
+    
+    public virtual void Drive()
     {
         Console.WriteLine("The car is now running.");
     }
 
-    public void Stop()
+    public virtual void Stop()
     {
         Console.WriteLine("The car has stopped.");
     }
 }
 
-class SUVCar : Car
-{
-    private int Price;
 
-    public SUVCar(string model, string make, int year, int price) : base(model, make, year)
+class MuscleCar : Car
+{
+    public MuscleCar(string model, string make, int year) : base(model, make, year) { }
+
+  
+    public override void Drive()
     {
-        Price = price;
+        Console.WriteLine("The muscle car is now running silently.");
     }
 
-    public override void DisplayDetails() 
-    { 
-        Console.WriteLine($"Model: {GetModel()}, Make: {GetMake()}, Year: {GetYear()}, Price: {Price}");
+   
+    public override void Stop()
+    {
+        Console.WriteLine("The muscle car has stopped.");
     }
 }
 
 class Program
 {
+    
+    static void TestDrive(Car car)
+    {
+        car.Drive();
+        car.Stop();
+    }
+
     static void Main(string[] args)
     {
-        SUVCar newCar = new SUVCar("Mitsubishi", "Xpander", 2024, 1068000);
-        newCar.DisplayDetails();
+        Car myCar = new Car("Dodge", "Challenger", 2024);
+        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
+        TestDrive(myCar);
 
-        newCar.Drive();
-        newCar.Stop();
+        MuscleCar myMuscleCar = new MuscleCar("Dodge", "Challenger", 2024);
+        Console.WriteLine($"Model: {myMuscleCar.Model}, Make: {myMuscleCar.Make}, Year: {myMuscleCar.Year}");
+        TestDrive(myMuscleCar);
     }
 }
