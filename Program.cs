@@ -31,18 +31,16 @@ abstract class Vehicle {
 class Car : Vehicle {
     // Additional attributes
     private string number;
-    private string color;
     private int speed;
     private int winsRace;
     private int firstMovieRelease;
 
     // Constructor
-    public Car(string name, string make, int year, string number, string color, int speed, int winsRace, int firstMovieRelease) {
+    public Car(string name, string make, int year, string number, int speed, int winsRace, int firstMovieRelease) {
         Name = name;
         Model = make; // Assigning 'make' to 'Model' for consistency
         Year = year;
         this.number = number;
-        this.color = color;
         this.speed = speed;
         this.winsRace = winsRace;
         this.firstMovieRelease = firstMovieRelease;
@@ -76,7 +74,7 @@ class Car : Vehicle {
 
 class Program {
     static void Main(string[] args) {
-        Car mcQueen = new Car("Lightning McQueen", "Chevrolet", 2006, "95", "Red", 200, 7, 2006);
+        Car mcQueen = new Car("Lightning McQueen", "Chevrolet", 2006, "95", 200, 7, 2006);
         mcQueen.Model = "C6 Chevrolet Corvette"; // Updating the model
         Console.WriteLine("Name: " + mcQueen.Name);
         Console.WriteLine("Model: " + mcQueen.Model);
