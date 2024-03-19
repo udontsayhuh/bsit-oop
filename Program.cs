@@ -24,7 +24,6 @@ class Car {
         Console.WriteLine("The car has stopped.");
     }
 
-    // The Repair method without the virtual keyword
     public void Repair() {
         Console.WriteLine("The car is being repaired.");
     }
