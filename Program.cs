@@ -1,11 +1,18 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-
-abstract class Car
+// Abstraction 
+public abstract class Vehicle
 {
-    private string Model;
-    private string Make;
-    private int Year;
+    public string Model { get; set; }
+    public string Make { get; set; }
+
+    // Encapsulation 
+    public abstract void Drive();
+    public abstract void Stop();
+}
+
+// Inheritance 
+public class Car : Vehicle
+{
+    public int Year { get; set; }
 
     public Car(string model, string make, int year)
     {
@@ -14,46 +21,14 @@ abstract class Car
         Year = year;
     }
 
-    public string GetModel()
-    {
-        return Model;
-    }
-    public string GetMake()
-    {
-        return Make;
-    }
-
-    public int GetYear()
-    {
-        return Year;
-    }
-
-    //display car details using abstraction
-    public abstract void DisplayDetails();
-
-    public void Drive()
+    public override void Drive() // Polymorphism 
     {
         Console.WriteLine("The car is now running.");
     }
 
-    public void Stop()
+    public override void Stop()
     {
         Console.WriteLine("The car has stopped.");
-    }
-}
-
-class SUVCar : Car
-{
-    private int Price;
-
-    public SUVCar(string model, string make, int year, int price) : base(model, make, year)
-    {
-        Price = price;
-    }
-
-    public override void DisplayDetails() 
-    { 
-        Console.WriteLine($"Model: {GetModel()}, Make: {GetMake()}, Year: {GetYear()}, Price: {Price}");
     }
 }
 
@@ -61,10 +36,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        SUVCar newCar = new SUVCar("Mitsubishi", "Xpander", 2024, 1068000);
-        newCar.DisplayDetails();
-
-        newCar.Drive();
-        newCar.Stop();
+        // Encapsulation 
+        Car myCar = new Car("Toyota", "Corolla", 2023);
+        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
+        myCar.Drive();
+        myCar.Stop();
     }
 }
