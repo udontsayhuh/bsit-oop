@@ -1,11 +1,10 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
+using System;
 
 abstract class Car
 {
-    private string Model;
-    private string Make;
-    private int Year;
+    protected string Model { get; }
+    protected string Make { get; }
+    protected int Year { get; }
 
     public Car(string model, string make, int year)
     {
@@ -14,21 +13,6 @@ abstract class Car
         Year = year;
     }
 
-    public string GetModel()
-    {
-        return Model;
-    }
-    public string GetMake()
-    {
-        return Make;
-    }
-
-    public int GetYear()
-    {
-        return Year;
-    }
-
-    //display car details using abstraction
     public abstract void DisplayDetails();
 
     public void Drive()
@@ -44,16 +28,16 @@ abstract class Car
 
 class SUVCar : Car
 {
-    private int Price;
+    private int Price { get; }
 
     public SUVCar(string model, string make, int year, int price) : base(model, make, year)
     {
         Price = price;
     }
 
-    public override void DisplayDetails() 
-    { 
-        Console.WriteLine($"Model: {GetModel()}, Make: {GetMake()}, Year: {GetYear()}, Price: {Price}");
+    public override void DisplayDetails()
+    {
+        Console.WriteLine($"Model: {Model}, Make: {Make}, Year: {Year}, Price: {Price}");
     }
 }
 
