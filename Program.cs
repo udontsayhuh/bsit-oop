@@ -3,15 +3,15 @@ using System;
 // ENCAPSULATION
 class Car {
     // Attributes
-    public string model; // Stores the model of the car
-    public string make;  // Stores the make of the car
-    public int year;     // Stores the year of the car
+    public string model;
+    public string make;
+    public int year;
 
     // Constructor
     public Car(string model, string make, int year) {
-        this.model = model; // Initializes the model attribute
-        this.make = make;   // Initializes the make attribute
-        this.year = year;   // Initializes the year attribute
+        this.model = model;
+        this.make = make;
+        this.year = year;
     }
 
     // ABSTRACTION
