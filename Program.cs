@@ -2,16 +2,29 @@ using System;
 
 // ENCAPSULATION
 class Car {
-    // Attributes
-    public string model;
-    public string make;
-    public int year;
+    // Encapsulated Attributes
+    private string model;
+    private string make;
+    private int year;
 
     // Constructor
     public Car(string model, string make, int year) {
         this.model = model;
         this.make = make;
         this.year = year;
+    }
+
+    // Public Properties to access Encapsulated Attributes
+    public string Model {
+        get { return model; }
+    }
+
+    public string Make {
+        get { return make; }
+    }
+
+    public int Year {
+        get { return year; }
     }
 
     // ABSTRACTION
@@ -43,16 +56,16 @@ class SchoolBus : Car {
 
 class Program {
     static void Main(string[] args) {
-        // ABSTRACTION: Using Car class without needing to know its internal details
+        // ABSTRACTION
         Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.model}, Make: {myCar.make}, Year: {myCar.year}");
+        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
         
         myCar.Drive();
         myCar.Stop();
         
-        // POLYMORPHISM: Treating SchoolBus object as Car object 
+        // POLYMORPHISM
         Car myBus = new SchoolBus("Volvo", "SchoolBus Inc.", 2024, 45);
-        Console.WriteLine($"Model: {myBus.model}, Make: {myBus.make}, Year: {myBus.year}, Capacity: {(myBus as SchoolBus).capacity}");
+        Console.WriteLine($"Model: {myBus.Model}, Make: {myBus.Make}, Year: {myBus.Year}, Capacity: {(myBus as SchoolBus).capacity}");
 
         myBus.Drive();
         myBus.Stop();
