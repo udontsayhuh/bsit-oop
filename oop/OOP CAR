@@ -1,0 +1,97 @@
+using System;
+
+public abstract class Engine
+{
+  public abstract void Start(); 
+}
+
+// (Inheritance & Encapsulation)
+public class Vehicle
+{
+  private string make; // Encapsulated attribute
+  private int year;// Encapsulated attribute
+
+  public string Make { get { return make; } }
+  public int Year { get { return year; } }
+
+  public Vehicle(string make, int year)
+  {
+    this.make = make;
+    this.year = year;
+  }
+
+  public virtual void Drive() 
+  {
+      
+  }
+}
+
+// Car Class (Inheritance & Polymorphism)
+public class Car : Vehicle
+{
+  private Engine engine; // EA (Engine object)
+  private int sittingCapacity; // CSC
+  private double price; // CP
+
+  public Car(string make, int year, Engine engine, int sittingCapacity, double price) : base(make, year)
+  {
+    this.engine = engine;
+    this.sittingCapacity = sittingCapacity;
+    this.price = price;
+  }
+
+  public int SittingCapacity { get { return sittingCapacity; } } // Public property for SC
+  public double Price { get { return price; } } // Public property for P
+
+  public void Drive() // 
+  {
+    Console.WriteLine("TAKE YOUR NEXT STEP WITH MINI COOPER");
+  }
+}
+
+// Electric Engine Class (Inheritance & Encapsulation)
+public class ElectricEngine : Engine
+{
+  public override void Start()
+  {
+    Console.WriteLine("TAKE YOUR NEXT STEPS WITH MINI COOPER.");
+  }
+}
+
+// Gas Engine Class (Inheritance & Encapsulation)
+public class fuelEngine : Engine
+{
+  public override void Start()
+  {
+    Console.WriteLine("IDKHTCSIAFHSM.");
+  }
+}
+
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    // Electric Car
+    double electricCarPrice = 3800000; //  actual value
+    Car electricCar = new Car("MINI COOPER", 2024, new ElectricEngine(), 7, electricCarPrice); //
+    Console.WriteLine($"Car Model: {electricCar.Make}, ");
+    
+    Console.WriteLine($"Year of Purchase: {electricCar.Year}, "); 
+    
+    Console.WriteLine($"Sitting Capacity: {electricCar.SittingCapacity}");
+    
+    Console.WriteLine($"Price: php{electricCar.Price}");  // Print the price
+    electricCar.Drive();
+
+    // Fuel Type
+    double fuelCarPrice = 2000; //  actual value of fuel
+    Car fuelCar = new Car("Petrol", 2024, new fuelEngine(), 7, fuelCarPrice); 
+
+    Console.WriteLine($"\nFuel Type: {fuelCar.Make}, ");
+    Console.WriteLine($"Year: {fuelCar.Year}, ");
+    Console.WriteLine($"Sitting Capacity: {fuelCar.SittingCapacity}");
+    Console.WriteLine($"Price: php{fuelCar.Price}");  // Print the price
+    fuelCar.Drive();
+  }
+}
