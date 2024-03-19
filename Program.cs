@@ -1,58 +1,60 @@
 using System;
 
-// Encapsulation: Using private access modifiers to encapsulate the internal state of the Car class.
+// ENCAPSULATION
 class Car {
     // Attributes
-    private string Model;
-    private string Make;
-    private int Year;
+    public string model; // Stores the model of the car
+    public string make;  // Stores the make of the car
+    public int year;     // Stores the year of the car
 
     // Constructor
     public Car(string model, string make, int year) {
-        Model = model;
-        Make = make;
-        Year = year;
+        this.model = model; // Initializes the model attribute
+        this.make = make;   // Initializes the make attribute
+        this.year = year;   // Initializes the year attribute
     }
 
-    // Abstraction: Hiding internal implementation details and providing only essential features through public methods.
+    // ABSTRACTION
     // Methods
-    public void Drive() {
+    public virtual void Drive() {
         Console.WriteLine("The car is now running.");
     }
 
     public void Stop() {
         Console.WriteLine("The car has stopped.");
     }
-
-    public void Repair() {
-        Console.WriteLine("The car is being repaired.");
-    }
 }
 
-// Inheritance: Creating a new class Bus that inherits from the Car class.
-class Bus : Car {
-    // Constructor calling base constructor
-    public Bus(string model, string make, int year) : base(model, make, year) {
+// INHERITANCE
+class SchoolBus : Car {
+    // Additional attribute
+    public int capacity;
+
+    // Constructor
+    public SchoolBus(string model, string make, int year, int capacity) : base(model, make, year) {
+        this.capacity = capacity;
     }
 
-    // Overriding the Repair method from the base class with a different implementation.
-    public override void Repair() {
-        Console.WriteLine("The bus is being repaired.");
+    // POLYMORPHISM
+    public override void Drive() {
+        Console.WriteLine("The school bus is now running with children aboard.");
     }
 }
 
 class Program {
     static void Main(string[] args) {
+        // ABSTRACTION: Using Car class without needing to know its internal details
         Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
+        Console.WriteLine($"Model: {myCar.model}, Make: {myCar.make}, Year: {myCar.year}");
+        
         myCar.Drive();
         myCar.Stop();
-        myCar.Repair(); // Demonstrating polymorphism
+        
+        // POLYMORPHISM: Treating SchoolBus object as Car object 
+        Car myBus = new SchoolBus("Volvo", "SchoolBus Inc.", 2024, 45);
+        Console.WriteLine($"Model: {myBus.model}, Make: {myBus.make}, Year: {myBus.year}, Capacity: {(myBus as SchoolBus).capacity}");
 
-        Bus myBus = new Bus("Mercedes", "Sprinter", 2024);
-        Console.WriteLine($"Model: {myBus.Model}, Make: {myBus.Make}, Year: {myBus.Year}");
         myBus.Drive();
         myBus.Stop();
-        myBus.Repair(); // Demonstrating polymorphism
     }
 }
