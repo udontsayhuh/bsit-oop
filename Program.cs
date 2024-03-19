@@ -60,10 +60,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Sedan newCar = new Sedan("Mitsubishi", "Xpander", 2024, 1068000);
-        newCar.DisplayDetails();
-
-        newCar.Drive();
-        newCar.Stop();
+        Sedan myCar = new Sedan("Toyota", "Vios", 2002, 1039000);
+        myCar.DisplayDetails();
+        myCar.Drive();
+        myCar.Stop();
     }
 }
