@@ -2,15 +2,30 @@ using System;
 
 abstract class Car
 {
-    protected string Model { get; }
-    protected string Make { get; }
-    protected int Year { get; }
+    private string Model;
+    private string Make;
+    private int Year;
 
     public Car(string model, string make, int year)
     {
         Model = model;
         Make = make;
         Year = year;
+    }
+
+    public string GetModel()
+    {
+        return Model;
+    }
+
+    public string GetMake()
+    {
+        return Make;
+    }
+
+    public int GetYear()
+    {
+        return Year;
     }
 
     public abstract void DisplayDetails();
@@ -26,18 +41,18 @@ abstract class Car
     }
 }
 
-class SUVCar : Car
+class Sedan : Car
 {
-    private int Price { get; }
+    private int Price;
 
-    public SUVCar(string model, string make, int year, int price) : base(model, make, year)
+    public Sedan(string model, string make, int year, int price) : base(model, make, year)
     {
         Price = price;
     }
 
     public override void DisplayDetails()
     {
-        Console.WriteLine($"Model: {Model}, Make: {Make}, Year: {Year}, Price: {Price}");
+        Console.WriteLine($"Model: {GetModel()}, Make: {GetMake()}, Year: {GetYear()}, Price: {Price}");
     }
 }
 
@@ -45,7 +60,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        SUVCar newCar = new SUVCar("Mitsubishi", "Xpander", 2024, 1068000);
+        Sedan newCar = new Sedan("Mitsubishi", "Xpander", 2024, 1068000);
         newCar.DisplayDetails();
 
         newCar.Drive();
