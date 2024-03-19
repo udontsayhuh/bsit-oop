@@ -75,7 +75,5 @@ class Program
         Console.WriteLine($"Model: {myPickuptruck.Model}, Make: {myPickuptruck.Make}, Year: {myPickuptruck.Year}");
         myPickuptruck.Drive(); //call for method for truck
         myPickuptruck.Stop();
-
-
     }
 }
