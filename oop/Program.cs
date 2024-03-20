@@ -17,9 +17,11 @@ class Program
             "Rudbeckia, while struggling between her ambitions and her \n" +
             "fondness for her brother, will Calmia reclaim what is hers?",
             "Monday",
-            1
+            78,
+            79
             );
         dramaSeries.displayDramaSeries();
+        dramaSeries.displayCurrentEpisode();
 
         //Romance
         Webtoon romanceSeries = new RomanceSeries(
@@ -37,11 +39,48 @@ class Program
             "Hestia decides that she’ll no longer spectate from the \n" +
             "sidelines – instead, she’ll save her derelict favorite!",
             "Saturday",
-            64
+            65,
+            66
             );
         romanceSeries.displayRomanceSeries();
 
+        //Thriller
+        Webtoon thrillerSeries = new ThrillerSeries(
+            "Thriller",
+            "It's Mine",
+            "LuckS",
+            "\nThere’s nothing that Yohan Do doesn’t \n" +
+            "know about his crush, Dajeong. Where she \n" +
+            "sits in class, works after school... and even \n" +
+            "where she lives. But unable to approach her, \n" +
+            "he watches her every move from afar and will \n" +
+            "do anything to protect her. Anything.",
+            "Friday",
+            156,
+            157
+            );
+        thrillerSeries.displayThrillerSeries();
 
+        //Fantasy
+        Webtoon fantasySeries = new FantasySeries(
+            "Fantasy",
+            "I'm the Queen in This Life",
+            "Themis/Omin",
+            "\nThe Etruscan Kingdom is stained with blood when \n" +
+            "the king’s illegitimate son Cesare conspires with his \n" +
+            "fiancée Ariadne to usurp the throne from his half-brother \n" +
+            "Alfonso. Despite Ariadne’s devotion to the new king, her faith \n" +
+            "is shattered when she is betrayed by him and eventually murdered \n" +
+            "by her own sister, who wishes to be queen. To her surprise, \n" +
+            "Ariadne finds herself sent back in time to her 17-year-old self. \n" +
+            "As she navigates the perils and opportunities of palace intrigue, \n" +
+            "Ariadne must make the most of her guile and grit to ensure that her \n" +
+            "tragic future does not repeat itself.",
+            "Monday",
+            49,
+            50
+            );
+        thrillerSeries.displayThrillerSeries();
     }
 }
 
@@ -55,6 +94,7 @@ abstract class Webtoon
     private string description;
     private string updateDay;
     private int episode;
+    private int nextEpisode;
 
     //public
     public string Genre
@@ -87,6 +127,11 @@ abstract class Webtoon
         get => episode; 
         set => episode = value;
     }
+    public int NextEpisode
+    {
+        get => nextEpisode;
+        set => nextEpisode = value;
+    }
 
     //Abstraction
     public abstract void displaySeries();
@@ -95,7 +140,7 @@ abstract class Webtoon
 
     //Constructor
     public Webtoon(string genre, string title, string author, 
-        string description, string updateDay, int episode)
+        string description, string updateDay, int episode, int nextEpisode)
     {
         Genre = genre;
         Title = title;
@@ -154,8 +199,8 @@ abstract class Webtoon
 class DramaSeries : Webtoon
 {
     public DramaSeries (string genre, string title, string author,
-        string description, string updateDay, int episode) : base(genre, title, author, 
-            description, updateDay, episode)
+        string description, string updateDay, int episode, int nextEpisode) : base(genre, title, author, 
+            description, updateDay, episode, nextEpisode)
     {
 
     }
@@ -174,7 +219,7 @@ class DramaSeries : Webtoon
     public override void displayNextEpisode()
     {
         Console.WriteLine(" "); 
-        Console.WriteLine("Episode " + Episode);
+        Console.WriteLine("Next Episode " + NextEpisode);
     }
 }
 
@@ -182,8 +227,8 @@ class DramaSeries : Webtoon
 class RomanceSeries : Webtoon
 {
     public RomanceSeries(string genre, string title, string author,
-        string description, string updateDay, int episode) : base(genre, title, author,
-            description, updateDay, episode)
+        string description, string updateDay, int episode, int nextEpisode) : base(genre, title, author,
+            description, updateDay, episode, nextEpisode)
     {
 
     }
@@ -202,15 +247,15 @@ class RomanceSeries : Webtoon
     public override void displayNextEpisode()
     {
         Console.WriteLine(" "); 
-        Console.WriteLine("Episode " + Episode);
+        Console.WriteLine("Next Episode " + NextEpisode);
     }
 }
 //Inheritance3
 class ThrillerSeries : Webtoon
 {
     public ThrillerSeries(string genre, string title, string author,
-        string description, string updateDay, int episode) : base(genre, title, author,
-            description, updateDay, episode)
+        string description, string updateDay, int episode, int nextEpisode) : base(genre, title, author,
+            description, updateDay, episode, nextEpisode)
     {
 
     }
@@ -229,15 +274,15 @@ class ThrillerSeries : Webtoon
     public override void displayNextEpisode()
     {
         Console.WriteLine(" "); 
-        Console.WriteLine("Episode " + Episode);
+        Console.WriteLine("Next Episode " + NextEpisode);
     }
 }
 //Inheritance4
 class FantasySeries : Webtoon
 {
     public FantasySeries(string genre, string title, string author,
-        string description, string updateDay, int episode) : base(genre, title, author,
-            description, updateDay, episode)
+        string description, string updateDay, int episode, int nextEpisode) : base(genre, title, author,
+            description, updateDay, episode, nextEpisode)
     {
 
     }
@@ -256,6 +301,6 @@ class FantasySeries : Webtoon
     public override void displayNextEpisode()
     {
         Console.WriteLine(" "); 
-        Console.WriteLine("Episode " + Episode);
+        Console.WriteLine("Next Episode " + NextEpisode);
     }
 }
