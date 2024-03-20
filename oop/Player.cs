@@ -23,6 +23,7 @@ namespace oop
         public string offlineStatus = "Offline";
         public string inGame = "In Game";
         public string inQueue = "In Queue";
+        public string notOnline = "Not Online";
 
         //Getters and Setters 
         // Player Number

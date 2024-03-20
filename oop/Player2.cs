@@ -15,12 +15,12 @@ namespace oop
         // Overring Status from Player
         public override void Status()
         {
-            Console.WriteLine("Status: " + offlineStatus);
+            Console.WriteLine("Status: " + onlineStatus);
         }
         // Overring Do from Player 
         public override void Do()
         {
-            Console.WriteLine("Player 2 is " + inQueue);
+            Console.WriteLine("This player is " + inQueue);
         }
     }
 }
