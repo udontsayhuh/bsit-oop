@@ -77,7 +77,6 @@ namespace oop
             Console.WriteLine("Age: " + playerAge);
             Console.WriteLine("Favorite Hero: " + favHeroName);
             Console.WriteLine("Favorite Hero Winrate: " + winRate);
-            Console.WriteLine(" ");
         }
     }
 }

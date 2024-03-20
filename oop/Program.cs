@@ -10,6 +10,8 @@ class Program {
         p1.Status(); // online or offline
         p1.Do(); // in game or in queue
 
+        Console.WriteLine(" ");
+
         //Player 2
         // Input: Name, Gender, Age, Favorite Hero, Favorite Hero Winrate, 
         Player p2 = new Player2("Cyphra", "Female", 19, "Lylia", 55.67);
