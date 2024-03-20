@@ -42,9 +42,9 @@ abstract class Car {
 }
 
 // Inheritance: Car1 and Car2 inheriting from Car
-class Car1 : Car {
-    public Car1(string model, string make, int year) : base(model, make, year) {
-        // Additional constructor logic specific to Car1
+class Sedan : Car {
+    public Sedan(string model, string make, int year) : base(model, make, year) {
+
     }
 
     // Override the Drive() method
@@ -57,30 +57,27 @@ class Car1 : Car {
     }
 }
 
-class Car2 : Car {
-    public Car2(string model, string make, int year) : base(model, make, year) {
-        // Additional constructor logic specific to Car2
+class Convertible : Car {
+    public Convertible(string model, string make, int year) : base(model, make, year) {
+
     }
 
     // Override the Drive() method
     public override void Drive() {
         Console.WriteLine("Ford Mustang is now running.");
     }
-    // Polymorphism : implementing different form  
-    public override void Stop() {
-        Console.WriteLine("The car has stopped.");
-    }
+   
 }
 
 class Program {
     static void Main(string[] args) {
         // Creating an instance of Car1
-        Car myCar1 = new Car1("Toyota", "Corolla", 2023);
+        Car myCar1 = new Sedan("Toyota", "Corolla", 2023);
         Console.WriteLine($"Model: {myCar1.Model}, Make: {myCar1.Make}, Year: {myCar1.Year}");
         myCar1.Drive();
         myCar1.Stop();
         // Instance of Car2
-        Car myCar2 = new Car2("Mustang", "Ford", 2023);
+        Car myCar2 = new Convertible("Mustang", "Ford", 2024);
         Console.WriteLine($"\nModel: {myCar2.Model}, Make: {myCar2.Make}, Year: {myCar2.Year}");
         myCar2.Drive();
         myCar2.Stop();
