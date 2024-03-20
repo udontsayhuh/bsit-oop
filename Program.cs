@@ -72,4 +72,4 @@ class Program
         Console.WriteLine();
         rectangle.DisplayInfo();
     }
-}
+} 
