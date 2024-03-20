@@ -1,42 +1,79 @@
-// Encapsulation, Inheritance
 using System;
 
-// Encapsulation
-class Vehicle
+abstract class Vehicle
 {
-    private int year;
-    private string model;
-    private string make;
-    private string type;
+    //Encapsulation
+    protected int year;
+    protected string model;
+    protected string make;
 
-    public Vehicle(int year, string make, string model, string type)
+    // Abstraction
+    public Vehicle(int year, string make, string model)
     {
         this.year = year;
         this.model = model;
         this.make = make;
-        this.type = type;
     }
 
-    public void Display()
-    {
-        Console.WriteLine($"Vehicle details:\nVehicle type is {type}, {model}(model), {make}(make), {year}(year)");
-    }
+    // Abstraction
+    public abstract void Display();
 }
 
 // Inheritance
 class Car : Vehicle
 {
-    public Car(int year, string make, string model, string type) : base(year, make, model, type)
+    public Car(int year, string make, string model) : base(year, make, model)
     {
     }
+
+    // Polymorphism
+    public override void Display()
+    {
+       Console.WriteLine($"This CAR is an {make}, {model} of year {year}\n");
+    }   
+}
+
+// Inheritance
+class Motorcycle : Vehicle
+{
+    public Motorcycle(int year, string make, string model) : base(year, make, model)
+    {
+    }
+
+    // Polymorphism
+    public override void Display()
+    {
+       Console.WriteLine($"This MOTORCYCLE is a {make}, {model} of year {year}\n");
+    }   
+}
+
+// Inheritance
+class Tank : Vehicle
+{
+    public Tank(int year, string make, string model) : base(year, make, model)
+    {
+    }
+
+    // Polymorphism
+    public override void Display()
+    {
+       Console.WriteLine($"This TANK is a {make}, {model} of year {year}");
+    }   
 }
 
 class Program
 {
     static void Main(string[] args)
     {
-        Car car1 = new Car(1997, "Mitsubishi", "Space gear", "car");
+        Vehicle car1 = new Car(1997, "Mitsubishi", "Space gear");
         car1.Display();
+
+        Vehicle motorcycle1 = new Motorcycle(2020, "BMW", "R18");
+        motorcycle1.Display();
+
+        Vehicle tank1 = new Tank(2008, "Hyundai Rotem", "K12 Black Panther");
+        tank1.Display();
+        
         Console.ReadKey();
     }
 }
