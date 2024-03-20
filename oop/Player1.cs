@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace oop
 {
     internal class Player1 : Player
     {
-        public Player1(string playerName, int playerAge, string faveHeroName) : base(playerName, playerAge, faveHeroName) { }
+        public Player1(string playerName, string gender, int playerAge, string faveHeroName, double winRate) : base(playerName, gender, playerAge, faveHeroName, winRate) { }
         // Overring Status from Player
         public override void Status()
         {
