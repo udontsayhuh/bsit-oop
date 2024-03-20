@@ -3,9 +3,9 @@ using System;
 // Abstract class Vehicle
 abstract class Vehicle { // Declaring an abstract class called Vehicle
     // Attributes
-    public string Model { get; set; } // Declaring a public property for Model attribute
-    public string Make { get; set; } // Declaring a public property for Make attribute
-    public int Year { get; set; } // Declaring a public property for Year attribute
+    public string Model { get; set; }
+    public string Make { get; set; } 
+    public int Year { get; set; }
 
     // Abstract method
     public abstract void Drive(); // Declaring an abstract method Drive() which will be implemented by subclasses
