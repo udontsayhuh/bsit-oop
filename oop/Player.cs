@@ -25,7 +25,7 @@ namespace oop
         public string inQueue = "In Queue";
         public string notOnline = "Not Online";
 
-        //Getters and Setters 
+        // Getters and Setters 
         // Player Number
         public int PlayerNumber
         {
@@ -46,13 +46,13 @@ namespace oop
             set { typeOfPlayer = value; }
         }
 
-        //Gender
+        // Gender
         public string Gender
         {
             get { return gender; }
             set { gender = value; }
         }
-        //Player Age
+        // Player Age
         public int PlayerAge
         {
             get { return playerAge; }

@@ -10,21 +10,23 @@ namespace oop
     {
         public string typeOfPlayer { get; set; }
         public int noOfChampionship { get; set; }
+        // Player 3 Constructor
         public Player3(int playerNumber, string playerName, string typeOfPlayer, int noOfChampionship, string gender, int playerAge, string favHeroName, double winRate) : base (playerNumber, playerName, typeOfPlayer, gender, playerAge, favHeroName, winRate) 
         {
             this.typeOfPlayer = typeOfPlayer;
             this.noOfChampionship = noOfChampionship;
         }
-
+        // Overriding Do from Player
         public override void Do()
         {
             Console.WriteLine("This player is " + notOnline);
         }
-
+        // Overriding Status from Player
         public override void Status()
         {
             Console.WriteLine("Status: " + offlineStatus);      
         }
+        // Exclusive for professional player
         public void professionalPlayerInformation()
         {
             Console.WriteLine("Player " + PlayerNumber + ": " + PlayerName);

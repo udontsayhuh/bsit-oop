@@ -12,12 +12,12 @@ namespace oop
         // Player 2 Constructor
         public Player2(int playerNumber, string playerName, string typeOfPlayer, string gender, int playerAge, string heroName, double winRate) : base(playerNumber, playerName, typeOfPlayer,  gender, playerAge, heroName, winRate) { }
         
-        // Overring Status from Player
+        // Overriding Status from Player
         public override void Status()
         {
             Console.WriteLine("Status: " + onlineStatus);
         }
-        // Overring Do from Player 
+        // Overriding Do from Player 
         public override void Do()
         {
             Console.WriteLine("This player is " + inQueue);
