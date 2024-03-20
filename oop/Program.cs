@@ -4,7 +4,19 @@ class Program
 {
     static void Main(string[] args)
     {
-
+        Webtoon dramaSeries = new DramaSeries(
+            "Drama",
+            "Dear Nemesis",
+            "Velma/ohsso",
+            "Calmia Phlox is given a second chance at life, \n" +
+            "but this time, she must compete against her beloved \n" +
+            "twin brother to gain back her coveted status and title\n" +
+            " as Countess Phlox. What’s more, her nemesis wants to... \n" +
+            "marry her?! Striking a deal with her former archenemy, \n" +
+            "Rudbeckia, while struggling between her ambitions and her \n" +
+            "fondness for her brother, will Calmia reclaim what is hers?"
+            "Monday"
+            )
     }
 }
 
@@ -67,7 +79,7 @@ abstract class Webtoon
         Episode = episode;
     }
 
-    public void displayRomanceSeries()
+    public void displayDramaSeries()
     {
         Console.WriteLine("Genre: " + Genre);
         Console.WriteLine("Title: " + Title);
@@ -102,9 +114,9 @@ abstract class Webtoon
 }
 
 //Inheritance
-class RomanceSeries : Webtoon
+class DramaSeries : Webtoon
 {
-    public RomanceSeries (string genre, string title, string author,
+    public DramaSeries (string genre, string title, string author,
         string description, string updateDay, int episode)
     {
 
