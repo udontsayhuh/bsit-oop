@@ -37,7 +37,7 @@ namespace oop
         public string Gender
         {
             get { return gender; }
-            set { gender = value}
+            set { gender = value; }
         }
         //Player Age
         public int PlayerAge
