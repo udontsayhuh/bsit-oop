@@ -1,6 +1,5 @@
 class Car {
-    //test
-    //git
+
     //Attributes
     public string Model;
     public string Make;
