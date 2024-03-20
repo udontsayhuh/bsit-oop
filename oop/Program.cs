@@ -22,6 +22,7 @@ class Program
             );
         dramaSeries.displayDramaSeries();
         dramaSeries.displayCurrentEpisode();
+        dramaSeries.displayNextEpisode();
 
         //Romance
         Webtoon romanceSeries = new RomanceSeries(
@@ -43,6 +44,8 @@ class Program
             66
             );
         romanceSeries.displayRomanceSeries();
+        romanceSeries.displayCurrentEpisode();
+        romanceSeries.displayNextEpisode();
 
         //Thriller
         Webtoon thrillerSeries = new ThrillerSeries(
@@ -60,6 +63,8 @@ class Program
             157
             );
         thrillerSeries.displayThrillerSeries();
+        thrillerSeries.displayCurrentEpisode();
+        thrillerSeries.displayNextEpisode();
 
         //Fantasy
         Webtoon fantasySeries = new FantasySeries(
@@ -80,7 +85,9 @@ class Program
             49,
             50
             );
-        thrillerSeries.displayThrillerSeries();
+        fantasySeries.displayThrillerSeries();
+        fantasySeries.displayCurrentEpisode();
+        fantasySeries.displayNextEpisode();
     }
 }
 
@@ -214,7 +221,7 @@ class DramaSeries : Webtoon
     public override void displayCurrentEpisode()
     {
         Console.WriteLine(" "); 
-        Console.WriteLine("Episode " + Episode);
+        Console.WriteLine("Current Episode " + Episode);
     }
     public override void displayNextEpisode()
     {
@@ -242,7 +249,7 @@ class RomanceSeries : Webtoon
     public override void displayCurrentEpisode()
     {
         Console.WriteLine(" "); 
-        Console.WriteLine("Episode " + Episode);
+        Console.WriteLine("Current Episode " + Episode);
     }
     public override void displayNextEpisode()
     {
@@ -269,7 +276,7 @@ class ThrillerSeries : Webtoon
     public override void displayCurrentEpisode()
     {
         Console.WriteLine(" "); 
-        Console.WriteLine("Episode " + Episode);
+        Console.WriteLine("Current Episode " + Episode);
     }
     public override void displayNextEpisode()
     {
@@ -296,7 +303,7 @@ class FantasySeries : Webtoon
     public override void displayCurrentEpisode()
     {
         Console.WriteLine(" ");
-        Console.WriteLine("Episode " + Episode);
+        Console.WriteLine("Current Episode " + Episode);
     }
     public override void displayNextEpisode()
     {
