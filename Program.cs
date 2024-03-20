@@ -1,34 +1,79 @@
-class Car {
-    //test
-    //git
-    //Attributes
-    public string Model;
-    public string Make;
-    public int Year;
 
-    //Constructor
-    public Car(string model, string make, int year) {
-        Model = model;
-        Make = make;
-        Year = year;
+// Base class representing a hero
+class Hero
+{
+    // attributes
+    private string Ability;
+    private string Rank;
+    private string Name;
+
+    // Encapsulation
+    public string AbilityNew
+    {
+        get { return Ability; }
+        set { Ability = value; }
     }
 
-    //Methods
-    public void Drive() {
-        Console.WriteLine("The car is now running.");
+    public string RankNew
+    {
+        get { return Rank; }
+        set { Rank = value; }
     }
 
-    public void Stop() {
-        Console.WriteLine("The car has stopped.");
+    public string NameNew
+    {
+        get { return Name; }
+        set { Name = value; }
+    }
+
+    // Constructor
+    public Hero(string ability, string rank, string name)
+    {
+        Ability = ability;
+        Rank = rank;
+        Name = name;
+    }
+
+    // Method to display hero's details
+    public virtual void DisplayDetails()
+    {
+        Console.WriteLine($"Name: {NameNew}, Ability: {AbilityNew}, Rank: {RankNew}");
+    }
+
+    // Abstraction: Method to perform hero's unique ability
+    public virtual void PerformAbility()
+    {
+        Console.WriteLine($"{NameNew} performs {AbilityNew}! And it killed the enemy.");
     }
 }
 
-class Program {
-    static void Main(string[] args) {
-        Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
-        myCar.Drive();
-        myCar.Stop();
+// Inheritance: Creating a subclass for hero
+class NormalHero : Hero
+{
+    // Constructor for the subclass
+    public NormalHero(string ability, string rank, string name) : base(ability, rank, name)
+    {
+    }
 
+    // Polymorphism: Override PerformAbility method
+    public override void PerformAbility()
+    {
+        Console.WriteLine($"{NameNew} attempts to perform {AbilityNew} And it destroys the building.");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Creating an instance of a hero
+        Hero saitama = new Hero("Serious Punch", "A-Class", "Saitama");
+        saitama.DisplayDetails();
+        saitama.PerformAbility();
+
+        // Creating an instance of a hero
+        NormalHero normalHero = new NormalHero("Fire Manipulation", "S-Class", "Genos");
+        normalHero.DisplayDetails();
+        normalHero.PerformAbility();
     }
 }
