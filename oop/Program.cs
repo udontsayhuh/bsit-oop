@@ -1,81 +1,59 @@
-﻿using System.Runtime.CompilerServices;
-
-class Car
+﻿using System;
+abstract class Car // Abstraction
 {
-    //test
-    //git
-    //Attributes
-    //Encapsulation
-    private string Model = "";
-    private string Make = "";
+    // Encapsulation
+    private string model = ""; // Empty string to avoid warning.
+    private string make = "";
     public int Year;
-
-    // Properties with proper encapsulation and naming convention
-    public string ModelName
+    public string Model
     {
-        get { return Model; }
-        set { Model = value; }
+        get { return model; }
+        set { model = value; }
     }
-
-    public string MakeName
+    public string Make
     {
-        get { return Make; }
-        set { Make = value; }
+        get { return make; }
+        set { make = value; }
     }
 
     // Constructor
     public Car(string model, string make, int year)
     {
-        ModelName = model;
-        MakeName = make;
+        Model = model;
+        Make = make;
         Year = year;
     }
 
-
-    //Abstraction
-    public virtual void Drive()
+    // Polymorphism 
+    public virtual void Drive() // Virtual Method
     {
         Console.WriteLine("The car is now running.");
     }
-
     public virtual void Stop()
     {
         Console.WriteLine("The car has stopped.");
     }
-}
-    //Inheritance
     class ElectricCar : Car
     {
-        public string Brand { get; set; }
-
-        public ElectricCar(string model, string make, int year, string brand)
-            : base(model, make, year)
+        public string Brand = "Tesla";
+        public ElectricCar(string model, string brand, int year)
+            : base(model, brand, year)
         {
             Brand = brand;
         }
-
-        //Polymorphism
-        public override void Drive()
-        {
-            base.Drive();
-            Console.WriteLine("The electric car runs like any car.");
-        }
-
-        public override void Stop()
-        { 
-            base.Stop();
-            Console.WriteLine("The electric car will stop when the battery runs out.");
-        }
     }
-
     class Program
     {
         static void Main(string[] args)
         {
-            Car myCar = new Car("Toyota", "Corolla", 2023);
-            Console.WriteLine($"Model: {myCar.ModelName}, Make: {myCar.MakeName}, Year: {myCar.Year}");
-            myCar.Drive();
-            myCar.Stop();
+            // Car myCar = new Car("Toyota", "Corolla", 2023);
+            // Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}\n");
+            // myCar.Drive();
+            // myCar.Stop();
+
+            ElectricCar eCar = new ElectricCar("Cybertruck", "Tesla", 2024);
+            Console.WriteLine($"\nElectric Car \nModel: {eCar.Model}, Brand: {eCar.Brand}, Year: {eCar.Year}");
         }
     }
+}
 
