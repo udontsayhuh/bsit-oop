@@ -154,7 +154,8 @@ abstract class Webtoon
         Author = author;
         Description = description;
         Episode = episode;
-        UpdateDay = updateDay;  
+        UpdateDay = updateDay;
+        NextEpisode = nextEpisode;
     }
 
     public void displayDramaSeries()
