@@ -1,39 +1,68 @@
-﻿class Car {
-    //test
-    //git
-    //Attributes
-    public string Model;
-    public string Make;
-    public int Year;
-    
-    //Constructoruyyuy
-    public Car(string model, string make, int year) {
-        Model = model;
-        Make = make;
-        Year = year;
-    }
+﻿// Main Fuction
+class Program {
+    static void Main(string[] args) {
+        Player p1 = new Player1("Zynx", 19, "Fanny");
+        Console.WriteLine(Player1: p1.PlayerName);
+        p1.Status();
+        p1.Do();
 
-    //Methods
-    public void Drive() {
-        Console.WriteLine("The car is now running.");
-    }
-
-    public void Stop() {
-        Console.WriteLine("The car has stopped.");
-    }
-    //Accelerate Added
-    public void Accelerate()
-    {
-        Console.WriteLine("The car has stopped.");
     }
 }
 
-class Program {
-    static void Main(string[] args) {
-        Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
-        myCar.Drive();
-        myCar.Stop();
+// Family Class
+abstract class Player
+{
+    //Player Information
+    private string playerName, heroName;
+    private int playerAge;
 
+
+    public abstract void Status();
+    public abstract void Do();
+    public string onlineStatus = "Online";
+    public string offlineStatus = "Offline";
+    public string inGame = "In Game";
+    public string inQueue = "In Queue";
+
+    //Getters and Setters 
+    public string PlayerName
+    {
+        get { return playerName; }
+        set { playerName = value; }
+    }
+
+    public int PlayerAge
+    {
+        get { return playerAge; }
+        set { playerAge = value; }
+    }
+    public string HeroName
+    {
+        get { return heroName; }
+        set { heroName = value; }
+    }
+
+    public Player(string playerName, int playerAge, string heroName)
+    {
+        PlayerName = playerName;
+        PlayerAge = playerAge;
+        HeroName = heroName;
+    }
+
+}
+
+class Player1 : Player
+{
+    
+    public Player1(string playerName, int playerAge, string heroName) : base(playerName, playerAge, heroName){}
+    // Status
+    public override void Status()
+    {
+        Console.WriteLine("Player 1 : " + onlineStatus);
+    }
+    // Do
+    public override void Do()
+    {
+        Console.WriteLine("Player 1 is " + inQueue);
     }
 }
