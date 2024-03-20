@@ -1,34 +1,69 @@
-class Car {
-    //test
-    //git
-    //Attributes
-    public string Model;
-    public string Make;
-    public int Year;
+using System;
 
-    //Constructor
-    public Car(string model, string make, int year) {
+abstract class Vehicle
+{
+    private string Brand;
+    private string Model;
+    private int Year;
+
+    public Vehicle(string brand, string model, int year)
+    {
+        Brand = brand;
         Model = model;
-        Make = make;
         Year = year;
     }
 
-    //Methods
-    public void Drive() {
-        Console.WriteLine("The car is now running.");
+    public string GetBrand()
+    {
+        return Brand;
     }
 
-    public void Stop() {
-        Console.WriteLine("The car has stopped.");
+    public string GetModel()
+    {
+        return Model;
+    }
+
+    public int GetYear()
+    {
+        return Year;
+    }
+
+    public abstract void ShowDetails();
+
+    public void StartEngine()
+    {
+        Console.WriteLine("The engine is now running.");
+    }
+
+    public void StopEngine()
+    {
+        Console.WriteLine("The engine has stopped.");
     }
 }
 
-class Program {
-    static void Main(string[] args) {
-        Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
-        myCar.Drive();
-        myCar.Stop();
+class SportsCar : Vehicle
+{
+    private int Price;
 
+    public SportsCar(string brand, string model, int year, int price) : base(brand, model, year)
+    {
+        Price = price;
+    }
+
+    public override void ShowDetails()
+    {
+        Console.WriteLine($"Brand: {GetBrand()}, Model: {GetModel()}, Year: {GetYear()}, Price: ${Price}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        SportsCar myCar = new SportsCar("Ferrari", "F8 Tributo", 2024, 278000);
+        myCar.ShowDetails();
+
+        myCar.StartEngine();
+        myCar.StopEngine();
     }
 }
