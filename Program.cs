@@ -1,35 +1,45 @@
 using System;
 
-public class Vehicle {
+public class Vehicle
+{
+    // Attributes
+    public string make; // Encapsulation: The 'make' attribute is public and directly accessible.
 
-    //Attributes
-    public string Make;
-    private string Model;
-    private int Year;
+    private string model; // Encapsulation: The 'model' attribute is private and accessed through a property.
+
+    private int year; // Encapsulation: The 'year' attribute is private and accessed through a property.
 
     public string Model
     {
-        get { return Model; }
-        set { Model = value; }  
+        get { return model; }
+        set { model = value; }
     }
 
     public int Year
     {
-        get { return Year; }
-        set { Year = value; }  
+        get { return year; }
+        set { year = value; }
     }
 
-    //Methods
-    public virtual void Drive();
+    // Methods
+    public virtual void Drive()  // Abstraction and Polymorphism: Providing an abstract behavior for driving that can be overridden.
+    {
+        Console.WriteLine("The vehicle is driving");
+    }
 
-    public virtual void Stop();
+    public virtual void Stop()  // Abstraction and Polymorphism: Providing an abstract behavior for stopping that can be overridden.
+    {
+        Console.WriteLine("The vehicle is stopping");
+    }
 }
 
-public class Car : Vehicle
+public class Car : Vehicle  // Inheritance: The Car class inherits from the Vehicle class.
 {
-    private string maintenanceSchedule;
-    private string transmissionType;
-    private bool hasNavigationSystem;
+    private string maintenanceSchedule; // Encapsulation: The 'maintenanceSchedule' attribute is private and accessed through a property.
+
+    private string transmissionType; // Encapsulation: The 'transmissionType' attribute is private and accessed through a property.
+
+    private bool hasNavigationSystem; // Encapsulation: The 'hasNavigationSystem' attribute is private and accessed through a property.
 
     public string MaintenanceSchedule
     {
@@ -49,25 +59,52 @@ public class Car : Vehicle
         set { hasNavigationSystem = value; }
     }
 
-    public override void Drive()
+    public override void Drive() // Polymorphism: Overriding the Drive method from the base class.
     {
         Console.WriteLine("The car is driving");
     }
+
+    public override void Stop() // Polymorphism: Overriding the Stop method from the base class.
+    {
+        Console.WriteLine("The car is stopping");
+    }
 }
 
-class Program {
-    static void Main(string[] args) {
-        Car ericeCar = new Car("Porsche", "911 Coupe", 2024);
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Creating a Vehicle object (Miata)
+        Vehicle myMiata = new()
+        {
+            make = "Mazda",
+            Model = "Miata",
+            Year = 2022
+        };
 
-        myCar.MaintenanceSchedule = "Every 10000 miles";
-        myCar.TransmissionType = "Manual";
-        myCar.HasNavigationSystem = true;
-        
-        Console.WriteLine($"Model: {myCar.Model}, Year: {myCar.Year}");
-        Console.WriteLine($"Maintenance Schedule: {myCar.MaintenanceSchedule}");
-        Console.WriteLine($"Transmission Type: {myCar.TransmissionType}");
-        Console.WriteLine($"Has Navigation System: {myCar.HasNavigationSystem}");
-        myCar.Drive();
-        myCar.Stop();
+        Console.WriteLine($"Make: {myMiata.make}, Model: {myMiata.Model}, Year: {myMiata.Year}");
+        myMiata.Drive();
+        myMiata.Stop();
+
+        Console.WriteLine();
+
+        // Creating a Car object (911 Coupe)
+        Car ericeCar = new()
+        {
+            make = "Porsche",
+            Model = "911 Coupe",
+            Year = 2024,
+
+            MaintenanceSchedule = "Every 10000 miles",
+            TransmissionType = "Manual",
+            HasNavigationSystem = true
+        };
+        Console.WriteLine($"Make: {ericeCar.make},    Year: {ericeCar.Year}");
+        Console.WriteLine($"Model: {ericeCar.Model}");
+        Console.WriteLine($"Maintenance Schedule: {ericeCar.MaintenanceSchedule}");
+        Console.WriteLine($"Transmission Type: {ericeCar.TransmissionType}");
+        Console.WriteLine($"Has Navigation System: {ericeCar.HasNavigationSystem}");
+        ericeCar.Drive();
+        ericeCar.Stop();
     }
 }
