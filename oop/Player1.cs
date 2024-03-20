@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace oop
-{
+{//a
     internal class Player1 : Player
     {
-        public Player1(int playerNumber, string playerName, string gender, int playerAge, string faveHeroName, double winRate) : base(playerNumber,playerName, gender, playerAge, faveHeroName, winRate) { }
+        public Player1(int playerNumber, string playerName, string typeOfPlayer, string gender, int playerAge, string faveHeroName, double winRate) : base(playerNumber, playerName, typeOfPlayer, gender, playerAge, faveHeroName, winRate) { }
         // Overring Status from Player
         public override void Status()
         {

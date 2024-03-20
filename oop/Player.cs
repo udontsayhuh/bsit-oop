@@ -10,7 +10,7 @@ namespace oop
     {
         //Player Information
         //Private
-        private string playerName, favHeroName, gender;
+        private string playerName,typeOfPlayer, favHeroName, gender;
         private int playerAge, playerNumber;
         private double winRate;
 
@@ -37,6 +37,12 @@ namespace oop
         {
             get { return playerName; }
             set { playerName = value; }
+        }
+
+        public string TypeOfPlayer
+        {
+            get { return typeOfPlayer; }
+            set { typeOfPlayer = value; }
         }
 
         //Gender
@@ -67,7 +73,7 @@ namespace oop
         }
         
         // Player Class Constructor
-        public Player(int playerNumber, string playerName, string gender, int playerAge, string favHeroName, double winRate)
+        public Player(int playerNumber, string playerName, string typeOfPlayer, string gender, int playerAge, string favHeroName, double winRate)
         {
             PlayerNumber = playerNumber;
             PlayerName = playerName;
@@ -75,16 +81,19 @@ namespace oop
             PlayerAge = playerAge;
             FaveHeroName = favHeroName;
             WinRate = winRate;
+            TypeOfPlayer = typeOfPlayer;
         }
 
-        // Printing The Player Information
-        public void Information()
+        // Printing The Normal Player Information
+        public void normalPlayerInformation()
         {
             Console.WriteLine("Player " + playerNumber + ": " + playerName);
+            Console.WriteLine("Type of Player: " + typeOfPlayer);
             Console.WriteLine("Gender: " + gender);
             Console.WriteLine("Age: " + playerAge);
             Console.WriteLine("Favorite Hero: " + favHeroName);
             Console.WriteLine("Favorite Hero Winrate: " + winRate);
         }
+
     }
 }
