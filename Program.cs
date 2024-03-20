@@ -16,7 +16,7 @@ class Car
 
     public void Display()
     {
-        Console.WriteLine($"Car details:\n{model}(model)\n{make}(make)\n{year}(year)")
+        Console.WriteLine($"Car details:\n{model}(model)\n{make}(make)\n{year}(year)");
     }
 }
 class Program
