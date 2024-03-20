@@ -20,7 +20,7 @@ namespace oop
         // Overring Do from Player 
         public override void Do()
         {
-            Console.WriteLine("Player 1 is " + inQueue);
+            Console.WriteLine("Player 2 is " + inQueue);
         }
     }
 }
