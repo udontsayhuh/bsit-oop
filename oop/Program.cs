@@ -20,6 +20,7 @@ class Program
             78,
             79
             );
+
         dramaSeries.displayDramaSeries();
         dramaSeries.displayCurrentEpisode();
         dramaSeries.displayNextEpisode();
@@ -43,6 +44,7 @@ class Program
             65,
             66
             );
+
         romanceSeries.displayRomanceSeries();
         romanceSeries.displayCurrentEpisode();
         romanceSeries.displayNextEpisode();
@@ -62,6 +64,7 @@ class Program
             156,
             157
             );
+
         thrillerSeries.displayThrillerSeries();
         thrillerSeries.displayCurrentEpisode();
         thrillerSeries.displayNextEpisode();
@@ -85,6 +88,7 @@ class Program
             49,
             50
             );
+
         fantasySeries.displayThrillerSeries();
         fantasySeries.displayCurrentEpisode();
         fantasySeries.displayNextEpisode();
@@ -203,7 +207,7 @@ abstract class Webtoon
     }
 }
 
-//Inheritance
+//InheritanceDrama
 class DramaSeries : Webtoon
 {
     public DramaSeries (string genre, string title, string author,
@@ -231,7 +235,7 @@ class DramaSeries : Webtoon
     }
 }
 
-//Inheritance2
+//InheritanceRomance
 class RomanceSeries : Webtoon
 {
     public RomanceSeries(string genre, string title, string author,
@@ -258,7 +262,7 @@ class RomanceSeries : Webtoon
         Console.WriteLine("Next Episode " + NextEpisode);
     }
 }
-//Inheritance3
+//InheritanceThriller
 class ThrillerSeries : Webtoon
 {
     public ThrillerSeries(string genre, string title, string author,
@@ -285,7 +289,7 @@ class ThrillerSeries : Webtoon
         Console.WriteLine("Next Episode " + NextEpisode);
     }
 }
-//Inheritance4
+//InheritanceFantasy
 class FantasySeries : Webtoon
 {
     public FantasySeries(string genre, string title, string author,
