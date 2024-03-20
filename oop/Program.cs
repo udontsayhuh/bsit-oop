@@ -35,13 +35,13 @@ abstract class Car {
     public abstract void Drive();
 
     // Method for Stop 
-    // Polymorphism: overridden in derived classes
+    // Polymorphism: overridden in derived class
     public virtual void Stop() {
         Console.WriteLine("The car has stopped.");
     }
 }
 
-// Inheritance: Car1 and Car2 inheriting from Car
+// Inheritance: Sedan and Convertible inheriting from Car
 class Sedan : Car {
     public Sedan(string model, string make, int year) : base(model, make, year) {
 
@@ -66,17 +66,17 @@ class Convertible : Car {
     public override void Drive() {
         Console.WriteLine("Ford Mustang is now running.");
     }
-   
+
 }
 
 class Program {
     static void Main(string[] args) {
-        // Creating an instance of Car1
+        // Creating an instance of Sedan
         Car myCar1 = new Sedan("Toyota", "Corolla", 2023);
         Console.WriteLine($"Model: {myCar1.Model}, Make: {myCar1.Make}, Year: {myCar1.Year}");
         myCar1.Drive();
         myCar1.Stop();
-        // Instance of Car2
+        // Instance of Convertible
         Car myCar2 = new Convertible("Mustang", "Ford", 2024);
         Console.WriteLine($"\nModel: {myCar2.Model}, Make: {myCar2.Make}, Year: {myCar2.Year}");
         myCar2.Drive();
