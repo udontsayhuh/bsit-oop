@@ -4,7 +4,7 @@ abstract class Car
 {
     // Encapsulated attributes
     private string model;
-    private string make;
+    private string manufacturer;
     private int year;
 
     // Public properties to access the encapsulated attributes
@@ -15,10 +15,10 @@ abstract class Car
         set { model = value; }
     }
 
-    public string Make
+    public string Manufacturer
     {
-        get { return make; }
-        set { make = value; }
+        get { return manufacturer; }
+        set { manufacturer = value; }
     }
 
     public int Year
@@ -28,10 +28,10 @@ abstract class Car
     }
 
     // Constructor
-    public Car(string model, string make, int year)
+    public Car(string model, string manufacturer, int year)
     {
         Model = model;
-        Make = make;
+        Manufacturer = manufacturer;
         Year = year;
     }
 
@@ -45,8 +45,8 @@ abstract class Car
 class Carfunc : Car
 { // Sub class Carfunc, superclass Car, (: means extends)
     // Constructor
-    public Carfunc(string model, string make, int year)
-        : base(model, make, year)
+    public Carfunc(string model, string manufacturer, int year)
+        : base(model, manufacturer, year)
     {
     }
 
@@ -54,20 +54,20 @@ class Carfunc : Car
     //polymorphism attributes
     public override void Drive()
     { // method overriding
-        if (Make == "Ferrari")
-            Console.WriteLine($"The {Make} is now running at 140kph.");
-        else if (Make == "Toyota")
-            Console.WriteLine($"The {Make} is now running at 110kph.");
-        else if (Make == "Mitsubishi")
-            Console.WriteLine($"The {Make} is now running at 100kph");
+        if (Manufacturer == "Ferrari")
+            Console.WriteLine($"The {Manufacturer}  {Model} is now running at 140kph.");
+        else if (Manufacturer == "Toyota")
+            Console.WriteLine($"The {Manufacturer}  {Model} is now running at 110kph.");
+        else if (Manufacturer == "Mitsubishi")
+            Console.WriteLine($"The {Manufacturer}  {Model} is now running at 100kph");
         else
-            Console.WriteLine($"The {Make} is now running at 90kph.");
+            Console.WriteLine($"The {Manufacturer}   {Model} is now running at 90kph.");
     }
 
     // Implementation of abstract Stop method
     public override void Stop()
     {
-        Console.WriteLine($"The {Make} has stopped.");
+        Console.WriteLine($"The {Manufacturer} {Model} has stopped.");
     }
 }
 
@@ -76,7 +76,7 @@ class Program
     static void Main(string[] args)
     {
         Carfunc myCar = new Carfunc("SF90", "Ferrari", 2019);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
+        Console.WriteLine($"Model: {myCar.Model}, Manufacturer: {myCar.Manufacturer}, Year: {myCar.Year}");
         myCar.Drive();
         myCar.Stop();
     }
