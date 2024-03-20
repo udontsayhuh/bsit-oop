@@ -1,4 +1,8 @@
-﻿using Microsoft.VisualBasic.FileIO;
+﻿
+
+// Darben V. Lamonte
+// BSIT 1-2
+
 using System;
 
 // a modified version that implement 4 pillars of OOP
