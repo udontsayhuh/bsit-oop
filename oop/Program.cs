@@ -4,19 +4,44 @@ class Program
 {
     static void Main(string[] args)
     {
+        //Drama
         Webtoon dramaSeries = new DramaSeries(
             "Drama",
             "Dear Nemesis",
             "Velma/ohsso",
-            "Calmia Phlox is given a second chance at life, \n" +
+            "\nCalmia Phlox is given a second chance at life, \n" +
             "but this time, she must compete against her beloved \n" +
             "twin brother to gain back her coveted status and title\n" +
-            " as Countess Phlox. What’s more, her nemesis wants to... \n" +
+            "as Countess Phlox. What’s more, her nemesis wants to... \n" +
             "marry her?! Striking a deal with her former archenemy, \n" +
             "Rudbeckia, while struggling between her ambitions and her \n" +
-            "fondness for her brother, will Calmia reclaim what is hers?"
-            "Monday"
-            )
+            "fondness for her brother, will Calmia reclaim what is hers?",
+            "Monday",
+            1
+            );
+        dramaSeries.displayDramaSeries();
+
+        //Romance
+        Webtoon romanceSeries = new RomanceSeries(
+            "Romance",
+            "For My Derelict Favorite",
+            "Kim Seonyu/Ryuho",
+            "\nWhat happens after the story ends with a \n" +
+            "“happily ever after”? When Hestia enters her \n" +
+            "favorite novel as a side character, she happily \n" +
+            "fangirls from the sidelines. Thinking she’ll \n" +
+            "return home when the story reaches its end, \n" +
+            "Hestia finds that the only thing awaiting her is \n" +
+            "the tragic death of her favorite character. \n" +
+            "Now miraculously restored to the day of the ending, \n" +
+            "Hestia decides that she’ll no longer spectate from the \n" +
+            "sidelines – instead, she’ll save her derelict favorite!",
+            "Saturday",
+            64
+            );
+        romanceSeries.displayRomanceSeries();
+
+
     }
 }
 
@@ -77,6 +102,7 @@ abstract class Webtoon
         Author = author;
         Description = description;
         Episode = episode;
+        UpdateDay = updateDay;  
     }
 
     public void displayDramaSeries()
@@ -84,31 +110,42 @@ abstract class Webtoon
         Console.WriteLine("Genre: " + Genre);
         Console.WriteLine("Title: " + Title);
         Console.WriteLine("Author/s: " + Author);
+        Console.WriteLine(" ");
         Console.WriteLine("Description: " + Description);
+        Console.WriteLine(" ");
         Console.WriteLine("Updates every: " + UpdateDay);
     }
-    public void displayComedySeries()
+    public void displayRomanceSeries()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Genre: " + Genre);
         Console.WriteLine("Title: " + Title);
         Console.WriteLine("Author/s: " + Author);
+        Console.WriteLine(" ");
         Console.WriteLine("Description: " + Description);
+        Console.WriteLine(" ");
         Console.WriteLine("Updates every: " + UpdateDay);
     }
     public void displayThrillerSeries()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Genre: " + Genre);
         Console.WriteLine("Title: " + Title);
         Console.WriteLine("Author/s: " + Author);
+        Console.WriteLine(" ");
         Console.WriteLine("Description: " + Description);
+        Console.WriteLine(" ");
         Console.WriteLine("Updates every: " + UpdateDay);
     }
     public void displayFantasySeries()
     {
+        Console.WriteLine(" ");
         Console.WriteLine("Genre: " + Genre);
         Console.WriteLine("Title: " + Title);
         Console.WriteLine("Author/s: " + Author);
+        Console.WriteLine(" ");
         Console.WriteLine("Description: " + Description);
+        Console.WriteLine(" ");
         Console.WriteLine("Updates every: " + UpdateDay);
     }
 }
@@ -117,7 +154,8 @@ abstract class Webtoon
 class DramaSeries : Webtoon
 {
     public DramaSeries (string genre, string title, string author,
-        string description, string updateDay, int episode)
+        string description, string updateDay, int episode) : base(genre, title, author, 
+            description, updateDay, episode)
     {
 
     }
@@ -130,19 +168,22 @@ class DramaSeries : Webtoon
     }
     public override void displayCurrentEpisode()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Episode " + Episode);
     }
     public override void displayNextEpisode()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Episode " + Episode);
     }
 }
 
 //Inheritance2
-class ComedySeries : Webtoon
+class RomanceSeries : Webtoon
 {
-    public ComedySeries(string genre, string title, string author,
-        string description, string updateDay, int episode)
+    public RomanceSeries(string genre, string title, string author,
+        string description, string updateDay, int episode) : base(genre, title, author,
+            description, updateDay, episode)
     {
 
     }
@@ -155,10 +196,12 @@ class ComedySeries : Webtoon
     }
     public override void displayCurrentEpisode()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Episode " + Episode);
     }
     public override void displayNextEpisode()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Episode " + Episode);
     }
 }
@@ -166,7 +209,8 @@ class ComedySeries : Webtoon
 class ThrillerSeries : Webtoon
 {
     public ThrillerSeries(string genre, string title, string author,
-        string description, string updateDay, int episode)
+        string description, string updateDay, int episode) : base(genre, title, author,
+            description, updateDay, episode)
     {
 
     }
@@ -179,10 +223,12 @@ class ThrillerSeries : Webtoon
     }
     public override void displayCurrentEpisode()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Episode " + Episode);
     }
     public override void displayNextEpisode()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Episode " + Episode);
     }
 }
@@ -190,7 +236,8 @@ class ThrillerSeries : Webtoon
 class FantasySeries : Webtoon
 {
     public FantasySeries(string genre, string title, string author,
-        string description, string updateDay, int episode)
+        string description, string updateDay, int episode) : base(genre, title, author,
+            description, updateDay, episode)
     {
 
     }
@@ -203,10 +250,12 @@ class FantasySeries : Webtoon
     }
     public override void displayCurrentEpisode()
     {
+        Console.WriteLine(" ");
         Console.WriteLine("Episode " + Episode);
     }
     public override void displayNextEpisode()
     {
+        Console.WriteLine(" "); 
         Console.WriteLine("Episode " + Episode);
     }
 }
