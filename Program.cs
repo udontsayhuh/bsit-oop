@@ -48,7 +48,7 @@ class SportsCar : Car {
 
 class Program {
     static void Main(string[] args) {
-        SportsCar mySportsCar = new SportsCar("Chevrolet", "Corvette", 2024, 495);
+        SportsCar mySportsCar = new SportsCar("Chevrolet", "Corvette", 2024);
         Console.WriteLine($"Model: {mySportsCar.Model}, Make: {mySportsCar.Make}, Year: {mySportsCar.Year}");
         mySportsCar.StartEngine(); 
         mySportsCar.Drive(); 
