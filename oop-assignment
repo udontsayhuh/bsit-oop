@@ -1,0 +1,78 @@
+using System;
+
+class Car {
+    public string Model;
+    public string Make;
+    public int Year;
+
+    public Car(string model, string make, int year) {
+        Model = model;
+        Make = make;
+        Year = year;
+    }
+
+    public virtual void Drive() {
+        Console.WriteLine("The car is now running.");
+    }
+
+    public void Stop() {
+        Console.WriteLine("The car has stopped.");
+    }
+}
+
+class ElectricCar : Car {
+    public ElectricCar(string model, string make, int year) : base(model, make, year) {
+    }
+
+    public override void Drive() {
+        Console.WriteLine("The electric car is now moving.");
+    }
+}
+
+class SUVCar : Car {
+    public SUVCar(string model, string make, int year) : base(model, make, year) {
+    }
+
+    public override void Drive() {
+        Console.WriteLine("The SUV is now moving.");
+    }
+}
+
+class SportsCar : Car {
+    public SportsCar(string model, string make, int year) : base(model, make, year) {
+    }
+
+    public override void Drive() {
+        Console.WriteLine("The Sports Car is now moving.");
+    }
+}
+
+class Program {
+    static void Main(string[] args) {
+        Car myCar = new Car("Toyota", "Corolla", 2023);
+        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
+        myCar.Drive();
+        myCar.Stop();
+
+        Console.WriteLine();
+
+        ElectricCar myElectricCar = new ElectricCar("Nissan", "Hyundai", 2024);
+        Console.WriteLine($"Model: {myElectricCar.Model}, Make: {myElectricCar.Make}, Year: {myElectricCar.Year}");
+        myElectricCar.Drive();
+        myElectricCar.Stop();
+
+        Console.WriteLine();
+
+        SUVCar mySUVCar = new SUVCar("Ford", "Model X", 2022);
+        Console.WriteLine($"Model: {mySUVCar.Model}, Make: {mySUVCar.Make}, Year: {mySUVCar.Year}");
+        mySUVCar.Drive();
+        mySUVCar.Stop();
+
+        Console.WriteLine();
+
+        SportsCar mySportsCar = new SportsCar("Ferrari", "Lamborghini", 2021);
+        Console.WriteLine($"Model: {mySUVCar.Model}, Make: {mySUVCar.Make}, Year: {mySUVCar.Year}");
+        mySportsCar.Drive();
+        mySportsCar.Stop();
+    }
+}
