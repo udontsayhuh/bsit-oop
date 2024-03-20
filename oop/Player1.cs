@@ -10,7 +10,7 @@ namespace oop
 {
     internal class Player1 : Player
     {
-        public Player1(string playerName, string gender, int playerAge, string faveHeroName, double winRate) : base(playerName, gender, playerAge, faveHeroName, winRate) { }
+        public Player1(int playerNumber, string playerName, string gender, int playerAge, string faveHeroName, double winRate) : base(playerNumber,playerName, gender, playerAge, faveHeroName, winRate) { }
         // Overring Status from Player
         public override void Status()
         {

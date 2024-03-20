@@ -11,7 +11,7 @@ namespace oop
         //Player Information
         //Private
         private string playerName, favHeroName, gender;
-        private int playerAge;
+        private int playerAge, playerNumber;
         private double winRate;
 
         //Abstract
@@ -25,7 +25,12 @@ namespace oop
         public string inQueue = "In Queue";
 
         //Getters and Setters 
-
+        // Player Number
+        public int PlayerNumber
+        {
+            get { return playerNumber; }
+            set { playerNumber = value; }
+        }
         // Player Name
         public string PlayerName
         {
@@ -61,9 +66,11 @@ namespace oop
         }
         
         // Player Class Constructor
-        public Player(string playerName, string gender, int playerAge, string favHeroName, double winRate)
+        public Player(int playerNumber, string playerName, string gender, int playerAge, string favHeroName, double winRate)
         {
+            PlayerNumber = playerNumber;
             PlayerName = playerName;
+            Gender = gender;
             PlayerAge = playerAge;
             FaveHeroName = favHeroName;
             WinRate = winRate;
@@ -72,7 +79,7 @@ namespace oop
         // Printing The Player Information
         public void Information()
         {
-            Console.WriteLine("Player 1: " + playerName);
+            Console.WriteLine("Player " + playerNumber + ": " + playerName);
             Console.WriteLine("Gender: " + gender);
             Console.WriteLine("Age: " + playerAge);
             Console.WriteLine("Favorite Hero: " + favHeroName);

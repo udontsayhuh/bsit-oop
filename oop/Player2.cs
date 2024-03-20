@@ -10,7 +10,7 @@ namespace oop
     internal class Player2 : Player
     {
         // Player 2 Constructor
-        public Player2(string playerName, string gender, int playerAge, string heroName, double winRate) : base(playerName, gender, playerAge, heroName, winRate) { }
+        public Player2(int playerNumber, string playerName, string gender, int playerAge, string heroName, double winRate) : base(playerNumber, playerName, gender, playerAge, heroName, winRate) { }
 
         // Overring Status from Player
         public override void Status()
