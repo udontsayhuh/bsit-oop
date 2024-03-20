@@ -1,33 +1,73 @@
-class Car {
+using System;
+
+public class Vehicle {
 
     //Attributes
-    public string Model;
     public string Make;
-    public int Year;
+    private string Model;
+    private int Year;
 
-    //Constructor
-    public Car(string model, string make, int year) {
-        Model = model;
-        Make = make;
-        Year = year;
+    public string Model
+    {
+        get { return Model; }
+        set { Model = value; }  
+    }
+
+    public int Year
+    {
+        get { return Year; }
+        set { Year = value; }  
     }
 
     //Methods
-    public void Drive() {
-        Console.WriteLine("The car is now running.");
+    public virtual void Drive();
+
+    public virtual void Stop();
+}
+
+public class Car : Vehicle
+{
+    private string maintenanceSchedule;
+    private string transmissionType;
+    private bool hasNavigationSystem;
+
+    public string MaintenanceSchedule
+    {
+        get { return maintenanceSchedule; }
+        set { maintenanceSchedule = value; }
     }
 
-    public void Stop() {
-        Console.WriteLine("The car has stopped.");
+    public string TransmissionType
+    {
+        get { return transmissionType; }
+        set { transmissionType = value; }
+    }
+
+    public bool HasNavigationSystem
+    {
+        get { return hasNavigationSystem; }
+        set { hasNavigationSystem = value; }
+    }
+
+    public override void Drive()
+    {
+        Console.WriteLine("The car is driving");
     }
 }
 
 class Program {
     static void Main(string[] args) {
-        Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
+        Car ericeCar = new Car("Porsche", "911 Coupe", 2024);
+
+        myCar.MaintenanceSchedule = "Every 10000 miles";
+        myCar.TransmissionType = "Manual";
+        myCar.HasNavigationSystem = true;
+        
+        Console.WriteLine($"Model: {myCar.Model}, Year: {myCar.Year}");
+        Console.WriteLine($"Maintenance Schedule: {myCar.MaintenanceSchedule}");
+        Console.WriteLine($"Transmission Type: {myCar.TransmissionType}");
+        Console.WriteLine($"Has Navigation System: {myCar.HasNavigationSystem}");
         myCar.Drive();
         myCar.Stop();
-
     }
 }
