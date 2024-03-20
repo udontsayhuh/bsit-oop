@@ -39,6 +39,7 @@ namespace oop
             set { playerName = value; }
         }
 
+        // Type of Player
         public string TypeOfPlayer
         {
             get { return typeOfPlayer; }
