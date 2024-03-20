@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace oop
 {
     internal class Player2 : Player
-    {//asds
+    {
         // Player 2 Constructor
         public Player2(int playerNumber, string playerName, string typeOfPlayer, string gender, int playerAge, string heroName, double winRate) : base(playerNumber, playerName, typeOfPlayer,  gender, playerAge, heroName, winRate) { }
-        //dasd
+        
         // Overring Status from Player
         public override void Status()
         {
