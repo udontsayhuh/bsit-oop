@@ -60,6 +60,7 @@ namespace oop
             catch (Exception ex)
             {
                 Console.WriteLine("INVALID INPUT: " + ex.Message);
+                Console.ReadKey();
                 Environment.Exit(1);
                 return 0;
             }
@@ -76,6 +77,7 @@ namespace oop
                 else
                 {
                     Console.WriteLine("Invalid Operator");
+                    Console.ReadKey();
                     Environment.Exit(1);
                     return '0';
                 }
@@ -83,6 +85,7 @@ namespace oop
             catch (Exception ex)
             {
                 Console.WriteLine("INVALID INPUT: " + ex.Message);
+                Console.ReadKey();
                 Environment.Exit(1);
                 return '0';
             }
