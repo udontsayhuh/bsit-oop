@@ -17,7 +17,7 @@ class Calculator
             if (!double.TryParse(Console.ReadLine(), out num1))
             {
                 Console.WriteLine("Invalid input. Please enter a valid number value!.");
-                continue;
+                return;
             }
             
           
@@ -26,14 +26,14 @@ class Calculator
             if (!double.TryParse(Console.ReadLine(), out num2))
             {
                 Console.WriteLine("Invalid input. Please enter a valid number value!.");
-                continue;
+                return;
             }
 
             Console.Write("Enter Third number:");
             if (!double.TryParse(Console.ReadLine(), out num3))
             {
                 Console.WriteLine("Invalid input. Please enter a valid number value!.");
-                continue;
+                return;
             }
 
             Console.WriteLine("Pick a Symbol Given Below.");
