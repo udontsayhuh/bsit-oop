@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class Program
+class CalculatorProgram
 {
     static void Main(string[] args)
     {
