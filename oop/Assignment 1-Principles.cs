@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 
-class Program
+/*class Program
 {
     static void Main(string[] args)
     {
@@ -93,7 +93,7 @@ class Program
         fantasySeries.displayCurrentEpisode();
         fantasySeries.displayNextEpisode();
     }
-}
+
 
 //Encapsulation
 abstract class Webtoon
@@ -315,4 +315,4 @@ class FantasySeries : Webtoon
         Console.WriteLine(" "); 
         Console.WriteLine("Next Episode " + NextEpisode);
     }
-}
+}*/
