@@ -2,20 +2,4 @@ using System;
 
 namespace Calculator
 {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 }
