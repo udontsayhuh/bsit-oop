@@ -1,13 +1,10 @@
 ﻿using System;
 
-namespace oop;
-
 // Calculator class
 abstract class Operation
 {
     // Abstract method to perform the operation
     public abstract double OpCompute(double num1, double num2);
-
 }
 
 // Derived class for addition operation
@@ -56,11 +53,23 @@ class Division : Operation
 
 class Calculator
 {
+    public double Input(string prompt)
+    {
+        double num;
+        Console.Write(prompt);
+        while (!double.TryParse(Console.ReadLine(), out num))
+        {
+            Console.Write("Invalid input. Please enter a valid number: ");
+        }
+        return num;
+    }
+
     // Method to perform the selected operation
     public double Compute(double num1, double num2, Operation operation)
     {
         return operation.OpCompute(num1, num2);
     }
+
     public char GetOperatorChoice()
     {
         // Get user choice of operation
@@ -75,6 +84,7 @@ class Calculator
             Console.WriteLine("[-] SUBTRACTION");
             Console.WriteLine("[*] MULTIPLICATION");
             Console.WriteLine("[/] DIVISION");
+            Console.WriteLine("[=] EQUALS (DISPLAY)");
             Console.Write("\nEnter your choice: ");
 
             // Try to parse the input to a char
@@ -85,86 +95,102 @@ class Calculator
             }
 
             // Check if the input is one of the specified operators
-            if (choice == '+' || choice == '-' || choice == '/' || choice == '*')
+            if (choice == '+' || choice == '-' || choice == '/' || choice == '*' || choice == '=')
             {
                 return choice; // Exit the loop if a valid input is provided
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter one of the specified operators: +, -, /, *.");
+                Console.WriteLine("Invalid input. Please enter one of the specified operators: +, -, /, *, =.");
             }
         }
     }
 
-    class CalculatorAssignment
+    public void RunCalculator()
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("--------------------------------------------------------------");
-            Console.WriteLine("                    WELCOME TO C# CALCULATOR\n");
-            Console.WriteLine("--------------------------------------------------------------");
+        Console.WriteLine("--------------------------------------------------------------");
+        Console.WriteLine("                    WELCOME TO C# CALCULATOR\n");
+        Console.WriteLine("--------------------------------------------------------------");
 
-            Calculator calculator = new Calculator();
+        double num1;
+        double num2;
+        double result = 0;
+        int counter = 1;
+        bool restart = true;
+        Operation operation = null;
+
+        while (restart)
+        {
+
+            num1 = Input($"Enter the first number: ");
+            counter = 1;
             while (true)
             {
 
-                // Get user input for the first number
-                Console.Write("Enter the first number: ");
-                double num1;
-                while (!double.TryParse(Console.ReadLine(), out num1))
+                char choice = GetOperatorChoice();
+
+                if (choice != '=')
                 {
-                    Console.Write("Invalid input. Please enter a valid number: ");
-                    Environment.Exit(0);
+                    if (counter == 2)
+                    {
+                        num1 = result;
+                    }
+
+                    num2 = Input($"Enter the second number: ");
                 }
-                char choice = calculator.GetOperatorChoice();
-                // Get user input for the second number
-                Console.Write("Enter the second number: ");
-                double num2;
-                while (!double.TryParse(Console.ReadLine(), out num2))
+                else
                 {
-                    Console.Write("Invalid input. Please enter a valid number: ");
-                    Environment.Exit(0);
+                    Console.WriteLine($"The Final Answer is: {result}");
+                    break;
                 }
-                // Perform the selected operation and display the result
-                Operation operation;
-                double result = 0;
+
                 switch (choice)
                 {
                     case '+':
                         operation = new Addition();
-                        result = calculator.Compute(num1, num2, operation);
-                        Console.WriteLine($"Result: {num1} + {num2} = {result}");
+                        counter = 2;
                         break;
                     case '-':
                         operation = new Subtraction();
-                        result = calculator.Compute(num1, num2, operation);
-                        Console.WriteLine($"Result: {num1} - {num2} = {result}");
+                        counter = 2;
                         break;
                     case '*':
                         operation = new Multiplication();
-                        result = calculator.Compute(num1, num2, operation);
-                        Console.WriteLine($"Result: {num1} * {num2} = {result}");
+                        counter = 2;
                         break;
                     case '/':
                         operation = new Division();
-                        result = calculator.Compute(num1, num2, operation);
-                        Console.WriteLine($"Result: {num1} / {num2} = {result}");
-                        break;
-                    default:
-                        operation = null;
+                        counter = 2;
                         break;
                 }
-                Console.WriteLine("Do you want to do another calculation? (Y/N).");
-                string playAgain = Console.ReadLine().ToLower();
-                if (playAgain != "y")
+
+                if (operation != null)
                 {
-                    Console.Clear();
-                    Console.WriteLine("--------------------------------------------------------------");
-                    Console.WriteLine("                    THANK YOU FOR USING C# CALCULATOR\n                            BY: CARL BERGADO");
-                    Console.WriteLine("--------------------------------------------------------------");
-                    break;
+                    result = Compute(num1, num2, operation);
+                    Console.WriteLine($"Result: {num1} {choice} {num2} = {result}");
                 }
             }
+            Console.WriteLine("Do you want to do another calculation? (Y/N).");
+            string playAgain = Console.ReadLine().ToLower();
+            if (playAgain != "y")
+            {
+                Console.Clear();
+                Console.WriteLine("--------------------------------------------------------------");
+                Console.WriteLine("                    THANK YOU FOR USING C# CALCULATOR\n                            BY: CARL BERGADO");
+                Console.WriteLine("--------------------------------------------------------------");
+                break;
+            }
+            else
+            {
+                Console.Clear();
+                continue;
+            }
         }
+    }
+
+    static void Main(string[] args)
+    {
+        Calculator calculator = new Calculator();
+        calculator.RunCalculator();
     }
 }
