@@ -96,7 +96,7 @@ class Program
 
                 if (userChoice != "+" && userChoice != "-" && userChoice != "*" && userChoice != "/")
                 {
-                    throw new InvalidOperationException("Invalid operator choice!"); //if operator is invalid, it will go to catch
+                    throw new InvalidOperationException(); //if operator is invalid, it will go to catch
                 } // if statement
 
                 Console.Write("\nEnter a number: "); //Second value
