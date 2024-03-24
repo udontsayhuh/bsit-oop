@@ -70,18 +70,18 @@ class Truck : Car
 
     //Inherited Method
     public void Drive() {
-        Console.Write("The Truck ");
+        Console.Write("Truck ");
         base.Drive();
     }
 
     public void Stop() {
-        Console.Write("The Truck ");
+        Console.Write("Truck ");
         base.Stop();
     }
 
     //Polymorphed Method
     override public void Horn() {
-        Console.WriteLine("The truck makes truck-horn sound.");
+        Console.WriteLine("Truck makes truck-horn sound.");
     }
 
     //Inherited Abstract Method
@@ -103,18 +103,18 @@ class Van : Car
 
     //Inherited Method
     public void Drive() {
-        Console.Write("The Van ");
+        Console.Write("Van ");
         base.Drive();
     }
 
     public void Stop() {
-        Console.Write("The Van ");
+        Console.Write("Van ");
         base.Stop();
     }
 
     //Polymorphed Method
     override public void Horn() {
-        Console.WriteLine("The van makes van-horn sound.");
+        Console.WriteLine("Van makes van-horn sound.");
     }
 
     //Inherited Abstract Method
