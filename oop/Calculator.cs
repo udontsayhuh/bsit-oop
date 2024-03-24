@@ -69,7 +69,7 @@ class Calculator
             Console.WriteLine();
             if (choice != 'Y')
             {
-                Console.WriteLine("Exiting...");
+                Console.WriteLine("Leaving...");
                 break;
 
 
