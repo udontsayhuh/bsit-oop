@@ -46,7 +46,7 @@ class Calculator
             if (operation != '+' && operation != '-' && operation != '*' && operation != '/')
             {
                 Console.WriteLine("Invalid operator. Please enter one of the four specified operators.");
-                ;
+                continue;
             }
              double result = 0;
             switch (operation)
