@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace oop
 {
-    class Calculator
+    class SimpleCalculator
     {
-        static void Main(string[] args)
+        public void CalculatorMain()
         {
             bool will_try_again = true;
             while (will_try_again)
@@ -22,7 +22,7 @@ namespace oop
 
                 //Call calculate function and displays result
                 double result = Calculate(num_1, operation, num_2);
-                Console.WriteLine($"\n{num_1} {operation} {num_2} = {result}\n");
+                PrintResult(num_1, operation, num_2, result);
 
                 //Prompts user to input Y or N, will not terminate unless Y or N
                 while (true)
@@ -49,7 +49,7 @@ namespace oop
             }
         }
 
-        static double InputNum() //Terminates program if input is not double
+        public double InputNum() //Terminates program if input is not double
         {
             try
             {
@@ -66,7 +66,7 @@ namespace oop
             }
         }
 
-        static char InputOperator() //Terminates program if input is not valid operator
+        public char InputOperator() //Terminates program if input is not valid operator
         {
             try
             {
@@ -91,26 +91,94 @@ namespace oop
             }
         }
 
-        static double Calculate(double num_1, char operation, double num_2) //Calculates result
+        public double Calculate(double num_1, char operation, double num_2) //Calculates result
         {
             switch (operation)
             {
                 case '+':
                     return num_1 + num_2;
-                    break;
                 case '-':
                     return num_1 - num_2;
-                    break;
                 case '/':
-                    return num_1 / num_2;
-                    break;
+                    if (num_2 == 0)
+                    {
+                        Console.WriteLine("You cannot divide by 0");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+                        return 0;
+                    }
+                    else
+                    {
+                        return num_1 / num_2;
+                    }
                 case '*':
                     return num_1 * num_2;
-                    break;
                 default:
                     return 0;
-                    break;
+            }
+        }
+
+        public virtual void PrintResult(double num_1, char operation, double num_2, double result)
+        {
+            Console.WriteLine($"\n{num_1} {operation} {num_2} = {result}\n");
+        }
+    }
+
+    //Inheritance
+    //Inherited Methods from SimpleCalculator
+    class BinaryCalculator : SimpleCalculator
+    {
+        //Polymorphism
+        //Overrides Print Result to print binary instead of decimal
+        public override void PrintResult(double num_1, char operation, double num_2, double result)
+        {
+            Console.WriteLine($"\nResult in Binary: {Convert.ToString((int)result, 2)}\n");
+        }
+    }
+ 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Choose Calculator Type
+            bool exit_program = false;
+            while (!exit_program)
+            {
+                try
+                {
+                    Console.WriteLine("Choose Calculator type:");
+                    Console.WriteLine("1 Simple Calculator");
+                    Console.WriteLine("2 Binary Calculator");
+                    Console.WriteLine("3 EXIT");
+
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+                            SimpleCalculator simpleCal = new SimpleCalculator();
+                            simpleCal.CalculatorMain();
+                            break;
+                        case 2:
+                            BinaryCalculator biCal = new BinaryCalculator();
+                            biCal.CalculatorMain();
+                            break;
+                        case 3:
+                            exit_program = true;
+                            break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Enter 1, 2, or 3 only!!!!");
+                            break;
+                    }
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.WriteLine("Enter 1, 2, or 3 only!!!!");
+                }
             }
         }
     }
 }
+//GARCES, JOHN MARK A.
+//BSIT 2-1
