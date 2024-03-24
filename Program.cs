@@ -41,11 +41,11 @@ abstract class Car {
 
     //Methods
     public void Drive() {
-        Console.WriteLine("The car is now running.");
+        Console.WriteLine("is now running.");
     }
 
     public void Stop() {
-        Console.WriteLine("The car has stopped.");
+        Console.WriteLine("has stopped.");
     }
 
     //*** Polymorphism :3
@@ -70,10 +70,12 @@ class Truck : Car
 
     //Inherited Method
     public void Drive() {
+        Console.Write("The Truck ");
         base.Drive();
     }
 
     public void Stop() {
+        Console.Write("The Truck ");
         base.Stop();
     }
 
@@ -101,10 +103,12 @@ class Van : Car
 
     //Inherited Method
     public void Drive() {
+        Console.Write("The Van ");
         base.Drive();
     }
 
     public void Stop() {
+        Console.Write("The Van ");
         base.Stop();
     }
 
@@ -136,20 +140,20 @@ class Program {
         Car T = new Truck("Toyota", "Corolla", 2023);
         Car Te = new Truck("Toyota", "Corolla", 2023);
         Console.WriteLine($"Model: {myTruck.model}, Make: {myTruck.make}, Year: {myTruck.year}");
-        myTruck.Drive();
-        myTruck.Stop();
         T.Horn();
         Te.Engine();
+        myTruck.Drive();
+        myTruck.Stop();
 
         //Subclass 2
         Van myVan = new Van("Volkswagen", "trasporter", 2021);
         Car V = new Van("Toyota", "Corolla", 2023);
         Car Ve = new Van("Toyota", "Corolla", 2023);
         Console.WriteLine($"Model: {myVan.model}, Make: {myVan.make}, Year: {myVan.year}");
-        myVan.Drive();
-        myVan.Stop();
         V.Horn();
         Ve.Engine();
+        myVan.Drive();
+        myVan.Stop();
 
     }
 }
