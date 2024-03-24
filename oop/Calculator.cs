@@ -116,6 +116,7 @@ class Calculator
                     Console.Write("Invalid input. Please enter a valid number: ");
                     Environment.Exit(0);
                 }
+                // Calls method for getting the operator
                 char choice = calculator.GetOperatorChoice();
                 // Get user input for the second number
                 Console.Write("Enter the second number: ");
