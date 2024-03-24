@@ -70,8 +70,6 @@ class MyCalc : MyCalculator
 	} // Operate
 }
 
-//
-
 namespace Afable_Lawrence
 {
 	class Program_Entry
@@ -103,7 +101,6 @@ namespace Afable_Lawrence
 
 				if (op != '+' && op != '-' && op != '*' && op != '/')
 				{
-					// throw new InvalidOperationException();
 					Console.WriteLine("Error operator!\n");
 				}
 				else
@@ -115,7 +112,7 @@ namespace Afable_Lawrence
 				
 				} while (op != '+' && op != '-' && op != '*' && op != '/');// do
 
-				// command
+				// creating an object
 				MyCalc mycalc = new MyCalc(num_1, num_2, op);
 				mycalc.Operate();
 				cont();
@@ -126,10 +123,6 @@ namespace Afable_Lawrence
 			{
 				Console.WriteLine("This program only accept numerical values!");
 			}
-			/*catch (InvalidOperationException)
-			{
-				Console.WriteLine("Invalid Operator!");
-			}*/
 			finally
 			{
 				Console.WriteLine("\nProgram terminated!");
