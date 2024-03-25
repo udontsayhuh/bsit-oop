@@ -78,7 +78,7 @@ namespace Calculator
                 Console.ReadLine();
                 Console.Write("Enter number for Operand 2: ");
                 Operand[1] = Convert.ToDouble(Console.ReadLine());
-                if (Operand[1] == 0)
+                if (chosenOperator == '/' && Operand[1] == 0)
                 {
                     Console.WriteLine("Cannot divide by 0!");
                 }
