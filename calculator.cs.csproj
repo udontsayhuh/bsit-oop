@@ -1,53 +1,124 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{70CFAAA9-9D04-4F89-AF68-0F23397FCE35}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>calculator.cs</RootNamespace>
-    <AssemblyName>calculator.cs</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-</Project>
+using System;
+
+namespace CalculatorApp
+{
+    // Encapsulation and Inheritance: Abstract class defining a contract for binary operations
+    abstract class BinaryOperation
+    {
+        // Encapsulation: Method to perform the operation
+        public abstract float Calculate(float num1, float num2);
+    }
+
+    // Inheritance: Concrete operation classes implementing the BinaryOperation abstract class
+    class Addition : BinaryOperation
+    {
+        // Encapsulation: Override method to perform addition
+        public override float Calculate(float num1, float num2)
+        {
+            return num1 + num2;
+        }
+    }
+
+    class Subtraction : BinaryOperation
+    {
+        public override float Calculate(float num1, float num2)
+        {
+            return num1 - num2;
+        }
+    }
+
+    class Multiplication : BinaryOperation
+    {
+        public override float Calculate(float num1, float num2)
+        {
+            return num1 * num2;
+        }
+    }
+
+    class Division : BinaryOperation
+    {
+        public override float Calculate(float num1, float num2)
+        {
+            if (num2 == 0)
+            {
+                Console.WriteLine("Error: Division by zero!");
+                return 0;
+            }
+            return num1 / num2;
+        }
+    }
+
+    // Calculator class encapsulating the calculation logic
+    class Calculator
+    {
+        public float PerformOperation(BinaryOperation operation, float num1, float num2)
+        {
+            return operation.Calculate(num1, num2);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Calculator calculator = new Calculator();
+            char choice;
+
+            do
+            {
+                // Prompt user for input
+                float num1, num2;
+                char operationSymbol;
+
+                Console.WriteLine("Enter the first number:");
+                while (!float.TryParse(Console.ReadLine(), out num1))
+                {
+                    Console.WriteLine("Invalid input. Please enter a numerical value.");
+                }
+
+                Console.WriteLine("Enter the operation (+, -, *, /):");
+                while (!char.TryParse(Console.ReadLine(), out operationSymbol) ||
+                       (operationSymbol != '+' && operationSymbol != '-' && operationSymbol != '*' && operationSymbol != '/'))
+                {
+                    Console.WriteLine("Invalid operation. Please choose from '+', '-', '*', or '/'.");
+                }
+
+                Console.WriteLine("Enter the second number:");
+                while (!float.TryParse(Console.ReadLine(), out num2))
+                {
+                    Console.WriteLine("Invalid input. Please enter a numerical value.");
+                }
+
+                // Select operation based on user input
+                BinaryOperation operation = null;
+                switch (operationSymbol)
+                {
+                    case '+':
+                        operation = new Addition();
+                        break;
+                    case '-':
+                        operation = new Subtraction();
+                        break;
+                    case '*':
+                        operation = new Multiplication();
+                        break;
+                    case '/':
+                        operation = new Division();
+                        break;
+                }
+
+                // Perform calculation
+                if (operation != null)
+                {
+                    float result = calculator.PerformOperation(operation, num1, num2);
+                    Console.WriteLine("Result: " + result);
+                }
+
+                // Ask user if they want to perform another calculation
+                Console.WriteLine("Do you want to perform another calculation? (Y/N)");
+                choice = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+            } while (char.ToUpper(choice) == 'Y');
+        }
+    }
+}
