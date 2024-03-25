@@ -66,6 +66,7 @@ namespace OOP_works
 
             while (keepCalculating)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Enter the First number: ");
                 double num1 = Convert.ToDouble(Console.ReadLine());
 
@@ -75,36 +76,30 @@ namespace OOP_works
                 Operation operation;
 
                 Console.WriteLine("Choose an operation:");
-                Console.WriteLine("1. Addition (+)");
-                Console.WriteLine("2. Subtraction (-)");
-                Console.WriteLine("3. Multiplication (*)");
-                Console.WriteLine("4. Division (/)");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine(">> Addition (+)");
+                Console.WriteLine(">> Subtraction (-)");
+                Console.WriteLine(">> Multiplication (*)");
+                Console.WriteLine(">> Division (/)");
 
-                Console.Write("Enter your choice: ");
-                int choice = Convert.ToInt32(Console.ReadLine());
-
-                if (choice == 5)
-                {
-                    keepCalculating = false;
-                    continue;
-                }
+                Console.Write("Enter the symbol of your choice: ");
+                string choice = Console.ReadLine();
 
                 switch (choice)
                 {
-                    case 1:
+                    case "+":
                         operation = new Addition();
                         break;
-                    case 2:
+                    case "-":
                         operation = new Subtraction();
                         break;
-                    case 3:
+                    case "*":
                         operation = new Multiplication();
                         break;
-                    case 4:
+                    case "/":
                         operation = new Division();
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid choice!");
                         continue;
                 }
@@ -113,25 +108,33 @@ namespace OOP_works
                 {
                     double result = calculator.PerformOperation(operation, num1, num2);
                     Console.WriteLine("Result: " + result);
-                    Console.WriteLine("Do you want to Calculate again (y/n)?");
+                }
+                catch (DivideByZeroException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
 
+                bool validChoice = false;
+                while (!validChoice)
+                {
+                    Console.WriteLine("Do you want to Calculate again (y/n)?");
                     string contchoice = Console.ReadLine().ToLower();
 
                     if (contchoice == "n" || contchoice == "no")
                     {
                         keepCalculating = false;
+                        validChoice = true;
                         Console.WriteLine("Calculator closed.");
-                        break;
                     }
-                    else if (contchoice != "y" && contchoice != "yes")
+                    else if (contchoice == "y" || contchoice == "yes")
                     {
+                        validChoice = true;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid Choice! Please type 'y' or 'n'...");
                     }
-                }
-
-                catch (DivideByZeroException e)
-                {
-                    Console.WriteLine(e.Message);
                 }
             }
         }
