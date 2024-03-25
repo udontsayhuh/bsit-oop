@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Calculator
 {
@@ -42,9 +42,15 @@ namespace Calculator
             Operand = operand;
             Firstvalue = firstvalue;
             Secondvalue = secondvalue;
+        }
+
+        public void compute(double firstvalue, double secondvalue, char operand)
+        {
             double result = Firstvalue + Secondvalue;
             Console.WriteLine($"| The sum of {Firstvalue} {operand} {Secondvalue} = " + result);
         }
+
+
     }
     class Calculator_Subtraction : Calculator
     {
@@ -53,6 +59,10 @@ namespace Calculator
             Operand = operand;
             Firstvalue = firstvalue;
             Secondvalue = secondvalue;
+        }
+
+        public void compute(double firstvalue, double secondvalue, char operand)
+        {
             double result = Firstvalue - Secondvalue;
             Console.WriteLine($"| The minuend of {Firstvalue} {operand} {Secondvalue} = " + result);
         }
@@ -64,6 +74,10 @@ namespace Calculator
             Operand = operand;
             Firstvalue = firstvalue;
             Secondvalue = secondvalue;
+        }
+
+        public void compute(double firstvalue, double secondvalue, char operand)
+        {
             double result = Firstvalue * Secondvalue;
             Console.WriteLine($"| The product of {Firstvalue} {operand} {Secondvalue} = " + result);
         }
@@ -75,6 +89,10 @@ namespace Calculator
             Operand = operand;
             Firstvalue = firstvalue;
             Secondvalue = secondvalue;
+        }
+
+        public void compute(double firstvalue, double secondvalue, char operand)
+        {
             double result = Firstvalue / Secondvalue;
             Console.WriteLine($"| The quotient of {Firstvalue} {operand} {Secondvalue} = " + result);
         }
@@ -89,9 +107,9 @@ namespace Calculator
             do
             {
                 Console.Clear();
-                Console.WriteLine("|------------------------------------------------|");
-                Console.WriteLine("|               RUBEN'S CALCULATOR               |");
-                Console.WriteLine("|------------------------------------------------|");
+                Console.WriteLine("|--------------------------------------------------------|");
+                Console.WriteLine("|                   RUBEN'S CALCULATOR                   |");
+                Console.WriteLine("|--------------------------------------------------------|");
                 Console.Write("| Please Enter first value: ");
                 while (!double.TryParse(Console.ReadLine(), out num1))
                 {
@@ -116,15 +134,19 @@ namespace Calculator
                 {
                     case '+':
                         Calculator_Addition calculate1 = new Calculator_Addition(num1, num2, operand);
+                        calculate1.compute(num1, num2, operand);
                         break;
                     case '-':
                         Calculator_Subtraction calculate2 = new Calculator_Subtraction(num1, num2, operand);
+                        calculate2.compute(num1, num2, operand);
                         break;
                     case '*':
                         Calculator_Multiplication calculate3 = new Calculator_Multiplication(num1, num2, operand);
+                        calculate3.compute(num1, num2, operand);
                         break;
                     case '/':
                         Calculator_Division calculate4 = new Calculator_Division(num1, num2, operand);
+                        calculate4.compute(num1, num2, operand);
                         break;
                 }
                 Console.Write("| Would you like to try again? (Y) yes / (N) no: ");
@@ -133,10 +155,12 @@ namespace Calculator
                 {
                     Console.WriteLine("| Invalid choice. Please choose (Y) yes or (N) no.");
                     Console.WriteLine("|");
-                    Console.Write("| Would you like to try again? (Y) yes / (N) no: ");
+                    Console.Write("| Would you like to try again? (Y)yes / (N)no: ");
                 }
             } while (repeat_choice == 'Y' || repeat_choice == 'y');
-            Console.WriteLine("\"Thank you for using RUBEN'S CALCULATOR\"");
+            Console.WriteLine("|--------------------------------------------------------|");
+            Console.WriteLine("|        \"Thank you for using RUBEN'S CALCULATOR\"        |");
+            Console.WriteLine("|--------------------------------------------------------|");
             Console.ReadKey();
         }
     }
