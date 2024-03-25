@@ -1,0 +1,95 @@
+using System;
+
+namespace CalculatorApp
+{
+    abstract class Calculator
+    {
+        public abstract void PerformCalculation(double num1, double num2, char op);
+        public abstract bool IsValidInput(string input);
+    }
+
+    class BasicCalculator : Calculator
+    {
+        public override bool IsValidInput(string input)
+        {
+            double num;
+            return double.TryParse(input, out num);
+        }
+
+        public override void PerformCalculation(double num1, double num2, char op)
+        {
+            double result = 0;
+            switch (op)
+            {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 != 0)
+                        result = num1 / num2;
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero.");
+                        return;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid operator.");
+                    return;
+            }
+            Console.WriteLine($"Result: {result}");
+        }
+    }
+
+    class calculator
+    {
+        static void Main(string[] args)
+        {
+            BasicCalculator calculator = new BasicCalculator();
+
+            while (true)
+            {
+                Console.WriteLine("Enter a number:");
+                string input1 = Console.ReadLine();
+                if (!calculator.IsValidInput(input1))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid numerical value.");
+                    return;
+                }
+
+                double num1 = double.Parse(input1);
+
+                Console.WriteLine("Enter an operator (+, -, *, /):");
+                char op = char.Parse(Console.ReadLine());
+                if (op != '+' && op != '-' && op != '*' && op != '/')
+                {
+                    Console.WriteLine("Invalid operator. Please enter one of the four fundamental operators.");
+                    return;
+                }
+
+                Console.WriteLine("Enter another number:");
+                string input2 = Console.ReadLine();
+                if (!calculator.IsValidInput(input2))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid numerical value.");
+                    return;
+                }
+
+                double num2 = double.Parse(input2);
+
+                calculator.PerformCalculation(num1, num2, op);
+
+                Console.WriteLine("Do you want to perform another calculation? (yes/no)");
+                string repeat = Console.ReadLine().ToLower();
+                if (repeat != "yes")
+                    break;
+            }
+        }
+    }
+}
