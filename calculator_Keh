@@ -17,8 +17,7 @@ class Calculator
             }
             catch (FormatException)
             {
-                Console.WriteLine(" NYAK! Invalid input! Please enter a numerical value.");
-                // Environment.Exit(0); // Not exiting here, let's allow the loop to continue
+                Console.WriteLine("NYAK! Invalid input! Please enter a numerical value.");
             }
         }
     }
@@ -32,7 +31,7 @@ class Calculator
             if (op == '+' || op == '-' || op == '*' || op == '/')
                 return op;
             else
-                Console.WriteLine("Invalid operator! Please try again!: (+, -, *, /)");
+                Console.WriteLine("LUH! Invalid operator! Please try again!: (+, -, *, /)");
         }
     }
 
@@ -60,7 +59,6 @@ class BasicCalculator : Calculator
                 if (num2 == 0)
                 {
                     Console.WriteLine("Cannot divide by ZERO!");
-                    // Environment.Exit(0); // Not exiting here, let's allow the loop to continue
                     return double.NaN; // Return NaN as result when dividing by zero
                 }
                 return num1 / num2;
@@ -89,10 +87,15 @@ class Program
         {
             calculator.PerformCalculation();
 
-            Console.Write("Do you want to perform another calculation? (Yes or ayaw ko po): ");
+            Console.Write("Do you want to perform another calculation? (G lang or ayaw ko po): ");
             string choice = Console.ReadLine().ToLower();
-            if (choice != "yes" && choice != "ayaw ko po")
+
+            if
+                (choice != "ayaw ko po")
                 break;
+            else
+                continue;
         }
+        Console.WriteLine("BYE :( ");
     }
 }
