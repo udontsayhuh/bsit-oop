@@ -147,7 +147,7 @@ namespace OOP_works
                 while (!validChoice)
                 {
                     Console.WriteLine(" ");
-					Console.ForegroundColor = ConsoleColor.White;
+		    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(">> Do you want to Calculate again? (y/n)");
                     Console.Write(">> ");
                     string contchoice = Console.ReadLine().ToLower(); // Get user's choice to continue or exit
