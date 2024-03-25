@@ -1,1 +1,113 @@
+using System;
 
+public class Calculator
+{
+    private double num1; // Encapsulated data member
+    private double num2; // Encapsulated data member
+
+    public Calculator(double n1, double n2)
+    {
+        num1 = n1;
+        num2 = n2;
+    }
+
+    public double Add()            // Public methods to access and modify data indirectly
+    {
+        return num1 + num2;
+    }
+
+    public double Subtract()       // Public methods to access and modify data indirectly
+    {
+        return num1 - num2;
+    }
+
+    public double Multiply()       // Public methods to access and modify data indirectly
+    {
+        return num1 * num2;
+    }
+
+    public double Divide()         // Public methods to access and modify data indirectly
+    {
+        if (num2 == 0)
+        {
+            Console.WriteLine("Division by zero is not allowed!");
+            return double.NaN;
+        }
+        return num1 / num2;
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.Clear(); // New Welcome Message hehe
+            DisplayWelcomeMessage();
+
+            try
+            {
+                double num1 = ENI("NUM1: ");
+                double num2 = ENI("NUM2: ");
+
+                string operation = GetOperationInput();
+                Calculator calculator = new Calculator(num1, num2);
+                double result = PerformCalculation(calculator, operation);
+
+                Console.WriteLine("\nResult: {0}", result);
+                AskForAnotherCalculation();
+            }
+            catch (FormatException)  //this construct ensures that the program doesn't crash unexpectedly due to invalid user input.
+            {
+                Console.WriteLine("Invalid input. Please enter numbers only!");
+            }
+        }
+    }
+
+    private static void DisplayWelcomeMessage()
+    {
+        Console.WriteLine("**********CALCULATOR*************");
+        Console.WriteLine("--------------------------------");
+    }
+
+    private static double ENI(string prompt)
+    {
+        Console.Write(prompt);
+        return Convert.ToDouble(Console.ReadLine());
+    }
+
+    private static string GetOperationInput()
+    {
+        Console.Write("Select operation (+, -, *, /): ");
+        return Console.ReadLine(); //get user input 
+    }
+
+    private static double PerformCalculation(Calculator calculator, string operation)
+    {
+        switch (operation)
+        {
+            case "+":
+                return calculator.Add();
+            case "-":
+                return calculator.Subtract();
+            case "*":
+                return calculator.Multiply();
+            case "/":
+                return calculator.Divide();
+            default:
+                Console.WriteLine("Invalid operation!");
+                return double.NaN;
+        }
+    }
+
+    private static void AskForAnotherCalculation()
+    {
+        Console.WriteLine("\nCalculating Again? (y/n)");
+        string answer = Console.ReadLine().ToLower();
+        if (answer != "y")
+        {
+            Environment.Exit(0); // Exiting Program
+        }
+    }
+}
