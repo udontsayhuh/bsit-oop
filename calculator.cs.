@@ -1,0 +1,141 @@
+using System;
+
+namespace CalculatorApp
+{
+    // Base Class: Parent
+    public class Calculator
+    {
+        // Method for performing arithmetic operation
+        public virtual double Operation(double a, double b)
+        {
+            return a + b; // Addition as default operation
+        }
+    }
+
+    // Derived Class: Child
+    public class Subtraction : Calculator
+    {
+        // Inheritance principle by overriding operation method for Subtraction
+        public override double Operation(double a, double b)
+        {
+            return a - b;
+        }
+    }
+
+    // Derived Class: Child
+    public class Multiplication : Calculator
+    {
+        // Inheritance principle by overriding operation method for Multiplication
+        public override double Operation(double a, double b)
+        {
+            return a * b;
+        }
+    }
+
+    // Derived Class: Child
+    public class Division : Calculator
+    {
+        // Inheritance principle by overriding operation method for Division
+        public override double Operation(double a, double b)
+        {
+            return a / b;
+        }
+    }
+
+    // UserInterface class to handle user interactions
+    public class UserInterface
+    {
+        // Method to display menu and get user choice
+        public void DisplayMenu()
+        {
+            Console.WriteLine("[Main Menu]");
+            Console.WriteLine("Calculator Application\n");
+            Console.WriteLine("Choose the operations:");
+            Console.WriteLine("A. Addition");
+            Console.WriteLine("B. Subtraction");
+            Console.WriteLine("C. Multiplication");
+            Console.WriteLine("E. Division");
+            Console.WriteLine("0. Exit");
+        }
+
+        // Method to get user input and perform operation
+        public void GetUserInput()
+        {
+            Console.Write("[Main Menu] Enter Choice: ");
+            int choice;
+            if (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 5)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid menu option (1-5).");
+                return;
+            }
+
+            if (choice == 5)
+            {
+                Console.WriteLine("Exiting...");
+                Environment.Exit(0);
+            }
+
+            double num1, num2;
+            Console.WriteLine("Enter First Number: ");
+            num1 = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Second Number: ");
+            num2 = double.Parse(Console.ReadLine());
+
+            Calculator calculator;
+            switch (choice)
+            {
+                case 1:
+                    calculator = new Calculator();
+                    break;
+                case 2:
+                    calculator = new Subtraction();
+                    break;
+                case 3:
+                    calculator = new Multiplication();
+                    break;
+                case 4:
+                    calculator = new Division();
+                    break;
+                default:
+                    Console.WriteLine("Invalid Input");
+                    return;
+            }
+
+            double result = calculator.Operation(num1, num2);
+            Console.WriteLine($"Result: {num1} {GetOperatorSymbol(choice)} {num2} = {result}");
+        }
+
+        // Method to get the operator symbol based on user's choice
+        private string GetOperatorSymbol(int choice)
+        {
+            switch (choice)
+            {
+                case 1:
+                    return "+";
+                case 2:
+                    return "-";
+                case 3:
+                    return "*";
+                case 4:
+                    return "/";
+                default:
+                    return string.Empty;
+            }
+        }
+    }
+
+    // Main program class
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            UserInterface ui = new UserInterface();
+
+            while (true)
+            {
+                ui.DisplayMenu();
+                ui.GetUserInput();
+            }
+        }
+    }
+}
