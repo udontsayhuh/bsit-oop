@@ -1,3 +1,7 @@
+//Code to perform basic arithmetic operations(Calculator)
+//Mier, Elisha Reign
+//BSIT 2-2
+
 using System;
 
 // Parent class for operations
