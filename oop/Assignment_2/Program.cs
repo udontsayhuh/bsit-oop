@@ -10,10 +10,9 @@ namespace oop.Assignment_2
     {
         static void Main(string[] args)
         {
-            char op;
-            Operation calc = new Operation();
-            Console.WriteLine("Calculator");
-            // Input first number
+            Operation op = new Operation();
+            op.getNumbers();
+            op.getOperation();
         }
     }
 }

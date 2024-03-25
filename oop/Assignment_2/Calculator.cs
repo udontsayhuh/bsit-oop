@@ -11,8 +11,9 @@ namespace oop.Assignment_2
     {
         private double num1, num2;
         protected double sum, diff, prod, quo;
-        protected char op;
-        public abstract void displayCalculator();
+        protected char op { get; set; }
+        public abstract void getNumbers();
+        public abstract void getOperation();
 
         public double Num1
         {
