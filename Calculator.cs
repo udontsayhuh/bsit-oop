@@ -4,6 +4,7 @@ public class Calculator
 {
     public static void Main(string[] args)
     {
+        // Start the calculation process
         Calculate();
     }
 
