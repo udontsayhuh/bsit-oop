@@ -94,7 +94,7 @@ namespace MyCalculator
             double number;
             while (!double.TryParse(Console.ReadLine(), out number))
             {
-                Console.WriteLine("Hmmm...that doesn't look like a number. Please enter a valid number:");
+                Console.WriteLine("Invalid input. Please enter a valid number:");
             }
             return number;
         }
@@ -105,7 +105,7 @@ namespace MyCalculator
             char op;
             while (!char.TryParse(Console.ReadLine(), out op) || !IsOperator(op))
             {
-                Console.WriteLine("Sorry, I didn't catch that. Please enter one of the following: +, -, *, /");
+                Console.WriteLine("Invalid operator. Please enter one of the following: +, -, *, /");
             }
             return op;
         }
@@ -152,7 +152,7 @@ namespace MyCalculator
     {
         static void Main(string[] args)
         {
-   
+            
             using (var myCalculator = new MyCalculator())
             {
                 myCalculator.Start();
