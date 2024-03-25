@@ -6,13 +6,15 @@ class Calculator
     {
         while (true)
         {
-            Console.WriteLine("Welcome to Simple Calculator");
-            Console.WriteLine("1. Addition");
-            Console.WriteLine("2. Subtraction");
-            Console.WriteLine("3. Multiplication");
-            Console.WriteLine("4. Division");
-            Console.WriteLine("5. Exit");
-            Console.WriteLine("Choose an option: ");
+            Console.WriteLine("===============================");
+            Console.WriteLine("= Welcome to Simple Calculator ");
+            Console.WriteLine("= 1. Addition                  ");
+            Console.WriteLine("= 2. Subtraction               ");
+            Console.WriteLine("= 3. Multiplication            ");
+            Console.WriteLine("= 4. Division                  ");
+            Console.WriteLine("= 5. Exit                      ");
+            Console.WriteLine("= Choose an option:            ");
+            Console.WriteLine("===============================");
 
             int choice;
             if (!int.TryParse(Console.ReadLine(), out choice))
@@ -67,8 +69,9 @@ class Calculator
                     Console.WriteLine("Invalid option. Please choose a number from 1 to 5.");
                     continue;
             }
-
+            Console.WriteLine("==========");
             Console.WriteLine("Result: " + result);
+            Console.WriteLine("==========");
         }
     }
 }
