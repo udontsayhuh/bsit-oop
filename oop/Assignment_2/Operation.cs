@@ -38,7 +38,6 @@ namespace oop.Assignment_2
             {
                 try
                 {
-                    char choice;
                         // Input first number
                         Console.Write("Enter your first number: ");
                         Num1 = Convert.ToDouble(Console.ReadLine());
@@ -48,6 +47,7 @@ namespace oop.Assignment_2
                         Num2 = Convert.ToDouble(Console.ReadLine());
 
                         // Ask if you want to continue using Calculator
+                        
                     x = false; // new value for x, so the loop will stop because x = false
                 }
                 catch (Exception e)
@@ -84,7 +84,6 @@ namespace oop.Assignment_2
                         default:
                             throw new Exception(); // throw exception
                     }
-
                     y = false; // new value for y, so the loop will stop because y = false
                 }
                 catch (Exception e)
