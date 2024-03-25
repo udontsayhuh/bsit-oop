@@ -1,0 +1,98 @@
+using System;
+
+class Calculator
+{
+    protected double num1;
+    protected double num2;
+
+    protected double GetNumber()
+    {
+        while (true)
+        {
+            try
+            {
+                Console.Write("Enter a number: ");
+                double num = Convert.ToDouble(Console.ReadLine());
+                return num;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine(" NYAK! Invalid input! Please enter a numerical value.");
+                // Environment.Exit(0); // Not exiting here, let's allow the loop to continue
+            }
+        }
+    }
+
+    protected char GetOperator()
+    {
+        while (true)
+        {
+            Console.Write("Enter an operator (+, -, *, /): ");
+            char op = Convert.ToChar(Console.ReadLine());
+            if (op == '+' || op == '-' || op == '*' || op == '/')
+                return op;
+            else
+                Console.WriteLine("Invalid operator! Please try again!: (+, -, *, /)");
+        }
+    }
+
+    protected virtual double Calculate()
+    {
+        return 0;
+    }
+}
+
+class BasicCalculator : Calculator
+{
+    protected char op;
+
+    protected override double Calculate()
+    {
+        switch (op)
+        {
+            case '+':
+                return num1 + num2;
+            case '-':
+                return num1 - num2;
+            case '*':
+                return num1 * num2;
+            case '/':
+                if (num2 == 0)
+                {
+                    Console.WriteLine("Cannot divide by ZERO!");
+                    // Environment.Exit(0); // Not exiting here, let's allow the loop to continue
+                    return double.NaN; // Return NaN as result when dividing by zero
+                }
+                return num1 / num2;
+            default:
+                return 0; // This should never happen
+        }
+    }
+
+    public void PerformCalculation()
+    {
+        num1 = GetNumber();
+        op = GetOperator();
+        num2 = GetNumber();
+
+        double result = Calculate();
+        Console.WriteLine("Result: " + result);
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        BasicCalculator calculator = new BasicCalculator();
+        while (true)
+        {
+            calculator.PerformCalculation();
+
+            Console.Write("Do you want to perform another calculation? (Yes or ayaw ko po): ");
+            string choice = Console.ReadLine().ToLower();
+            if (choice != "yes" && choice != "ayaw ko po")
+                break;
+        }
+    }
+}
