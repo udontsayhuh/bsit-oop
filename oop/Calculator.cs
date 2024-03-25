@@ -85,7 +85,7 @@ class SecondNum : Option // a class that will enter a second number
             }
             catch (FormatException)
             {
-                Console.WriteLine("Invalid input! Please input a valid numerical value.\n"); // handle the invalid input and will still input a valid numerical value
+                Console.WriteLine("Invalid input! Please input a valid number.\n"); // handle the invalid input and will still input a valid numerical value
             }
         }
         }
