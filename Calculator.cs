@@ -156,8 +156,8 @@ namespace OOP_works
                     {
                         keepCalculating = false; // Exit the loop if user chooses 'n' or 'no'
                         validChoice = true;
-						Console.ForegroundColor = ConsoleColor.Yellow;
-						Console.WriteLine(" ");
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.WriteLine(" ");
                         Console.WriteLine(">> Calculator closed. <<");
                     }
                     else if (contchoice == "y" || contchoice == "yes")
