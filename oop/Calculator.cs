@@ -81,7 +81,7 @@ class Calculator
         }
     }
 
-    // Abstraction: Calculate method abstracts the process of performing calculations.
+    // Abstraction: Method that abstracts the process of performing calculations.
     static float Calculate(float num1, float num2, char op)
     {
         switch (op)
@@ -94,11 +94,11 @@ class Calculator
                 return num1 * num2;
             case '/':
                 if (num2 == 0)
-                    throw new ArgumentException("Cannot divide by zero.");
+                    throw new Exception("Cannot divide by zero.");
 
                 return num1 / num2;
             default:
-                throw new ArgumentException("Invalid operator.");
+                throw new Exception("Invalid operator.");
 
         }
     }
