@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace oop.Assignment_2
 {
-    internal class Calculator
+    internal abstract class Calculator
     {
-        private int num1, num2;
-        public int sum, diff, prod, quo;
+        private double num1, num2;
+        protected double sum, diff, prod, quo;
+        protected char op;
+        public abstract void displayCalculator();
 
-        public int Num1
+        public double Num1
         {
             get { return num1; }
             set { num1 = value; }
         }
-        public int Num2
+        public double Num2
         {
             get { return num2; }
             set { num2 = value; }
@@ -27,25 +29,58 @@ namespace oop.Assignment_2
     class Operation : Calculator
     {
 
-        public int add(int num1, int num2)
+        public double add(double num1, double num2)
         {
             sum = num1 + num2;
             return sum;
         }
-        public int sub(int num1, int num2)
+        public double sub(double num1, double num2)
         {
             diff = num1 - num2;
             return diff;
         }
-        public int mul(int num1, int num2)
+        public double mul(double num1, double num2)
         {
             prod = num1 * num2;
             return prod;
         }
-        public int div(int num1, int num2)
+        public double div(double num1, double num2)
         {
             quo = num1 / num2;
             return quo;
+        }
+
+        public override void displayCalculator()
+        {
+            Console.WriteLine("Enter your first number: ");
+            Num1 = Convert.ToInt32(Console.ReadLine());
+
+            // Input second number
+            Console.WriteLine("Enter your first number: ");
+            Num2 = Convert.ToInt32(Console.ReadLine());
+
+            // Choosing operation
+            Console.Write("Enter Operation\n: [+] Addition\n[-] Subtraction\n[*] Multiplication\n-> ");
+            Console.Write("");
+            op = Convert.ToChar(Console.ReadLine());
+            switch (op)
+            {
+                case '+':
+                    Console.WriteLine("= " + add(Num1, Num2));
+                    break;
+                case '-':
+                    Console.WriteLine("= " + sub(Num1, Num2));
+                    break;
+                case '*':
+                    Console.WriteLine("= " + mul(Num1, Num2));
+                    break;
+                case '/':
+                    Console.WriteLine("= " + div(Num1, Num2));
+                    break;
+                default:
+                    Console.WriteLine("Invalid Operation");
+                    break;
+            }
         }
     }
 }
