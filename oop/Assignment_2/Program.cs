@@ -16,8 +16,27 @@ namespace oop.Assignment_2
             {
                 op.getNumbers();
                 op.getOperation();
-                Console.WriteLine("Do you want to Continue Using Calculator? [Y or y] Yes, [N or n] No: ");
-                choice = Convert.ToChar(Console.ReadLine());
+
+                bool a = true;
+                do
+                {
+                    Console.WriteLine("Do you want to Continue Using Calculator? [Y or y] Yes, [N or n] No: ");
+                    choice = Convert.ToChar(Console.ReadLine());
+
+                    if(choice == 'Y' || choice == 'y')
+                    {
+                        break;
+                    }
+                    else if(choice == 'N' || choice == 'n')
+                    {
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        a = true;
+                    }
+                } while (a);
+                
             } while (choice == 'Y' || choice == 'y');
             
         }
