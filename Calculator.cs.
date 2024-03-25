@@ -1,0 +1,110 @@
+using System;
+
+namespace CalculatorApp
+{
+    class Calculator
+    {
+        static void Main(string[] args)
+        {
+            // Display welcome message
+            Console.WriteLine("WELCOME TO CALCULATOR APP!");
+
+            // Prompt user to enter first number
+            double num1 = GetNumberFromUser("Enter the first number: ");
+
+            // Prompt user to enter second number
+            double num2 = GetNumberFromUser("Enter the second number: ");
+
+            // Prompt user to choose an operation
+            Console.WriteLine("Choose an operation:");
+            Console.WriteLine("Add (+)");
+            Console.WriteLine("Subtract (-)");
+            Console.WriteLine("Multiply (*)");
+            Console.WriteLine("Divide (/)");
+            Console.Write("Select an option either (+, -, *, /): ");
+
+            // Read user's choice
+            char operatorSymbol = GetOperatorFromUser();
+
+            double result = 0;
+
+            // Perform the selected operation
+            switch (operatorSymbol)
+            {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero!");
+                        return;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid operator!!!");
+                    return;
+            }
+
+            // Display the result
+            Console.WriteLine($"Result: {result}");
+
+            // Prompt user to press any key to exit
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+        }
+
+        // Helper method to get a valid number input from the user
+        static double GetNumberFromUser(string message)
+        {
+            double number;
+            bool isValidInput;
+
+            do
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+                isValidInput = double.TryParse(input, out number);
+
+                if (!isValidInput)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+            } while (!isValidInput);
+
+            return number;
+        }
+
+        // Helper method to get a valid operator input from the user
+        static char GetOperatorFromUser()
+        {
+            char[] validOperators = { '+', '-', '*', '/' };
+            char operatorSymbol;
+            bool isValidOperator;
+
+            do
+            {
+                string input = Console.ReadLine().Trim();
+                isValidOperator = char.TryParse(input, out operatorSymbol) &&
+                                  Array.IndexOf(validOperators, operatorSymbol) != -1;
+
+                if (!isValidOperator)
+                {
+                    Console.WriteLine("Invalid operator. Please enter one of the following: +, -, *, /");
+                }
+            } while (!isValidOperator);
+
+            return operatorSymbol;
+        }
+    }
+}
