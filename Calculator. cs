@@ -1,0 +1,143 @@
+using System;
+
+namespace CalculatorApp
+{
+    // Base class representing arithmetic operations
+    public abstract class Operation
+    {
+        public abstract double PerformOperation(double num1, double num2); // This abstract class serves as the base for all arithmetic operations and defines a common method for performing operations with two numbers.
+    }
+
+    // Addition operation class inherits from Operation class
+    public class Addition : Operation
+    {
+        public override double PerformOperation(double num1, double num2)
+        {
+            return num1 + num2;
+        }
+    }
+
+    // Subtraction operation class inherits from Operation class
+    public class Subtraction : Operation
+    {
+        public override double PerformOperation(double num1, double num2)
+        {
+            return num1 - num2;
+        }
+    }
+
+    // Multiplication operation class inherits from Operation class
+    public class Multiplication : Operation
+    {
+        public override double PerformOperation(double num1, double num2)
+        {
+            return num1 * num2;
+        }
+    }
+
+    // Division operation class inherits from Operation class
+    public class Division : Operation
+    {
+        public override double PerformOperation(double num1, double num2)
+        {
+            if (num2 != 0)
+            {
+                return num1 / num2;
+            }
+            else
+            {
+                throw new ArgumentException("Cannot divide by zero.");
+            }
+        }
+    }
+
+    // Calculator class
+    public class Calculator
+    {
+        private Operation operation; // Demonstrates Encapsulation by keeping the current operation private within the Calculator class, ensuring that it is inaccessible from outside the class, thereby encapsulating its functionality and data to maintain code integrity and security.
+
+        // Method to perform calculation
+        public double PerformCalculation(double num1, double num2, string op)
+        {
+            switch (op)
+            {
+                case "+":
+                    operation = new Addition(); // Demonstrates Polymorphism (Inheritance) by instantiating an object of the Addition class based on the input operator.
+                    break;
+                case "-":
+                    operation = new Subtraction();
+                    break;
+                case "*":
+                    operation = new Multiplication();
+                    break;
+                case "/":
+                    operation = new Division();
+                    break;
+                default:
+                    throw new ArgumentException("Invalid operator.");
+            }
+
+            return operation.PerformOperation(num1, num2); // Polymorphism (Inheritance) that calls the PerformOperation method specific to the current operation object.
+        }
+    }
+
+    // Main program class
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Calculator calculator = new Calculator();
+            bool repeat = true;
+
+            while (repeat)
+            {
+                Console.WriteLine("Please enter a numerical value to proceed with the calculation:");
+                string input1 = Console.ReadLine();
+
+                if (!double.TryParse(input1, out double num1))
+                {
+                    Console.WriteLine("Invalid input detected ! Please enter a numerical value to continue with the calculation.");
+                    return;
+                }
+
+                Console.WriteLine("Please enter an operator to perform the calculation. You can use symbols like + (addition), - (subtraction), * (multiplication), or / (division):");
+                string op = Console.ReadLine();
+
+                if (op != "+" && op != "-" && op != "*" && op != "/")
+                {
+                    Console.WriteLine("Invalid operator detected. Please enter one of the following mathematical operators: addition (+), subtraction (-), multiplication (*), or division (/) to perform the calculation.");
+                    return;
+                }
+
+                Console.WriteLine("Provide another numerical value to continue with the calculation process:");
+                string input2 = Console.ReadLine();
+
+                if (!double.TryParse(input2, out double num2))
+                {
+                    Console.WriteLine("Invalid input detected. Please enter a valid numerical value to continue with the calculation.");
+                    return;
+                }
+
+                try
+                {
+                    double result = calculator.PerformCalculation(num1, num2, op);
+                    Console.WriteLine("Result: " + result);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+
+                Console.WriteLine("Would you like to perform another calculation? Please enter 'yes' to continue or 'no' to exit.");
+                string choice = Console.ReadLine();
+
+                if (choice.ToLower() != "yes")
+                {
+                    repeat = false;
+                }
+            }
+        }
+    }
+}
+
+
