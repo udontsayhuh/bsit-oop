@@ -1,0 +1,147 @@
+using System;
+
+namespace CalculatorApp
+{
+    public class Calculator
+    {
+        public double Add(double num1, double num2)
+        {
+            return num1 + num2;
+        }
+
+        public double Subtract(double num1, double num2)
+        {
+            return num1 - num2;
+        }
+
+        public double Multiply(double num1, double num2)
+        {
+            return num1 * num2;
+        }
+
+        public double Divide(double num1, double num2)
+        {
+            if (num2 == 0)
+            {
+                throw new DivideByZeroException("Cannot divide by zero.");
+            }
+            return num1 / num2;
+        }
+    }
+
+    public class UserInterface : Calculator
+    {
+        public int DisplayMenu()
+        {
+            Console.WriteLine("===================================");
+            Console.WriteLine("            Main Menu              ");
+            Console.WriteLine("===================================");
+            Console.WriteLine("            Calculator             ");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("Operations:");
+            Console.WriteLine("    [1] Addition");
+            Console.WriteLine("    [2] Subtraction");
+            Console.WriteLine("    [3] Multiplication");
+            Console.WriteLine("    [4] Division");
+            Console.WriteLine("    [5] Exit");
+            Console.WriteLine("-----------------------------------");
+            Console.Write("Enter your choice: ");
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 5)
+            {
+                Console.WriteLine("Invalid choice. Please enter a number between 1 and 5.");
+                Console.Write("Enter you" +
+                    "" +
+                    "" +
+                    "" +
+                    "" +
+                    "" +
+                    "r choice: ");
+            }
+            return choice;
+        }
+
+
+
+        public void PerformOperation(int choice)
+        {
+            double num1, num2;
+            switch (choice)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    num1 = GetNumber("Enter First Number: ");
+                    num2 = GetNumber("Enter Second Number: ");
+                    CalculateAndDisplay(choice, num1, num2);
+                    break;
+                case 5:
+                    Console.WriteLine("Exiting...");
+                    break;
+                default:
+                    Console.WriteLine("Invalid Input");
+                    break;
+            }
+        }
+
+        private void CalculateAndDisplay(int choice, double num1, double num2)
+        {
+            double result = 0;
+            switch (choice)
+            {
+                case 1:
+                    result = num1 + num2;
+                    Console.WriteLine($"\n{num1} + {num2} = " + result);
+                    break;
+                case 2:
+                    result = num1 - num2;
+                    Console.WriteLine($"\n{num1} - {num2} = " + result);
+                    break;
+                case 3:
+                    result = num1 * num2;
+                    Console.WriteLine($"\n{num1} * {num2} = " + result);
+                    break;
+                case 4:
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                        Console.WriteLine($"\n{num1} / {num2} = " + result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nCannot divide by zero.");
+                    }
+                    break;
+            }
+        }
+
+        private double GetNumber(string message)
+        {
+            double number;
+            bool isValid;
+            do
+            {
+                Console.Write(message);
+                isValid = double.TryParse(Console.ReadLine(), out number);
+                if (!isValid)
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+            } while (!isValid);
+            return number;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            UserInterface ui = new UserInterface();
+            int choice = 0;
+            while (choice != 5)
+            {
+                choice = ui.DisplayMenu();
+                ui.PerformOperation(choice);
+            }
+        }
+    }
+}
