@@ -1,80 +1,161 @@
 ﻿//mrccdricmyg
 
 using System;
-using System.Runtime.CompilerServices;
 
-
-class Input
-{   
-
-    public static string get_input()
-    {   while (true)
-        {
-            return "string";
-        }
-   
+// abstract class (OOP Concepts application)
+public abstract class Calculator
+{
+    public double get_input()
+    {
+        return 0;
     }
 
-    public static float get_num()
-    {   
+
+
+}
+
+// Inheritance (OOP Concepts application)
+
+public class Power : Calculator
+{   public static void turn_off()
+    {
+        Console.WriteLine("thank you for using the calculator");
+        Environment.Exit(0);
+    }
+
+    public static void turn_on()
+    {
+        Console.WriteLine("Initiating Calculator...");
+    }
+}
+
+// Input class
+public class Input : Calculator
+{
+    // Pass on/off gate
+    public static int pass = 1;
+    public static bool x = true;
+
+    // Input method of Numerical values
+    // Polymorphism (OOP Concepts application)
+    public static new double get_input()
+    {
         while (true)
         {
             Console.WriteLine("Enter an integer...");
             string input = Console.ReadLine();
 
-            // Attempt to parse the input as a float
-            if (!float.TryParse(input, out float result))
+            // Attempt to parse the input as a numerical value
+            if (!double.TryParse(input, out double result))
             {
-                Console.WriteLine("The input is not numerical.");
-                
+                if((pass % 2) != 0)
+                {
+                    Console.WriteLine("invalid input");
+                    Power.turn_off();
+                }
+                else
+                {
+                    Console.WriteLine("invalid input, try again");
+                }
             }
             else
             {
-                float num1 = Convert.ToSingle(input);
+                pass++;
+                double num1 = Convert.ToDouble(input);
                 return num1;
             }
         }
     }
 
-    public static float Calculate(float num1)
+    // Input method of Operations
+    public static string get_operator()
     {
-        while (true) {
+        while (true)
+        {
             Console.WriteLine("Enter an operator (+, -, *, /)...");
             string input = Console.ReadLine();
 
             switch (input)
             {
                 case "+":
-                    float result = num1 + (Input.get_num());
-                    return result;
+                    return "+";
                 case "-":
-                    float result2 = num1 - (Input.get_num());
-                    return result2;
+                    return "-";
                 case "*":
-                    float result3 = num1 * (Input.get_num());
-                    return result3;
+                    return "*";
                 case "/":
-                    float result4 = num1 / (Input.get_num());
-                    return result4;
-
+                    return "/";
             }
+            Console.WriteLine("invalid input");
         }
     }
 
+    // Confirmation Method
+    public static void get_confirmation()
+        
+    {
+        while(true){
+            Console.WriteLine("Would you like to do another calculation? (y,n) ");
+            string input = Console.ReadLine();
+            switch (input.ToUpper())
+            {
+
+                case "Y":
+                    return;
+                case "N":
+                    Power.turn_off();
+                    return;
+            }
+            Console.WriteLine("invalid input");
+            break;
+        }
+
+
+    }
 }
 
-
-class Operator : Input
+// Calculate Class
+public class Calculate : Calculator
 {
+    // to get input from the class methods
 
+    private readonly Input input;
+
+    public static void result()
+    {
+        double num1 = Input.get_input();
+        string operand = Input.get_operator();
+        double num2 = Input.get_input();
+        switch (operand)
+        {
+            case "+":
+                Console.WriteLine($"{num1} + {num2} = {(num1 + num2)}");
+                break;
+            case "-":
+                Console.WriteLine($"{num1} + {num2} = {(num1 - num2)}");
+                break;
+            case "*":
+                Console.WriteLine($"{num1} + {num2} = {(num1 * num2)}");
+                break;
+            case "/":
+                Console.WriteLine($"{num1} + {num2} = {(num1 / num2)}");
+                break;
+
+        }
+    }
 }
 
 class Program
 {
     static void Main(string[] args)
     {
-        float result = Input.Calculate(Input.get_num());
+        Power.turn_on();
+        while (true)
+        {
+            Calculate.result();
+            Console.WriteLine("calculation done");
+            Input.get_confirmation();
+        }
 
-        Console.WriteLine(result);
     }
 }
