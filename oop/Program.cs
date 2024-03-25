@@ -102,7 +102,6 @@ public class SUV : Car
     }
 }
 
-
 class Program {
     static void Main(string[] args) {
         Car myCar = new SUV("Santa Fe", "Hyundai", 2023, "Mid-size"); // creating new instance of SUV class of type Car
