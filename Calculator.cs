@@ -98,7 +98,7 @@ namespace OOP_works
                 Console.WriteLine("|   >> Addition (+)         |");
                 Console.WriteLine("|   >> Subtraction (-)      |");
                 Console.WriteLine("|   >> Multiplication (*)   |");
-                Console.WriteLine("|   >> Division (/)          |");
+                Console.WriteLine("|   >> Division (/)         |");
                 Console.WriteLine("————————————————————————————");
 
                 Console.WriteLine(" ");
@@ -134,7 +134,7 @@ namespace OOP_works
                     Console.WriteLine(" ");
                     Console.WriteLine("==========");
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Result: " + result); // Displays the result
+                    Console.WriteLine("Result: " + result); // Display the result
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("==========");
                 }
@@ -147,15 +147,18 @@ namespace OOP_works
                 while (!validChoice)
                 {
                     Console.WriteLine(" ");
-                    Console.WriteLine(">> Do you want to Calculate again (y/n)?");
+					Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(">> Do you want to Calculate again? (y/n)");
                     Console.Write(">> ");
-                    string contchoice = Console.ReadLine().ToLower(); // Gives user a choice to continue or exit
+                    string contchoice = Console.ReadLine().ToLower(); // Get user's choice to continue or exit
 
                     if (contchoice == "n" || contchoice == "no")
                     {
                         keepCalculating = false; // Exit the loop if user chooses 'n' or 'no'
                         validChoice = true;
-                        Console.WriteLine(">> Calculator closed.");
+						Console.ForegroundColor = ConsoleColor.Yellow;
+						Console.WriteLine(" ");
+                        Console.WriteLine(">> Calculator closed. <<");
                     }
                     else if (contchoice == "y" || contchoice == "yes")
                     {
