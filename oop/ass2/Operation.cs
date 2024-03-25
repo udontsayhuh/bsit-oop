@@ -10,7 +10,7 @@ namespace oop.ass2
     internal class Operation : Compute
     {
 
-        public void validator()
+        public void validator() //
         {
             bool n = true;
             while (n)
@@ -37,7 +37,7 @@ namespace oop.ass2
             {
                 try
                 {
-                    Console.WriteLine("Please choose an operation: \n" +
+                    Console.WriteLine("\nPlease choose an operation: \n" +
                     "[+] Addition\n" +
                     "[-] Subtraction\n" +
                     "[*] Multiplication\n" +

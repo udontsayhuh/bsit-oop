@@ -13,9 +13,42 @@ class CalculatorProgram
 {
     static void Main(string[] args)
     {
-        Operation op = new Operation();
-        op.validator();
-        op.operation();
+        bool useCalcuAgain = true;
 
+        while (useCalcuAgain)
+        {
+            Operation op = new Operation();
+            op.validator();
+            op.operation();
+
+            string response;
+            bool validResponse = false;
+
+            do
+            {
+                Console.WriteLine("\nDo you want to calculate again? (yes/no)");
+                response = Console.ReadLine();
+
+                if (response == "yes" || response == "YES" || response == "no" || response == "NO")
+                {
+                    validResponse = true;
+                }
+                else
+                {
+                    Console.WriteLine("Error. Please type 'yes' or 'no' only.\n");
+                }
+                
+            } while (!validResponse) ;
+            if (response == "yes" || response == "YES")
+            {
+                Console.WriteLine("/nYou may now use the calculator again.");
+            }
+            if (response == "no" || response == "NO")
+            {
+                useCalcuAgain = false;
+            }
+        }
+
+        Console.WriteLine("\nThank you for using this calculator.");
     }
 }
