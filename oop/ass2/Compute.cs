@@ -10,7 +10,7 @@ namespace oop.ass2
 {
     internal class Compute
     {
-        // User Input 1st Number and 2nd Number
+        // Encapsulation of user input
         private double number1, number2;
         public char operators;
         public double sum, difference, product, quotient;

@@ -15,27 +15,27 @@ class CalculatorProgram
     {
         bool useCalcuAgain = true;
 
-        while (useCalcuAgain)
+        while (useCalcuAgain) //to use the calculator again
         {
             Operation op = new Operation();
-            op.validator();
-            op.operation();
+            op.validator();                     //calling the validator method which includes the user input w/validations
+            op.operation();                     //calling the operation methon which includes the operations & cases w/validations
 
             string response;
-            bool validResponse = false;
+            bool validResponse = false;         //validation for user response
 
             do
             {
                 Console.WriteLine("\nDo you want to calculate again? (yes/no)");
                 response = Console.ReadLine();
 
-                if (response == "yes" || response == "YES" || response == "no" || response == "NO")
+                if (response == "yes" || response == "YES" || response == "no" || response == "NO") //checks whether the response are valud considering the cases
                 {
                     validResponse = true;
                 }
                 else
                 {
-                    Console.WriteLine("Error. Please type 'yes' or 'no' only.\n");
+                    Console.WriteLine("Error. Please type 'yes' or 'no' only.\n");      //error message
                 }
                 
             } while (!validResponse) ;
@@ -45,7 +45,7 @@ class CalculatorProgram
             }
             if (response == "no" || response == "NO")
             {
-                useCalcuAgain = false;
+                useCalcuAgain = false;                                                  // to stop the loop
             }
         }
 
