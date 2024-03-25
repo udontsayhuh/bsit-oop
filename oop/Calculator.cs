@@ -1,13 +1,13 @@
 // Base Class
 abstract class Operator
 {
-    public abstract int Calculate(int num1, int num2);
+    public abstract double Calculate(double num1, double num2);
 }
 
 // Subclass for Addition
 class Add : Operator
 {
-    public override int Calculate(int num1, int num2)
+    public override double Calculate(double num1, double num2)
     {
         return num1 + num2;
     }
@@ -16,7 +16,7 @@ class Add : Operator
 // Subclass for Subtraction
 class Subtract : Operator
 {
-    public override int Calculate(int num1, int num2)
+    public override double Calculate(double num1, double num2)
     {
         return num1 - num2;
     }
@@ -25,7 +25,7 @@ class Subtract : Operator
 // Subclass for Multiplication
 class Multiply : Operator
 {
-    public override int Calculate(int num1, int num2)
+    public override double Calculate(double num1, double num2)
     {
         return num1 * num2;
     }
@@ -34,7 +34,7 @@ class Multiply : Operator
 // Subclass for Division
 class Divide : Operator
 {
-    public override int Calculate(int num1, int num2)
+    public override double Calculate(double num1, double num2)
     {
         if (num2 == 0)
         {
@@ -48,28 +48,41 @@ class Calculator
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Activity#2 OOP (Calculator)");
-
-        Console.Write("Enter the first number: ");
-        int num1 = Convert.ToInt32(Console.ReadLine());
-
-        Console.Write("Enter the second number: ");
-        int num2 = Convert.ToInt32(Console.ReadLine());
-
-        Console.WriteLine("Choose an operation: +, -, *, /");
-        string operation = Console.ReadLine();
-
-        Operator op = GetOperator(operation);
-
-        if (op != null)
+        bool repeat = false;
+        do
         {
-            int result = op.Calculate(num1, num2);
+            Console.WriteLine("Simple Calculator!");
+
+            Console.Write("Enter the first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter the second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            string operation;
+            Operator op;
+
+            do
+            {
+                Console.WriteLine("Choose an operation: +, -, *, /");
+                operation = Console.ReadLine();
+                op = GetOperator(operation);
+
+                if (op == null)
+                {
+                    Console.WriteLine("Invalid operation. Please try again.");
+                }
+
+            } while (op == null);
+
+            double result = op.Calculate(num1, num2);
             Console.WriteLine($"Result: {result}");
-        }
-        else
-        {
-            Console.WriteLine("Invalid operation.");
-        }
+
+            Console.WriteLine("Do you want to perform another operation? (yes/no)");
+            string response = Console.ReadLine();
+            repeat = (response.ToLower() == "yes");
+
+        } while (repeat);
     }
 
     static Operator GetOperator(string operation)
@@ -89,3 +102,4 @@ class Calculator
         }
     }
 }
+
