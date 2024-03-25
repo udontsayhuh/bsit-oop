@@ -91,10 +91,9 @@ class Program
             string choice = Console.ReadLine().ToLower();
 
             if
-                (choice != "ayaw ko po")
+                (choice == "ayaw ko po")
                 break;
-            else
-                continue;
+            
         }
         Console.WriteLine("BYE :( ");
     }
