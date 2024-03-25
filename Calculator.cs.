@@ -1,0 +1,96 @@
+using System;
+
+namespace My_Colorful_Calculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Title and Text Color
+            Console.Title = "Marv's Calculator";
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            // Loop to calculate again
+            bool calculateAgain = true;
+
+            // Main loop for calculator
+            while (calculateAgain)
+            {
+                // Declaring Variables
+                float num1, num2, result; // Encapsulation: Encapsulated only for this method.
+
+                string operation; // Encapsulation: Encapsulated only for this method.
+
+                // Input first number
+                Console.Write("Enter the first number: ");
+                num1 = Convert.ToSingle(Console.ReadLine()); // Abstraction: Conversions are hidden from user.
+
+                // Input second number
+                Console.Write("Enter the second number: ");
+                num2 = Convert.ToSingle(Console.ReadLine()); // Abstraction: Conversions are hidden from user.
+
+                // Input operation (+, -, /, *)
+                Console.Write("Enter the desired operator (+, -, /, *): ");
+                operation = Console.ReadLine(); // Encapsulation: Encapsulated only for this method.
+
+                // Perform calculation based on the user's given operator
+                switch (operation)
+                {
+                    // Add
+                    case "+":
+                        result = num1 + num2;
+                        break;
+                    // Subtract
+                    case "-":
+                        result = num1 - num2;
+                        break;
+                    // Multipliply
+                    case "*":
+                        result = num1 * num2;
+                        break;
+                    // Divide
+                    case "/":
+                        if (num2 != 0)
+                            result = num1 / num2;
+                        else
+                        {
+                            // Zero Error
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Error: Division by zero!");
+                            Console.ForegroundColor = ConsoleColor.Cyan; // Reset color to cyan
+                            continue;
+                        }
+                        break;
+                    // Invalid operator
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid operator! Please enter a valid operator.");
+                        Console.ForegroundColor = ConsoleColor.Cyan; // Reset color to cyan
+                        continue;
+                }
+
+                // Output
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"The answer is: {num1} {operation} {num2} = {result}");
+
+                // Ask user to calculate again
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("Do you want to calculate again? (yes/no): ");
+                string choice = Console.ReadLine().ToLower();
+
+                // Exit loop if false
+                if (choice != "yes")
+                    calculateAgain = false;
+            }
+
+            // Just a closing message
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Thank you for using Marv's Calculator!");
+            Console.ReadKey();
+
+            // I did not apply the inheritance and polymorphism, since it only separates the different operators within a class.
+            // For me, abstraction and encapsulation are best suited in this scenario where it keeps all the processes in the main program.
+            // By having the same methods while having different functions, does not mean it needs to be separated.
+        }
+    }
+}
