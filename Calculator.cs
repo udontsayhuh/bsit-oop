@@ -9,6 +9,7 @@ abstract class Calculator
 
   public void AskUser()
   {
+    Console.Clear();
     Console.WriteLine("Enter a number: ");
     if(!double.TryParse(Console.ReadLine(), out num1))
     {
@@ -34,7 +35,7 @@ class Addition : Calculator
       {
         AskUser();
         double sum = num1 + num2;
-        Console.WriteLine($"The sum of {num1} + {num2} is {sum}");
+        Console.WriteLine($"The sum of {num1} + {num2} is {sum.ToString("0.#####")}");
       }
 }
 
@@ -45,7 +46,7 @@ class Subtraction : Calculator
       {
         AskUser();
         double difference = num1 - num2;
-        Console.WriteLine($"The difference of {num1} - {num2} is {difference}");
+        Console.WriteLine($"The difference of {num1} - {num2} is {difference.ToString("0.#####")}");
       }
 }
 
@@ -56,7 +57,7 @@ class Multiplication : Calculator
       {
         AskUser();
         double product = num1 * num2;
-        Console.WriteLine($"The product of {num1} * {num2} is {product}");
+        Console.WriteLine($"The product of {num1} * {num2} is {product.ToString("0.#####")}");
       }
 }
 
@@ -72,7 +73,7 @@ class Division : Calculator
             Environment.Exit(0);
         }
         double quotient = num1 / num2;
-        Console.WriteLine($"The quotient of {num1} / {num2} is {quotient}");
+        Console.WriteLine($"The quotient of {num1} / {num2} is {quotient.ToString("0.#####")}");
       }
 }
 
@@ -128,7 +129,12 @@ class Program
                     Console.WriteLine("Invalid input. Choose between 'yes' and 'no' only! ");
                 }
             } while (response != "yes" && response != "no");
-
+      
+            if (response == "yes")
+            {
+                Console.Clear();
+            }
+              
             if (response == "no")
             {
                 Console.WriteLine("Program ends.");
