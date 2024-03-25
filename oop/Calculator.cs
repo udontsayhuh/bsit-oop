@@ -51,7 +51,7 @@ class Calculator
         bool repeat = false;
         do
         {
-            Console.WriteLine("Simple Calculator!");
+            Console.WriteLine("OOP Calculator");
 
             Console.Write("Enter the first number: ");
             double num1 = Convert.ToDouble(Console.ReadLine());
@@ -102,4 +102,4 @@ class Calculator
         }
     }
 }
-
+//Lennox Macadangdang BSIT 2-1
