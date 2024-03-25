@@ -6,43 +6,36 @@ namespace MyFirstCalculator
     {
         static void Main(string[] args)
         {
-            // Display welcome message
-            Console.WriteLine("------------------------------------------------");
-            Console.WriteLine("|                 My Calculator                 |");
-            Console.WriteLine("------------------------------------------------");
+            do
+            {
+                // Display welcome message and header
+                Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine("|                     My Calculator                      |");
+                Console.WriteLine("----------------------------------------------------------");
 
-            // Create an instance of the Calculator class
-            Calculator calculator = new Calculator();
+                // Create an instance of the Calculator class
+                Calculator calculator = new Calculator();
 
-            // Perform calculation
-            calculator.PerformCalculation();
+                // Perform calculation
+                calculator.PerformCalculation();
 
-            // Wait for the user to press Enter before exiting
-            WaitForEnterKey();
-        }
-
-        static void WaitForEnterKey()
-        {
-            // Display message prompting user to press Enter to exit
-            Console.WriteLine("------------------------------------------------");
-            Console.WriteLine(" Press Enter to exit...");
-            while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+                // Ask user if they want to perform another calculation
+                Console.WriteLine("----------------------------------------------------------");
+                Console.Write(" Do you want to perform another calculation? (Y or N): ");
+            } while (Console.ReadLine().Trim().ToLower() == "y");
         }
     }
 
     class Calculator
     {
-        // Private fields to store the numbers and operator
-        private double num1;
-        private double num2;
-        private char op;
-
         // Method to perform calculation
         public void PerformCalculation()
         {
+            double num1, num2;
+            char op;
+
             // Prompt user for first number
             Console.Write(" Enter the first number: ");
-            // Try to parse user input into a double, store in num1
             if (!double.TryParse(Console.ReadLine(), out num1))
             {
                 // If parsing fails, display error message and return
@@ -51,38 +44,33 @@ namespace MyFirstCalculator
             }
 
             // Prompt user for operator
-            Console.Write(" Enter an operator \n ( +, -, *, /): ");
-            // Read the first character of user input as the operator
-            op = Console.ReadKey().KeyChar;
-            Console.WriteLine();
-
-            // Validate operator
-            if (op != '+' && op != '-' && op != '*' && op != '/')
+            Console.Write(" Enter an operator (+, -, *, /): ");
+            if (!char.TryParse(Console.ReadLine(), out op) || (op != '+' && op != '-' && op != '*' && op != '/'))
             {
-                // If operator is invalid, display error message and return
-                Console.WriteLine(" Invalid operator. Please enter one of the following: +, -, *, / \n");
+                // If parsing fails or operator is invalid, display error message and return
+                Console.WriteLine(" Invalid operator. Please enter one of the following:");
+                Console.WriteLine(" +, -, *, /");
                 return;
             }
 
             // Prompt user for second number
             Console.Write(" Enter the second number: ");
-            // Try to parse user input into a double, store in num2
             if (!double.TryParse(Console.ReadLine(), out num2))
             {
                 // If parsing fails, display error message and return
-                Console.WriteLine(" Invalid input. Please enter a numerical value. \n");
+                Console.WriteLine(" Invalid input. Please enter a numerical value.");
                 return;
             }
 
             // Perform calculation
-            double result = Calculate();
+            double result = Calculate(num1, num2, op);
 
             // Display result
-            Console.WriteLine("\n Result: " + result);
+            Console.WriteLine(" Result: " + result);
         }
 
         // Method to perform actual calculation based on operator
-        private double Calculate()
+        private double Calculate(double num1, double num2, char op)
         {
             switch (op)
             {
@@ -102,6 +90,7 @@ namespace MyFirstCalculator
                     return num1 / num2;
                 default:
                     // Handle invalid operator
+                    Console.WriteLine(" Invalid operator.");
                     return double.NaN; // Return NaN for invalid operator
             }
         }
