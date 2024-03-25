@@ -72,6 +72,7 @@ class MainClass
         Console.WriteLine("                 Calculator Program");
         Console.WriteLine("=====================================================");
 
+        // Loop for user input and program execution
         while (true)
         {
             // Input for first number
@@ -89,7 +90,7 @@ class MainClass
 
             if (operatorSymbol != '+' && operatorSymbol != '-' && operatorSymbol != '*' && operatorSymbol != '/')
             {
-                Console.WriteLine("Invalid operator. Please enter one of the four operators: +, -, *, /");
+                Console.WriteLine("Invalid input. Please enter one of the four operators: +, -, *, /");
                 break; // Terminate program if input is invalid
             }
 
@@ -107,7 +108,7 @@ class MainClass
             Console.WriteLine($"Result: {expression.FirstNumber} {expression.OperatorSymbol} {expression.SecondNumber} = " + result);
 
             // Check if the user wants to perform another calculation
-            Console.Write("\nWould you like to calculate again? (Y/N): ");
+            Console.Write("\nWould you like to do another calculation? ('Y' or 'y' = Yes): ");
             string choice = Console.ReadLine().ToUpper();
             // Terminate the program if the user does not input 'Y' or 'y'.
             if (choice != "Y")
@@ -115,6 +116,7 @@ class MainClass
                 break;
             }
         }
+        // Display message before terminating the program
         Console.WriteLine("\nExiting program...\nThank you for using this Calculator!");
 
     }
