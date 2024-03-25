@@ -1,34 +1,75 @@
-class Car {
-    //test
-    //git
-    //Attributes
-    public string Model;
-    public string Make;
-    public int Year;
+﻿using System;
 
-    //Constructor
-    public Car(string model, string make, int year) {
-        Model = model;
-        Make = make;
-        Year = year;
-    }
+class Calculator
+{
+    static void Main()
+    {
+        bool tryagain = true;
 
-    //Methods
-    public void Drive() {
-        Console.WriteLine("The car is now running.");
-    }
+        while (tryagain)
+        {
+            Console.WriteLine("Calculator\n");
 
-    public void Stop() {
-        Console.WriteLine("The car has stopped.");
-    }
-}
+            double num1, num2;
+            char numerator;
 
-class Program {
-    static void Main(string[] args) {
-        Car myCar = new Car("Toyota", "Corolla", 2023);
-        Console.WriteLine($"Model: {myCar.Model}, Make: {myCar.Make}, Year: {myCar.Year}");
-        myCar.Drive();
-        myCar.Stop();
+            Console.Write("Enter the first number: ");
+            if (!double.TryParse(Console.ReadLine(), out num1))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid numerical value.");
+                return;
+            }
 
+            Console.Write("Enter the operator: ");
+            numerator = Convert.ToChar(Console.ReadLine());
+
+            Console.Write("Enter the second number: ");
+            if (!double.TryParse(Console.ReadLine(), out num2))
+            {
+                Console.Write("Invalid input.");
+                return;
+            }
+
+            double result = 0;
+
+            switch (numerator)
+            {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero");
+                        return;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid operator!");
+                    return;
+            }
+
+            Console.WriteLine($"Result: {num1} {numerator} {num2} = {result}");
+
+            Console.WriteLine("Do you want to use the calculator again? (Y/N)");
+            string choice = Console.ReadLine();
+
+            if (choice.ToUpper() != "Y")
+            {
+                tryagain = false;
+            }
+
+            Console.Clear(); 
+        }
     }
 }
