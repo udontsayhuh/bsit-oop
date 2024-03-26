@@ -15,15 +15,15 @@ namespace MyCalculator
               // converting the input into float value and using the parameter to pass the value if its converted
                 if (!float.TryParse(Console.ReadLine(), out number1))
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number");
-                    continue;
+                    Console.WriteLine("Invalid input. Terminating the calculator");
+                    break;
                 }
 
                 Console.Write("Enter the second number: ");
                 if (!float.TryParse(Console.ReadLine(), out number2))
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number");
-                    continue;
+                    Console.WriteLine("Invalid input. Terminating the calculator");
+                    break;
                 }
 
                 string symbol;
