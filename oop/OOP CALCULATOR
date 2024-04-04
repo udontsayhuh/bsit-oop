@@ -11,22 +11,22 @@ public class Calculator
         num2 = n2;
     }
 
-    public double Add()            // Public methods to access and modify data indirectly
+    public double Add()            
     {
         return num1 + num2;
     }
 
-    public double Subtract()       // Public methods to access and modify data indirectly
+    public double Subtract()       
     {
         return num1 - num2;
     }
 
-    public double Multiply()       // Public methods to access and modify data indirectly
+    public double Multiply()       
     {
         return num1 * num2;
     }
 
-    public double Divide()         // Public methods to access and modify data indirectly
+    public double Divide()         
     {
         if (num2 == 0)
         {
@@ -43,7 +43,7 @@ public class Program
     {
         while (true)
         {
-            Console.Clear(); // New Welcome Message hehe
+            Console.Clear(); 
             DisplayWelcomeMessage();
 
             try
