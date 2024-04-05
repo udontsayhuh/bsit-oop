@@ -1,25 +1,28 @@
 using System;
 
-public class Calculator
+public class Calculator     // Class to perform basic calculator operations
 {
-    private double num1;
+    private double num1;      // Instance variables for the two numbers
     private double num2;
 
-    public Calculator(double n1, double n2)
+    public Calculator(double n1, double n2)             // Constructor that initializes the two numbers
+
     {
         num1 = n1;
         num2 = n2;
     }
 
-    public double Add() => num1 + num2;
+    public double Add() => num1 + num2;           // Method to add the two numbers
 
-    public double Subtract() => num1 - num2;
+    public double Subtract() => num1 - num2;    // Method to subtract the second number from the first
 
-    public double Multiply() => num1 * num2;
+    public double Multiply() => num1 * num2;    // Method to multiply the two numbers
 
-    public double Divide()
+    public double Divide()    // Method to divide the first number by the second
+
     {
-        if (num2 == 0)
+        if (num2 == 0)        // Check if the second number is zero to avoid division by zero
+
         {
             Console.WriteLine("Division by zero is not allowed!");
             return double.NaN;
@@ -30,25 +33,32 @@ public class Calculator
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main(string[] args)      // Main method
+
     {
-        while (true)
+        while (true)          // Infinite loop to keep the calculator running
+
         {
-            Console.Clear();
-            DisplayWelcomeMessage();
+            Console.Clear();        // Clear the console and display the calculator interface
+
+            DisplayCal();
 
             try
             {
-                double num1 = GetNumericInput("NUM1: ");
-                double num2 = GetNumericInput("NUM2: ");
+                double num1 = GetNumericInput("Enter First Number: ");   // Get the first number, operation, and second number from the user
 
                 string operation = GetOperationInput();
-                Calculator calculator = new Calculator(num1, num2);
+                double num2 = GetNumericInput("Enter Second Number: ");
+
+                Calculator calculator = new Calculator(num1, num2);         // Create a Calculator object and perform the calculation
+
                 double result = PerformCalculation(calculator, operation);
 
-                Console.WriteLine("\nResult: {0}", result);
+                Console.WriteLine("\nResult: {0}", result);      // Display the result
+
                 AskForAnotherCalculation();
             }
+            // Catch any FormatException that occurs when non-numeric input is entered
             catch (FormatException)
             {
                 Console.WriteLine("Invalid input. Please enter numbers only!");
@@ -56,25 +66,29 @@ public class Program
         }
     }
 
-    private static void DisplayWelcomeMessage()
+    private static void DisplayCal()    // Method to display the calculator interface
+
     {
         Console.WriteLine("**********CALCULATOR*************");
         Console.WriteLine("--------------------------------");
     }
 
-    private static double GetNumericInput(string prompt)
+    private static double GetNumericInput(string prompt)     // Method to get numeric input from the user
+
     {
         Console.Write(prompt);
         return Convert.ToDouble(Console.ReadLine());
     }
 
-    private static string GetOperationInput()
+    private static string GetOperationInput()      // Method to get the operation from the user
+
     {
         Console.Write("Select operation (+, -, *, /): ");
         return Console.ReadLine();
     }
 
-    private static double PerformCalculation(Calculator calculator, string operation)
+    private static double PerformCalculation(Calculator calculator, string operation)     // Method to perform the calculation based on the operation
+
     {
         switch (operation)
         {
@@ -88,11 +102,13 @@ public class Program
         }
     }
 
-    private static void AskForAnotherCalculation()
+    private static void AskForAnotherCalculation()     // Method to ask the user if they want to perform another calculation
+
     {
         Console.Write("Perform another calculation? (y/n): ");
         string response = Console.ReadLine();
-        if (response.ToLower() != "y")
+        if (response.ToLower() != "y")        // If the user does not want to perform another calculation, exit the program
+
             Environment.Exit(0);
     }
 }
