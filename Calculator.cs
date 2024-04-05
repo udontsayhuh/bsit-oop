@@ -5,7 +5,7 @@ namespace c_sharp_Calculator
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string value;
             do
