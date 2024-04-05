@@ -2,8 +2,8 @@ using System;
 
 public class Calculator
 {
-    private double num1; // Encapsulated data member
-    private double num2; // Encapsulated data member
+    private double num1;
+    private double num2;
 
     public Calculator(double n1, double n2)
     {
@@ -11,22 +11,13 @@ public class Calculator
         num2 = n2;
     }
 
-    public double Add()            
-    {
-        return num1 + num2;
-    }
+    public double Add() => num1 + num2;
 
-    public double Subtract()       
-    {
-        return num1 - num2;
-    }
+    public double Subtract() => num1 - num2;
 
-    public double Multiply()       
-    {
-        return num1 * num2;
-    }
+    public double Multiply() => num1 * num2;
 
-    public double Divide()         
+    public double Divide()
     {
         if (num2 == 0)
         {
@@ -43,13 +34,13 @@ public class Program
     {
         while (true)
         {
-            Console.Clear(); 
+            Console.Clear();
             DisplayWelcomeMessage();
 
             try
             {
-                double num1 = ENI("NUM1: ");
-                double num2 = ENI("NUM2: ");
+                double num1 = GetNumericInput("NUM1: ");
+                double num2 = GetNumericInput("NUM2: ");
 
                 string operation = GetOperationInput();
                 Calculator calculator = new Calculator(num1, num2);
@@ -58,7 +49,7 @@ public class Program
                 Console.WriteLine("\nResult: {0}", result);
                 AskForAnotherCalculation();
             }
-            catch (FormatException)  //this construct ensures that the program doesn't crash unexpectedly due to invalid user input.
+            catch (FormatException)
             {
                 Console.WriteLine("Invalid input. Please enter numbers only!");
             }
@@ -71,7 +62,7 @@ public class Program
         Console.WriteLine("--------------------------------");
     }
 
-    private static double ENI(string prompt)
+    private static double GetNumericInput(string prompt)
     {
         Console.Write(prompt);
         return Convert.ToDouble(Console.ReadLine());
@@ -80,34 +71,28 @@ public class Program
     private static string GetOperationInput()
     {
         Console.Write("Select operation (+, -, *, /): ");
-        return Console.ReadLine(); //get user input 
+        return Console.ReadLine();
     }
 
     private static double PerformCalculation(Calculator calculator, string operation)
     {
         switch (operation)
         {
-            case "+":
-                return calculator.Add();
-            case "-":
-                return calculator.Subtract();
-            case "*":
-                return calculator.Multiply();
-            case "/":
-                return calculator.Divide();
+            case "+": return calculator.Add();
+            case "-": return calculator.Subtract();
+            case "*": return calculator.Multiply();
+            case "/": return calculator.Divide();
             default:
-                Console.WriteLine("Invalid operation!");
+                Console.WriteLine("Invalid operation. Please choose +, -, *, or /.");
                 return double.NaN;
         }
     }
 
     private static void AskForAnotherCalculation()
     {
-        Console.WriteLine("\nCalculating Again? (y/n)");
-        string answer = Console.ReadLine().ToLower();
-        if (answer != "y")
-        {
-            Environment.Exit(0); // Exiting Program
-        }
+        Console.Write("Perform another calculation? (y/n): ");
+        string response = Console.ReadLine();
+        if (response.ToLower() != "y")
+            Environment.Exit(0);
     }
 }
