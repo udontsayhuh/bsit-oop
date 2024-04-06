@@ -8,6 +8,10 @@ namespace oop
 {
     class SimpleCalculator
     {
+        //Stores the expression
+        public string expression = "";
+
+        //Calculator Logic
         public void CalculatorMain()
         {
             bool will_try_again = true;
@@ -18,11 +22,17 @@ namespace oop
                 //Call input functions
                 double num_1 = InputNum();
                 char operation = InputOperator();
-                double num_2 = InputNum();
 
-                //Call calculate function and displays result
-                double result = Calculate(num_1, operation, num_2);
-                PrintResult(num_1, operation, num_2, result);
+                //Loops kapag hindi '='
+                while (operation != '=')
+                {
+                    double num_2 = InputNum();
+                    num_1 = Calculate(num_1, operation, num_2);
+                    operation = InputOperator();
+                }
+
+                //Prints Result
+                PrintResult(num_1);
 
                 //Prompts user to input Y or N, will not terminate unless Y or N
                 while (true)
@@ -32,10 +42,14 @@ namespace oop
                         Console.WriteLine("Try Again? (Y/N): ");
                         string yes_no = Console.ReadLine().ToUpper();
                         if (yes_no == "Y")
+                        {
+                            this.expression = "";
                             break;
+                        }
                         else if (yes_no == "N")
                         {
                             will_try_again = false;
+                            Console.Clear();
                             break;
                         }
                         else
@@ -49,45 +63,46 @@ namespace oop
             }
         }
 
-        public double InputNum() //Terminates program if input is not double
+        public double InputNum() //Loop na sya, di na terminate
         {
-            try
+            while (true)
             {
-                Console.Write("Enter number: ");
-                double num = Convert.ToDouble(Console.ReadLine());
-                return num;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("INVALID INPUT: " + ex.Message);
-                Console.ReadKey();
-                Environment.Exit(1);
-                return 0;
+                try
+                {
+                    Console.Write("Enter number: ");
+                    double num = Convert.ToDouble(Console.ReadLine());
+                    this.expression = this.expression + ' ' + Convert.ToString(num); //Adds the input to expression
+                    return num;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("INVALID INPUT: " + ex.Message);
+                }
             }
         }
 
-        public char InputOperator() //Terminates program if input is not valid operator
+        public char InputOperator() //Loop na rin sya
         {
-            try
+            while (true)
             {
-                Console.Write("Enter Operator ( + , - , / , *): ");
-                char operation = Convert.ToChar(Console.ReadLine());
-                if (operation == '+' || operation == '-' || operation == '/' || operation == '*')
-                    return operation;
-                else
+                try
                 {
-                    Console.WriteLine("Invalid Operator");
-                    Console.ReadKey();
-                    Environment.Exit(1);
-                    return '0';
+                    Console.Write("Enter Operator ( + , - , / , *): ");
+                    char operation = Convert.ToChar(Console.ReadLine());
+                    if (operation == '+' || operation == '-' || operation == '/' || operation == '*' || operation == '=')
+                    {
+                        this.expression = this.expression + ' ' + operation; //Adds input to expression
+                        return operation;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Operator");
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("INVALID INPUT: " + ex.Message);
-                Console.ReadKey();
-                Environment.Exit(1);
-                return '0';
+                catch (Exception ex)
+                {
+                    Console.WriteLine("INVALID INPUT: " + ex.Message);
+                }
             }
         }
 
@@ -118,9 +133,9 @@ namespace oop
             }
         }
 
-        public virtual void PrintResult(double num_1, char operation, double num_2, double result)
+        public virtual void PrintResult(double result)
         {
-            Console.WriteLine($"\n{num_1} {operation} {num_2} = {result}\n");
+            Console.WriteLine($"\n{this.expression} {result}\n");
         }
     }
 
@@ -130,9 +145,9 @@ namespace oop
     {
         //Polymorphism
         //Overrides Print Result to print binary instead of decimal
-        public override void PrintResult(double num_1, char operation, double num_2, double result)
+        public override void PrintResult(double result)
         {
-            Console.WriteLine($"\nResult in Binary: {Convert.ToString((int)result, 2)}\n");
+            Console.WriteLine($"\nResult in Binary: {this.expression} {Convert.ToString((int)result, 2)}\n");
         }
     }
  
