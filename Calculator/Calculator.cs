@@ -11,19 +11,19 @@ namespace Calculator
     {
         public class Calculator
         {   //declare variables
-            public double num1 = 0;
+            public double num = 0;
             public double num2 = 0;
             public double ans = 0;
             public string operators = "";
 
-            public double GetValue1() //encapsulation
+            public double GetValue() //encapsulation
             {
                 while (true)
                 {
                     try
                     {
                         Console.Write("Enter a number: ");
-                        num1 = Convert.ToDouble(Console.ReadLine());//value for num1
+                        num = Convert.ToDouble(Console.ReadLine());//value for num1
                         break;
                     }
                     catch //invalid value
@@ -31,26 +31,9 @@ namespace Calculator
                         Console.WriteLine("Enter numbers only"); //display error
                     }
                 }
-                return num1;
+                return num;
             }
 
-            public double GetValue2() //encapsulation
-            {
-                while (true)
-                {
-                    try
-                    {
-                        Console.Write("Enter a number: ");
-                        num2 = Convert.ToDouble(Console.ReadLine());//value for num1
-                        break;
-                    }
-                    catch //invalid value
-                    {
-                        Console.WriteLine("Enter numbers only"); //display error
-                    }
-                }
-                return num2;
-            }
 
             public void GetOpt() //encapsulation
             {
@@ -113,7 +96,6 @@ namespace Calculator
             {
                 string repeat;
                 double Num1;
-                double Num2;
                 bool Continue;
                 bool notEqual = true;
                 do
@@ -123,31 +105,31 @@ namespace Calculator
                     Console.WriteLine("=========================");//spacing
                     Console.WriteLine("        CALCULATOR       ");//spacing
                     Console.WriteLine("=========================");//spacing
-                    Num1 = calculator.GetValue1(); //get the value of 1st number
+                    Num1 = calculator.GetValue(); //get the value of 1st number
                     do
                     {
                         calculator.GetOpt(); // get the operator for calculation
                         if (calculator.operators != "=")
-                            calculator.GetValue2(); //get the value of 1st number
+                            calculator.GetValue(); //get the value of 1st number
 
 
                         switch (calculator.operators) //calculate with the chosen operator
                         {
                             case "*":
                                 Multiplication multiplication = new Multiplication();
-                                Num1 = Convert.ToDouble(multiplication.Multiply(Num1, calculator.num2));
+                                Num1 = Convert.ToDouble(multiplication.Multiply(Num1, calculator.num));
                                 break;
                             case "+":
                                 Addition addition = new Addition();
-                                Num1 = Convert.ToDouble(addition.Add(Num1, calculator.num2));
+                                Num1 = Convert.ToDouble(addition.Add(Num1, calculator.num));
                                 break;
                             case "-":
                                 Subtraction subtraction = new Subtraction();
-                                Num1 = Convert.ToDouble(subtraction.Subtract(Num1, calculator.num2));
+                                Num1 = Convert.ToDouble(subtraction.Subtract(Num1, calculator.num));
                                 break;
                             case "/":
                                 Division division = new Division();
-                                Num1 = Convert.ToDouble(division.Divide(Num1, calculator.num2));
+                                Num1 = Convert.ToDouble(division.Divide(Num1, calculator.num));
                                 break;
                             case "=":
                                 notEqual = false;
