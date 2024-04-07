@@ -10,11 +10,11 @@ namespace Calculator
     abstract class Calculator
     {
         // Attributes
-        public double[] Operand;    // Array to store the value of operands.
+        public List<dynamic> Operand = new List<dynamic>();    // List to store the values of operands (declared as dynamic to store any data type).
         public double Result;
 
         // Constructor
-        public Calculator(double[] operand, double result)
+        public Calculator(List<dynamic> operand, double result)
         {
             Operand = operand;
             Result = result;
@@ -22,7 +22,7 @@ namespace Calculator
 
         // Abstract method.
         public abstract void UserInput();   // Method for user input.
-        public abstract void Calculate(char chosenOperator);    // Method for calculation.
+        public abstract void Calculate();   // Method for calculation.
 
         // Regular Method.
         public void DisplayOperationOption()
@@ -36,73 +36,102 @@ namespace Calculator
             Console.WriteLine("|    +     ║       *        ║      -      ║     /    |");
             Console.WriteLine("──────────────────────────────────────────────────────");
         }
+
+        public void DisplayAllValuesInputted()
+        {
+            Console.Clear();    // Clear the console screen.
+            DisplayOperationOption();   // Method call to DisplayOperationOption method.
+            foreach (dynamic val in Operand) { Console.Write($"{val} "); }  // Display all the values stored in the list called Operand.
+            Console.WriteLine("\n");
+        }
     }
 
     // Create another class called BasicCalcualtor that inherits from the "Calculator".
     class BasicCalculator : Calculator
     {
-        public BasicCalculator(double[] operand, double result) : base(operand, result) { }
+        public BasicCalculator(List<dynamic> operand, double result) : base(operand, result) { }
 
         // Implementation of abstract method from "Calculator" class (Polymorphism as well).
         public override void UserInput()
         {
-            // Error handling.
-            try // Execute and test for errors, if any occurs handle them with catch statement.
+            char chosenOperator = ' ';
+            while (chosenOperator != '=')   // Loop as long as the user does not enter an equal sign for the operator.
             {
-                Console.Write("Enter number for Operand 1: ");
-                Operand[0] = Convert.ToDouble(Console.ReadLine());
-            }
-            catch (Exception e)
-            {   // Execute this statement if the user inputted is not a number.
-                Console.WriteLine("Invalid input! Now terminating the program!");
-                Environment.Exit(0);
-            }
-
-            Console.Write("Enter operator: ");
-            char chosenOperator = Convert.ToChar(Console.Read());
-
-            // Validate the chosen operator.
-            while (chosenOperator != '+' && chosenOperator != '*' && chosenOperator != '-' && chosenOperator != '/')
-            {
-                Console.ReadLine();
-                Console.Clear();    // Clear the console scree.
-                DisplayOperationOption();   // Diplay operation option using the DisplayOperationOption method.
-                Console.WriteLine($"Enter number for Operand 1: {Operand[0]}");
-                Console.Write("\nInvalid operator!\nEnter valid operator (+, *, -, /): ");
-                chosenOperator = Convert.ToChar(Console.Read());
-            }
-
-            // Error handling.
-            try
-            {   // Execute and test for errors, if any occurs handle them with catch statement.
-                Console.ReadLine();
-                Console.Write("Enter number for Operand 2: ");
-                Operand[1] = Convert.ToDouble(Console.ReadLine());
-                if (chosenOperator == '/' && Operand[1] == 0)
+                // Error handling.
+                while (true)
                 {
-                    Console.WriteLine("Cannot divide by 0!");
+                    try // Execute and test for errors, if any occurs handle them with cath statement.
+                    {
+                        Console.Write("Enter number for Operand: ");
+                        Operand.Add(Convert.ToDouble(Console.ReadLine()));  // Add the user inputted to the list of Operand.
+                        DisplayAllValuesInputted(); // Method call to DisplayAllValuesInputted method.
+                        break;
+                    }
+                    catch (Exception e)
+                    {   // Execute this statement if the user inputted is not a number.
+                        DisplayAllValuesInputted(); // Method call to DisplayAllValuesInputted method.
+                        Console.WriteLine("Invalid input! Please input a valid value!");
+                    }
+                }
+
+                Console.Write("Enter operator: ");
+                chosenOperator = Convert.ToChar(Console.Read());
+
+                // Validate the chosen operator.
+                while (chosenOperator != '+' && chosenOperator != '*' && chosenOperator != '-' && chosenOperator != '/' && chosenOperator != '=')
+                {
+                    Console.ReadLine();
+                    DisplayAllValuesInputted(); // Method call to DisplayAllValuesInputted method.
+
+                    Console.Write("Invalid operator!\nEnter valid operator (+, *, -, /, =): ");
+                    chosenOperator = Convert.ToChar(Console.Read());
+                }
+                Console.ReadLine();
+                Operand.Add(chosenOperator);    // Add the user inputted for the operator to the list of Operand.
+                DisplayAllValuesInputted();     // Method call to DisplayAllValuesInputted method.
+            }
+            Console.Clear();    // Clear the console scree.
+            DisplayOperationOption();   // Diplay operation option using the DisplayOperationOption method.
+            Calculate();    // Method call to Calculate method.
+        }
+
+        public override void Calculate()
+        {
+            //list:  1 + 8 / 3 *  10  / 5 - 96   *   5  /   3    =
+            //index: 0 1 2 3 4 5  6   7 8 9 10  11  12  13  14  15
+            for (int i = 0; Operand[i] != '='; i += 2)  // Continue looping until the equal sign has been reached (indicating termination).
+            {
+                if (i != 0) // This statement is the one that always gets executed after the first loop.
+                {
+                    switch (Operand[i])
+                    {
+                        case '+': Result += Operand[i + 1]; break;
+                        case '*': Result *= Operand[i + 1]; break;
+                        case '-': Result -= Operand[i + 1]; break;
+                        case '/': Result /= Operand[i + 1]; break;
+                    }
                 }
                 else
-                {
-                    Calculate(chosenOperator);  // Call to Calculate method with parameter of chosenOperator.
+                {   // This statement will only execute once. And this is the first statement to be executed.
+                    if (Operand[i + 1] != '=')  // Check and execute if the value of the second element in the list is not '='.
+                    {
+                        switch (Operand[i + 1])
+                        {
+                            case '+': Result = Operand[0] + Operand[2]; break;
+                            case '-': Result = Operand[0] - Operand[2]; break;
+                            case '*': Result = Operand[0] * Operand[2]; break;
+                            case '/': Result = Operand[0] / Operand[2]; break;
+                        }
+                    }
+                    else
+                    {
+                        break;  // Exit the for loop.
+                    }
+                    i += 1; // Increment i by 1.
                 }
             }
-            catch (Exception e)
-            {   // Execute this statement if the user inputted is not a number.
-                Console.WriteLine("Invalid input! Now terminating the program!");
-                Environment.Exit(0);
-            }
-        }
-        public override void Calculate(char chosenOperator)
-        {
-            switch (chosenOperator)
-            {
-                case '+': Result = Operand[0] + Operand[1]; break;
-                case '*': Result = Operand[0] * Operand[1]; break;
-                case '-': Result = Operand[0] - Operand[1]; break;
-                case '/': Result = Operand[0] / Operand[1]; break;
-            }
-            Console.WriteLine($"{Operand[0]} {chosenOperator} {Operand[1]} = {Result}");
+            foreach (dynamic val in Operand) { Console.Write($"{val} "); }  // Display all the values stored in the list of Operand.
+            Console.WriteLine($"{Result}\n");
         }
     }
 
@@ -113,8 +142,8 @@ namespace Calculator
             char anotherCalcu = 'Y';
             while (anotherCalcu == 'Y')
             {   // Loop as long as the value of anotherCalcu is 'Y' (outer loop).
-                // Create a new array of double with two elements initialized to 0.0 then passed it as an argument to the constructor of BasicCalculator.
-                BasicCalculator calculateValues = new BasicCalculator(new double[] { 0.0, 0.0 }, 0.0);
+                // Create a new list that accept any data type and passed the 0.0 as an argument to the constructor of BasicCalculator.
+                BasicCalculator calculateValues = new BasicCalculator(new List<dynamic>(), 0.0);
                 calculateValues.DisplayOperationOption();   // Diplay operation option using the DisplayOperationOption method.
                 calculateValues.UserInput();    // Get the user input for operands and operator using the UserInput method.
 
@@ -130,7 +159,7 @@ namespace Calculator
                     anotherCalcu = Char.ToUpper(Convert.ToChar(Console.Read()));
                     Console.ReadLine();
                 }   // End of inner loop.
-                Console.Clear();    // Clear the console scree.
+                Console.Clear();    // Clear the console screen.
             }   // End of outer loop.
             Console.WriteLine("Program end!");
         }
