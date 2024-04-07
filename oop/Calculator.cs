@@ -96,8 +96,6 @@ namespace Calculator
                 num = GetNum();
                 GetResult();
 
-                //Print the Result for the next Operation
-                Console.WriteLine(result);
             }
 
         }
@@ -195,13 +193,13 @@ namespace Calculator
 
         public void GetResult()
         {
-           
-            Console.Write($"{result} {operation} {num}");
+
+            //Console.Write($"{result} {operation} {num}");
 
             //Get the associated GetResult method from the x child of Arithmetic
             result = Operation.GetResult(result, num);
 
-            Console.WriteLine($" = {result}\n");
+            //Console.WriteLine($" = {result}\n");
 
         }
 
