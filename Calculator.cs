@@ -1,122 +1,168 @@
 using System;
+using System.Collections.Generic;
 
 abstract class Calculator
 {
-  protected double num1;
-  protected double num2;
+    protected double num1;
+    protected double num2;
+    protected List<string> inputs = new List<string>();
 
-  public abstract void Solve();
+    public abstract void Solve();
 
-  public void AskUser()
-  {
-    Console.Clear();
-    Console.WriteLine("Enter a number: ");
-    if(!double.TryParse(Console.ReadLine(), out num1))
+    public void AskUser()
     {
-      Console.Clear();
-      Console.WriteLine("Invalid input. Only NUMERIC input is accepted.\nProgram terminated.");
-      Environment.Exit(0);
+        Console.Clear();
+        Console.WriteLine("Welcome to the Calculator App!");
+        Console.WriteLine("Input '=' when you have a valid expression (of at least TWO numbers and ONE operator).");
+
+        double result = 0;
+        bool isFirstInput = true;
+        int inputNumber = 1;
+        int operatorNumber = 1;
+
+        while (true)
+        {
+            if (isFirstInput)
+            {
+                Console.Write($"\nEnter number #{inputNumber}: ");
+                string input = Console.ReadLine().Trim();
+
+                if (input == "=")
+                {
+                    if (inputs.Count < 2)
+                    {
+                        Console.WriteLine("Invalid input! Please enter at least one operator and one number before '='.");
+                        continue;
+                    }
+
+                    Console.WriteLine($"Result: {result.ToString("0.#####")}");
+                    break;
+                }
+
+                if (!double.TryParse(input, out double number))
+                {
+                    Console.WriteLine("Invalid input! Please enter a valid number.");
+                    continue;
+                }
+
+                inputs.Add(input);
+                result = number;
+                isFirstInput = false;
+                inputNumber++;
+            }
+            else
+            {
+                Console.Write($"\nEnter operator #{operatorNumber} (+, -, *, /): ");
+                string op = Console.ReadLine().Trim();
+
+                if (op == "=")
+                {
+                    if (inputs.Count < 3 || inputs.Count % 2 != 1)
+                    {
+                        Console.WriteLine("Invalid input! Please enter a number after every operator.");
+                        continue;
+                    }
+
+                    Console.WriteLine($"Result: {result.ToString("0.#####")}");
+                    break;
+                }
+
+                if (op != "+" && op != "-" && op != "*" && op != "/")
+                {
+                    Console.WriteLine("Invalid operator! Please enter a valid operator.");
+                    continue;
+                }
+
+                Console.Write($"Enter number #{inputNumber}: ");
+                string input = Console.ReadLine().Trim();
+
+                if (!double.TryParse(input, out double number))
+                {
+                    Console.WriteLine("Invalid input! Please enter a valid number.");
+                    continue;
+                }
+
+                switch (op)
+                {
+                    case "+":
+                        result += number;
+                        break;
+                    case "-":
+                        result -= number;
+                        break;
+                    case "*":
+                        result *= number;
+                        break;
+                    case "/":
+                        if (number == 0)
+                        {
+                            Console.WriteLine("Cannot divide by zero! Please enter a non-zero number.");
+                            continue;
+                        }
+                        result /= number;
+                        break;
+                }
+
+                inputs.Add(op);
+                inputs.Add(input);
+                inputNumber++;
+                operatorNumber++;
+            }
+
+            if (inputs.Count > 0)
+            {
+                Console.WriteLine($"\nCurrent expression: {string.Join(" ", inputs)}\n");
+            }
+        }
     }
 
-    Console.WriteLine("Enter another number: ");
-    if(!double.TryParse(Console.ReadLine(), out num2))
+    public void ClearInputs()
     {
-      Console.Clear();
-      Console.WriteLine("Invalid input. Only NUMERIC input is accepted.\nProgram terminated.");
-      Environment.Exit(0);
+        inputs.Clear();
     }
-  }
 }
-
 
 class Addition : Calculator
 {
-      public override void Solve()
-      {
+    public override void Solve()
+    {
         AskUser();
-        double sum = num1 + num2;
-        Console.WriteLine($"The sum of {num1} + {num2} is {sum.ToString("0.#####")}");
-      }
+    }
 }
-
 
 class Subtraction : Calculator
 {
-      public override void Solve()
-      {
+    public override void Solve()
+    {
         AskUser();
-        double difference = num1 - num2;
-        Console.WriteLine($"The difference of {num1} - {num2} is {difference.ToString("0.#####")}");
-      }
+    }
 }
-
 
 class Multiplication : Calculator
 {
-      public override void Solve()
-      {
+    public override void Solve()
+    {
         AskUser();
-        double product = num1 * num2;
-        Console.WriteLine($"The product of {num1} * {num2} is {product.ToString("0.#####")}");
-      }
+    }
 }
-
 
 class Division : Calculator
 {
-      public override void Solve()
-      {
+    public override void Solve()
+    {
         AskUser();
-        if(num2 == 0)
-        {
-            Console.WriteLine("Syntax Error! Division by zero is invalid.\nProgram Terminated.");
-            Environment.Exit(0);
-        }
-        double quotient = num1 / num2;
-        Console.WriteLine($"The quotient of {num1} / {num2} is {quotient.ToString("0.#####")}");
-      }
+    }
 }
-
 
 class Program
 {
-  static void Main(string[] args)
-  {
-    while (true)
+    static void Main(string[] args)
     {
-      Console.WriteLine("Choose an operation: ");
-      Console.WriteLine("'+' for Addition");
-      Console.WriteLine("'-' for Subtraction");
-      Console.WriteLine("'*' for Multiplication");
-      Console.WriteLine("'/' for Division");
+        Calculator calculator = new Addition(); 
 
-      Console.WriteLine("Enter your chosen operation symbol: ");
-      char operation = Console.ReadKey().KeyChar;
-      Console.WriteLine();
-
-      Calculator calculator;
-
-      switch (operation)
-      {
-        case '+':
-          calculator = new Addition();
-          break;
-        case '-':
-          calculator = new Subtraction();
-          break;
-        case '*':
-          calculator = new Multiplication();
-          break;
-        case '/':
-          calculator = new Division();
-          break;
-        default:
-          Console.Clear();
-          Console.WriteLine("Invalid choice. Choose between +, -, *, / ONLY!");
-          continue;
-      }
-
-      calculator.Solve();
+        while (true)
+        {
+            calculator.Solve();
 
             string response;
             do
@@ -129,17 +175,15 @@ class Program
                     Console.WriteLine("Invalid input. Choose between 'yes' and 'no' only! ");
                 }
             } while (response != "yes" && response != "no");
-      
-            if (response == "yes")
-            {
-                Console.Clear();
-            }
-              
+
             if (response == "no")
             {
+                Console.Clear();
                 Console.WriteLine("Program ends.");
                 return;
             }
+
+            calculator.ClearInputs();
         }
     }
 }
