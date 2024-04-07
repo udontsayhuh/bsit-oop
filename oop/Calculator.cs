@@ -1,153 +1,118 @@
+// modify version
+
 using System;
 
-abstract class MyCalculator
+class Calculator
 {
-	public float Num_1;
-	public float Num_2;
-	public char Op;
+    public void Start()
+    {
+        Console.WriteLine("Calculator!");
+        Console.WriteLine("Press '=' to stop: \n");
+        SubMenu();
+    }
 
-	// constructor
-	public MyCalculator(float Num_1, float Num_2, char Op)
-	{
+    private void SubMenu()
+    {
+        float num1 = InputNum();
+        char op = InputOp();
+        float num2 = 0; // Initialize num_2
 
-		this.Num_1 = Num_1;
-		this.Num_2 = Num_2;
-		this.Op = Op;
+        while (op != '=')
+        {
+            num2 = InputNum();
 
-	} // MyCalc
+            switch (op)
+            {
+                case '+':
+                    num1 = Add(num1, num2);
+                    break;
+                case '-':
+                    num1 = Sub(num1, num2);
+                    break;
+                case '*':
+                    num1 = Prod(num1, num2);
+                    break;
+                case '/':
+                    num1 = Quo(num1, num2);
+                    break;
+            } // switch
 
-	// method
-	public abstract void Operate();
+            op = InputOp(); // Get the next operator
+        } // while
 
-} // MyClass
+        Console.WriteLine($"\nFinal result: {num1}");
+        Continue();
+    } // subMenu
 
-class MyCalc : MyCalculator
+    private float InputNum()
+    {
+        float num;
+        string input;
+        do
+        {
+            Console.Write("Enter a number: ");
+            input = Console.ReadLine();
+        } while (!float.TryParse(input, out num));
+
+        return num;
+    } // inputNum
+
+    private char InputOp()
+    {
+        char op;
+        do
+        {
+            Console.Write("Enter operator (+, -, *, /, =): ");
+            op = Console.ReadKey().KeyChar;
+            Console.WriteLine();
+        } while (op != '+' && op != '-' && op != '*' && op != '/' && op != '=');
+
+        return op;
+    } // inputNum
+
+    private float Add(float num1, float num2)
+    {
+        return num1 + num2;
+    } // Add
+
+    private float Sub(float num1, float num2)
+    {
+        return num1 - num2;
+    } // Sub
+
+    private float Prod(float num1, float num2)
+    {
+        return num1 * num2;
+    } // Prod
+
+    private float Quo(float num1, float num2)
+    {
+        if (num2 == 0)
+        {
+            Console.WriteLine("Cannot divide by zero.");
+            return num1;
+        }
+        return num1 / num2;
+    } // Quo
+
+    private void Continue()
+    {
+        Console.Write("\nDo you want to continue? (Y/N): ");
+        char choice = Console.ReadKey().KeyChar;
+
+        if (choice == 'Y' || choice == 'y')
+        {
+            Console.WriteLine("\n");
+            SubMenu();
+        }
+    } // Continue
+} // Calculator
+
+class Program
 {
-
-	// constructor
-	public MyCalc(float Num_1, float Num_2, char Op) : base(Num_1, Num_2, Op) { }
-   
-	public override void Operate()
-	{
-		// method 
-
-		float result = 0;
-		switch (Op)
-		{
-			case '+':
-				result = Num_1 + Num_2;
-				Console.WriteLine($"{Num_1} + {Num_2} = {result}");
-				break;
-
-			case '-':
-				result = Num_1 - Num_2;
-				Console.WriteLine($"{Num_1} - {Num_2} = {result}");
-				break;
-
-			case '*':
-				result = Num_1 * Num_2;
-				Console.WriteLine($"{Num_1} * {Num_2} = {result}");
-				break;
-
-			case '/':
-				if (Num_2 != 0)
-				{
-					result = Num_1 / Num_2;
-					Console.WriteLine($"{Num_1} / {Num_2} = {result}");
-				}
-				else
-					Console.WriteLine("Error! Division by zero.");
-				break;
-
-				/*	default:
-						Console.WriteLine("Error! Invalid Operator!");
-						break;
-				*/
-
-		} // switch
-
-
-	} // Operate
+    static void Main(string[] args)
+    {
+        Calculator calculator = new Calculator();
+        calculator.Start();
+    }
 }
-
-namespace Afable_Lawrence
-{
-	class Program_Entry
-	{
-
-		static void Main(string[] args)
-		{
-			Console.WriteLine("Calculator!");
-			SubMenu();
-		} // Main
-
-		static void SubMenu()
-		{
-			try
-			{
-
-				float num_1 = 0;
-				float num_2 = 0;
-				char op;
-
-				// input
-				Console.Write("\nEnter the first number: ");
-				num_1 = float.Parse(Console.ReadLine());
-				
-                do {
-				Console.Write("Enter operator (+, -, *, /): ");
-				op = Console.ReadKey().KeyChar;
-				Console.WriteLine();
-
-				if (op != '+' && op != '-' && op != '*' && op != '/')
-				{
-					Console.WriteLine("Error operator!\n");
-				}
-				else
-				{
-					Console.Write("Enter the second number: ");
-					num_2 = float.Parse(Console.ReadLine());
-
-				} // else
-				
-				} while (op != '+' && op != '-' && op != '*' && op != '/');// do
-
-				// creating an object
-				MyCalc mycalc = new MyCalc(num_1, num_2, op);
-				mycalc.Operate();
-				cont();
-
-			} // try
-
-			catch (FormatException)
-			{
-				Console.WriteLine("This program only accept numerical values!");
-			}
-			finally
-			{
-				Console.WriteLine("\nProgram terminated!");
-			}
-
-
-		} // subMenu
-
-
-		static void cont()
-		{
-			Console.Write("\nDo you want to continue? (Y/N): ");
-			char cho = Console.ReadKey().KeyChar;
-
-			if (cho == 'Y' || cho == 'y')
-			{
-				SubMenu();
-			}
-			else
-			{
-				return;
-			}
-		} // Cont
-
-	} // program entry
-} // namespace
-
-
