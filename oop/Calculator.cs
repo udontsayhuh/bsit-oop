@@ -60,39 +60,14 @@ class Calculator
     public bool answer;
     private Operator chosenOpe;
 
-    // Method to get the first number from the user with exception handling
-    public double FirstNum(string prompt)
-    {
-        double number;
-
-        while (true)
-        {
-            Console.Write(prompt);
-            try
-            {
-                number = Convert.ToDouble(Console.ReadLine());
-                break;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("\nInvalid input. Program will now exit.");
-                Console.WriteLine("Press any key to exit...");
-                Console.WriteLine("\n+----------+----------+----------+----------+----------+");
-                Console.ReadKey();
-                Environment.Exit(0);
-            }
-        }
-        return number;
-    }
-
     // Method to get the second number from the user with exception handling
-    public double SecondNum(string prompt)
+    public double InputNum()
     {
         double number;
 
         while (true)
         {
-            Console.Write(prompt);
+            Console.Write("\nEnter a number: ");
             try
             {
                 number = Convert.ToDouble(Console.ReadLine());
@@ -114,7 +89,7 @@ class Calculator
 
         while (true)
         {
-            Console.Write("\nEnter an operation (+, -, *, /): ");
+            Console.Write("\nEnter an operation (+, -, *, /, =): ");
             choice = Convert.ToChar(Console.ReadLine());
 
             // Instantiate the appropriate operator class based on user choice; Polymorphism was applied
@@ -132,6 +107,8 @@ class Calculator
                 case '/':
                     chosenOpe = new Division();
                     break;
+                case '=':
+                    break;
                 default:
                     Console.WriteLine("Invalid operation. Please try again.");
                     continue;
@@ -141,19 +118,17 @@ class Calculator
         return choice;
     }
 
-
     // Method to display the calculation result
-    public string DisplayResult()
+    public void DisplayResult()
     {
         if (symbol == '/' && num2 == 0)
         {
             Console.WriteLine("Cannot divide by zero.");
-            return null; // Return null when division by zero occurs
         }
         else
         {
             double result = chosenOpe.Perform(num1, num2);
-            return $"\n{num1} {symbol} {num2} = {result}";
+            num1 = result;
         }
     }
 
@@ -191,13 +166,23 @@ class Program
         do
         {
             Console.WriteLine("\n+----------+----------+----------+----------+----------+");
-            // Get user inputs
-            calculator.num1 = calculator.FirstNum("\nEnter the first number: ");
-            calculator.symbol = calculator.OperatorSymbol();
-            calculator.num2 = calculator.SecondNum("\nEnter the second number: ");
 
-            // Display and handle calculation result
-            Console.WriteLine(calculator.DisplayResult());
+            calculator.num1 = calculator.InputNum();
+
+            while (true)
+            {
+                calculator.symbol = calculator.OperatorSymbol();
+
+                if (calculator.symbol == '=')
+                {
+                    Console.WriteLine($"\nResult: {calculator.num1}");
+                    break;
+                }
+
+                calculator.num2 = calculator.InputNum();
+                calculator.DisplayResult();
+            }
+
             calculator.AskAgain();
 
         } while (calculator.answer);
