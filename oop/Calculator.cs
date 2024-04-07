@@ -2,65 +2,104 @@ using System;
 
 class Calculator
 {
-    // Properties to store the numbers
     private double num1;
     private double num2;
     private double num3;
+    private double num4;
+    private double num5;
+    private char operation;
 
-    // Constructor
     public Calculator()
     {
         num1 = 0;
         num2 = 0;
         num3 = 0;
+        num4 = 0;
+        num5 = 0;
+        operation = ' ';
     }
 
-    // Method to input numbers
-    public void InputNumbers()
+    public void InputNumbersAndOperator()
     {
-        Console.Write("Enter First Number:");
+        Console.Write("Enter First Number: ");
         if (!double.TryParse(Console.ReadLine(), out num1))
         {
-            Console.WriteLine("Invalid input. Please enter a valid number value!.");
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+            return;
         }
 
-        Console.Write("Enter Second number:");
+        Console.Write("Enter Operator (+, -, *, /): ");
+        operation = Console.ReadLine()[0];
+
+        Console.Write("Enter Second Number: ");
         if (!double.TryParse(Console.ReadLine(), out num2))
         {
-            Console.WriteLine("Invalid input. Please enter a valid number value!.");
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+            return;
         }
 
-        Console.Write("Enter Third number:");
+        Console.Write("Enter Operator (+, -, *, /): ");
+        operation = Console.ReadLine()[0];
+
+        Console.Write("Enter Third Number: ");
         if (!double.TryParse(Console.ReadLine(), out num3))
         {
-            Console.WriteLine("Invalid input. Please enter a valid number value!.");
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+            return;
+        }
+
+        Console.Write("Enter Operator (+, -, *, /): ");
+        operation = Console.ReadLine()[0];
+
+        Console.Write("Enter Fourth Number: ");
+        if (!double.TryParse(Console.ReadLine(), out num4))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+            return;
+        }
+
+        Console.Write("Enter Operator (+, -, *, /): ");
+        operation = Console.ReadLine()[0];
+
+        Console.Write("Enter Fifth Number: ");
+        if (!double.TryParse(Console.ReadLine(), out num5))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+            return;
         }
     }
 
-    // Method to perform calculation
-    public void PerformCalculation(char operation)
+    public void PerformCalculation()
     {
         double result = 0;
+
         switch (operation)
         {
             case '+':
-                result = num1 + num2 + num3;
-                Console.WriteLine("Addition:" + result);
+                result = num1 + num2 + num3 + num4 + num5;
+                Console.WriteLine($"Result: {result}");
                 break;
             case '-':
-                result = num1 - num2 - num3;
-                Console.WriteLine("Subtraction:" + result);
+                result = num1 - num2 - num3 - num4 - num5;
+                Console.WriteLine($"Result: {result}");
                 break;
             case '*':
-                result = num1 * num2 * num3;
-                Console.WriteLine("Multiplication:" + result);
+                result = num1 * num2 * num3 * num4 * num5;
+                Console.WriteLine($"Result: {result}");
                 break;
             case '/':
-                result = num1 / num2 / num3;
-                Console.WriteLine("Division:" + result);
+                if (num2 != 0)
+                {
+                    result = num1 / num2 / num3 / num4 / num5;
+                    Console.WriteLine($"Result: {result}");
+                }
+                else
+                {
+                    Console.WriteLine("Cannot divide by zero.");
+                }
                 break;
             default:
-                Console.WriteLine("Invalid operator. Please enter one of the four specified operators.");
+                Console.WriteLine("Invalid operator.");
                 break;
         }
     }
@@ -71,22 +110,13 @@ class Program
     static void Main(string[] args)
     {
         Calculator calculator = new Calculator();
-        
+
         while (true)
         {
             Console.WriteLine("Welcome to The Calculator");
-            
-            calculator.InputNumbers();
 
-            Console.WriteLine("Pick a Symbol Given Below.");
-            Console.WriteLine("[+]");
-            Console.WriteLine("[-]");
-            Console.WriteLine("[*]");
-            Console.WriteLine("[/]");
-            Console.Write("Type Here:");
-            char operation = Console.ReadLine()[0];
-
-            calculator.PerformCalculation(operation);
+            calculator.InputNumbersAndOperator();
+            calculator.PerformCalculation();
 
             Console.Write("Do you want to perform another calculation? (Y/N): ");
             char choice = Char.ToUpper(Console.ReadKey().KeyChar);
@@ -95,6 +125,7 @@ class Program
             {
                 break;
             }
+            Console.WriteLine();
         }
     }
 }
