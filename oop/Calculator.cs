@@ -1,7 +1,16 @@
 // Palaje BSIT 2-2
-// Calculator Program
+// Laboratory #3
+// Calculator Program Modification
 
 using System;
+
+// Custom exception class for division by zero
+public class DivisionByZeroException : Exception
+{
+    public DivisionByZeroException(string message) : base(message)
+    {
+    }
+}
 
 // Base class for Calculator
 public class Calculator
@@ -20,12 +29,11 @@ public class Calculator
             case '/':
                 if (secondNumber == 0)
                 {
-                    Console.WriteLine("Error: Division by zero");
+                    throw new DivisionByZeroException("Error: Division by zero");
                 }
                 return firstNumber / secondNumber;
             default:
-                Console.WriteLine("Invalid operator. Please enter one of the four operators: +, -, *, /");
-                return double.NaN; // Return NaN for invalid operation
+                throw new InvalidOperationException("Invalid operator. Please enter one of the four operators: +, -, *, /");
         }
     }
 }
@@ -35,30 +43,31 @@ public class Expression : Calculator
 {
     // Properties to store the expression components
     public double FirstNumber { get; set; }
-    public double SecondNumber { get; set; }
     public char OperatorSymbol { get; set; }
 
     // Constructor to initialize the expression components
-    public Expression(double firstNumber, double secondNumber, char operatorSymbol)
+    public Expression(double firstNumber, char operatorSymbol)
     {
         FirstNumber = firstNumber;
-        SecondNumber = secondNumber;
         OperatorSymbol = operatorSymbol;
     }
+
     // Method to evaluate the expression using Calculator's Calculate method
-    public double Evaluate()
+    public double Evaluate(double secondNumber)
     {
         try
         {
-            // Try to calculate the expression
-            return Calculate(FirstNumber, SecondNumber, OperatorSymbol);
+            return Calculate(FirstNumber, secondNumber, OperatorSymbol);
         }
-        catch (ArgumentException ex)
+        catch (DivisionByZeroException ex)
         {
-            // Handle the ArgumentException
             Console.WriteLine(ex.Message);
-            // Return a suitable value or throw the exception further
-            throw new ArgumentException("Invalid expression.");
+            throw; // Rethrow the exception to be caught in the Main method
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return double.NaN;
         }
     }
 }
@@ -68,56 +77,104 @@ class MainClass
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("=====================================================");
-        Console.WriteLine("                 Calculator Program");
-        Console.WriteLine("=====================================================");
-
-        // Loop for user input and program execution
         while (true)
         {
-            // Input for first number
-            Console.Write("\nEnter the first number: ");
-            if (!double.TryParse(Console.ReadLine(), out double firstNumber))
+            double result = 0;
+            double firstNumber = 0;
+            char operatorSymbol = ' ';
+            bool isFirstIteration = true;
+
+            Console.Clear(); // Clear the console screen
+            Console.WriteLine("=====================================================");
+            Console.WriteLine("                 Calculator Program");
+            Console.WriteLine("=====================================================");
+
+            while (true)
             {
-                Console.WriteLine("Invalid input. Please enter a numerical value.");
-                break; // Terminate program if input is invalid
+                // Input for first number
+                if (isFirstIteration)
+                {
+                    Console.Write("Enter a numerical value: ");
+                    if (!double.TryParse(Console.ReadLine(), out firstNumber))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a numerical value.");
+                        continue;
+                    }
+                    isFirstIteration = false;
+                }
+                else
+                {
+                    while (true)
+                    {
+                        Console.Write("Enter operator (+, -, *, /) or '=' to get result: ");
+                        char.TryParse(Console.ReadLine(), out operatorSymbol);
+
+                        if (operatorSymbol == '=')
+                            break;
+
+                        if (operatorSymbol != '+' && operatorSymbol != '-' && operatorSymbol != '*' && operatorSymbol != '/')
+                        {
+                            Console.WriteLine("Invalid operator. Please enter one of the four operators: +, -, *, /");
+                            continue;
+                        }
+
+                        break;
+                    }
+
+                    if (operatorSymbol == '=')
+                    {
+                        result = firstNumber;
+                        break;
+                    }
+
+                    double secondNumber;
+                    while (true)
+                    {
+                        Console.Write("Enter a numerical value: ");
+                        string input = Console.ReadLine();
+
+                        if (!double.TryParse(input, out secondNumber))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a numerical value.");
+                            continue;
+                        }
+
+                        break;
+                    }
+
+                    Expression expression = new Expression(firstNumber, operatorSymbol);
+                    try
+                    {
+                        result = expression.Evaluate(secondNumber);
+                    }
+                    catch (DivisionByZeroException)
+                    {
+                        // Reset calculation loop if division by zero occurs
+                        Console.WriteLine("Resetting calculation due to division by zero...\nPress any key to continue...");
+                        Console.ReadLine(); // to stay before clearing the screen for a reset
+                        isFirstIteration = true;
+                        break;
+                    }
+                    //Console.WriteLine($"Intermediate result: {result}"); //if you want to see the answers for each calculation
+
+                    firstNumber = result;
+                }
             }
 
-            // Input for operator
-            Console.Write("Enter operator (+, -, *, /): ");
-            char operatorSymbol = Console.ReadKey().KeyChar;
-            Console.WriteLine();
+            if (isFirstIteration) // If calculation reset, continue to the next iteration
+                continue;
 
-            if (operatorSymbol != '+' && operatorSymbol != '-' && operatorSymbol != '*' && operatorSymbol != '/')
-            {
-                Console.WriteLine("Invalid input. Please enter one of the four operators: +, -, *, /");
-                break; // Terminate program if input is invalid
-            }
-
-            // Input for second number
-            Console.Write("Enter the second number: ");
-            if (!double.TryParse(Console.ReadLine(), out double secondNumber))
-            {
-                Console.WriteLine("Invalid input. Please enter a numerical value.");
-                break; // Terminate program if input is invalid
-            }
-
-            // Create an instance of Expression and evaluate the expression
-            Expression expression = new Expression(firstNumber, secondNumber, operatorSymbol);
-            double result = expression.Evaluate();
-            Console.WriteLine($"Result: {expression.FirstNumber} {expression.OperatorSymbol} {expression.SecondNumber} = " + result);
+            // Console.WriteLine($"Final result: {result}"); // result without rounding off
+            Console.WriteLine($"Final result: {Math.Round(result, 2)} "); // Round the result to 2 decimal places
 
             // Check if the user wants to perform another calculation
-            Console.Write("\nWould you like to do another calculation? ('Y' or 'y' = Yes): ");
-            string choice = Console.ReadLine().ToUpper();
-            // Terminate the program if the user does not input 'Y' or 'y'.
-            if (choice != "Y")
+            Console.Write("\nWould you like to calculate again?\nEnter Y or y if yes: ");
+            string choice2 = Console.ReadLine().ToUpper();
+            if (choice2 != "Y")
             {
+                Console.WriteLine("\nExiting program...\nThank you for using this Calculator!");
                 break;
             }
         }
-        // Display message before terminating the program
-        Console.WriteLine("\nExiting program...\nThank you for using this Calculator!");
-
     }
 }
