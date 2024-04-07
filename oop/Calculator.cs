@@ -123,7 +123,6 @@ class Calculator
         {
 
             num1 = Input($"Enter the first number: ");
-            counter = 1;
             while (true)
             {
 
