@@ -69,13 +69,16 @@ namespace oop
             {
                 try
                 {
+                    PrintExpression();
                     Console.Write("Enter number: ");
                     double num = Convert.ToDouble(Console.ReadLine());
                     this.expression = this.expression + ' ' + Convert.ToString(num); //Adds the input to expression
+                    Console.Clear();
                     return num;
                 }
                 catch (Exception ex)
                 {
+                    Console.Clear();
                     Console.WriteLine("INVALID INPUT: " + ex.Message);
                 }
             }
@@ -87,20 +90,24 @@ namespace oop
             {
                 try
                 {
-                    Console.Write("Enter Operator ( + , - , / , *): ");
+                    PrintExpression();
+                    Console.Write("Enter Operator ( + , - , / , * , = ): ");
                     char operation = Convert.ToChar(Console.ReadLine());
                     if (operation == '+' || operation == '-' || operation == '/' || operation == '*' || operation == '=')
                     {
                         this.expression = this.expression + ' ' + operation; //Adds input to expression
+                        Console.Clear();
                         return operation;
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("Invalid Operator");
                     }
                 }
                 catch (Exception ex)
                 {
+                    Console.Clear();
                     Console.WriteLine("INVALID INPUT: " + ex.Message);
                 }
             }
@@ -133,8 +140,23 @@ namespace oop
             }
         }
 
+        //Prints Expression with Border
+        public void PrintExpression()
+        {
+            Console.Write("=");
+            foreach (char c in this.expression)
+                Console.Write("=");
+            Console.WriteLine("\n" + $"{this.expression}");
+            foreach (char c in this.expression)
+                Console.Write("=");
+            Console.Write("=");
+            Console.WriteLine("\n\n");
+        }
+
+        //Prints Expression with Result
         public virtual void PrintResult(double result)
         {
+            Console.Clear();
             Console.WriteLine($"\n{this.expression} {result}\n");
         }
     }
@@ -147,6 +169,7 @@ namespace oop
         //Overrides Print Result to print binary instead of decimal
         public override void PrintResult(double result)
         {
+            Console.Clear();
             Console.WriteLine($"\nResult in Binary: {this.expression} {Convert.ToString((int)result, 2)}\n");
         }
     }
@@ -162,6 +185,7 @@ namespace oop
                 try
                 {
                     Console.WriteLine("Choose Calculator type:");
+                    Console.WriteLine("NOTE: CALCULATOR CALCULATES LEFT TO RIGHT, NO PEMDAS!");
                     Console.WriteLine("1 Simple Calculator");
                     Console.WriteLine("2 Binary Calculator");
                     Console.WriteLine("3 EXIT");
