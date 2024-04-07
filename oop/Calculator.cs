@@ -39,7 +39,7 @@ namespace oop
                 {
                     try
                     {
-                        Console.WriteLine("Try Again? (Y/N): ");
+                        Console.Write("Try Again? (Y/N): ");
                         string yes_no = Console.ReadLine().ToUpper();
                         if (yes_no == "Y")
                         {
@@ -72,7 +72,10 @@ namespace oop
                     PrintExpression();
                     Console.Write("Enter number: ");
                     double num = Convert.ToDouble(Console.ReadLine());
-                    this.expression = this.expression + ' ' + Convert.ToString(num); //Adds the input to expression
+                    if (num < 0)
+                        this.expression = this.expression + $" ({Convert.ToString(num)})";
+                    else
+                        this.expression = this.expression + $" {Convert.ToString(num)}"; //Adds the input to expression
                     Console.Clear();
                     return num;
                 }
@@ -170,7 +173,10 @@ namespace oop
         public override void PrintResult(double result)
         {
             Console.Clear();
-            Console.WriteLine($"\nResult in Binary: {this.expression} {Convert.ToString((int)result, 2)}\n");
+            if (result < 0)
+                Console.WriteLine($"\nResult in Binary: {this.expression} -{Convert.ToString((int)Math.Abs(result), 2)}\n");
+            else
+                Console.WriteLine($"\nResult in Binary: {this.expression} {Convert.ToString((int)result, 2)}\n");
         }
     }
  
