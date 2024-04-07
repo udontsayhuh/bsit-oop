@@ -64,93 +64,105 @@ namespace Calculator
         {
             do
             {
-                double num1 = 0;
-                double num2 = 0;
-                double result = 0;
-
                 Console.WriteLine("=============================");
                 Console.WriteLine("WELCOME TO CALCULATOR PROGRAM");
                 Console.WriteLine("=============================");
 
-                // attempt to convert input1 to double num1
+                // Attempt to parse the next number
                 // new method learned: tryParse -  returns a boolean value indicating whether the conversion was successful or not.
-                // tryParse will return true if conversion succeeds, if fail num1 will remain 0
+                // tryParse will return true if conversion succeeds, if fail nextNumber will remain 0
 
-                // Input validation for num1
-                Console.WriteLine("Enter your first number: ");
-                string input1 = Console.ReadLine();
-                if (!double.TryParse(input1, out num1))
+                //declaring variables
+                double result = 0;
+                double nextNumber = 0;
+
+                // while loop:  while user do not put right input (must be a number) it will loop.
+                bool validInput = false;
+                while (!validInput)
                 {
-                    Console.WriteLine("INVALID INPUT, Enter a valid number!");
-                    return; // Terminate
-                }
-
-                // Input validation for num2
-                Console.WriteLine("Enter your second number: ");
-                string input2 = Console.ReadLine();
-                if (!double.TryParse(input2, out num2))
-                {
-                    Console.WriteLine("INVALID INPUT. Enter a valid number!");
-                    return; // Terminate
-                }
-
-                // Ask for the operation until valid is entered
-                bool checkOperation = false;
-                while (!checkOperation)
-                {
-                    Console.WriteLine("PLEASE PICK YOUR OPTION: ");
-                    Console.WriteLine("===================");
-                    Console.WriteLine("= + : ADD         =");
-                    Console.WriteLine("= - : SUBTRACT    =");
-                    Console.WriteLine("= * : MULTIPLY    =");
-                    Console.WriteLine("= / : DIVIDE      =");
-                    Console.WriteLine("===================");
-                    Console.WriteLine("Enter an option: ");
-
-                    string operation = Console.ReadLine();
-                    switch (operation)
+                    Console.WriteLine("Enter your first number: ");
+                    if (!double.TryParse(Console.ReadLine(), out result))
                     {
-                        case "+": // Addition operation
-                            result = num1 + num2;
-                            Console.WriteLine($"Your result: {num1} + {num2} = " + result);
-                            checkOperation = true;
-                            break;
+                        Console.WriteLine("INVALID INPUT, Enter a valid number!");
+                    }
+                    else
+                    {
+                        validInput = true;
+                    }
+                }
 
-                        case "-": // Subtraction operation
-                            result = num1 - num2;
-                            Console.WriteLine($"Your result: {num1} - {num2} = " + result);
-                            checkOperation = true;
-                            break;
+                //while loop: while user do not put the right operator or = it will loop.
+                while (true)
+                {
+                    Console.WriteLine("Enter an operator (+, -, *, /) or = to get the result: ");
+                    string operation = Console.ReadLine();
+                    if (operation == "=")
+                    {
+                        // if the user only put the first number and proceed to input "=" without inputing a second number, it will prompt error message.
+                        if (nextNumber == 0) 
+                        {
+                            Console.WriteLine("You need to enter the second number before getting the result."); // if input "=" without second number, prompt this.
+                            continue;
+                        }
 
-                        case "*": // Multiplication operation
-                            result = num1 * num2;
-                            Console.WriteLine($"Your result: {num1} * {num2} = " + result);
-                            checkOperation = true;
-                            break;
-
-                        case "/": // Division operation
-                                  // If user inputs 0 (cannot divide zero)
-                            if (num2 == 0)
-                            {
-                                Console.WriteLine("You cannot divide by zero!");
-                            }
-                            else
-                            {
-                                result = num1 / num2;
-                                Console.WriteLine($"Your result: {num1} / {num2} = " + result);
-                            }
-                            checkOperation = true;
-                            break;
-
-                        default: // Invalid operation
-                            Console.WriteLine("INVALID OPTION! Please enter a valid option.");
-                            break;
+                        Console.WriteLine($"Your result: {result}");
+                        break;
                     }
 
+
+                    // Check if the input is a valid operator
+                    if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
+                    {
+                        Console.WriteLine("INVALID OPTION! Please enter a valid operator.");
+                        continue; // Skip to the next iteration of the loop
+                    }
+
+                    // Attempt to parse the next number
+                    // new method learned: tryParse -  returns a boolean value indicating whether the conversion was successful or not.
+                    // tryParse will return true if conversion succeeds, if fail nextNumber will remain 0
+
+                    // while loop:  while user do not put right input (must be a number) it will loop.
+                    validInput = false;  // Update the existing validInput variable
+                    while (!validInput)
+                    {
+                        Console.WriteLine("Enter the next number: ");
+                        if (!double.TryParse(Console.ReadLine(), out nextNumber))
+                        {
+                            Console.WriteLine("INVALID INPUT, Enter a valid number!");
+                        }
+                        else
+                        {
+                            validInput = true;  
+                        }
+                    }
+
+                    // Perform the operation based on the operator entered
+                    switch (operation)
+                    {
+                        case "+":
+                            result += nextNumber;
+                            break;
+                        case "-":
+                            result -= nextNumber;
+                            break;
+                        case "*":
+                            result *= nextNumber;
+                            break;
+                        case "/":
+                            // Check for division by zero
+                            if (nextNumber == 0)
+                            {
+                                Console.WriteLine("Cannot divide by zero");
+                                continue ;
+                            }
+                            result /= nextNumber;
+                            break;
+                    }
                 }
 
-                // After result ask the user if they want to continue
+                // After displaying the result, ask the user if they want to continue
                 Console.WriteLine("Would you like to continue? (Y)/(N)");
+
             } while (Console.ReadLine().ToUpper() == "Y");
 
             Console.WriteLine("==========================================");
@@ -159,5 +171,7 @@ namespace Calculator
 
             Console.ReadKey();
         }
+
+
     }
 }
