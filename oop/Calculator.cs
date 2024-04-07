@@ -81,7 +81,6 @@ class Calculator
         return number;
     }
 
-
     // Method to get the operator symbol from the user
     public char OperatorSymbol()
     {
