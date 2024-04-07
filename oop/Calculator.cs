@@ -138,7 +138,12 @@ class Calculator
 
                     num2 = Input($"Enter the second number: ");
                 }
-                else
+                // Calls method for getting the operator
+                char choice = calculator.GetOperatorChoice();
+                // Get user input for the second number
+                Console.Write("Enter the second number: ");
+                double num2;
+                while (!double.TryParse(Console.ReadLine(), out num2))
                 {
                     Console.WriteLine($"The Final Answer is: {result}");
                     break;
