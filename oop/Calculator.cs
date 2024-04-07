@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace Calculator
 {
@@ -18,7 +12,7 @@ namespace Calculator
     //Inheritance
     class Addition : Arithemtic
     {
-        
+
         //Polymorphism
         //Override inherited method
         public override double GetResult(double x, double y)
@@ -63,28 +57,65 @@ namespace Calculator
     class Calculator
     {
         //Attributes
-        public double num1, num2;
-        public char operation;
+        private double num, result;
+        private char operation;
         public bool retry;
 
         //Attribute Object
         //The attribute can have the instance from any children of the Arithmetic class
         private Arithemtic Operation;
-        
+
         //Methods
-        public double GetNum()
+        public void Main()
         {
-          
-            while (true){
+            //Initialize Boolean to True
+            bool firstIteration = true;
+
+            while (true)
+            {
+
+                if (firstIteration)
+                {
+
+                    //Get First Input
+                    result = GetNum();
+
+                    //Set as False, so this if block doesn't execute anymore
+                    firstIteration = false;
+                }
+
+                operation = GetOperation();
+
+                //Get out of Main Method if User Input is Terminate
+                if (operation == '=')
+                {
+                    Console.WriteLine(result);
+                    return;
+                }
+
+                num = GetNum();
+                GetResult();
+
+                //Print the Result for the next Operation
+                Console.WriteLine(result);
+            }
+
+        }
+
+        private double GetNum()
+        {
+
+            while (true)
+            {
                 try
                 {
                     //Get a Double value from the user
-                    Console.Write("\nEnter a Number: ");
+                    Console.Write("Enter a Number: ");
                     double num = Convert.ToDouble(Console.ReadLine());
 
                     //Condition is for the second number input only
                     //Check if the second number is Zero and Division has been selected
-                    if(operation == '/' && num == 0)
+                    if (operation == '/' && num == 0)
                     {
                         //Show Message and Continue the input loop
                         Console.WriteLine("\nCannot Divide By 0!\n");
@@ -99,36 +130,37 @@ namespace Calculator
                 //If input is not a number catch block will execute
                 catch (FormatException e)
                 {
-                    
-                    Console.WriteLine("\nInvalid Input");
-                    Console.WriteLine("Terminating Program\n");
 
-                    //Exit the Program
-                    Environment.Exit(1);
-
-                    //This will not execute
-                    //Only exist for removing error
-                    return 1;
+                    Console.WriteLine("\nInvalid Input\nTry Again!");
 
                 }
             }
         }
 
-        public char GetOperation()
+        private char GetOperation()
         {
 
             while (true)
             {
-                
+
                 char operation = ' ';
 
                 //Keep looping until input is valid
-                while (operation != '+' && operation != '-' && operation != '*' && operation != '/')
+                while (operation != '+' && operation != '-' && operation != '*' && operation != '/' && operation != '=')
                 {
 
-                    Console.Write("\nEnter an Operation (+,-,*,/): ");
-                    operation = Convert.ToChar(Console.Read());
-                    Console.ReadLine();
+                    Console.Write("Enter an Operation (+,-,*,/)\nOr an Equal Sign(=) to Terminate\n: ");
+                    string temp = Console.ReadLine();
+
+                    //If String Length is longer than 1 character continue loop
+                    if (temp.Length > 1)
+                    {
+                        Console.WriteLine("Input should only be 1 Character!");
+                        continue;
+                    }
+
+                    //Get the first Character of the String
+                    operation = Convert.ToChar(temp);
 
                     //Create an Object Based on the input operation
                     //Set the value of the Attribute Operation to the new Object associated with the input operation
@@ -146,8 +178,10 @@ namespace Calculator
                         case '/':
                             Operation = new Division();
                             break;
+                        case '=':
+                            Console.WriteLine("Terminating Calculator!");
+                            break;
                         default:
-                            //Show Message that input is invalid
                             Console.WriteLine("\nInput a Correct Operation!\n");
                             break;
                     }
@@ -159,11 +193,16 @@ namespace Calculator
 
         }
 
-        public string GetResult()
+        public void GetResult()
         {
-            //Return a String of the Result using the attributes in the class
+           
+            Console.Write($"{result} {operation} {num}");
+
             //Get the associated GetResult method from the x child of Arithmetic
-            return $"{num1} {operation} {num2} = {Operation.GetResult(num1, num2)}";
+            result = Operation.GetResult(result, num);
+
+            Console.WriteLine($" = {result}\n");
+
         }
 
         public void TryAgain()
@@ -173,7 +212,7 @@ namespace Calculator
             //Keep looping until input is valid
             while (reply != 'Y' && reply != 'N')
             {
-                
+
                 //Input for character
                 Console.Write("\nWould you like to input again? (Y:N): ");
                 reply = Char.ToUpper(Convert.ToChar(Console.Read()));
@@ -185,26 +224,20 @@ namespace Calculator
             retry = (reply == 'Y') ? true : false;
         }
     }
-        
+
     class Program
     {
-      
+
         static void Main(string[] args)
         {
 
             //Create Object
             Calculator calculator = new Calculator();
 
-            //Keep looping while the retry attribute is true
+            //Keep looping while attribute retry is True
             do
             {
-                //Set Values for the attributes in the Object
-                calculator.num1 = calculator.GetNum();
-                calculator.operation = calculator.GetOperation();
-                calculator.num2 = calculator.GetNum();
-
-                Console.WriteLine(calculator.GetResult());
-
+                calculator.Main();
                 calculator.TryAgain();
 
             } while (calculator.retry);
