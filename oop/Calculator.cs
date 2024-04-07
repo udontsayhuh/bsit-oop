@@ -95,13 +95,13 @@ class Calculator
             }
 
             // Check if the input is one of the specified operators
-            if (choice == '+' || choice == '-' || choice == '/' || choice == '*' || choice == '=')
+            if (choice == '+' || choice == '-' || choice == '/' || choice == '*')
             {
                 return choice; // Exit the loop if a valid input is provided
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter one of the specified operators: +, -, /, *, =.");
+                Console.WriteLine("Invalid input. Please enter one of the specified operators: +, -, /, *.");
             }
         }
     }
@@ -123,6 +123,7 @@ class Calculator
         {
 
             num1 = Input($"Enter the first number: ");
+
             while (true)
             {
 
@@ -137,12 +138,7 @@ class Calculator
 
                     num2 = Input($"Enter the second number: ");
                 }
-                // Calls method for getting the operator
-                char choice = calculator.GetOperatorChoice();
-                // Get user input for the second number
-                Console.Write("Enter the second number: ");
-                double num2;
-                while (!double.TryParse(Console.ReadLine(), out num2))
+                else
                 {
                     Console.WriteLine($"The Final Answer is: {result}");
                     break;
