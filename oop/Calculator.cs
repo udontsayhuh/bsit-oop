@@ -1,122 +1,180 @@
-
 using System;
 
-public class BasicCalculator
+// Abstract base class representing an arithmetic operation
+abstract class Operation
 {
-    // Method to perform basic arithmetic operations
-    public virtual double PerformOperation(double num1, double num2, char op)
+    // Method signature for performing an operation
+    public abstract double Perform(double num1, double num2);
+}
+
+// Concrete subclass for addition operation
+class AdditionOperation : Operation
+{
+    // Implementation of the addition operation
+    public override double Perform(double num1, double num2)
     {
-        // Switch statement to handle different operations
+        return num1 + num2;
+    }
+}
+
+// Concrete subclass for subtraction operation
+class SubtractionOperation : Operation
+{
+    // Implementation of the subtraction operation
+    public override double Perform(double num1, double num2)
+    {
+        return num1 - num2;
+    }
+}
+
+// Concrete subclass for multiplication operation
+class MultiplicationOperation : Operation
+{
+    // Implementation of the multiplication operation
+    public override double Perform(double num1, double num2)
+    {
+        return num1 * num2;
+    }
+}
+
+// Concrete subclass for division operation
+class DivisionOperation : Operation
+{
+    // Implementation of the division operation
+    public override double Perform(double num1, double num2)
+    {
+        if (num2 == 0)
+        {
+            Console.WriteLine("Error: Division by zero.");
+            return double.NaN;
+        }
+        return num1 / num2;
+    }
+}
+
+// Class representing a calculator
+class Calculator
+{
+    // Operation objects for each arithmetic operation
+    private Operation addition;
+    private Operation subtraction;
+    private Operation multiplication;
+    private Operation division;
+
+    // Constructor to instantiate operation objects
+    public Calculator()
+    {
+        // Instantiate operation objects
+        addition = new AdditionOperation();
+        subtraction = new SubtractionOperation();
+        multiplication = new MultiplicationOperation();
+        division = new DivisionOperation();
+    }
+
+    // Method to perform basic arithmetic operations
+    public double PerformOperation(double num1, double num2, char op)
+    {
         switch (op)
         {
             case '+':
-                return num1 + num2;
+                return addition.Perform(num1, num2);
             case '-':
-                return num1 - num2;
+                return subtraction.Perform(num1, num2);
             case '*':
-                return num1 * num2;
+                return multiplication.Perform(num1, num2);
             case '/':
-               
-                if (num2 == 0)
-                {
-                    return 0;
-                }
-                return num1 / num2;
+                return division.Perform(num1, num2);
             default:
-                return 0;
+                Console.WriteLine("Invalid operator.");
+                return double.NaN;
         }
     }
-}
 
-// Define a SquareRoot calculator class inheriting from BasicCalculator
-public class SquareRootCalculator : BasicCalculator
-{
-    // Override PerformOperation method to add square root functionality
-    public override double PerformOperation(double num1, double num2, char op)
+    // Method to display result
+    public void DisplayResult(double result)
     {
-        // Call the base method to perform basic arithmetic operation
-        double result = base.PerformOperation(num1, num2, op);
-
-        // Additional functionality for ScientificCalculator: Calculate square root of the result
-        double sqrtResult = Math.Sqrt(result);
-        Console.WriteLine($"Square root of the result: {sqrtResult}");
-
-        return result;
+        Console.WriteLine($"The result is: {result}");
     }
 }
 
-// Main program class
 class Program
 {
-    // Main method, entry point of the program
     static void Main()
     {
-        // Prompt user to select calculator type
-        Console.WriteLine("Select Calculator Type:");
-        Console.WriteLine("\n1. Basic Calculator");
-        Console.WriteLine("2. SquareRoot Calculator");
+        bool repeat = true;
 
-        // Read user choice
-        int choice;
-        if (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 2)
+        while (repeat)
         {
-            Console.WriteLine("Invalid choice. Please enter 1 or 2.");
-            return;
-        }
+            Console.WriteLine("--------------------------------------------------------------------");
+            Console.WriteLine("                       BASIC CALCULATOR");
+            Console.WriteLine("--------------------------------------------------------------------");
+            Console.WriteLine("Enter a number:");
+            double result = 0;
+            bool isFirstValue = true;
+            char prevOperator = '+';
 
-        BasicCalculator calculator = choice == 1 ? new BasicCalculator() : new SquareRootCalculator();
+            Calculator calculator = new Calculator(); // Instantiate a basic calculator
 
-        // Run the selected calculator
-        RunCalculator(calculator);
-    }
-
-    // Method to run the calculator
-    static void RunCalculator(BasicCalculator calculator)
-    {
-        // Main loop for calculator operations
-        while (true)
-        {
-            // first numerical value
-            Console.WriteLine("\n----------------------------------------------------");
-            Console.WriteLine("Enter a numerical value:");
-            double num1;
-            if (!double.TryParse(Console.ReadLine(), out num1))
+            // Loop to handle user inputs for calculations
+            while (true)
             {
-                Console.WriteLine("\nInvalid input. Please enter a numerical value.");
-                return;
+                string input = Console.ReadLine();
+
+                if (input == "=")
+                    break;
+
+                double num;
+                if (!double.TryParse(input, out num))
+                {
+                    Console.WriteLine("--------------------------------------------------------------------");
+                    Console.WriteLine("Invalid input. Please enter a numerical value ");
+                    Console.WriteLine("--------------------------------------------------------------------");
+                    continue;
+                }
+
+                if (isFirstValue)
+                {
+                    result = num;
+                    isFirstValue = false;
+                }
+                else
+                {
+                    result = calculator.PerformOperation(result, num, prevOperator);
+                }
+
+                Console.WriteLine("Enter an operation (+, -, *, /) or '=' to compute:");
+                string op = Console.ReadLine();
+
+                if (op != "+" && op != "-" && op != "*" && op != "/" && op != "=")
+                {
+                    Console.WriteLine("--------------------------------------------------------------------");
+                    Console.WriteLine("Invalid operator. Please enter a valid operator or '=' to calculate.");
+                    Console.WriteLine("--------------------------------------------------------------------");
+                    continue;
+                }
+
+                if (op == "=")
+                    break;
+
+                prevOperator = op[0];
+
+                // Prompt for the next number
+                Console.WriteLine("Enter a number:");
             }
 
-            //  ask the user na maglagay ng operator
-            Console.WriteLine("Enter one of the following operators: +, -, *, /");
-            char op = Console.ReadKey().KeyChar;
+            // Display result
+            Console.WriteLine("--------------------------------------------------------------------");
+            calculator.DisplayResult(result);
+            Console.WriteLine("--------------------------------------------------------------------");
 
-            // Check if operator is valid
-            if (op != '+' && op != '-' && op != '*' && op != '/')
-            {
-                Console.WriteLine("\n\nInvalid operator. Please enter one of the four specified operators.");
-                return;
-            }
-
-            //  user enter thw second numerical value
-            Console.WriteLine("\nEnter another numerical value:");
-            double num2;
-            if (!double.TryParse(Console.ReadLine(), out num2))
-            {
-                Console.WriteLine("\nInvalid input. Please enter a numerical value.");
-                return;
-            }
-
-            // Perform the calculation using the selected calculator
-            double result = calculator.PerformOperation(num1, num2, op);
-            Console.WriteLine($"Result: {result}");
-
-            // Ask user if they want to perform another calculation
-            Console.WriteLine("\n----------------------------------------------------");
-            Console.WriteLine("Do you want to do another calculation? (yes/no)");
+            // Prompt to start a new calculation session or exit
+            Console.WriteLine("Do you want to start a new calculation session? (yes/no)");
             string response = Console.ReadLine().ToLower();
-            if (response != "yes" && response != "YES" && response != "Yes")
+            if (response != "yes")
+                
             {
-                break;
+                repeat = false;
+                
             }
         }
     }
