@@ -5,83 +5,112 @@ using System;
 
 namespace Calculator
 {
+   // Class representing a calculator with basic arithmetic operations
+    class Calculator
+    {
+         // Encapsulation: The 'result' field is declared as private to restrict direct access from outside the class
+        private double result;
+
+         // Abstraction: This method calculates the result based on the given numbers and operator
+        protected double Calculate(double num1, double num2, double result, char op)
+        {    //Polymorphism related to the operation
+            switch (op)
+            {
+                case '+':
+                    return result + num1;
+                case '-':
+                    return result - num1;
+                case '*':
+                    return result * num1;
+                case '/':
+                    if (num1 == 0)
+                    {
+                        Console.WriteLine("Cannot divide by zero. Please enter a number or operator");
+                        return result;
+                    }
+                    return result / num1;
+                default:
+                    return result;
+            }
+        }
+
+        //abtraction related to the valid operation used
+        protected bool IsOperator(string input)
+        {
+            return input == "+" || input == "-" || input == "*" || input == "/";
+        }
+
+        // abstraction of the calculator main function, and user display
+        public void PerformCalculation()
+        {
+            string userInput = "";
+
+            Console.WriteLine("-----------------------");
+            Console.WriteLine(" Calculator Activity");
+            Console.WriteLine("-----------------------");
+        // encapsulation related to the user prompt display using do-while statement
+            do
+            {
+                Console.Write("Enter number or operator (Enter '=' to see the result): ");
+                string input = Console.ReadLine();
+
+                if (input == "=")
+                {
+                    break;
+                }
+                // encapsulation convert string to double and check its validation
+                if (double.TryParse(input, out double number))
+                {
+                    if (userInput == "")
+                        result = number;
+                    else
+                    {
+                        if (!IsOperator(userInput))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid operator.");
+                            continue;
+                        } // abstraction, update the number and operator used
+                        result = Calculate(number, result, result, userInput[0]);
+                    }
+                }
+                else if (IsOperator(input))
+                {
+                    userInput = input;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number or operator.");
+                    continue;
+                }
+
+            } while (true);
+
+            PrintResult();
+        }
+
+        // Public method to print the result
+        public void PrintResult()
+        {
+            Console.WriteLine($"Result: {result}");
+        }
+    }
+// main entry point prompt
     class Program
     {
-        // Default Constructor
-
         static void Main(string[] args)
         {
             do
-            {
-                double num1 = 0; // Encapsulation: Variables num1, num2, and result are encapsulated within the Main method.
-                double num2 = 0;
-                double result = 0;
+            { //polymorphism, create New instance //abstraction,calling the method used to start the program
+                Calculator calculator = new Calculator();
+                calculator.PerformCalculation();
 
-                Console.WriteLine("-----------------------");
-                Console.WriteLine("Calculator Activity");
-                Console.WriteLine("-----------------------");
+                Console.Write("Do you want to continue? (YES/NO): ");
+                string continueInput = Console.ReadLine();
+//encapsulation, determine either yes or no
+                if (continueInput.ToUpper() != "YES")
+                    break;
 
-                // Accepting input for number 1
-                Console.Write("Enter number 1: ");
-                if (!double.TryParse(Console.ReadLine(), out num1))
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                    return;                 }
-
-                // Accepting input for number 2
-                Console.Write("Enter number 2: ");
-                if (!double.TryParse(Console.ReadLine(), out num2))
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                    return; // Encapsulation: Control flow logic is encapsulated within the Main method same as the num1 variable
-                }
-
-                // Abstraction: The user interface and calculation logic..
-                // Accepting input for operator
-                Console.WriteLine("Enter an operation to be used: ");
-                Console.WriteLine("\t+ : Add");
-                Console.WriteLine("\t- : Subtract");
-                Console.WriteLine("\t* : Multiply");
-                Console.WriteLine("\t/ : Divide");
-                Console.Write("Enter an operation to be used: ");
-                string operation = Console.ReadLine();
-
-                // Polymorphism: Switch statement allows for different behavior based on the type of operation that the user has chosen.
-
-                // Performing the calculation based on the operator
-                switch (operation)
-                {
-                    case "+":
-                        result = num1 + num2;
-                        Console.WriteLine($"Your result: {num1} + {num2} = " + result);
-                        break;
-                    case "-":
-                        result = num1 - num2;
-                        Console.WriteLine($"Your result: {num1} - {num2} = " + result);
-                        break;
-                    case "*":
-                        result = num1 * num2;
-                        Console.WriteLine($"Your result: {num1} * {num2} = " + result);
-                        break;
-                    case "/":
-                        // Abstraction: Handling division by zero is abstracted away from the user.
-                        // Check for division by zero
-                        if (num2 == 0)
-                        {
-                            Console.WriteLine("Cannot divide by zero.");
-                            return; // Encapsulation: Control flow logic if the cannot divide by zero…
-                        }
-                        result = num1 / num2;
-                        Console.WriteLine($"Your result: {num1} / {num2} = " + result);
-                        break;
-                    default:
-                        Console.WriteLine("That was not a valid operation.");
-                        return; // Encapsulation: Control flow logic if the operation is invalid.
-                }
-
-                // Asking the user to continue or exit
-                Console.Write("Would you like to continue? (Y = yes, N = no): ");
-            } while (Console.ReadLine().ToUpper() == "Y" || Console.ReadLine().ToUpper() == "yes") || Console.ReadLine().ToUpper() == "YES");
+            } while (true);
 
             Console.WriteLine("Thank you for using the calculator!!!");
             Console.ReadKey();
