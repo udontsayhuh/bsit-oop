@@ -5,99 +5,116 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
+
+using System;
+
 namespace oop.ass2
 {
-    internal class Operation : Compute
+    internal class Operation
     {
-        private double total = 0; // Variable for storing results
+        private double total = 0;
 
         public void Validator()
         {
-            bool continueOpt = true; // to loop the entry and validation
-            while (continueOpt)
+            Console.WriteLine("Enter values and operators ALTERNATIVELY. Press '=' to calculate.");
+
+            while (true)
             {
                 try
                 {
-                    Console.Write("Please enter a number: "); // first input
-                    double Number1 = Convert.ToDouble(Console.ReadLine());
-                    /*Console.Write("Please enter an operation: "); // first input
-                    char operators = Convert.ToChar(Console.ReadLine());*/
+                    Console.Write("-> ");
+                    string input = Console.ReadLine();
 
-                    if (total == 0) // If the total is 0, assign the number
+                    if (input == "=")
+                        break;
+
+                    if (double.TryParse(input, out double number))
                     {
-                        total = Number1;
+                        total = number;
                     }
                     else
                     {
-                        Console.WriteLine("\nPlease choose an operation: \n" + // let's the user choose what operation
-                                          "[+] Addition\n" +
-                                          "[-] Subtraction\n" +
-                                          "[*] Multiplication\n" +
-                                          "[/] Division\n" +
-                                          "[=] Equals");
-
-                        Console.Write("Enter your choice: ");
-                        char operators = Convert.ToChar(Console.ReadLine());
-
-                        switch (operators) // operation cases
+                        Console.Write("-> ");
+                        char operation = input[0];
+                        switch (operation)
                         {
                             case '+':
-                                total = Add(total, Number1);
+                                Add();
                                 break;
                             case '-':
-                                total = Subtract(total, Number1);
+                                Subtract();
                                 break;
                             case '*':
-                                total = Multiply(total, Number1);
+                                Multiply();
                                 break;
                             case '/':
-                                total = Divide(total, Number1);
-                                break;
-                            case '=':
-                                continueOpt = false;
+                                Divide();
                                 break;
                             default:
-                                Console.WriteLine("Error. Please input a valid operation.");
-                                continue;
+                                Console.WriteLine("Invalid operation.");
+                                break;
                         }
-
                     }
                 }
-                catch (FormatException)
+                catch (ArgumentException)
                 {
-                    Console.WriteLine("Error. Please input numbers only."); // catches if the input is not a double, float, or integer
+                    Console.WriteLine("Invalid Input. Try Again.");
                 }
+
             }
 
             Console.WriteLine($"Result: {total}");
         }
 
-        public double Add(double total, double number1)
+        private void Add()
         {
-            return total + number1;
-        }
-
-        public double Subtract(double total, double number1)
-        {
-            return total - number1;
-        }
-
-        public double Multiply(double total, double number1)
-        {
-            return total * number1;
-        }
-
-        public double Divide(double total, double number1)
-        {
-            if (number1 != 0) // Avoid division by zero
-            {
-                return total / number1;
-            }
+            double value;
+            if (double.TryParse(Console.ReadLine(), out value))
+                total = total + value;
             else
+                throw new ArgumentException();
+        }
+
+        private void Subtract()
+        {
+            double value;
+            if (double.TryParse(Console.ReadLine(), out value))
+                total = total - value;
+            else
+                throw new ArgumentException();
+        }
+
+        private void Multiply()
+        {
+            double value;
+            if (double.TryParse(Console.ReadLine(), out value))
+                total = total * value;
+            else
+                throw new ArgumentException();
+        }
+
+        private void Divide()
+        {
+            try
             {
-                Console.WriteLine("Cannot divide by zero.");
-                return double.NaN; // Returning NaN (Not a Number) to indicate error
+                double value = ReadDouble();
+                if (value != 0)
+                    total /= value;
+                else
+                    Console.WriteLine("Cannot divide by zero.");
             }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        private double ReadDouble()
+        {
+            double value;
+            if (!double.TryParse(Console.ReadLine(), out value))
+                throw new ArgumentException();
+            return value;
         }
     }
 }
