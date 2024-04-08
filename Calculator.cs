@@ -5,12 +5,12 @@ namespace CalculatorApp
     // Abstract base class for mathematical operations
     public abstract class Operation
     {
-        //Encapsulation: The PerformOperation method is encapsulated within the Operation class,
+        // Encapsulation: The PerformOperation method is encapsulated within the Operation class.
         public abstract double PerformOperation(double num1, double num2);
     }
 
     // This is the Concrete classes for each mathematical operation
-    // Inheritance: The Addition, Subraction, Nultiplication, and Division class inherits from the Operation base class
+    // Inheritance: The Addition, Subraction, Multiplication, and Division class inherits from the Operation base class
     public class Addition : Operation
     {
         public override double PerformOperation(double num1, double num2)
@@ -76,16 +76,25 @@ namespace CalculatorApp
                 Console.WriteLine("Enter a number:");
                 double num1 = GetValidNumber();
 
-                Console.WriteLine("Enter an operator (+, -, *, /):");
-                char op = GetValidOperator();
+                char op;
+                do
+                {
+                    Console.WriteLine("Enter an operator (+, -, *, /), or = to display the result:");
+                    op = GetValidOperator();
 
-                Console.WriteLine("Enter another number:");
-                double num2 = GetValidNumber();
+                    if (op != '=')
+                    {
+                        Console.WriteLine("Enter another number:");
+                        double num2 = GetValidNumber();
 
-                // Polymorphism: The PerformCalculation method accepts an Operation object
-                // Perform the selected operation
-                double result = PerformCalculation(num1, num2, op);
-                Console.WriteLine("Result: " + result);
+                        // Perform the selected operation
+                        double result = PerformCalculation(num1, num2, op);
+                        Console.WriteLine("Intermediate Result: " + result);
+                        num1 = result; // Update num1 with the intermediate result
+                    }
+                } while (op != '=');
+
+                Console.WriteLine("Result: " + num1);
 
                 Console.WriteLine("Do you want to perform another calculation? (Y/N)");
                 string repeatInput = Console.ReadLine();
@@ -97,13 +106,17 @@ namespace CalculatorApp
         private double GetValidNumber()
         {
             double number;
-            bool isValid = double.TryParse(Console.ReadLine(), out number);
+            bool isValid;
 
-            if (!isValid)
+            do
             {
-                Console.WriteLine("Invalid input. Exiting...");
-                Environment.Exit(0);
-            }
+                isValid = double.TryParse(Console.ReadLine(), out number);
+
+                if (!isValid)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number:");
+                }
+            } while (!isValid);
 
             return number;
         }
@@ -111,15 +124,15 @@ namespace CalculatorApp
         private char GetValidOperator()
         {
             char op;
-            bool isValid = false;
+            bool isValid;
 
             do
             {
                 isValid = char.TryParse(Console.ReadLine(), out op);
 
-                if (!isValid || (op != '+' && op != '-' && op != '*' && op != '/'))
+                if (!isValid || (op != '+' && op != '-' && op != '*' && op != '/' && op != '='))
                 {
-                    Console.WriteLine("Invalid operator. Please enter a valid operator (+, -, *, /):");
+                    Console.WriteLine("Invalid operator. Please enter a valid operator (+, -, *, /), or = to display the result:");
                     isValid = false;
                 }
             } while (!isValid);
