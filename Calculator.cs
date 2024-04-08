@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 
 namespace CalculatorApp
 {
@@ -13,26 +14,17 @@ namespace CalculatorApp
     class Addition : BinaryOperation
     {
         // Encapsulation: Override method to perform addition
-        public override float Calculate(float num1, float num2)
-        {
-            return num1 + num2;
-        }
+        public override float Calculate(float num1, float num2) => num1 + num2;
     }
 
     class Subtraction : BinaryOperation
     {
-        public override float Calculate(float num1, float num2)
-        {
-            return num1 - num2;
-        }
+        public override float Calculate(float num1, float num2) => num1 - num2;
     }
 
     class Multiplication : BinaryOperation
     {
-        public override float Calculate(float num1, float num2)
-        {
-            return num1 * num2;
-        }
+        public override float Calculate(float num1, float num2) => num1 * num2;
     }
 
     class Division : BinaryOperation
@@ -51,9 +43,82 @@ namespace CalculatorApp
     // Calculator class encapsulating the calculation logic
     class Calculator
     {
-        public float PerformOperation(BinaryOperation operation, float num1, float num2)
+        private List<string> inputs = new List<string>();
+
+        public void PerformCalculation()
         {
-            return operation.Calculate(num1, num2);
+            inputs.Clear();
+
+            // Collect inputs until '=' is entered
+            bool expectNumber = true; // Flag to track whether the next input is expected to be a number
+            while (true)
+            {
+                if (expectNumber)
+                    Console.WriteLine("Enter a number:");
+                else
+                    Console.WriteLine("Enter an operator (+, -, *, /), For the result enter Equal sign (=): ");
+
+                string input = Console.ReadLine();
+                if (input == "=")
+                    break;
+
+                if (expectNumber && float.TryParse(input, out _))
+                {
+                    inputs.Add(input);
+                    expectNumber = false; // After a number is entered, expect an operator next
+                }
+                else if (!expectNumber && "+-*/".Contains(input))
+                {
+                    inputs.Add(input);
+                    expectNumber = true; // After an operator is entered, expect a number next
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input.");
+                }
+            }
+
+            if (inputs.Count > 0)
+            {
+                float result = CalculateResult();
+                Console.WriteLine("Result: " + result);
+            }
+        }
+
+        private float CalculateResult()
+        {
+            float result = float.Parse(inputs[0]);
+
+            // Iterate through pairs of operator and number
+            for (int i = 1; i < inputs.Count; i += 2)
+            {
+                string op = inputs[i];
+                float num = float.Parse(inputs[i + 1]);
+
+                switch (op)
+                {
+                    case "+":
+                        result += num;
+                        break;
+                    case "-":
+                        result -= num;
+                        break;
+                    case "*":
+                        result *= num;
+                        break;
+                    case "/":
+                        if (num != 0)
+                            result /= num;
+                        else
+                            Console.WriteLine("Error: Division by zero!");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid operator: " + op);
+                        break;
+                }
+            }
+
+            return result;
         }
     }
 
@@ -66,53 +131,7 @@ namespace CalculatorApp
 
             do
             {
-                // Prompt user for input
-                float num1, num2;
-                char operationSymbol;
-
-                Console.WriteLine("Enter the first number:");
-                while (!float.TryParse(Console.ReadLine(), out num1))
-                {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                }
-
-                Console.WriteLine("Enter the operation (+, -, *, /):");
-                while (!char.TryParse(Console.ReadLine(), out operationSymbol) ||
-                       (operationSymbol != '+' && operationSymbol != '-' && operationSymbol != '*' && operationSymbol != '/'))
-                {
-                    Console.WriteLine("Invalid operation. Please choose from '+', '-', '*', or '/'.");
-                }
-
-                Console.WriteLine("Enter the second number:");
-                while (!float.TryParse(Console.ReadLine(), out num2))
-                {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                }
-
-                // Select operation based on user input
-                BinaryOperation operation = null;
-                switch (operationSymbol)
-                {
-                    case '+':
-                        operation = new Addition();
-                        break;
-                    case '-':
-                        operation = new Subtraction();
-                        break;
-                    case '*':
-                        operation = new Multiplication();
-                        break;
-                    case '/':
-                        operation = new Division();
-                        break;
-                }
-
-                // Perform calculation
-                if (operation != null)
-                {
-                    float result = calculator.PerformOperation(operation, num1, num2);
-                    Console.WriteLine("Result: " + result);
-                }
+                calculator.PerformCalculation();
 
                 // Ask user if they want to perform another calculation
                 Console.WriteLine("Do you want to perform another calculation? (Y/N)");
