@@ -117,8 +117,8 @@ class Calculator
         return choice;
     }
 
-    // Method to display the calculation result
-    public void DisplayResult()
+    // Method to calculate the input numbers
+    public void Calculate()
     {
         if (symbol == '/' && num2 == 0)
         {
@@ -127,7 +127,7 @@ class Calculator
         else
         {
             double result = chosenOpe.Perform(num1, num2);
-            num1 = result;
+            num1 = result; // Update num1 for further calculations
         }
     }
 
@@ -179,7 +179,7 @@ class Program
                 }
 
                 calculator.num2 = calculator.InputNum();
-                calculator.DisplayResult();
+                calculator.Calculate();
             }
 
             calculator.AskAgain();
