@@ -79,7 +79,7 @@ namespace Calculator_Program
                     Console.WriteLine("\nEnter / for Division");
                     Console.Write("\n\nOperator to be used: ");
                     string op = Console.ReadLine();
-                    if (op != "+" && op != "-" && op != "*" && op != "/") // to verify if the operator entered is valid
+                    if (op != "+" && op != "-" && op != "*" && op != "/")
                     {
                         throw new InvalidOperationException();
                     }
