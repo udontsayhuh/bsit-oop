@@ -78,7 +78,7 @@ public class Calculator : Operations {
             // Continue getting user input for operator until the inputted operator is valid
             while(true) {
                 try {
-                    Console.Write("Enter the operator: ");
+                    Console.Write("Enter the operator ('=' to get result): ");
                     if (!char.TryParse(Console.ReadLine(), out op)) {
                         // Throw ArgumentException if user input for operator is invalid
                         throw new ArgumentException("Invalid input. Please enter a valid operator.");
