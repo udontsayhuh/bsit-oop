@@ -200,8 +200,8 @@ class Calculator
             if (answer == "y")
             {
                 // reset the elements inside the array
-                numbers = new double[0];
-                operators = new char[0];
+                Array.Resize(ref numbers, 0);
+                Array.Resize(ref numbers, 0);
                 UserInput(); // ask user to input again from the start
                 break;
             }
