@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 
 namespace Calculator
-{   
+{
 
     // Parent Class
     abstract public class Arithmetic
@@ -19,7 +19,7 @@ namespace Calculator
     }
 
     // Child Classes
-    public class Addition: Arithmetic
+    public class Addition : Arithmetic
     {
 
         public Addition(char symbol, string name) : base(symbol, name)
@@ -45,8 +45,9 @@ namespace Calculator
         }
     }
 
-    public class Multiplication : Arithmetic { 
-        
+    public class Multiplication : Arithmetic
+    {
+
         public Multiplication(char symbol, string name) : base(symbol, name)
         {
 
@@ -76,11 +77,39 @@ namespace Calculator
     // Main Method
     public class Calculator
     {
+        static bool operatorIsValid(char c)
+        {
+            return c == '+' || c == '-' || c == '*' || c == '/';
+        }
+
+        static double calculate(double operand1, char operation, double operand2)
+        {
+            switch (operation)
+            {
+                case '+':
+                    return operand1 + operand2;
+                case '-':
+                    return operand1 - operand2;
+                case '*':
+                    return operand1 * operand2;
+                case '/':
+                    if (operand2 == 0)
+                    {
+                        Console.WriteLine("Cannot divide by zero.");
+                        return operand1;
+                    }
+                    return operand1 / operand2;
+                default:
+                    throw new ArgumentException("Invalid operator.");
+            }
+        }
+
+        // Main
         public static void Main(string[] args)
         {
 
             // Declaration
-           double num1, num2;
+            double num1, num2;
 
             // Instances
             Addition add = new Addition('+', "Addition");
@@ -92,65 +121,76 @@ namespace Calculator
             Arithmetic[] operations = { add, subtract, multiply, divide };
 
 
-            // Prompt for 2 numbers to calculate
             start:
-            Console.WriteLine("==============================================");
-            try
-            {
-                Console.Write("Enter first number: ");
-                num1 = Convert.ToDouble(Console.ReadLine());
-                Console.Write("Enter second number: ");
-                num2 = Convert.ToDouble(Console.ReadLine());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Enter numerical Values only!");
-                Console.WriteLine("Program ends.");
-                return;
-            }
+            double answer = 0;
+            bool isFirst = true;
+            char operation = '+';
 
-            bool operationIsValid = false;
-            Arithmetic operationToUse = null;
-            while (!operationIsValid)
-            {
-                // Prompt for operation to use
-                Console.Write("Enter an operator to use (+,-,*,/): ");
-                char input = Console.ReadKey().KeyChar;
-                Console.WriteLine();
 
-                // Check if the symbol is in the array of operations
-                foreach (Arithmetic operation in operations)
+            while (true)
+            {
+                Console.Write("> ");
+                string input = Console.ReadLine();
+
+                if (input == "=")
                 {
-                    if (input == operation.Symbol)
-                    {
-                        operationIsValid = true;
-                        operationToUse = operation;
-                        
-                    }
+                    Console.WriteLine("The answer is: " + answer);
+                    break;
                 }
 
+                if (isFirst)
+                {
+                    if (!double.TryParse(input, out answer))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a number.");
+                        continue;
+                    }
+                    isFirst = false;
+                    continue;
+                }
+
+                if (!char.TryParse(input, out operation) || !operatorIsValid(operation))
+                {
+                    Console.WriteLine("Invalid operator!!");
+                    continue;
+                }
+
+                Console.Write("> ");
+                if (!double.TryParse(Console.ReadLine(), out double operand))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    continue;
+                }
+
+                answer = calculate(answer, operation, operand);
+
 
             }
 
-            // Solve the 2 numbers depending on the opeartion chosen
-            Console.WriteLine($"The artihmetic operation used is {operationToUse.Symbol}");
-            Console.WriteLine($"{num1} {operationToUse.Symbol} {num2} = {operationToUse.solve(num1, num2)}");
-            Console.WriteLine("==============================================");
-            // Ask the user for another calculation
-            Console.Write("Do you want to do another calculation? (Press Y for another calculation, any key to end): ");
-            char choice = Console.ReadKey().KeyChar;
-            Console.WriteLine();
-            if (char.ToUpper(choice) == 'Y')
+            askAgain:
+            Console.WriteLine("Do you want another calculation? (Y/N): ");
+            string continueCalculation = Console.ReadLine();
+
+            if (continueCalculation.ToUpper() == "Y")
             {
+                Console.WriteLine("=====================================");
                 goto start;
-            } else
+            }
+            else if (continueCalculation.ToUpper() == "N")
             {
-                Console.WriteLine("Program ends.");
+
+                Console.WriteLine("Goodbye!");
+            }
+            else
+            {
+                // Handle invalid input
+                Console.WriteLine("Invalid input. Please enter Y or N.");
+                goto askAgain;
             }
 
-            
+
 
         }
     }
-   
+
 }
