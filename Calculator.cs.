@@ -1,24 +1,30 @@
 using System;
+using System.Collections.Generic;
 
 namespace CalculatorApp
 {
+    // Class representing a simple calculator
     public class Calculator
     {
+        // Addition operation
         public double Add(double num1, double num2)
         {
             return num1 + num2;
         }
 
+        // Subtraction operation
         public double Subtract(double num1, double num2)
         {
             return num1 - num2;
         }
 
+        // Multiplication operation
         public double Multiply(double num1, double num2)
         {
             return num1 * num2;
         }
 
+        // Division operation
         public double Divide(double num1, double num2)
         {
             if (num2 == 0)
@@ -29,119 +35,124 @@ namespace CalculatorApp
         }
     }
 
-    public class UserInterface : Calculator
+    // User Interface for calculator operations
+    public class UserInterface
     {
-        public int DisplayMenu()
+        private Calculator calculator;
+
+        // Constructor
+        public UserInterface()
         {
-            Console.WriteLine("===================================");
-            Console.WriteLine("            Main Menu              ");
-            Console.WriteLine("===================================");
-            Console.WriteLine("            Calculator             ");
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine("Operations:");
-            Console.WriteLine("    [1] Addition");
-            Console.WriteLine("    [2] Subtraction");
-            Console.WriteLine("    [3] Multiplication");
-            Console.WriteLine("    [4] Division");
-            Console.WriteLine("    [5] Exit");
-            Console.WriteLine("-----------------------------------");
-            Console.Write("Enter your choice: ");
-            int choice;
-            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 5)
-            {
-                Console.WriteLine("Invalid choice. Please enter a number between 1 and 5.");
-                Console.Write("Enter you" +
-                    "" +
-                    "" +
-                    "" +
-                    "" +
-                    "" +
-                    "r choice: ");
-            }
-            return choice;
+            calculator = new Calculator();
         }
 
-
-
-        public void PerformOperation(int choice)
+        // Method to display the menu
+        public void DisplayMenu()
         {
-            double num1, num2;
-            switch (choice)
-            {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    num1 = GetNumber("Enter First Number: ");
-                    num2 = GetNumber("Enter Second Number: ");
-                    CalculateAndDisplay(choice, num1, num2);
-                    break;
-                case 5:
-                    Console.WriteLine("Exiting...");
-                    break;
-                default:
-                    Console.WriteLine("Invalid Input");
-                    break;
-            }
+            Console.Clear();
+            Console.WriteLine("===================================");
+            Console.WriteLine("           Calculator App          ");
+            Console.WriteLine("===================================\n");
+            Console.WriteLine("Enter numbers and operations separated by Enter:");
+            Console.WriteLine("When done, enter '=' to display the result.");
+            Console.WriteLine("\nOperations:");
+            Console.WriteLine("    [+] Addition");
+            Console.WriteLine("    [-] Subtraction");
+            Console.WriteLine("    [*] Multiplication");
+            Console.WriteLine("    [/] Division");
         }
 
-        private void CalculateAndDisplay(int choice, double num1, double num2)
+        // Method to perform calculation
+        public void PerformCalculation()
         {
             double result = 0;
-            switch (choice)
+            string input;
+            List<string> inputs = new List<string>();
+
+            // Get user input until '=' is entered
+            do
             {
-                case 1:
-                    result = num1 + num2;
-                    Console.WriteLine($"\n{num1} + {num2} = " + result);
-                    break;
-                case 2:
-                    result = num1 - num2;
-                    Console.WriteLine($"\n{num1} - {num2} = " + result);
-                    break;
-                case 3:
-                    result = num1 * num2;
-                    Console.WriteLine($"\n{num1} * {num2} = " + result);
-                    break;
-                case 4:
-                    if (num2 != 0)
-                    {
-                        result = num1 / num2;
-                        Console.WriteLine($"\n{num1} / {num2} = " + result);
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nCannot divide by zero.");
-                    }
-                    break;
+                input = Console.ReadLine();
+                inputs.Add(input);
+            } while (input != "=");
+
+            try
+            {
+                result = EvaluateExpression(inputs);
+                Console.WriteLine($"The result is: {result}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 
-        private double GetNumber(string message)
+        // Method to evaluate the expression provided by the user
+        private double EvaluateExpression(List<string> inputs)
         {
-            double number;
-            bool isValid;
-            do
-            {
-                Console.Write(message);
-                isValid = double.TryParse(Console.ReadLine(), out number);
-                if (!isValid)
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-            } while (!isValid);
-            return number;
-        }
-    }
+            double result = 0;
+            char currentOperator = '+';
+            bool isFirst = true;
 
-    class Program
-    {
+            // Iterate through the input list
+            foreach (var input in inputs)
+            {
+                if (input == "=")
+                    break;
+
+                if (isFirst)
+                {
+                    result = Convert.ToDouble(input);
+                    isFirst = false;
+                    continue;
+                }
+
+                // Check if the input is an operator or operand
+                if (input == "+" || input == "-" || input == "*" || input == "/")
+                {
+                    currentOperator = Convert.ToChar(input);
+                }
+                else
+                {
+                    // Convert input to double (operand) and perform calculation based on the current operator
+                    double operand = Convert.ToDouble(input);
+                    switch (currentOperator)
+                    {
+                        case '+':
+                            result = calculator.Add(result, operand);
+                            break;
+                        case '-':
+                            result = calculator.Subtract(result, operand);
+                            break;
+                        case '*':
+                            result = calculator.Multiply(result, operand);
+                            break;
+                        case '/':
+                            result = calculator.Divide(result, operand);
+                            break;
+                        default:
+                            throw new InvalidOperationException("Invalid operator.");
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        // Main method to run the program
         static void Main(string[] args)
         {
             UserInterface ui = new UserInterface();
-            int choice = 0;
-            while (choice != 5)
+            char choice;
+
+            // Display menu and perform calculation until user chooses to exit
+            do
             {
-                choice = ui.DisplayMenu();
-                ui.PerformOperation(choice);
-            }
+                ui.DisplayMenu();
+                ui.PerformCalculation();
+                Console.Write("Would you like to try again? [y] yes, [n] no: ");
+                choice = Convert.ToChar(Console.ReadLine());
+            } while (char.ToLower(choice) == 'y');
         }
     }
 }
