@@ -4,14 +4,6 @@
 
 using System;
 
-// Custom exception class for division by zero
-public class DivisionByZeroException : Exception
-{
-    public DivisionByZeroException(string message) : base(message)
-    {
-    }
-}
-
 // Base class for Calculator
 public class Calculator
 {
@@ -35,6 +27,14 @@ public class Calculator
             default:
                 throw new InvalidOperationException("Invalid operator. Please enter one of the four operators: +, -, *, /");
         }
+    }
+}
+
+// Custom exception class for division by zero
+public class DivisionByZeroException : Exception
+{
+    public DivisionByZeroException(string message) : base(message)
+    {
     }
 }
 
@@ -150,14 +150,14 @@ class MainClass
                     catch (DivisionByZeroException)
                     {
                         // Reset calculation loop if division by zero occurs
-                        Console.WriteLine("Resetting calculation due to division by zero...\nPress any key to continue...");
+                        Console.WriteLine("\nResetting calculation due to division by zero...\nPress any key to continue...");
                         Console.ReadLine(); // to stay before clearing the screen for a reset
                         isFirstIteration = true;
                         break;
                     }
-                    //Console.WriteLine($"Intermediate result: {result}"); //if you want to see the answers for each calculation
+                    // Console.WriteLine($"Intermediate result: {result}"); //if you want to see the answers for each calculation
 
-                    firstNumber = result;
+                    firstNumber = result; // if the user inputs '=' after the first value
                 }
             }
 
@@ -169,8 +169,8 @@ class MainClass
 
             // Check if the user wants to perform another calculation
             Console.Write("\nWould you like to calculate again?\nEnter Y or y if yes: ");
-            string choice2 = Console.ReadLine().ToUpper();
-            if (choice2 != "Y")
+            string choice = Console.ReadLine().ToUpper();
+            if (choice != "Y")
             {
                 Console.WriteLine("\nExiting program...\nThank you for using this Calculator!");
                 break;
