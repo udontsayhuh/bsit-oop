@@ -31,22 +31,18 @@ namespace Calculatorassignment
                 {
                     case '+':
                         result = First_value + second_value;
-                        Console.WriteLine($"\nThe sum of {First_value} and {second_value} is equal to {result}");
                         break;
 
                     case '-':
                         result = First_value - second_value;
-                        Console.WriteLine($"\nThe subtraction of {First_value} and {second_value} is equal to {result}\n");
                         break;
 
                     case '*':
                         result = First_value * second_value;
-                        Console.WriteLine($"\nThe product of {First_value} and {second_value} is equal to {result}\n");
                         break;
 
                     case '/':
                         result = First_value / second_value;
-                        Console.WriteLine($"\nThe quotient of {First_value} and {second_value} is equal to {result}\n");
                         break;
 
                     default:
