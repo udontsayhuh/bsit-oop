@@ -1,125 +1,180 @@
-﻿using System;
-using System.Threading.Tasks;
-namespace calculator
+﻿using Calculator;
+using System;
+
+namespace Calculator
 {
-    public static class Calculator
+    //polymorphism
+    //INVALID INPUT 
+    public class Displayerrormessage    //base class (parent) 
     {
-        static async Task Main(string[] args)
+        public virtual void errormessage()
         {
+            // Base implementation can be left empty
+        }
+    }
+    public class Invalidoperator : Displayerrormessage
+    {
+        public override void errormessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("INVALID INPUT: ");
+            Console.WriteLine("Please enter a valid input again (Arithmetic operator).");
+            Console.ResetColor();
+        }
+    }
+
+    public class Invalidinteger : Displayerrormessage
+    {
+        public override void errormessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("INVALID INPUT: ");
+            Console.WriteLine("Please enter valid input again (numeric value).");
+            Console.ResetColor();
+        }
+    }
+
+    public class InvalidEqual : Displayerrormessage
+    {
+        public override void errormessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("INVALID INPUT: ");
+            Console.WriteLine("The equal sign is not applicable in the first entry .");
+            Console.ResetColor();
+        }
+    }
+
+    public class Calculatorf
+    {
+        //encapsulation 
+        private double nextValue;
+        private double result;
+        private string operation = " ";
+
+        public void GetUserInput()
+        {
+            bool validUserInput = false;
+            while (!validUserInput)
+            {
+                Console.Write("\nEnter a value: ");
+                if (!double.TryParse(Console.ReadLine(), out result))
+                {
+                    Displayerrormessage myInvalidinteger = new Invalidinteger();
+                    myInvalidinteger.errormessage();
+                    continue;
+                }
+                else
+                {
+                    validUserInput = true;
+                }
+            }
+
             while (true)
             {
-                double valueFirst = 0;
-                double valueSecond = 0;
-                double result = 0;
-                string operation = "";
+                Console.Write("\nEnter your arithmetic operator: ");
+                string operation = Console.ReadLine();
 
-                Console.Clear(); //to clear the screen after the loop 
-
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("++++++++++++++++++++++++++++++++++");
-                Console.WriteLine("+       CALCULATOR PROGRAM       +");
-                Console.WriteLine("++++++++++++++++++++++++++++++++++");
-                Console.ResetColor();
-
-                Console.Write("Enter the first value: ");
-                if (!double.TryParse(Console.ReadLine(), out valueFirst)) // if the user input a letter
+                if (operation == "=")
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("INVALID INPUT: Please enter a valid number.");
-                    await Task.Delay(1000);
-                    return;
-                }
-
-                Console.Write("\nEnter the second value: ");
-                if (!double.TryParse(Console.ReadLine(), out valueSecond)) // if the user input a letter
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("INVALID INPUT: Please enter a valid number.");
-                    await Task.Delay(1000);
-                    return;
-                }
-
-                while (string.IsNullOrEmpty(operation) || !(operation == "+" || operation == "-" || operation == "*" || operation == "/"))
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("|--------------------------------|");
-                    Console.WriteLine("|      Arithmetic Operator:      |");
-                    Console.WriteLine("|________________________________|");
-                    Console.WriteLine("|            + : ADD             |");
-                    Console.WriteLine("|            - : MINUS           |");
-                    Console.WriteLine("|            * : TIMES           |");
-                    Console.WriteLine("|            / : DIVIDE          |");
-                    Console.WriteLine("|--------------------------------|");
-                    Console.ResetColor();
-
-                    Console.Write("Enter your arithmetic operator: ");
-                    operation = Console.ReadLine();
-
-                    if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
+                    if (nextValue == 0 && result != 0)  //if the user enter a equal sign in the first entry ofthe arithmetic operator. 
                     {
-                        Console.Clear();
-                        Console.WriteLine($"Your first value is: {valueFirst}"); 
-                        Console.ForegroundColor= ConsoleColor.Red;
-                        Console.WriteLine("INVALID INPUT: Please enter a valid arithmetic operator.");
-                        Console.ResetColor();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("|--------------------------------|");
-                        Console.WriteLine("|      Arithmetic Operator:      |");
-                        Console.WriteLine("|________________________________|");
-                        Console.WriteLine("|            + : ADD             |");
-                        Console.WriteLine("|            - : MINUS           |");
-                        Console.WriteLine("|            * : TIMES           |");
-                        Console.WriteLine("|            / : DIVIDE          |");
-                        Console.WriteLine("|--------------------------------|");
-                        Console.ResetColor();
-                        Console.Write("Enter your arithmetic operator: ");
-                        operation = Console.ReadLine();
+                        Displayerrormessage myInvalidEqual = new InvalidEqual();
+                        myInvalidEqual.errormessage();
+                        continue;
+                    }
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"\nThe result is: {result}");
+                    Console.ResetColor();
+                    break; // Exit the loop when '=' is encountered
+                }
+
+                if (operation != "+" && operation != "-" && operation != "*" && operation != "/") // checking if valid ba yung input 
+                {
+                    Displayerrormessage myInvalidoperator = new Invalidoperator();
+                    myInvalidoperator.errormessage();
+                    continue;
+                }
+
+                validUserInput = false; // Update the existing validInput variable
+                while (!validUserInput)
+                {
+                    Console.Write("\nEnter a value: "); 
+                    if (!double.TryParse(Console.ReadLine(), out nextValue))
+                    {
+                        Displayerrormessage myInvalidinteger = new Invalidinteger();
+                        myInvalidinteger.errormessage();
+                        continue;
+                    }
+                    else
+                    {
+                        validUserInput = true;
                     }
                 }
 
                 switch (operation)
                 {
                     case "+":
-                        result = valueFirst + valueSecond;
+                        result += nextValue;
                         break;
                     case "-":
-                        result = valueFirst - valueSecond;
+                        result -= nextValue;
                         break;
                     case "*":
-                        result = valueFirst * valueSecond;
+                        result *= nextValue;
                         break;
                     case "/":
-                        if (valueSecond == 0)
+                        if (nextValue != 0 && result != 0)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("INVALID INPUT: Division by zero is not allowed.");
-                            Console.ResetColor();
-                            Console.Write("Enter your second value: ");
-                            string secondval = Console.ReadLine();
-                            
-
-                            if (!double.TryParse(secondval, out valueSecond))
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("INVALID INPUT: Please enter a valid number.");
-                                Console.ResetColor();
-                                return;
-                            }
-                            else
-                            {
-                                result = valueFirst / valueSecond;
-                                break;
-                            }
+                            result /= nextValue;
                         }
                         else
                         {
-                            result = valueFirst / valueSecond;
-                            break;
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("INVALID INPUT: Division by zero");
+                            Console.ResetColor();
                         }
+                        break;
                 }
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("The result is: " + result);
-                Console.ResetColor();
+            }
+        }
+
+        //abstraction: displaying 
+        public void DisplayHeader()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("++++++++++++++++++++++++++++++++++");
+            Console.WriteLine("+       CALCULATOR PROGRAM       +");
+            Console.WriteLine("++++++++++++++++++++++++++++++++++");
+            Console.ResetColor();
+        }
+
+        public void DisplayArithmeticOperators()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("|--------------------------------|");
+            Console.WriteLine("|      Arithmetic Operators:     |");
+            Console.WriteLine("|________________________________|");
+            Console.WriteLine("|            + : ADD             |");
+            Console.WriteLine("|            - : MINUS           |");
+            Console.WriteLine("|            * : TIMES           |");
+            Console.WriteLine("|            / : DIVIDE          |");
+            Console.WriteLine("|--------------------------------|");
+            Console.WriteLine("|            = : RESULT          |");
+            Console.WriteLine("|--------------------------------|");
+            Console.ResetColor();
+        } 
+
+        static void Main(string[] args)
+        {
+            Calculatorf calculator = new Calculatorf();
+
+            do
+            {
+                calculator.DisplayHeader();
+                calculator.DisplayArithmeticOperators();
+                calculator.GetUserInput();
+
                 Console.ReadKey(); // to delay the the press 1 
 
                 Console.WriteLine("\n|--------------------------------|");
@@ -127,21 +182,18 @@ namespace calculator
                 Console.WriteLine("|        Press 2 to exit         |");
                 Console.WriteLine("|--------------------------------|");
 
-                Console.Write("Enter your choice: ");
+                Console.Write("Enter your choice: ");  // asking the user to continue or not 
                 string repeat = Console.ReadLine();
 
-                if (repeat == "2")
+                if (repeat != "1")
                 {
-                    return; //terminate 
+                    break; // Exit the loop if the user doesn't want to proceed
                 }
-
-                operation = " ";
-                valueFirst = 0;
-                valueSecond = 0;
-                result = 0;
-
-                Console.ReadLine(); //used to pause the console output and wait for the user to press Enter before the console application is closed.
+                Console.Clear(); // Clear the console for the next calculation
             }
+            while (true);
+            Console.ReadLine(); //used to pause the console output and wait for the user to press Enter before the console application is closed.
         }
     }
 }
+
