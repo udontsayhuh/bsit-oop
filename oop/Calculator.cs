@@ -17,7 +17,7 @@ namespace BestCalculatorInCebu
         }
     }
 
-   //Child class fo Subtraction
+    //Child class for Subtraction
     public class Subtraction : Operation
     {
         public override int Calculation(int num1, int num2)
@@ -42,8 +42,7 @@ namespace BestCalculatorInCebu
         {
             if (num2 == 0)
             {
-                Console.WriteLine("Error: Division by zero!");
-                Environment.Exit(0);
+                throw new ArgumentException("Error: Division by zero!");
             }
             return num1 / num2;
         }
@@ -61,42 +60,64 @@ namespace BestCalculatorInCebu
                 if (!int.TryParse(Console.ReadLine(), out int num1))
                 {
                     Console.WriteLine("Invalid input. Please enter a numerical value.");
-                    Environment.Exit(0);
+                    continue;
                 }
 
-                Console.Write("Enter an operator (+, -, *, /): ");
-                char opSymbol = Console.ReadKey().KeyChar;
-                Console.WriteLine();
+                int result = num1;
 
-                Operation operation;
-                switch (opSymbol)
+                while (true)
                 {
-                    case '+':
-                        operation = new Addition();
+                    Console.Write("Choose an operator (+, -, *, /) and use '=' to calculate: ");
+                    char opSymbol = Console.ReadKey().KeyChar;
+                    Console.WriteLine();
+
+                    if (opSymbol == '=')
                         break;
-                    case '-':
-                        operation = new Subtraction();
+
+                    if (opSymbol != '+' && opSymbol != '-' && opSymbol != '*' && opSymbol != '/')
+                    {
+                        Console.WriteLine("Invalid operator. Please use +, -, *, /, or =.");
+                        continue;
+                    }
+
+                    Console.Write("Enter another value: ");
+                    if (!int.TryParse(Console.ReadLine(), out int num2))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a numerical value.");
+                        continue;
+                    }
+
+                    Operation operation;
+                    switch (opSymbol)
+                    {
+                        case '+':
+                            operation = new Addition();
+                            break;
+                        case '-':
+                            operation = new Subtraction();
+                            break;
+                        case '*':
+                            operation = new Multiplication();
+                            break;
+                        case '/':
+                            operation = new Division();
+                            break;
+                        default:
+                            Console.WriteLine("Invalid operator. Please use +, -, *, or /.");
+                            continue;
+                    }
+
+                    try
+                    {
+                        result = operation.Calculation(result, num2);
+                    }
+                    catch (ArgumentException e)
+                    {
+                        Console.WriteLine(e.Message);
                         break;
-                    case '*':
-                        operation = new Multiplication();
-                        break;
-                    case '/':
-                        operation = new Division();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid operator. Please use +, -, *, or /.");
-                        Environment.Exit(0);
-                        return;
+                    }
                 }
 
-                Console.Write("Enter another value: ");
-                if (!int.TryParse(Console.ReadLine(), out int num2))
-                {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                    Environment.Exit(0);
-                }
-
-                int result = operation.Calculation(num1, num2);
                 Console.WriteLine($"Result: {result}");
 
                 Console.Write("Do you want to perform another calculation? (Y/N): ");
