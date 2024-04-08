@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MyCalculatorApp
+{
 // Class representing a calculator
 class Calculator
 {
@@ -22,6 +22,7 @@ class Calculator
     }
 
     // Method for division
+
     public double Divide(double x, double y) // Encapsulation - Methods encapsulate behavior.
     {
         if (y == 0)
@@ -33,7 +34,8 @@ class Calculator
 }
 
 // Main program class
-class Program {
+class Program
+{
     // Entry point of the program
     static void Main(string[] args)
     {
@@ -45,8 +47,8 @@ class Program {
             Console.WriteLine("* \t\tCALCULATOR\t\t *");
             Console.WriteLine("******************************************");
             double number1 = isValid("Enter the first number: ");
-            Console.WriteLine("\n\t [ +  - / * ] ");
-            Console.WriteLine("Choose Operator :");
+            //Console.WriteLine("\n\t [ +  - / * ] ");
+            Console.WriteLine("Choose Operator [ +  - / * ] :");
             char choice = Console.ReadKey().KeyChar;
             Console.WriteLine();
 

@@ -12,3 +12,18 @@ C:\Users\Ma. Elisa T. Garrote\source\repos\Calculator.cs\Calculator.cs\obj\Debug
 C:\Users\Ma. Elisa T. Garrote\source\repos\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.pdb
 C:\Users\Ma. Elisa T. Garrote\source\repos\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.genruntimeconfig.cache
 C:\Users\Ma. Elisa T. Garrote\source\repos\Calculator.cs\Calculator.cs\obj\Debug\net7.0\ref\Calculator.cs.dll
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.AssemblyInfoInputs.cache
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.AssemblyInfo.cs
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.csproj.CoreCompileInputs.cache
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.sourcelink.json
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.dll
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\refint\Calculator.cs.dll
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.pdb
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\bin\Debug\net7.0\Calculator.cs.exe
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\bin\Debug\net7.0\Calculator.cs.deps.json
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\bin\Debug\net7.0\Calculator.cs.runtimeconfig.json
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\bin\Debug\net7.0\Calculator.cs.dll
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\bin\Debug\net7.0\Calculator.cs.pdb
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\Calculator.cs.genruntimeconfig.cache
+C:\Users\Ma. Elisa T. Garrote\source\repos\bsit - oop\bsit-oop\Calculator.cs\Calculator.cs\obj\Debug\net7.0\ref\Calculator.cs.dll
