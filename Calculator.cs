@@ -1,9 +1,67 @@
 using System;
 using System.Collections.Generic;
 
+//*** Abstraction :3 ***
+abstract class invalid_0 {
+    //Method
+    virtual public void error_messsage() {
+        Console.WriteLine("Invalid because of something");
+    }
+
+}
+
+//*** Inheritance :3 ***
+//*** Polymorphism :3 ***
+class invalid_1 : invalid_0 
+{
+    override public void error_messsage() 
+    {
+        Console.WriteLine("Invalid! You must enter a valid number");
+    }
+}
+
+class invalid_2 : invalid_0 
+{
+    override public void error_messsage() 
+    {
+        Console.WriteLine("Invalid! You cannot divide by 0. Enter a non-zero number");
+    }
+}
+
+class invalid_3 : invalid_0 
+{
+    override public void error_messsage() 
+    {
+        Console.WriteLine("Invalid! first operation must not be =");
+    }
+}
+
+class invalid_4 : invalid_0 
+{
+    override public void error_messsage() 
+    {
+        Console.WriteLine("Invalid! You must enter +, -, *, /, or =");
+    }
+}
+
+class invalid_5 : invalid_0 
+{
+    override public void error_messsage() 
+    {
+        Console.WriteLine("Invalid! You must enter 'Yes' or 'No'\n");
+    }
+}
+
 class Calculator
 {
-    static void Main()
+    static void Main(string[] args) {
+
+        invalid_0 IE1 = new invalid_1();
+        invalid_0 IE2 = new invalid_2();
+        invalid_0 IE3 = new invalid_3();
+        invalid_0 IE4 = new invalid_4();
+        invalid_0 IE5 = new invalid_5();
+        
     {
         // Starting Loop
         while (true) 
@@ -32,7 +90,7 @@ class Calculator
                     {
                         if (num == 0 && operations.Count > 0 && operations[operations.Count - 1] == '/')
                         {
-                            Console.WriteLine("Invalid! You cannot divide by 0, IDIOT! enter a non-zero number");
+                            IE2.error_messsage();
                             continue;
                         }
                         numbers.Add(num);
@@ -44,15 +102,15 @@ class Calculator
                     }
                     else if (input == "=" && numbers.Count >= 1 && numbers.Count != operations.Count)
                     {
-                        Console.WriteLine("Invalid! You must enter a number");
+                        IE1.error_messsage();
                     }
                     else if (input == "=")
                     {
-                        Console.WriteLine("Invalid! You must enter a number");
+                        IE1.error_messsage();
                     }
                     else
                     {
-                        Console.WriteLine("Invalid! You must enter a valid number");
+                        IE1.error_messsage();
                     }
                 }
 
@@ -73,11 +131,11 @@ class Calculator
                     {
                         if (input == "=" && numbers.Count == 0) // '=' is not allowed as the first operation
                         {
-                            Console.WriteLine("Invalid! You must enter a valid number");
+                            IE1.error_messsage();
                         }
                         else if (input == "=" && operations.Count == 0)
                         {
-                            Console.WriteLine("Invalid! first operation must not be");
+                            IE3.error_messsage();
                             continue;
                         }
                         else
@@ -88,19 +146,20 @@ class Calculator
                     }
                     else
                     {
-                        Console.WriteLine("Invalid! You must enter +, -, *, /, or =");
+                        IE4.error_messsage();
                     }
                 }
 
                 // Calculations
+                double result = numbers[0];
                 if (numbers.Count >= 2 && numbers.Count == operations.Count && operations.Contains('='))
                 {
-                    double result = numbers[0];
+                    
                     for (int i = 0; i < operations.Count; i++)
                     {
                         if (operations[i] == '/' && numbers[i + 1] == 0)
                         {
-                            Console.WriteLine("Invalid! You cannot divide by 0, IDIOT! enter a non-zero number\n");
+                            IE2.error_messsage();
                             hasPerformedCalculation = false;
                             break;
                         }
@@ -152,11 +211,12 @@ class Calculator
                         // Ask
                         else
                         {
-                            Console.WriteLine("Invalid! You must enter 'Yes' or 'No'\n");
+                            IE5.error_messsage();
                         }
                     }
                 }
             }
         }
+    }
     }
 }
