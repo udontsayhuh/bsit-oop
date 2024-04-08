@@ -7,20 +7,22 @@ class Choice
     public double num2;
     public double ans;
     public char option;
+    public int count = 1;
 
     public virtual void Enter() //methods for choosing an option
     {
         Console.WriteLine("\n\t+ : Addition");
         Console.WriteLine("\t- : Subtraction");
         Console.WriteLine("\t* : Multiplication");
-        Console.WriteLine("\t/ : Division\n");
+        Console.WriteLine("\t/ : Division");
+        Console.WriteLine("\t= : Equal\n");
 
         while (true) //loop if the input is incorrect
         {
             Console.Write("Choose an option: ");
             option = Convert.ToChar(Console.ReadLine());
 
-            if (option == '+' || option == '-' || option == '*' || option == '/')
+            if (option == '+' || option == '-' || option == '*' || option == '/' || option == '=')
             {
                 break; //breaks the loop if input is correct
             }
@@ -38,10 +40,10 @@ class First : Choice //class for the first input
     public override void Enter() //uses polymorphism
     {
         Console.Write("\nEnter first number: ");
-        if (!double.TryParse(Console.ReadLine(), out num1))
+        while (!double.TryParse(Console.ReadLine(), out num1)) //loops until valid numeral value is entered 
         {
-            Console.WriteLine("Invalid input. End of Program.\n");
-            Environment.Exit(0); //ends the program
+            Console.WriteLine("Invalid input. Only numerical value is accepted.\n");
+            Console.Write("Enter first number: ");
         }
     }
 }
@@ -50,11 +52,11 @@ class Second : Choice //class for the second input
 {
     public override void Enter() //uses polymorphism
     {
-        Console.Write("\nEnter second number: ");
-        while (!double.TryParse(Console.ReadLine(), out num2)) //if input is non numeric, it will ask the user again to enter
+        Console.Write("\nEnter a number: ");
+        while (!double.TryParse(Console.ReadLine(), out num2)) //loops until valid numeral value is entered
         {
             Console.WriteLine("Invalid input. Only numerical value is accepted.\n");
-            Console.Write("Enter second number: ");
+            Console.Write("Enter a number: ");
         }
     }
 }
@@ -66,39 +68,60 @@ class Program
         do //uses do-while loop
         {
             First first = new First(); //instantiate class First
-            first.Enter(); //calls the method
-
             Choice choice = new Choice(); //instantiate class Choice
-            choice.Enter();
-
             Second second = new Second(); //instantiate class Second
-            second.Enter();
 
-            switch (choice.option) //will perform the selected option
+            choice.count = 1;
+
+            while (true)
             {
-                case '+': //addition
-                    choice.ans = first.num1 + second.num2;
-                    Console.WriteLine($"\nUsing addition, the result is {choice.ans}\n");
-                    break;
 
-                case '-': //subtraction
-                    choice.ans = first.num1 - second.num2;
-                    Console.WriteLine($"\nUsing subtraction, the result is {choice.ans}\n");
-                    break;
+                if (choice.count == 1) //if user will enter the first number
+                {
+                    first.Enter(); //calls the method (First Class)
+                }
+                else //if user will enter another number
+                {
+                    first.num1 = choice.ans; //store the answer to the variable num1
+                }
 
-                case '*': //multiplication
-                    choice.ans = first.num1 * second.num2;
-                    Console.WriteLine($"\nUsing multiplication, the result is {choice.ans}\n");
-                    break;
+                choice.Enter(); //calls the method (Enter Class)
 
-                case '/': //division
-                    choice.ans = first.num1 / second.num2;
-                    Console.WriteLine($"\nUsing division, the result is {choice.ans}\n");
+                if (choice.option == '=') //if operator is =, then it prints the result
+                {
+                    Console.WriteLine($"\n The final result is {choice.ans}\n");
                     break;
+                }
 
-                default: //for invalid operation
-                    Console.WriteLine("Invalid option.\n");
-                    break;
+                second.Enter(); //calls the method (Second Class)
+
+
+                switch (choice.option) //will perform the selected option
+                {
+                    case '+': //addition
+                        choice.ans = first.num1 + second.num2;
+                        choice.count = 2;
+                        break;
+
+                    case '-': //subtraction
+                        choice.ans = first.num1 - second.num2;
+                        choice.count = 2;
+                        break;
+
+                    case '*': //multiplication
+                        choice.ans = first.num1 * second.num2;
+                        choice.count = 2;
+                        break;
+
+                    case '/': //division
+                        choice.ans = first.num1 / second.num2;
+                        choice.count = 2;
+                        break;
+
+                    default: //for invalid operation
+                        Console.WriteLine("Invalid option.\n");
+                        break;
+                }
             }
             Console.Write("Would you like to continue? Press any key to continue and X if not: ");
         }
@@ -107,4 +130,3 @@ class Program
         Console.WriteLine("\nEnd of Program.\n");
     }
 }
-
