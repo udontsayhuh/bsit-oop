@@ -40,7 +40,7 @@ class CalculatorProgram
             } while (!validResponse) ;
             if (response == "yes" || response == "YES")
             {
-                Console.WriteLine("/nYou may now use the calculator again.");
+                Console.WriteLine("\nYou may now use the calculator again.");
             }
             if (response == "no" || response == "NO")
             {
