@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 // Base class for operations
 abstract class Operation
@@ -56,47 +57,29 @@ class Calculator
 {
     static void Main(string[] args)
     {
-        // Main method where the program execution begins
         do
         {
-            int num1, num2;
+            // List to store input values and operations
+            List<string> inputs = new List<string>();
 
-            // Getting the first number with error handling
-            Console.Write("Enter the first number: ");
-            while (!int.TryParse(Console.ReadLine(), out num1))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid integer.");
-                Console.Write("Enter the first number: ");
-            }
-
-            // Getting the second number with error handling
-            Console.Write("Enter the second number: ");
-            while (!int.TryParse(Console.ReadLine(), out num2))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid integer.");
-                Console.Write("Enter the second number: ");
-            }
-
-            string operation;
-            Operation op;
-
-            // Getting the operation choice
+            // Getting user input until equal sign is entered
+            string input;
             do
             {
-                Console.WriteLine("Choose an operation: +, -, *, /");
-                operation = Console.ReadLine();
-                op = GetOperation(operation);
+                input = Console.ReadLine();
+                inputs.Add(input);
+            } while (input != "=");
 
-                if (op == null)
-                {
-                    Console.WriteLine("Invalid operation. Please try again.");
-                }
-
-            } while (op == null);
-
-            // Performing the calculation
-            int result = op.Calculate(num1, num2);
-            Console.WriteLine($"Result: {result}");
+            try
+            {
+                // Calculating result
+                int result = EvaluateExpression(inputs);
+                Console.WriteLine($"Result: {result}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
 
             // Asking user if they want to perform another calculation
             Console.Write("Do you want to perform another calculation? (yes/no): ");
@@ -110,21 +93,52 @@ class Calculator
         } while (true);
     }
 
-    // Method to get the appropriate operation based on user input
-    static Operation GetOperation(string operation)
+    // Method to evaluate the expression provided by the user
+    static int EvaluateExpression(List<string> inputs)
     {
-        switch (operation)
+        int result = 0;
+        char currentOperator = '+';
+        bool isFirst = true;
+
+        foreach (var input in inputs)
         {
-            case "+":
-                return new Addition();
-            case "-":
-                return new Subtraction();
-            case "*":
-                return new Multiplication();
-            case "/":
-                return new Division();
-            default:
-                return null;
+            if (input == "=")
+                break;
+
+            if (isFirst)
+            {
+                result = Convert.ToInt32(input);
+                isFirst = false;
+                continue;
+            }
+
+            if (input == "+" || input == "-" || input == "*" || input == "/")
+            {
+                currentOperator = Convert.ToChar(input);
+            }
+            else
+            {
+                int operand = Convert.ToInt32(input);
+                switch (currentOperator)
+                {
+                    case '+':
+                        result = result + operand;
+                        break;
+                    case '-':
+                        result = result - operand;
+                        break;
+                    case '*':
+                        result = result * operand;
+                        break;
+                    case '/':
+                        result = result / operand;
+                        break;
+                    default:
+                        throw new InvalidOperationException("Invalid operator.");
+                }
+            }
         }
+
+        return result;
     }
 }
