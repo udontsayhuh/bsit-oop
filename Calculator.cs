@@ -1,8 +1,10 @@
 using System;
-
-// Encapsulation: The CalculatorBase class encapsulates methods for performing mathematical operations 
-class CalculatorBase
+// Encapsulation
+// The Calculator class encapsulates methods for performing mathematical operations 
+class Calculator
 {
+    // Abstraction
+    // Methods to perform mathematical operations hide the complex implementation details
     // Method to add two numbers
     public double Add(double num1, double num2)
     {
@@ -37,79 +39,87 @@ class Program
 {
     static void Main(string[] args)
     {
-        double num1, num2, ans; // Declare variables
-        char operation; // Variable to store the operator
+        double num1 = 0, num2, ans = 0; // Initialize variables
+        char operation = '+'; // Initialize operation as addition
 
-        CalculatorBase calculator = new CalculatorBase(); // Creating an instance of CalculatorBase
-        
-         Console.WriteLine("----WELCOME TO MY CALCULATOR----");
+        Calculator calculator = new Calculator(); // Creating an instance of Calculator
 
-        // Prompt user to input the first number
-        Console.WriteLine("Enter the first number:");
-        
-        // Read user input for the first number, validate if it's numerical
-        if (!double.TryParse(Console.ReadLine(), out num1))
+        Console.WriteLine("----WELCOME TO MY CALCULATOR----");
+
+        // Loop to ask if the user wants to start a new calculation session
+        while (true)
         {
-            Console.WriteLine("Invalid input. Please enter a numerical value.");
-            return;
-        }
+            // Loop to accept values and operations until "=" is entered
+            while (true)
+            {
+                // Prompt user to input a number or "="
+                Console.WriteLine("Enter a number:");
+                string input = Console.ReadLine().Trim();
 
-        // Prompt user to select the operation
-        Console.WriteLine("Operator to use (* for multiplication, / for division, + for addition, or - for subtraction):");
-        
-        // Read user input for the operation, validate if it's one of the allowed operators
-        if (!char.TryParse(Console.ReadLine(), out operation) || (operation != '*' && operation != '/' && operation != '+' && operation != '-'))
-        {
-            Console.WriteLine("Invalid operation selected.");
-            return;
-        }
+                // Check if input is "=" to compute and break the loop
+                if (input == "=")
+                    break;
 
-        // Prompt user to input the second number
-        Console.WriteLine("Enter the second number:");
-        
-        // Read user input for the second number, validate if it's numerical
-        if (!double.TryParse(Console.ReadLine(), out num2))
-        {
-            Console.WriteLine("Invalid input. Please enter a numerical value.");
-            return;
-        }
+                // Parse the input as a number
+                if (!double.TryParse(input, out num2))
+                {
+                    Console.WriteLine("Invalid input. Please enter a numerical value.");
+                    continue;
+                }
 
-        // Perform the appropriate calculation based on the selected operation
-        switch (operation)
-        {
-            case '*':
-                ans = calculator.Multiply(num1, num2);
-                Console.WriteLine($"The product of {num1} and {num2} is {ans}.");
+                // Perform the appropriate calculation based on the previous operation
+                switch (operation)
+                {
+                    case '+':
+                        ans = calculator.Add(num1, num2); // Polymorphism Calling Add method with different parameters
+                        break;
+                    case '-':
+                        ans = calculator.Subtract(num1, num2); // Polymorphism Calling Subtract method with different parameters
+                        break;
+                    case '*':
+                        ans = calculator.Multiply(num1, num2); // Polymorphism Calling Multiply method with different parameters
+                        break;
+                    case '/':
+                        ans = calculator.Divide(num1, num2); // Polymorphism Calling Divide method with different parameters
+                        break;
+                }
+
+                // Store the result for subsequent calculations
+                num1 = ans;
+
+                // Prompt user to input an operation or "="
+                string opInput;
+                do
+                {
+                    Console.WriteLine("Enter an operation (+, -, *, /) or '=' to compute:");
+                    opInput = Console.ReadLine().Trim();
+                } while (opInput != "+" && opInput != "-" && opInput != "*" && opInput != "=" && opInput != "/");
+
+                // Check if input is "=" to compute and break the loop
+                if (opInput == "=")
+                    break;
+
+                operation = opInput[0];
+            }
+
+            // Display the final result
+            Console.WriteLine($"The result is: {ans}");
+
+            // Ask if the user wants to start a new calculation session
+            Console.WriteLine("Do you want to start a new calculation session? (yes/no)");
+            string response = Console.ReadLine().ToLower();
+
+            if (response != "yes")
                 break;
-            case '/':
-                ans = calculator.Divide(num1, num2);
-                if (!double.IsNaN(ans)) // Check if division by zero occurred
-                    Console.WriteLine($"The quotient of {num1} and {num2} is {ans}.");
-                break;
-            case '+':
-                ans = calculator.Add(num1, num2);
-                Console.WriteLine($"The sum of {num1} and {num2} is {ans}.");
-                break;
-            case '-':
-                ans = calculator.Subtract(num1, num2);
-                Console.WriteLine($"The difference of {num1} and {num2} is {ans}.");
-                break;
+
+            // Reset variables for a new session
+            num1 = 0;
+            operation = '+';
+            ans = 0;
         }
 
-        // Ask the user if they want to perform another calculation
-        Console.WriteLine("Do you want to perform another calculation? (yes/no)");
-        string repeat = Console.ReadLine().ToLower();
-
-        // If the user wants to perform another calculation, recursively call Main
-        if (repeat == "yes")
-        {
-            Main(args);
-        }
-        else
-        {
-            // If the user doesn't want to perform another calculation, display a thank you message
-            Console.WriteLine("Thank you for using the calculator. Press Enter to exit.");
-            Console.ReadLine(); // Wait for user to press Enter before exiting
-        }
+        // Display a thank you message
+        Console.WriteLine("Thank you for using the calculator. Press Enter to exit.");
+        Console.ReadLine(); // Wait for user to press Enter before exiting
     }
 }
