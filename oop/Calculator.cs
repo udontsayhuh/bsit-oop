@@ -3,6 +3,7 @@
 //BSIT 2-2
 
 using System;
+using System.Collections.Generic;
 
 // Parent class for operations
 abstract class Operation
@@ -53,91 +54,116 @@ class Calculator
 {
     // Method to get user input, validate and display output
     public void PerformCalculation()
-    {   //Loop for performing calculation
-        string value;
-        do
+    {
+        List<double> numbers = new List<double>();
+        List<char> operators = new List<char>();
+
+        Console.WriteLine("\nEnter numbers and operators alternately, end with '=':");
+
+        bool expectNumber = true; //input should be a number
+        //loop for user input
+        while (true)
         {
-            Console.Write("\nEnter first number:");
-            double num1;
-            if (!double.TryParse(Console.ReadLine(), out num1))
-            {
-                Console.WriteLine("\nInput is invalid.");
-                return; //terminate
-            }
+            string input = Console.ReadLine();
 
-            string symbol;
-            do
-            {
-                Console.Write("Enter symbol (/,+,-,*):");
-                symbol = Console.ReadLine();
-                if (symbol != "/" && symbol != "+" && symbol != "-" && symbol != "*")
-                {
-                    Console.WriteLine("\nInput is invalid.");
-                    return; //terminate
-                }
-            } while (symbol != "/" && symbol != "+" && symbol != "-" && symbol != "*");
+            if (input == "=")
+                break;
 
-            double num2;
-            while (true)
+            double number;
+            if (double.TryParse(input, out number))
             {
-                Console.Write("Enter second number:");
-                if (!double.TryParse(Console.ReadLine(), out num2))
+                if (expectNumber)
                 {
-                    Console.WriteLine("\nInput is invalid.");
-                    return; //terminate
+                    numbers.Add(number);
+                    expectNumber = false; //input should be an operator
                 }
                 else
                 {
-                    break;
+                    Console.WriteLine("Invalid input. Input an operator.");
                 }
             }
-            //Variable to retrieve the appropriate operation based on the user's input choice
-            Operation operation = GetOperation(symbol);
-
-            try
-            { //To perform arithmetic operation then display the output
-                double result = operation.PerformOperation(num1, num2);
-                Console.WriteLine($"\n {num1} {symbol} {num2} = {result}");
-            }
-            catch (DivideByZeroException zero)
+            else if (input.Length == 1 && "+-*/".IndexOf(input[0]) != -1)
             {
-                Console.WriteLine(zero.Message);
+                if (!expectNumber)
+                {
+                    operators.Add(input[0]);
+                    expectNumber = true; // Next input should be a number
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Input a number.");
+                }
             }
-            //Mthod to ask the user if they want to continue
-            Console.Write("\nDo you want to continue(y/n):");
-            value = Console.ReadLine();
-        } while (value == "y" || value == "Y");
+            else
+            {
+                Console.WriteLine("Invalid input.");
+            }
+        }
+
+        // To check if the expression is incomplete
+        if (numbers.Count != operators.Count + 1)
+        {
+            Console.WriteLine("Invalid input. Input an operator.");
+            return;
+        }
+
+        // To perform calculation of the expression
+        double result = numbers[0];
+        for (int i = 0; i < operators.Count; i++)
+        {
+            char op = operators[i];
+            double nextNumber = numbers[i + 1];
+            result = PerformOperation(result, nextNumber, op);
+        }
+
+        Console.WriteLine($"Result: {result}"); //to display result
+
+        //To prompt the user if they want to perform another calculation
+        Console.Write("\nDo you want to perform another calculation? (y/n): ");
+        string response = Console.ReadLine().ToLower();
+        if (response == "n")
+            Environment.Exit(0);
+        else if (response != "y")
+            Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
     }
 
-    //Mthod to to perform arithmetic operation chosen by the user
-    private Operation GetOperation(string symbol)
+    // Method to perform arithmetic operation based on operator
+    private double PerformOperation(double num1, double num2, char op)
     {
-        switch (symbol)
+        Operation operation;
+        switch (op)
         {
-            case "+":
-                return new Addition();
-            case "-":
-                return new Subtraction();
-            case "*":
-                return new Multiplication();
-            case "/":
-                return new Division();
+            case '+':
+                operation = new Addition();
+                break;
+            case '-':
+                operation = new Subtraction();
+                break;
+            case '*':
+                operation = new Multiplication();
+                break;
+            case '/':
+                operation = new Division();
+                break;
             default:
-                throw new ArgumentException("\nInput is invalid.");
+                throw new ArgumentException("Invalid operator");
         }
+
+        return operation.PerformOperation(num1, num2);
     }
 }
-
 // Main 
 class Program
 {
     static void Main(string[] args)
-    {   
+    {
         Console.WriteLine("Basic Arithmetic Calculator");
         Console.WriteLine("----------------------------");
-        //Instance of Calculator class
+
         Calculator calculator = new Calculator();
-        calculator.PerformCalculation();
+        while (true)
+        {
+            calculator.PerformCalculation();
+        }
     }
 }
-
