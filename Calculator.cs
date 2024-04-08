@@ -1,19 +1,18 @@
-//Hambiol,Regine Mae G.
-//BSIT 2-2
-
+//REGINE MAE G. HAMBIOL
+//BSIT2-2
 using System;
 
 namespace Calculator
 {
-   // Class representing a calculator with basic arithmetic operations
+    // Base class for calculator functionality
     class Calculator
     {
-         // Encapsulation: The 'result' field is declared as private to restrict direct access from outside the class
+        //encapsulation, Fields are declared as private to restrict direct access from outside the class
         private double result;
 
-         // Abstraction: This method calculates the result based on the given numbers and operator
+        //abstraction, Protected modifier allows derived classes to access this method which are numbers and operator
         protected double Calculate(double num1, double num2, double result, char op)
-        {    //Polymorphism related to the operation
+        { //polymorphism, switch statement operation
             switch (op)
             {
                 case '+':
@@ -34,13 +33,13 @@ namespace Calculator
             }
         }
 
-        //abtraction related to the valid operation used
+        //abstraction, Protected modifier allows derived classes to access this method
         protected bool IsOperator(string input)
         {
             return input == "+" || input == "-" || input == "*" || input == "/";
         }
 
-        // abstraction of the calculator main function, and user display
+        //abstraction, Public method to perform calculation and display result
         public void PerformCalculation()
         {
             string userInput = "";
@@ -48,7 +47,7 @@ namespace Calculator
             Console.WriteLine("-----------------------");
             Console.WriteLine(" Calculator Activity");
             Console.WriteLine("-----------------------");
-        // encapsulation related to the user prompt display using do-while statement
+
             do
             {
                 Console.Write("Enter number or operator (Enter '=' to see the result): ");
@@ -58,7 +57,7 @@ namespace Calculator
                 {
                     break;
                 }
-                // encapsulation convert string to double and check its validation
+                //encapsulation, convert string to double and checks valid parameter
                 if (double.TryParse(input, out double number))
                 {
                     if (userInput == "")
@@ -69,7 +68,7 @@ namespace Calculator
                         {
                             Console.WriteLine("Invalid input. Please enter a valid operator.");
                             continue;
-                        } // abstraction, update the number and operator used
+                        }  //anstraction, update number and operator used...
                         result = Calculate(number, result, result, userInput[0]);
                     }
                 }
@@ -94,25 +93,25 @@ namespace Calculator
             Console.WriteLine($"Result: {result}");
         }
     }
-      // main entry point prompt
+
     class Program
     {
         static void Main(string[] args)
-        {
+        { //polymorphism, create New instance...
+            //abstraction, calling the method used to start the program...
             do
-            { //polymorphism, create New instance 
-               //abstraction,calling the method used to start the program
+            {
                 Calculator calculator = new Calculator();
                 calculator.PerformCalculation();
 
                 Console.Write("Do you want to continue? (YES/NO): ");
                 string continueInput = Console.ReadLine();
-                  //encapsulation, determine either yes or no
+
                 if (continueInput.ToUpper() != "YES")
                     break;
 
             } while (true);
-
+            //choice NO display 
             Console.WriteLine("Thank you for using the calculator!!!");
             Console.ReadKey();
         }
