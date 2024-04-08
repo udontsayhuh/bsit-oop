@@ -1,50 +1,68 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-// here po, i applied the concept of abstraction by creating an abstract class called Calculator (ABSTRACTION)
-// bali po, nagdedefine ito sa method na Calculate without specifying pano ito nagiimplement
-// and then created four classes that inherit from the Calculator class (INHERITANCE)
-// for polymorphism naman po, i created a method called Calculate in the Calculator class and then overrode it in the four classes (POLYMORPHISM)
+// ACTIVITY 2: REVISED CALCULATOR FOR LOOPING AND ALLOWING SEVERAL VALUES UNTIL = IS ENTERED
 
+// ABSTRACTION: here po, i applied the concept of abstraction by creating an abstract class called Calculator bali po, nagdedefine ito sa method na Calculate without specifying pano ito nagiimplement
+// INHERITANCE: and then created four classes that inherit from the Calculator class (INHERITANCE)
+// POLYMORPHISM: i created a method called Calculate in the Calculator class and then overrode it in the four classes (POLYMORPHISM)
+// ENCAPSULATION: para naman po sa encapsulation, i used the access modifier private to hide the implementation details of the classes and only expose the Calculate method. for instance po, the AddCalculator class only has the Calculate method and the rest of the methods are hidden from the user.
 
-// abstraction
 public abstract class Calculator
 {
-    public abstract double Calculate(double num1, double num2);
+    public abstract double Calculate(double[] numbers);
 }
+
 public class AddCalculator : Calculator
 {
-    public override double Calculate(double num1, double num2) 
+    public override double Calculate(double[] numbers)
     {
-        return num1 + num2;
+        return numbers.Sum();
     }
 }
 
 public class SubtractCalculator : Calculator
 {
-    public override double Calculate(double num1, double num2)
+    public override double Calculate(double[] numbers)
     {
-        return num1 - num2;
+        double result = numbers[0];
+        for (int i = 1; i < numbers.Length; i++)
+        {
+            result -= numbers[i];
+        }
+        return result;
     }
 }
 
 public class MultiplyCalculator : Calculator
 {
-    public override double Calculate(double num1, double num2)
+    public override double Calculate(double[] numbers)
     {
-        return num1 * num2;
+        double result = 1;
+        foreach (var num in numbers)
+        {
+            result *= num;
+        }
+        return result;
     }
 }
 
 public class DivideCalculator : Calculator
 {
-    public override double Calculate(double num1, double num2)
+    public override double Calculate(double[] numbers)
     {
-        if (num2 == 0)
+        double result = numbers[0];
+        for (int i = 1; i < numbers.Length; i++)
         {
-            Console.WriteLine("Error: Division by zero is not allowed.");
-            return double.NaN; // NaN means "Not a Number" po
+            if (numbers[i] == 0)
+            {
+                Console.WriteLine("Error: Division by zero is not allowed.");
+                return double.NaN;
+            }
+            result /= numbers[i];
         }
-        return num1 / num2;
+        return result;
     }
 }
 
@@ -57,85 +75,49 @@ class Program
         Console.WriteLine("||".PadRight(13) + "Migo's Calculator" + "".PadRight(10) + "||");
         Console.WriteLine("||".PadRight(40) + "||");
         Console.WriteLine("".PadLeft(42, '='));
-        Console.WriteLine();
 
         while (true)
         {
-            
+            Console.WriteLine();
+            Console.WriteLine("Enter numbers followed by an operator (+, -, *, /) or '=' to calculate:");
 
-            // prompt the user to enter the first number.
-            double num1;
-            Console.Write("Enter the first number: ");
-            if (!double.TryParse(Console.ReadLine(), out num1))
+            List<double> numbers = new List<double>();
+            List<string> operators = new List<string>();
+
+            string input;
+            do
             {
-                Console.WriteLine("Invalid input. Please enter a number.");
-                break; // terminate the program if the input is invalid
+                input = Console.ReadLine();
+
+                if (double.TryParse(input, out double number))
+                {
+                    numbers.Add(number);
+                }
+                else if (input == "+" || input == "-" || input == "*" || input == "/")
+                {
+                    operators.Add(input);
+                }
+                else if (input != "=")
+                {
+                    Console.WriteLine("Invalid input.");
+                }
+            } while (input != "=");
+
+            if (numbers.Count < 2 || operators.Count + 1 != numbers.Count)
+            {
+                Console.WriteLine("Invalid input. Please provide correct numbers and operators.");
+                continue;
             }
 
-            // Loop indefinitely until the user chooses to exit.
-            while (true)
+            double result = numbers[0];
+            for (int i = 0; i < operators.Count; i++)
             {
-                // prompt the user to choose the operation to use.
-                Console.WriteLine();
-                Console.WriteLine("Choose the operation to use  | + | - | * | / | : ");
-                string operation = Console.ReadLine();
-
-                // create a calculator object based on the user's input.
-                Calculator calculator = null;
-                switch (operation)
-                {
-                    case "+":
-                        calculator = new AddCalculator();
-                        break;
-                    case "-":
-                        calculator = new SubtractCalculator();
-                        break;
-                    case "*":
-                        calculator = new MultiplyCalculator();
-                        break;
-                    case "/":
-                        calculator = new DivideCalculator();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid operation. Please use +, -, *, or /.");
-                        continue;
-                }
-
-                // prompt the user to enter second number.
-                Console.Write("Enter the second number: ");
-                if (!double.TryParse(Console.ReadLine(), out double num2))
-                {
-                    Console.WriteLine("Invalid input. Please enter a number.");
-                    continue;
-                }
-
-                // calculate the result and display it.
-                double result = calculator.Calculate(num1, num2);
-                if (double.IsNaN(result))
-                {
-                    continue;
-                }
-                Console.WriteLine($"The result is: {result}");
-
-                // ask the user if they want to do another calculation again.
-                Console.WriteLine();
-                Console.Write("Do you want to do another calculation again? (y/n): ");
-                string continueCalculation = Console.ReadLine();
-                if (continueCalculation.ToLower() != "y")
-                {
-                    break;
-                }
-
-                // prompt the user to enter the first number again if they want to continue.
-                Console.Write("Enter the first number: ");
-                if (!double.TryParse(Console.ReadLine(), out num1))
-                {
-                    Console.WriteLine("Invalid input. Please enter a number.");
-                    break; // terminate the program if the input is invalid
-                }
+                Calculator calculator = GetCalculator(operators[i]);
+                result = calculator.Calculate(new double[] { result, numbers[i + 1] });
             }
 
-            // asking user to do another calculation. If yes, repeat the process. If no, exit the program.
+            Console.WriteLine($"The result is: {result}");
+
             Console.WriteLine();
             Console.Write("Do you want to perform another calculation from the start? (y/n): ");
             string continueProgram = Console.ReadLine();
@@ -143,6 +125,23 @@ class Program
             {
                 break;
             }
+        }
+    }
+
+    static Calculator GetCalculator(string operatorSymbol)
+    {
+        switch (operatorSymbol)
+        {
+            case "+":
+                return new AddCalculator();
+            case "-":
+                return new SubtractCalculator();
+            case "*":
+                return new MultiplyCalculator();
+            case "/":
+                return new DivideCalculator();
+            default:
+                throw new ArgumentException("Invalid operator: " + operatorSymbol);
         }
     }
 }
