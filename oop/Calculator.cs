@@ -76,11 +76,11 @@ class Program
             while (true)
             {
 
-                if (choice.count == 1) //if user will enter the first number
+                if (choice.count == 1) //if condition is correct
                 {
                     first.Enter(); //calls the method (First Class)
                 }
-                else //if user will enter another number
+                else //if count is not equal to 1
                 {
                     first.num1 = choice.ans; //store the answer to the variable num1
                 }
