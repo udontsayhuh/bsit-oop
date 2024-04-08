@@ -16,7 +16,7 @@ namespace MyCalculator
 
     // Calculator class implementing the ICalculator interface
 	// encapsulating the two input numbers
-    public class Calculator : ICalculator
+    public class Calculator 
     {
         
 		private float num1;
@@ -30,34 +30,7 @@ namespace MyCalculator
         get { return num2; } 
         set { num2 = value; }
 	}
-        // Method to perform addition
-		
-        public float Add(float num1, float num2)
-        {
-            return num1 + num2;
-        }
-
-        // Method to perform subtraction
-        public float Subtract(float num1, float num2)
-        {
-            return num1 - num2;
-        }
-
-        // Method to perform multiplication
-        public float Multiply(float num1, float num2)
-        {
-            return num1 * num2;
-        }
-
-        // Method to perform division
-        public float Divide(float num1, float num2)
-        {
-            if (num2 == 0)
-            {
-                throw new DivideByZeroException("Cannot divide by zero"); 
-            }
-            return num1 / num2;
-        }
+        
     }
 
     class Program
@@ -65,34 +38,43 @@ namespace MyCalculator
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Basic Calculator App!");
-
-            // Creating the instance
-            ICalculator calculator = new Calculator();
+        
+            
 		
 		// Uses while loop if the user want to try again
+	    
 		while(true){ 	
-		    Console.WriteLine("Enter First number:");
+            Number1:
+		    Console.WriteLine("Enter a number:");
             string num1= (Console.ReadLine());
 		    
 		// Checks if the input is numeric or non-numeric
            if (!float.TryParse(num1, out float fnum) )
             {
-                Console.WriteLine("Invalid input. Exiting the program...");
-                Environment.Exit (0);
+                Console.WriteLine("Invalid input, Please try a valid input");
+                goto Number1;
+		    
             }
-		   
+		 
 		   // Using goto to use a mini loop
 		   choice:
-           Console.WriteLine("Enter operation that you want(+,-,*,/):");
+           Console.WriteLine("Enter operator(+,-,*,/,=) :");
 		   string choice = Console.ReadLine();
 		   
-		   // Checks the input if one of the operators are inputted
-		   if(choice!= "+"&& choice != "-" && choice != "*" && choice != "/" )
+			// Checks the input if one of the operators are inputted
+		   if(choice!= "+"&& choice != "-" && choice != "*" && choice != "/" && choice != "=")
 		   {Console.WriteLine("Invalid input.");
 				goto choice;}
-					
+		
+		    if (choice == "=")
+                    {
+                        Console.WriteLine($"The total is: {fnum}");
+						goto yesNo;
+                        break;
+                    }
+			
 			num:		
-			Console.WriteLine("Enter Second number:");
+			Console.WriteLine("Enter another number:");
 			string num2=(Console.ReadLine());
            
 		   // Checks if the input is numeric or non-numeric
@@ -102,26 +84,37 @@ namespace MyCalculator
                 goto num;
             }
 		  
-            
-		   // switch case for the operators
+		   
+			
+		    // switch case for the operators
 			switch (choice)
         {
             case "+":
-                Console.WriteLine($"The sum is: {calculator.Add(fnum,snum)}");
-                break;
+			    fnum=fnum+snum;
+                goto choice;
+				break;
             case "-":
-                Console.WriteLine($"The difference is: {calculator.Subtract(fnum, snum)}");
-                break;
+			    fnum=fnum-snum;
+               goto choice;
+				break;
             case "*":
-                Console.WriteLine($"The product is: {calculator.Multiply(fnum, snum)}");
-                break;
+			    fnum=fnum*snum;
+              goto choice;
+			    break;
 		    case "/":
-			    Console.WriteLine($"The quotient is: {calculator.Divide(fnum, snum)}");
-                break;
-            default:
-                Console.WriteLine("Invalid input.");
+			    fnum=fnum/snum;
+               goto choice;
+				break;
+	
+				break;
+		    default:
+                Console.WriteLine($"Invalid input.");
 				goto choice;
         }
+			
+			
+		   
+		
 		
 		// Another goto to perform mini loop
 		yesNo:
