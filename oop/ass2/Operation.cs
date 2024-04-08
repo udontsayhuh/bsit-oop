@@ -23,25 +23,12 @@ namespace oop.ass2
                     Number2 = Convert.ToDouble(Console.ReadLine());             //second input
                     n = false;                                                  //to stop the loop
 
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Error. Please input numbers only.");     //catches if the input is not a double, float, or integer
-                }
-            }
-        }
-        public void operation()
-        {
-            bool t = true;                                                      //to loop the entry and validations
-            while (t)
-            {
-                try
-                {
                     Console.WriteLine("\nPlease choose an operation: \n" +      //let's the user choose what operation
                     "[+] Addition\n" +
                     "[-] Subtraction\n" +
                     "[*] Multiplication\n" +
-                    "[/] Division");
+                    "[/] Division" +
+                    "[=] Equals");
                     Console.Write("Enter your choice: ");
                     operators = Convert.ToChar(Console.ReadLine());
 
@@ -62,17 +49,15 @@ namespace oop.ass2
                         default:
                             throw new Exception();
                     }
-                    t = false;                                                      //to stop the loop
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    Console.WriteLine("Error! Please enter valid operations only\n");//catches if the input is not any of the given choices
+                    Console.WriteLine("Error. Please input numbers only.");     //catches if the input is not a double, float, or integer
                 }
             }
-            
-            
         }
-        public double Add(double number1, double number2)               
+
+        public double Add(double number1, double number2)
         {
             sum = number1 + number2;
             return sum;
@@ -89,9 +74,17 @@ namespace oop.ass2
         }
         public double Divide(double number1, double number2)
         {
-            quotient = number1 / number2;
-            return quotient;
+            if (number2 != 0) // Avoid division by zero
+            {
+                quotient = number1 / number2;
+                return quotient;
+            }
+            else
+            {
+                Console.WriteLine("Cannot divide by zero.");
+                return double.NaN; // Returning NaN (Not a Number) to indicate error
+            }
         }
+
     }
-        
- }
+}
