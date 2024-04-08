@@ -10,40 +10,46 @@ class Calculator
         {
             Console.WriteLine("Welcome to Mark's Calculator\n");
 
+            float result = GetUserInput("Enter a number:"); // Initialize result with the first number entered by the user
 
-            // Input first number
-            float num1 = GetUserInput("Enter a number:");
-
-            // Input operator
-            char op = GetOperator();
-
-            // Input second number
-            float num2 = GetUserInput("Enter another number:");
-
-            try
+            // Loop until user decides to stop
+            while (true)
             {
-                // Perform calculation based on the operator
-                float result = Calculate(num1, num2, op);
+                // Input operator
+                char op = GetOperator();
 
-                // Display the result
-                Console.WriteLine($"Result: {result}");
+                // If the operator is "=", break the inner loop
+                if (op == '=')
+                    break;
 
+                // Input second number
+                float num2 = GetUserInput("Enter another number:");
 
-                // Ask user if they want to do another calculation
-                Console.WriteLine("\nDo you want to do another calculation? (yes/no)");
-
-                string choice = Console.ReadLine().ToLower();
-                if (choice != "yes")
-                    break; // Exit the loop if the user doesn't want to perform another calculation
+                try
+                {
+                    // Perform calculation based on the operator
+                    result = Calculate(result, num2, op);
+                    Console.WriteLine($"Result so far: {result}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+
+            // Display the final result
+            Console.WriteLine($"Final result: {result}");
+
+            // Ask user if they want to do another calculation
+            Console.WriteLine("\nDo you want to do another calculation? (yes/no)");
+
+            string choice = Console.ReadLine().ToLower();
+            if (choice != "yes")
+                break; // Exit the loop if the user doesn't want to perform another calculation
         }
+
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Thank you for using Simple Calculator!");
-
     }
 
     // Encapsulation: Method for encapsulating input handling.
@@ -59,8 +65,6 @@ class Calculator
             else
             {
                 Console.WriteLine("Invalid input! Please enter a numerical value.");
-
-                Environment.Exit(0); // Terminate the program if input is non-numerical
             }
         }
     }
@@ -71,13 +75,13 @@ class Calculator
         char op;
         while (true)
         {
-            Console.Write("Enter the operator (+, -, *, /): ");
+            Console.Write("Enter the operator (+, -, *, /, =): ");
             op = Console.ReadKey().KeyChar;
             Console.WriteLine();
-            if (op == '+' || op == '-' || op == '*' || op == '/')
+            if (op == '+' || op == '-' || op == '*' || op == '/' || op == '=')
                 return op;
             else
-                Console.WriteLine("Invalid operator! Please enter one of +, -, *, /");
+                Console.WriteLine("Invalid operator! Please enter one of +, -, *, /, =");
         }
     }
 
@@ -99,8 +103,6 @@ class Calculator
                 return num1 / num2;
             default:
                 throw new Exception("Invalid operator.");
-
         }
     }
 }
-
