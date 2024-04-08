@@ -60,7 +60,7 @@ class Calculator
     public bool answer;
     private Operator chosenOpe;
 
-    // Method to get the second number from the user with exception handling
+    // Method to get the input number from the user with exception handling
     public double InputNum()
     {
         double number;
@@ -166,25 +166,27 @@ class Program
         {
             Console.WriteLine("\n+----------+----------+----------+----------+----------+");
 
-            calculator.num1 = calculator.InputNum();
+            calculator.num1 = calculator.InputNum(); // Get the first input number from user
 
+            // Loop to get the operator symbol and perform the calculations
             while (true)
             {
-                calculator.symbol = calculator.OperatorSymbol();
+                calculator.symbol = calculator.OperatorSymbol(); // Get the operator symbol from user
 
+                // Check if '=' is entered so it can display the result
                 if (calculator.symbol == '=')
                 {
                     Console.WriteLine($"\nResult: {calculator.num1}");
                     break;
                 }
 
-                calculator.num2 = calculator.InputNum();
-                calculator.Calculate();
+                calculator.num2 = calculator.InputNum(); // Get the second (or further) number/s from user
+                calculator.Calculate(); // Perform the calculation based on the operator
             }
 
-            calculator.AskAgain();
+            calculator.AskAgain(); // Ask the user if they want to perform another calculation
 
-        } while (calculator.answer);
+        } while (calculator.answer); // Repeat the loop if user wants to continue
 
         Console.WriteLine("\nEnd of Program.\n");
         Console.WriteLine("+----------+----------+----------+----------+----------+");
