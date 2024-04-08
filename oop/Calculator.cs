@@ -105,21 +105,28 @@ class Calculator
             if (numbers.Count >= 2)
             {
                 int result = numbers[0];
-                for (int i = 0; i < operations.Count; i++)
+                try
                 {
-                    Operation op;
-                    if (operations[i] == "=")
+                    for (int i = 0; i < operations.Count; i++)
                     {
-                        break;
+                        Operation op;
+                        if (operations[i] == "=")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            op = GetOperation(operations[i]);
+                        }
+                        result = op.Calculate(result, numbers[i + 1]);
                     }
-                    else
-                    {
-                        op = GetOperation(operations[i]);
-                    }
-                    result = op.Calculate(result, numbers[i + 1]);
-                }
 
-                Console.WriteLine($"Result: {result}");
+                    Console.WriteLine($"Result: {result}");
+                }
+                catch (DivideByZeroException ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
             }
 
             Console.WriteLine("----------------------------------------------");
