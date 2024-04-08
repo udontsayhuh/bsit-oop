@@ -2,159 +2,108 @@
 // BSIT 2-2
 
 using System;
-using System.Reflection.Emit;
 
-
-class Calculate
+class BaseCalculator
 {
-    // implementing encapsulation
-    private double num1;
-    private double num2;
-    private char operand;
-    private double result;
+    //implementing encapsulation
+    private double[] numbers;
+    private char[] operators;
+    protected double result;
 
-    // use properties to access the private fields
-    public double Num1
+    // properties
+    public double[] Numbers
     {
-        get { return num1; }
-        set { num1 = value; }
+        get { return numbers; }
+        set { numbers = value; }
     }
 
-    public double Num2
+    public char[] Operators
     {
-        get { return num1; }
-        set { num2 = value; }
+        get { return operators; }
+        set { operators = value; }
     }
 
-    public char Operand
+    // Constructor
+    public BaseCalculator(double[] numbers, char[] operators)
     {
-        get { return operand; }
-        set { operand = value; }
+        Numbers = numbers;
+        Operators = operators;
     }
 
-    // constructor
-    public Calculate(double num1, double num2, char operand)
+    // Method to calculate the result
+    public virtual void CalculateResult()
     {
-        Num1 = num1;
-        Num2 = num2;
-        Operand = operand;
-    }
+        // set the result to the first number in the array
+        result = numbers[0];
 
-    // a method that calculates and display the result
-    // implementing abstraction
-    // the calculation is hidden from the user and only display the result
-    public virtual void DisplayResult()
-    {
-        switch (operand)
+        // loop through the array
+        for (int index = 0; index < numbers.Length - 1; index++)
         {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                result = num1 / num2;
-                break;
-            default:
-                break;
+            // assign value to the variables to start calculating
+            char operand = operators[index];
+            double nextNumber = numbers[index + 1];
+
+            switch (operand)
+            {
+                case '+':
+                    result += nextNumber;
+                    break;
+                case '-':
+                    result -= nextNumber;
+                    break;
+                case '*':
+                    result *= nextNumber;
+                    break;
+                case '/':
+                    if (nextNumber == 0)
+                    {
+                        Console.WriteLine("Undefined. Cannot divide by zero");
+                        result = 0;
+                        break;
+                    }
+                    else
+                    {
+                        result /= nextNumber;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
-
-        Console.WriteLine("\nResult:");
-        Console.WriteLine($"{num1} {operand} {num2} = {result}");
     }
-
 }
 
 // implementing inheritance
-class CalculateAgain : Calculate
+class Calculate : BaseCalculator
 {
-    private int numberOfTries;
-
-    public int NumberOfTries
+    public Calculate(double[] numbers, char[] operators) : base(numbers, operators)
     {
-        get { return numberOfTries; }
-        set { numberOfTries = value; }
-    }
-
-    public CalculateAgain(double num1, double num2, char operand, int numberOfTries) : base(num1, num2, operand)
-    {
-        Num1 = num1;
-        Num2 = num2;
-        Operand = operand;
-        NumberOfTries = numberOfTries;
+        Numbers = numbers;
+        Operators = operators;
     }
 
     // implementing polymorphism
-    public override void DisplayResult()
+    public void CalculateResult()
     {
-        base.DisplayResult();
-        Console.WriteLine($"\nNumber of times you have calculated: {numberOfTries}");
+        base.CalculateResult();
+        Console.WriteLine("\nResult: " + result);
     }
-
 }
 
 
-class BasicCalculator
+class Calculator
 {
-    // declaring variables as global to be accessed by all methods
-    static double num1;
-    static double num2;
-    static char operand;
+    // declaring empty arrays
+    static double[] numbers = new double[0];
+    static char[] operators = new char[0];
 
     static void Main(string[] args)
     {
-        // calls the method to get the user input
+        // calls the UserInput method to start asking for input
         UserInput();
-
-        // create an object of the Calculate class
-        Calculate firstCalculation = new Calculate(num1, num2, operand);
-
-        // display the result
-        firstCalculation.DisplayResult();
-
-        // asks the user if they want to do another calculation
-        // initialize the number of tries to 1 because we already did one calculation
-        int numberOfTries = 1;
-
-        while (true)
-        {
-            Console.Write("\nDo you want to do another calculation? (y/n): ");
-            string stringChoice = Console.ReadLine().ToLower();
-
-            char choice = Convert.ToChar(stringChoice);
-
-            if (choice == 'y')
-            {
-                numberOfTries += 1; // increment the number of tries
-
-                Console.Clear(); // clear the previous display on the screen for cleanliness of output
-
-                UserInput(); // calls the method to get the user input
-                
-                // create an object of the Calculate again class
-                CalculateAgain anotherCalculation = new CalculateAgain(num1, num2, operand, numberOfTries);
-
-                // displays the result
-                anotherCalculation.DisplayResult();
-
-            }
-            else if (choice == 'n')
-            {
-                Console.WriteLine("\nExiting the program...");
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter y or n.");
-            }
-        }
     }
 
-    // a method for displaying the header
+    // method to display header
     static void Header()
     {
         Console.WriteLine("------------------------------------");
@@ -162,91 +111,110 @@ class BasicCalculator
         Console.WriteLine("------------------------------------");
     }
 
-    // a method to ask for user input
+    // method to get the user input for numbers and operand
     static void UserInput()
     {
-        // calls the Header() method
+        Console.Clear(); // clear the previous display
+
+        // calls header method
         Header();
 
-        // ask the user for input 
-        Console.Write("Enter the first number: ");
-        string stringNum1 = Console.ReadLine();
-
-        // checks if the input is a valid number
-        if (ValidNumber(stringNum1))
-        {
-            num1 = double.Parse(stringNum1);
-
-            // calls the method to ask user for operator
-            InputOperator();
-        }
-        else
-        {
-            // display error message and terminate the program
-            Console.WriteLine("invalid input. Must be a numeric value.");
-            Environment.Exit(0);
-        }
-    }
-
-    // a method to check if the input is a valid number
-    static bool ValidNumber(string userInput)
-    {
-        if (double.TryParse(userInput, out double number))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    // a method to get the user input for the operator
-    static void InputOperator()
-    {
-        // prompts the user to input the operator until its valid
         while (true)
         {
-            Console.Write("Enter the operator (+ , - , * , / ): ");
-            string userOperator = Console.ReadLine();
-
-            // checks if the input is a valid operator
-            if (userOperator == "+" || userOperator == "-" || userOperator == "*" || userOperator == "/")
+            try
             {
-                operand = Convert.ToChar(userOperator);
+                Console.Write("Enter a number: ");
+                double number = double.Parse(Console.ReadLine());
 
-                // calls the method to ask the user input for the second number
-                InputSecondNumber();
+                // resize the array
+                Array.Resize(ref numbers, numbers.Length + 1);
+                // add the number to the array
+                numbers[numbers.Length - 1] = number;
 
+                // get the operator from user input
+                while (true)
+                {
+                    Console.Write("Enter an operator (+, -, *, /): ");
+                    
+                    if (char.TryParse(Console.ReadLine(), out char operand))
+                    {
+                        if (operand == '+' || operand == '-' || operand == '*' || operand == '/')
+                        {
+                            // resize the array
+                            Array.Resize(ref operators, operators.Length + 1);
+                            // add the operator to the array
+                            operators[operators.Length - 1] = operand;
+                            break;
+                        }
+                        else if (operand == '=')
+                        {
+                            if (numbers.Length >= 2 && operators.Length >= 1)
+                            {
+                                Calculate calcu = new Calculate(numbers, operators);
+                                calcu.CalculateResult();
+
+                                // call the TryAgain method
+                                CalculateAgain();
+                                return; // Exit the method
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input! Must have at least two numbers and one operator");
+                                Console.WriteLine("Press any key to continue...");
+                                Console.ReadKey();
+
+                                // reset the elements inside the array
+                                Array.Resize(ref numbers, 0);
+                                Array.Resize(ref numbers, 0);
+                                UserInput(); // ask user to input again from the start
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input! Must be a valid operator");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input! Must be a valid operator");
+                    }
+
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input! Must be a numeric value");
+            }
+        }
+    }
+
+    // a method that asks user if they want to do another calculation
+    static void CalculateAgain()
+    {
+        while (true)
+        {
+            Console.Write("\nDo you want to do another calculation? (y/n): ");
+            string answer = Console.ReadLine().ToLower();
+
+            if (answer == "y")
+            {
+                // reset the elements inside the array
+                numbers = new double[0];
+                operators = new char[0];
+                UserInput(); // ask user to input again from the start
                 break;
+            }
+            else if (answer == "n")
+            {
+                // exits the program
+                Console.WriteLine("Exiting program...");
+                Environment.Exit(0);
             }
             else
             {
-                Console.WriteLine("Invalid operator. Please choose from +, -, *, /.\n");
-            }
-
-        }
-    }
-
-    // a method to get the user input for second number
-    static void InputSecondNumber()
-    {
-        Console.Write("Enter the second number: ");
-        string stringNum2 = Console.ReadLine();
-
-        // prompts the user to input a valid number
-        while (true)
-        {
-            if (ValidNumber(stringNum2))
-            {
-                num2 = double.Parse(stringNum2);
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter a numeric value.\n");
+                Console.WriteLine("Invalid input! Must be 'y' or 'n'");
             }
         }
-
     }
 }
