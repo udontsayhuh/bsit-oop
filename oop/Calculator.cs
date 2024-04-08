@@ -2,62 +2,47 @@ using System;
 
 namespace MyCalculator
 {
-   
-    class Calculator // Demonstrates Encapsulation with privated members
+    class Calculator // Demonstrates Encapsulation with private members
     {
-        private double num1;
-        private double num2;
-        private char op;
+        private double accumulator;
 
-       
         public Calculator() // Constructor
         {
-            num1 = 0;
-            num2 = 0;
-            op = ' ';
+            accumulator = 0;
         }
 
-     
-        public double Calculate()
+        public double Accumulator
+        {
+            get { return accumulator; }
+            set { accumulator = value; }
+        }
+
+        public double PerformOperation(double number, char op)
         {
             switch (op)
             {
                 case '+':
-                    return num1 + num2;
+                    accumulator += number;
+                    break;
                 case '-':
-                    return num1 - num2;
+                    accumulator -= number;
+                    break;
                 case '*':
-                    return num1 * num2;
+                    accumulator *= number;
+                    break;
                 case '/':
-                    if (num2 == 0)
+                    if (number == 0)
                     {
                         Console.WriteLine("Error: Division by zero.");
-                        Environment.Exit(1);
+                        return double.NaN; // Indicate error by returning NaN
                     }
-                    return num1 / num2;
+                    accumulator /= number;
+                    break;
                 default:
                     Console.WriteLine("Invalid operation.");
-                    Environment.Exit(1);
-                    return 0;
+                    return double.NaN;
             }
-        }
-
-        
-        public void SetNum1(double number)
-        {
-            num1 = number;
-        }
-
-       
-        public void SetNum2(double number)
-        {
-            num2 = number;
-        }
-
-     
-        public void SetOperation(char operation)
-        {
-            op = operation;
+            return accumulator;
         }
     }
 
@@ -65,75 +50,72 @@ namespace MyCalculator
     {
         static void Main(string[] args) // Change startup object to this point
         {
+            Calculator calculator = new Calculator();
+
+            Console.WriteLine("Basic Calculator Program");
+
+            double currentNumber;
+            char currentOp = '+';
+
             while (true)
             {
-                Calculator calculator = new Calculator();
+                double num = GetUserNumber("Enter a numerical value: ");
+                if (num == double.NaN) 
+                    continue;
 
-                Console.WriteLine("Basic Calculator Program");
-
-                double num1 = GetUserNumber("Enter the first numerical value: ");
-                calculator.SetNum1(num1);
+                calculator.PerformOperation(num, currentOp);
 
                 char op = GetOperation();
-                calculator.SetOperation(op);
+                if (op == '=')
+                {
+                    Console.WriteLine("Final result: " + calculator.Accumulator);
+                    if (!PromptForAnotherCalculation())
+                        break;
+                    calculator.Accumulator = 0;
+                    currentOp = '+';
+                    Console.Clear();
+                    continue;
+                }
 
-                double num2 = GetUserNumber("Enter the second numerical value: ");
-                calculator.SetNum2(num2);
-
-                double result = calculator.Calculate();
-                Console.WriteLine($"{num1} {op} {num2} = {result}");
-
-                if (!PromptForAnotherCalculation())
-                    break;
-
-                Console.Clear();
+                currentOp = op;
             }
-            Console.Clear();
+
             Console.WriteLine("Goodbye");
         }
 
         static double GetUserNumber(string message)
         {
             double number;
-            Console.Write(message);
-            if (double.TryParse(Console.ReadLine(), out number))
-                return number;
-            else
+            while (true)
             {
-                Console.WriteLine("Invalid input.");
-                Environment.Exit(1);
-                return 0; // Added to satisfy compiler
+                Console.Write(message);
+                string input = Console.ReadLine().Trim();
+                if (double.TryParse(input, out number))
+                    return number;
+                else
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
             }
         }
 
         static char GetOperation()
         {
             char op = ' ';
-            Console.Write("Enter an operation (+, -, *, /): ");
-            switch (Console.ReadLine().Trim())
+            while (true)
             {
-                case "+":
-                    op = '+';
+                Console.Write("Enter an operation (+, -, *, /, =): ");
+                string input = Console.ReadLine().Trim();
+                if (input.Length == 1 && (input[0] == '+' || input[0] == '-' || input[0] == '*' || input[0] == '/' || input[0] == '=')) // Check validity of input
+                {
+                    op = input[0];
                     break;
-                case "-":
-                    op = '-';
-                    break;
-                case "*":
-                    op = '*';
-                    break;
-                case "/":
-                    op = '/';
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid operation");
-                    Environment.Exit(0);
-                    break;
+                }
+                else
+                    Console.WriteLine("Invalid operation. Please enter a valid operation.");
             }
             return op;
         }
 
-        static bool PromptForAnotherCalculation() 
+        static bool PromptForAnotherCalculation()
         {
             while (true)
             {
@@ -141,14 +123,10 @@ namespace MyCalculator
                 string prompt = Console.ReadLine().Trim().ToLower();
                 if (prompt == "yes")
                     return true;
-                else if (prompt == "no") 
+                else if (prompt == "no")
                     return false;
                 else
-                {
-                    Console.WriteLine("Invalid input.");
-                    Environment.Exit(1);
-                    return false;
-                }
+                    Console.WriteLine("Invalid input. Please enter 'Yes' or 'No'.");
             }
         }
     }
