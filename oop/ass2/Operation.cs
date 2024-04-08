@@ -9,75 +9,89 @@ namespace oop.ass2
 {
     internal class Operation : Compute
     {
+        private double total = 0; // Variable for storing results
 
-        public void validator() //
+        public void Validator()
         {
-            bool n = true;                                                      //to loop the entry and validation
-            while (n)
+            bool continueOpt = true; // to loop the entry and validation
+            while (continueOpt)
             {
                 try
                 {
-                    Console.Write("Please enter the first number: ");           //first input
-                    Number1 = Convert.ToDouble(Console.ReadLine());
-                    Console.Write("Please enter the second number: ");
-                    Number2 = Convert.ToDouble(Console.ReadLine());             //second input
-                    n = false;                                                  //to stop the loop
+                    Console.Write("Please enter a number: "); // first input
+                    double Number1 = Convert.ToDouble(Console.ReadLine());
+                    /*Console.Write("Please enter an operation: "); // first input
+                    char operators = Convert.ToChar(Console.ReadLine());*/
 
-                    Console.WriteLine("\nPlease choose an operation: \n" +      //let's the user choose what operation
-                    "[+] Addition\n" +
-                    "[-] Subtraction\n" +
-                    "[*] Multiplication\n" +
-                    "[/] Division" +
-                    "[=] Equals");
-                    Console.Write("Enter your choice: ");
-                    operators = Convert.ToChar(Console.ReadLine());
-
-                    switch (operators)                                              //operation cases
+                    if (total == 0) // If the total is 0, assign the number
                     {
-                        case '+':
-                            Console.WriteLine("= " + Add(Number1, Number2));
-                            break;
-                        case '-':
-                            Console.WriteLine("= " + Subtract(Number1, Number2));
-                            break;
-                        case '*':
-                            Console.WriteLine("= " + Multiply(Number1, Number2));
-                            break;
-                        case '/':
-                            Console.WriteLine("= " + Divide(Number1, Number2));
-                            break;
-                        default:
-                            throw new Exception();
+                        total = Number1;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nPlease choose an operation: \n" + // let's the user choose what operation
+                                          "[+] Addition\n" +
+                                          "[-] Subtraction\n" +
+                                          "[*] Multiplication\n" +
+                                          "[/] Division\n" +
+                                          "[=] Equals");
+
+                        Console.Write("Enter your choice: ");
+                        char operators = Convert.ToChar(Console.ReadLine());
+
+                        switch (operators) // operation cases
+                        {
+                            case '+':
+                                total = Add(total, Number1);
+                                break;
+                            case '-':
+                                total = Subtract(total, Number1);
+                                break;
+                            case '*':
+                                total = Multiply(total, Number1);
+                                break;
+                            case '/':
+                                total = Divide(total, Number1);
+                                break;
+                            case '=':
+                                continueOpt = false;
+                                break;
+                            default:
+                                Console.WriteLine("Error. Please input a valid operation.");
+                                continue;
+                        }
+
                     }
                 }
-                catch (Exception e)
+                catch (FormatException)
                 {
-                    Console.WriteLine("Error. Please input numbers only.");     //catches if the input is not a double, float, or integer
+                    Console.WriteLine("Error. Please input numbers only."); // catches if the input is not a double, float, or integer
                 }
             }
+
+            Console.WriteLine($"Result: {total}");
         }
 
-        public double Add(double number1, double number2)
+        public double Add(double total, double number1)
         {
-            sum = number1 + number2;
-            return sum;
+            return total + number1;
         }
-        public double Subtract(double number1, double number2)
+
+        public double Subtract(double total, double number1)
         {
-            difference = number1 - number2;
-            return difference;
+            return total - number1;
         }
-        public double Multiply(double number1, double number2)
+
+        public double Multiply(double total, double number1)
         {
-            product = number1 * number2;
-            return product;
+            return total * number1;
         }
-        public double Divide(double number1, double number2)
+
+        public double Divide(double total, double number1)
         {
-            if (number2 != 0) // Avoid division by zero
+            if (number1 != 0) // Avoid division by zero
             {
-                quotient = number1 / number2;
-                return quotient;
+                return total / number1;
             }
             else
             {
@@ -85,6 +99,5 @@ namespace oop.ass2
                 return double.NaN; // Returning NaN (Not a Number) to indicate error
             }
         }
-
     }
 }

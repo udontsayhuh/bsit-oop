@@ -18,8 +18,7 @@ class CalculatorProgram
         while (useCalcuAgain) //to use the calculator again
         {
             Operation op = new Operation();
-            op.validator();                     //calling the validator method which includes the user input w/validations
-            op.operation();                     //calling the operation methon which includes the operations & cases w/validations
+            op.Validator();                     //calling the validator method which includes the user input w/validations
 
             string response;
             bool validResponse = false;         //validation for user response

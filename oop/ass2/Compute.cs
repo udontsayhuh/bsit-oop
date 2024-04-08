@@ -11,19 +11,19 @@ namespace oop.ass2
     internal class Compute
     {
         // Encapsulation of user input
-        private double number1, number2;
-        public char operators;
-        public double sum, difference, product, quotient;
+        private double number1, total;
+        //public char operators;
+        //public double sum, difference, product, quotient;
 
         public double Number1
         {
             get { return number1; }
             set { number1 = value; }
         }
-        public double Number2
+        public double Total
         {
-            get { return number2; }
-            set { number2 = value; }
+            get { return total; }
+            set { total = value; }
         }
     }
 
