@@ -7,7 +7,6 @@ namespace Calculatorassignment
     {
         //Encapsulation for private fields
         private double first_value;
-        private double second_value;
 
         //getter and setter for abstraction
         public double First_value
@@ -15,95 +14,156 @@ namespace Calculatorassignment
             get { return first_value; }
             set { first_value = value; }
         }
-        public double Second_value
-        {
-            get { return second_value; }
-            set { second_value = value; }
-        }
 
         public Calculator() { }
-        public Calculator(double First_value, double Second_value)
+        public Calculator(double First_value)
         {
             first_value = First_value;
-            second_value = Second_value;
         }
 
-    
-    // Calculations for the operators
-    public void Calculation(double operatorchoice)
-    {
-     try 
-        { 
-        switch (operatorchoice)
+        // Calculations for the operators
+        public double Calculation(double second_value, char operatorchoice)
         {
-            case '+' :
-                   Console.Write("\nEnter a value: ");
-                   double Second_value_sum = Convert.ToDouble(Console.ReadLine());
-                   double sum = First_value + Second_value_sum ;
-                   Console.WriteLine($"\nThe sum of {First_value} and {Second_value_sum} is equal to {sum}");
-                   break;
-
-            case '-' :
-                  Console.Write("\nEnter a value: ");
-                  double Second_value_min = Convert.ToDouble(Console.ReadLine());
-                  double subtract = First_value - Second_value_min ;
-                  Console.WriteLine($"\nThe subtraction of {First_value} and {Second_value_min} is equal to {subtract}\n");
-                  break;
-
-            case '*' :
-                    Console.Write("\nEnter a value: ");
-                    double Second_value_multiply = Convert.ToDouble(Console.ReadLine());
-                    double product = First_value * Second_value_multiply;
-                    Console.WriteLine($"\nThe product of {First_value} and {Second_value_multiply} is equal to {product}\n");
-                    break;
-
-            case '/' :
-                    Console.Write("\nEnter a value: ");
-                    double Second_value_divide = Convert.ToDouble(Console.ReadLine());
-                    double quotient = First_value / Second_value_divide ;
-                    Console.WriteLine($"\nThe quotient of {First_value} and {Second_value_divide} is equal to {quotient}\n");
-                    break;
-              
-                default:
-                Default();
-                break;
-                }
-            }
-            catch 
-            {
-                Console.WriteLine("Invalid Value."); 
-            }
-    }
-    private void Default()
-        {
-        Console.WriteLine("Invalid Operator");
-        }
-    }
-    class Program
-        {
-            static void Main(string[] args)
-            {
+            double result = 0;
             try
             {
-                // Printing line for the first value.
-                Console.Write("Enter a value: ");
-                double First_value = Convert.ToDouble(Console.ReadLine());
+                switch (operatorchoice)
+                {
+                    case '+':
+                        result = First_value + second_value;
+                        Console.WriteLine($"\nThe sum of {First_value} and {second_value} is equal to {result}");
+                        break;
 
-                Console.WriteLine("\n+ - * / ");
-                Console.Write("Choose operator to use: ");
-                int operatorchoice = Convert.ToChar(Console.ReadLine());
+                    case '-':
+                        result = First_value - second_value;
+                        Console.WriteLine($"\nThe subtraction of {First_value} and {second_value} is equal to {result}\n");
+                        break;
 
-                Calculator calculator = new Calculator();
-                calculator.First_value = First_value;
-                calculator.Calculation(operatorchoice);
-                 
+                    case '*':
+                        result = First_value * second_value;
+                        Console.WriteLine($"\nThe product of {First_value} and {second_value} is equal to {result}\n");
+                        break;
+
+                    case '/':
+                        result = First_value / second_value;
+                        Console.WriteLine($"\nThe quotient of {First_value} and {second_value} is equal to {result}\n");
+                        break;
+
+                    default:
+                        Default();
+                        break;
+                }
             }
             catch
             {
-                // This will print if the value is not numerical.
-               Console.WriteLine("Invalid Value.");
+                Console.Write("Invalid value. Please enter a valid number: ");
             }
+            return result;
+        }
+        private void Default()
+        {
+            Console.Write("Invalid operator. Please enter a valid operator (+, -, *, /, =):");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                //using do-while loop to repeat the process if the user wants to calculate again
+                string choice;
+                do
+                {
+                    Console.Write("Enter a value: ");
+                    double First_value;
+                    while (!double.TryParse(Console.ReadLine(), out First_value))
+                    {
+                        Console.Write("Invalid value. Please enter a valid number: ");
+                    }
 
+                    char operatoruse;
+                    bool validOperator = false;
+                    do
+                    {
+                        Console.WriteLine("+ - * / ");
+                        Console.Write("Choose operator to use: ");
+                        if (!char.TryParse(Console.ReadLine(), out operatoruse))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid operator.");
+                            continue;
+                        }
+
+                        if (operatoruse == '+' || operatoruse == '-' || operatoruse == '*' || operatoruse == '/')
+                        {
+                            validOperator = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid operator. Please enter a valid operator (+, -, *, /).");
+                        }
+                    } while (!validOperator);
+
+
+                    Console.Write("Enter a value: ");
+                    double second_value;
+                    while (!double.TryParse(Console.ReadLine(), out second_value))
+                    {
+                        Console.Write("Invalid value. Please enter a valid number: ");
+                    }
+
+                    Calculator calculator = new Calculator(First_value);
+                    double result = calculator.Calculation(second_value, operatoruse);
+
+                    while (true)
+                    {
+                        Console.WriteLine("\n+ - * / ");
+                        Console.Write("Choose operator to use (Enter an = to finish): ");
+                        if (!char.TryParse(Console.ReadLine(), out operatoruse))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid operator.");
+                            continue;
+                        }
+
+                        if (operatoruse == '=')
+                            break;
+
+                        if (operatoruse == '+' || operatoruse == '-' || operatoruse == '*' || operatoruse == '/')
+                        {
+                            validOperator = true;
+                        }
+                        else
+                        {
+                            Console.Write("Invalid operator. Please enter a valid operator (+, -, *, /): ");
+                            continue;
+                        }
+
+                        do
+                        {
+                            Console.Write("\nEnter a value: ");
+                        } while (!double.TryParse(Console.ReadLine(), out second_value));
+
+
+                        calculator.First_value = result;
+                        result = calculator.Calculation(second_value, operatoruse);
+                    }
+
+                    Console.WriteLine($"The result will be: {result}");
+
+                    Console.Write("\nDo you want to make another calculation? (Yes/No): ");
+                    choice = Console.ReadLine().ToLower();
+                } while (choice == "yes");
+
+                if (choice == "no")
+                {
+                    Console.WriteLine("End of Program");
+                }
+
+            }
+            catch
+            {
+                Console.WriteLine("Invalid Value.");
+            }
         }
-        }
+    }
 }
