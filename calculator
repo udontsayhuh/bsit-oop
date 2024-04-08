@@ -55,35 +55,63 @@ namespace CalculatorApp
 
             while (true)
             {
-                Console.WriteLine("Enter a number:");
+                Console.WriteLine("Enter a number or '=' to calculate:");
                 string input1 = Console.ReadLine();
+
+                if (input1 == "=")
+                {
+                    Console.WriteLine("Please enter at least one number before '=' to calculate.");
+                    continue;
+                }
+
                 if (!calculator.IsValidInput(input1))
                 {
                     Console.WriteLine("Invalid input. Please enter a valid numerical value.");
-                    return;
+                    continue;
                 }
 
                 double num1 = double.Parse(input1);
 
-                Console.WriteLine("Enter an operator (+, -, *, /):");
-                char op = char.Parse(Console.ReadLine());
-                if (op != '+' && op != '-' && op != '*' && op != '/')
+                char op = ' ';
+                double num2 = 0;
+
+                while (true)
                 {
-                    Console.WriteLine("Invalid operator. Please enter one of the four fundamental operators.");
-                    return;
+                    Console.WriteLine("Enter an operator (+, -, *, /) or '=' to calculate:");
+                    string operatorInput = Console.ReadLine();
+
+                    if (operatorInput == "=")
+                    {
+                        if (op == ' ')
+                        {
+                            Console.WriteLine("Operator is missing. Please enter an operator.");
+                            continue;
+                        }
+                        else
+                        {
+                            calculator.PerformCalculation(num1, num2, op);
+                            break;
+                        }
+                    }
+
+                    if (operatorInput.Length != 1 || (operatorInput[0] != '+' && operatorInput[0] != '-' && operatorInput[0] != '*' && operatorInput[0] != '/'))
+                    {
+                        Console.WriteLine("Invalid operator. Please enter one of the four fundamental operators.");
+                        continue;
+                    }
+
+                    op = operatorInput[0];
+
+                    Console.WriteLine("Enter another number:");
+                    string input2 = Console.ReadLine();
+                    if (!calculator.IsValidInput(input2))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid numerical value.");
+                        continue;
+                    }
+
+                    num2 = double.Parse(input2);
                 }
-
-                Console.WriteLine("Enter another number:");
-                string input2 = Console.ReadLine();
-                if (!calculator.IsValidInput(input2))
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid numerical value.");
-                    return;
-                }
-
-                double num2 = double.Parse(input2);
-
-                calculator.PerformCalculation(num1, num2, op);
 
                 Console.WriteLine("Do you want to perform another calculation? (yes/no)");
                 string repeat = Console.ReadLine().ToLower();
@@ -93,3 +121,4 @@ namespace CalculatorApp
         }
     }
 }
+
