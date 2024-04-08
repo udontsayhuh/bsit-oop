@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 // ABSTRACTION
 abstract class Operation
@@ -6,34 +6,28 @@ abstract class Operation
     public abstract double Execute(double num1, double num2);
 }
 
-// INHERITANCE AND POLYMORPHISM 
-// all operations inherit from the Operation class and overrides the Execute() method
+// INHERITANCE AND POLYMORPHISM
+//all operations inherit from the Operation class and overrides the Execute() method
 class Addition : Operation
 {
-    public override double Execute(double num1, double num2)
-    { return num1 + num2;}
+    public override double Execute(double num1, double num2) => num1 + num2;
 }
 
 class Subtraction : Operation
 {
-    public override double Execute(double num1, double num2)
-    { return num1 - num2; }
+    public override double Execute(double num1, double num2) => num1 - num2;
 }
 
 class Multiplication : Operation
 {
-    public override double Execute(double num1, double num2)
-    { return num1 * num2; }
+    public override double Execute(double num1, double num2) => num1 * num2;
 }
 
 class Division : Operation
 {
     public override double Execute(double num1, double num2)
-    {// throwing an exception if division by zero is encountered 
-        if (num2 == 0)
-        {
-            throw new DivideByZeroException("\n>>Error! Cannot divide by zero.");
-        }
+    {// throws an exception if division by zero is encountered
+        if (num2 == 0) throw new DivideByZeroException("\t\t>>Error! Cannot divide by zero.");
         return num1 / num2;
     }
 }
@@ -43,101 +37,111 @@ class Calculator
     // ENCAPSULATION
     // private GetOperation hides the logic of creating Operation objects from users
     private Operation GetOperation(string operatorSymbol)
+    {
+        switch (operatorSymbol)
         {
-            switch (operatorSymbol)
-            {
-                case "+": return new Addition();
-                case "-": return new Subtraction();
-                case "*": return new Multiplication();
-                case "/": return new Division();
-                default: throw new ArgumentException("\n>>Error! Invalid operator input.");
+            case "+": return new Addition();
+            case "-": return new Subtraction();
+            case "*": return new Multiplication();
+            case "/": return new Division();
+            default: throw new ArgumentException("\t\t>>Error! Invalid operator input.");
         }
-        }
-    // encapsulates the functionalities and provides UI
+    }
+    // main loop. handles the functionalities and provides UI
+
     public void Start()
     {
+        Console.WriteLine("\t\t\t>>>Simple Calculator<<<\n\nEnter operands with an operator in between each. Press '=' to get the result.");
+        Console.WriteLine("-----------------------------------------------------------------------------\n");
+
         bool continueSession = true;
-        while (continueSession)
+        while (continueSession) // loop for new sessions
         {
-            double num1, num2;
-            string operationSymbol;
+            double result = 0;
+            double currentNumber = GetValidNumber("\tEnter number: ");
+            result = currentNumber;
 
-            Console.WriteLine("Enter the first number: ");
-            if (!double.TryParse(Console.ReadLine(), out num1))
+            while (true) // loop for ongoing calculation within a session
             {
-                Console.WriteLine("\n>>Error! Please enter a numerical value.");
-                Console.WriteLine("--------------------------------------------------\n");
-                Console.WriteLine("\t\tExiting the program...");
-                Console.ReadKey();
-                return;
-            }
-
-
-            try // handles and catches thrown exceptions
-            {
-                Console.WriteLine("Enter the operator (+ - * /): ");
-                operationSymbol = Console.ReadLine();
-
-                Operation operation = GetOperation(operationSymbol);
-
-                Console.WriteLine("Enter the second number: ");
-                if (!double.TryParse(Console.ReadLine(), out num2))
+                string operationSymbol = GetValidOperationOrEqual();
+                if (operationSymbol == "=")
                 {
-                    Console.WriteLine("\n>>Error! Please enter a numerical value.");
-                    Console.WriteLine("--------------------------------------------------\n");
-                    Console.WriteLine("\t\tExiting the program...");
-                    Console.ReadKey();
-                    return;
+                    Console.WriteLine($"\n\n\t\t\tResult: {result}");
+                    Console.WriteLine("\n--------------------------------------------\n");
+                    break;
                 }
-                //RESULT
-                double result = operation.Execute(num1, num2);
-                Console.WriteLine($"\n\n\t\tResult: {num1} {operationSymbol} {num2} = {result}");
-                Console.WriteLine("--------------------------------------------------\n");
-            }
-            catch (ArgumentException ex){
-                //handles thrown invalid operator input
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("--------------------------------------------------\n");
-                Console.WriteLine("\t\tExiting the program....");
-                Console.ReadKey();
-                return;
-            }
 
-            catch (DivideByZeroException ex)
-            { //handles thrwon division by zero
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("--------------------------------------------------\n");
-                Console.WriteLine("\t\tExiting the program...");
-                Console.ReadKey();
-                return;
+                double nextNumber = GetValidNumber("\tEnter number: ");
+                try // handles and cathes thrown exceptions
+                {
+                    // performs the operation based on user-input
+                    Operation operation = GetOperation(operationSymbol);
+                    result = operation.Execute(result, nextNumber);
+                }
+                catch (DivideByZeroException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-
-            // asks for new session
-            continueSession = AskToContinue();
-            Console.WriteLine("--------------------------------------------------\n");
+            continueSession = AskToContinue(); // start new session
         }
-        Console.WriteLine("\tPress any key to exit the program...");
+        Console.WriteLine("\n-----------------------------------------------------------------------------");
+        Console.WriteLine("\n\t\t\tPress any key to exit the program...");
         Console.ReadKey();
     }
-    // ENCAPSILATION
+    // ENCAPSULATION
+    // ensures the user inputs a valid number
+    private double GetValidNumber(string prompt)
+    {
+        double number;
+        Console.Write(prompt);
+        while (!double.TryParse(Console.ReadLine(), out number))
+        {
+            Console.WriteLine("\t\t>>Error! Please enter a valid numerical value.");
+            Console.Write(prompt);
+        }
+        return number;
+    }
+    // ensures the user inputs a valid operation
+    private string GetValidOperationOrEqual()
+    {
+        Console.Write("\tEnter operator: ");
+        while (true) // loop until valid input is received
+        {
+            string operation = Console.ReadLine();
+            if (operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "=")
+            {
+                return operation;
+            }
+            else
+            {
+                Console.WriteLine("\t\t>>Error! Invalid operation. Please enter +, -, *, /, or '='.");
+                Console.Write("\tEnter operator: ");
+            }
+        }
+    }
     // handles the logic of asking the user to start new session
     private bool AskToContinue()
     {
-        while (true) // loop until valid input is received
+        Console.Write("Do you want to start a new session? (y/n): ");
+        while (true) 
         {
-            Console.WriteLine("Do you want to start a new calculator session? (y/n):");
-            var response = Console.ReadLine();
-            if (response.ToLower() == "y")
+            string response = Console.ReadLine().ToLower();
+            if (response.ToLower == "y")
             {
+                Console.WriteLine("\n---------------------------------------------");
+                Console.WriteLine("\n\n\t\t\t>>>New Calculator Session!<<<\n\nEnter operands with an operator in between each. Press '=' to get the result.");
+                Console.WriteLine("-----------------------------------------------------------------------------\n");
                 return true;
             }
-            else if (response.ToLower() == "n")
+            else if (response.ToLower == "n")
             {
                 return false;
             }
             else
             {
-                Console.WriteLine("\n>>Error! Invalid input. Please enter 'y' or 'n'.\n");
+                Console.WriteLine(">>Error! Invalid input. Please enter 'y' or 'n'.");
+                Console.Write("Do you want to start a new session? (y/n): ");
             }
         }
     }
@@ -146,7 +150,7 @@ class Calculator
 class Program
 {// main entry point
     static void Main(string[] args)
-    {//creating Calculator object -- starting the calculator application
+    {//creating Calculator object -- starting the calculator program
         var calculator = new Calculator();
         calculator.Start();
     }
