@@ -94,19 +94,20 @@ namespace Calculator
             Console.WriteLine($"Result: {result}");
         }
     }
-// main entry point prompt
+      // main entry point prompt
     class Program
     {
         static void Main(string[] args)
         {
             do
-            { //polymorphism, create New instance //abstraction,calling the method used to start the program
+            { //polymorphism, create New instance 
+               //abstraction,calling the method used to start the program
                 Calculator calculator = new Calculator();
                 calculator.PerformCalculation();
 
                 Console.Write("Do you want to continue? (YES/NO): ");
                 string continueInput = Console.ReadLine();
-//encapsulation, determine either yes or no
+                  //encapsulation, determine either yes or no
                 if (continueInput.ToUpper() != "YES")
                     break;
 
