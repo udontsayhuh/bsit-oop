@@ -2,6 +2,43 @@ using System;
 
 namespace My_Colorful_Calculator
 {
+    // Absclass representing a calculator
+    abstract class Calculator
+    {
+        protected float result;
+
+        // Abs method to calculate operation between two numbers
+        public abstract float Calculate(float num1, float num2, string operation);
+    }
+
+    // Calculations of basic arithmetic operations
+    class BasicCalculator : Calculator // Inheritance: BasicCalculator inherits from Calculator
+    {
+        // Method to calculate operation between two numbers
+        public override float Calculate(float num1, float num2, string operation)
+        {
+            switch (operation)
+            {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 != 0)
+                        result = num1 / num2;
+                    else
+                        throw new DivideByZeroException("Error: Division by zero!");
+                    break;
+            }
+            return result;
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -16,69 +53,40 @@ namespace My_Colorful_Calculator
             // Main loop for calculator
             while (calculateAgain)
             {
-                // Declaring Variables
-                float num1, num2, result; // Encapsulation: Encapsulated only for this method.
+                // Start of calculation process
+                Console.WriteLine("START CALCULATING:");
 
-                string operation; // Encapsulation: Encapsulated only for this method.
+                // Input the first number
+                float num1 = GetValidNumber("Enter a number: ");
 
-                // Input first number
-                Console.Write("Enter the first number: ");
-                num1 = Convert.ToSingle(Console.ReadLine()); // Abstraction: Conversions are hidden from user.
+                // Input the operator or '=' to calculate
+                string currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
 
-                // Input second number
-                Console.Write("Enter the second number: ");
-                num2 = Convert.ToSingle(Console.ReadLine()); // Abstraction: Conversions are hidden from user.
+                BasicCalculator calculator = new BasicCalculator(); // Abstraction: Calculations are abstracted behind Calculator interface
 
-                // Input operation (+, -, /, *)
-                Console.Write("Enter the desired operator (+, -, /, *): ");
-                operation = Console.ReadLine(); // Encapsulation: Encapsulated only for this method.
-
-                // Perform calculation based on the user's given operator
-                switch (operation)
+                // Loop to input numbers and operators until '=' is entered
+                while (currentOperator != "=")
                 {
-                    // Add
-                    case "+":
-                        result = num1 + num2;
-                        break;
-                    // Subtract
-                    case "-":
-                        result = num1 - num2;
-                        break;
-                    // Multipliply
-                    case "*":
-                        result = num1 * num2;
-                        break;
-                    // Divide
-                    case "/":
-                        if (num2 != 0)
-                            result = num1 / num2;
-                        else
-                        {
-                            // Zero Error
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Error: Division by zero!");
-                            Console.ForegroundColor = ConsoleColor.Cyan; // Reset color to cyan
-                            continue;
-                        }
-                        break;
-                    // Invalid operator
-                    default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid operator! Please enter a valid operator.");
-                        Console.ForegroundColor = ConsoleColor.Cyan; // Reset color to cyan
-                        continue;
+                    // Input the next number
+                    float num2 = GetValidNumber("Enter a number: ");
+
+                    // Calculate based on current operator
+                    num1 = calculator.Calculate(num1, num2, currentOperator); // Polymorphism: The actual method called depends on the object type
+
+                    // Input the next operator or '=' to calculate
+                    currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
                 }
 
-                // Output
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"The answer is: {num1} {operation} {num2} = {result}");
+                // Output the result
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Result: {num1}");
 
                 // Ask user to calculate again
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("Do you want to calculate again? (yes/no): ");
                 string choice = Console.ReadLine().ToLower();
 
-                // Exit loop if false
+                // Exit loop if 'no' is entered
                 if (choice != "yes")
                     calculateAgain = false;
             }
@@ -87,10 +95,52 @@ namespace My_Colorful_Calculator
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Thank you for using Marv's Calculator!");
             Console.ReadKey();
+        }
 
-            // I did not apply the inheritance and polymorphism, since it only separates the different operators within a class.
-            // For me, abstraction and encapsulation are best suited in this scenario where it keeps all the processes in the main program.
-            // By having the same methods while having different functions, does not mean it needs to be separated.
+        // Method to get a valid number input from the user
+        static float GetValidNumber(string message)
+        {
+            float number;
+            while (true)
+            {
+                Console.Write(message);
+                if (float.TryParse(Console.ReadLine(), out number))
+                    break;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input! Please enter a valid number.");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                }
+            }
+            return number;
+        }
+
+        // Method to get a valid operator input from the user
+        static string GetValidOperator(string message)
+        {
+            string op;
+            while (true)
+            {
+                Console.Write(message);
+                op = Console.ReadLine();
+                if (op == "+" || op == "-" || op == "*" || op == "/" || op == "=")
+                    break;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid operator! Please enter a valid operator or '='.");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                }
+            }
+            return op;
         }
     }
 }
+
+// Inheritance and Polymorphism: the changes applied were the abstract class which inherits it to the basic class (a concrete class which is the BasicCalculator)
+// Encasulation: the variables are only called when needed
+// Abstraction: the calculation process
+// Code organization were added too to enhanced readability of the code like: (GetValidNumber and GetValidOperator) to make sure that the user inputs are valid
+// In my original code, I only applied the abstraction and encapsulation because it does not require all the input to be valid and sequentially loops
+// But now, I added the principles of OOP to modify my original code to meet the requirements of the new laboratory assignment
