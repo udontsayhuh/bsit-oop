@@ -49,11 +49,11 @@ namespace SimpleCalculator
     }
     
     // Class for handling the second number input.
-    // Inheritance: Second class inherit the properties and methods define in the Input class.
-    class Second : Input 
+    // Inheritance: Number class inherit the properties and methods define in the Input class.
+    class Number : Input 
     {
         // Polymorphism: Override the base class method to provide specialized behavior.
-        // Override the Choice method to handle the second number input.
+        // Override the Choice method to handle the numbers input.
         public override void Choice() 
         {
             // Loop to continue asking for valid input, will end if input is valid numeric.
@@ -63,8 +63,8 @@ namespace SimpleCalculator
                 // Catch FormatException occurs due to invalid input, will display error message. 
                 try 
                 {
-                    Console.Write("\nEnter the Second Number: ");
-                    // Read and convert the code from string to double, if valid input then exit the loop.
+                    Console.Write("\nEnter a Number: ");
+                    // checks if the number is for num1 or num2
                     if (num1 == 0)
                     {
                         num1 = Convert.ToDouble(Console.ReadLine());
@@ -92,50 +92,51 @@ namespace SimpleCalculator
             // main program loop
             do 
             {
-                // Instantiate First class to get the first number.
-                Second second = new Second();
+                // Instantiate First class to get the numbers.
+                Number number = new Number();
                 
-                // Instantiate Input class to get the chosen operator.
+                // Instantiate Input class.
                 Input input = new Input();
                 
                 while (true)
                 {
-                        if (x == 1) //if user will enter the first number
+                    if (x == 1) //if user will enter the first number
                     {
-                        second.Choice(); //calls the method (First Class)
+                        number.Choice(); //calls the method (Number Class)
                     }
                     else //if user will enter another number
                     {
-                        second.num1 = input.result; //store the answer to the variable num1
+                        number.num1 = input.result; //store the answer to the variable num1
                     }
     
-                    input.Choice(); //calls the method (Enter Class)
+                    input.Choice(); //calls the method (Choice Class)
     
                     if (input.choiceOperator == "=") //if operator is =, then it prints the result
                     {
                         Console.WriteLine($"\n The final result is {input.result}\n");
+                        x = 1;
                         break;
                     }
     
-                    second.Choice(); //calls the method (Second Class)
+                    number.Choice(); //calls the method (Number Class)
                 
                     // Perform the calculation based on the chosen operator.
                     switch (input.choiceOperator) 
                     {
                         case "+": 
-                            input.result = second.num1 + second.num2;
+                            input.result = number.num1 + number.num2;
                             x = 2;
                             break;
                         case "-": 
-                            input.result = second.num1 - second.num2;
+                            input.result = number.num1 - number.num2;
                             x = 2;
                             break;
                         case "*": 
-                            input.result = second.num1 * second.num2;
+                            input.result = number.num1 * number.num2;
                             x = 2;
                             break;    
                         case "/": 
-                            input.result = second.num1 / second.num2;
+                            input.result = number.num1 / number.num2;
                             x = 2;
                             break; 
                         default:  
