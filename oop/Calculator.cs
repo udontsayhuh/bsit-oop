@@ -56,10 +56,18 @@ class Calculator
     public double Input(string prompt)
     {
         double num;
-        Console.Write(prompt);
-        while (!double.TryParse(Console.ReadLine(), out num))
+        while (true)
         {
-            Console.Write("Invalid input. Please enter a valid number: ");
+            try
+            {
+                Console.Write(prompt);
+                num = Convert.ToDouble(Console.ReadLine());
+                break;
+            }
+            catch
+            {
+                Console.Write("Invalid input. Please enter a valid number: \n");
+            }
         }
         return num;
     }
@@ -95,13 +103,13 @@ class Calculator
             }
 
             // Check if the input is one of the specified operators
-            if (choice == '+' || choice == '-' || choice == '/' || choice == '*')
+            if (choice == '+' || choice == '-' || choice == '/' || choice == '*' || choice == '=')
             {
                 return choice; // Exit the loop if a valid input is provided
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter one of the specified operators: +, -, /, *.");
+                Console.WriteLine("Invalid input. Please enter one of the specified operators: +, -, /, *, =.");
             }
         }
     }
