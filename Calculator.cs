@@ -96,19 +96,27 @@ class Program
             char op = InputOutput.GetOperatorInput("Enter the operator (+, -, *, /):");
             double num2 = InputOutput.GetNumberInput("Enter the second number:");
 
-            // Create an instance of the Calculator class with the input values
-            Calculator calc = new Calculator(num1, op, num2);
-            // Perform the calculation
-            double result = calc.Calculate();
-
-            // Display the result
-            InputOutput.DisplayResult(result);
+            // Check if the user wants to calculate the result
+            Console.WriteLine("Enter '=' to calculate the result:");
+            string input = Console.ReadLine();
+            if (input == "=")
+            {
+                // Create an instance of the Calculator class with the input values
+                Calculator calc = new Calculator(num1, op, num2);
+                // Perform the calculation
+                double result = calc.Calculate();
+                // Display the result
+                InputOutput.DisplayResult(result);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter '=' to calculate the result.");
+            }
 
             // Ask the user if they want to perform another calculation
             Console.Write("Do you want to perform another calculation? (yes/no) ");
-            string input = Console.ReadLine();
-            repeat = (input.ToLower() == "yes");
+            string repeatInput = Console.ReadLine();
+            repeat = (repeatInput.ToLower() == "yes");
         }
     }
 }
- 
