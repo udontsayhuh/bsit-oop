@@ -1,4 +1,7 @@
-﻿using System;
+﻿// This is the first version of the Calculator system
+// When the user input is invalid, the program is immediately terminated
+
+using System;
 using System.Threading;
 
 namespace Calculator
