@@ -151,7 +151,7 @@ public class Calculate : Calculator
         {
             num1 = total;
         }
-        
+
         string operand = Input.get_operator();
 
         if (operand == "=")
@@ -164,7 +164,24 @@ public class Calculate : Calculator
             init = false;
             return true;
         }
-        double num2 = Input.get_input();
+
+        double num2;
+
+        // Removes Division by zero
+
+        while (true)
+        {
+            num2 = Input.get_input();
+            if (operand == "/"  && num2 == 0 )
+            {
+                Console.WriteLine("invalid input");
+            }
+            else
+            {
+                break;
+            }
+
+        }
 
         init = true;
         switch (operand)
