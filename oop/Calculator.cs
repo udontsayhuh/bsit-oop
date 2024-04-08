@@ -1,89 +1,152 @@
-﻿// Calculator
+// Calculator
 // >Program Checklist<
-// User Input: /
-// Invalid Input Termination: /
-// Input Checking: /
-// Calculation & Display: /
-// Program Restart Prompt: /
-// Applications of OOP: encapsulation and abstraction
+// Prompt user to enter valid input: /
+// Input several values: /
+// Applied OOP principles: Abstraction, Polymorphism, & Encapsulation
 
 using System;
 
-namespace calculator_using_Csharp
-{   //encapsulation
-    class Calculator
+namespace BasicCalculator
+{
+    abstract class Operations // Abstraction
     {
-        public double Calculate(double num1, double num2, string operation)
+        public abstract double Execute(double num1, double num2);
+    }
+
+    class Addition : Operations
+    {
+        public override double Execute(double num1, double num2)
         {
-            switch (operation)
-            {
-                case "+":
-                    return num1 + num2;
-                case "-":
-                    return num1 - num2;
-                case "*":
-                    return num1 * num2;
-                case "/":
-                    if (num2 == 0)
-                    {
-                        throw new ArgumentException("Undefined");
-                    }
-                    return num1 / num2;
-                default:
-                    throw new ArgumentException("Invalid operation");
-            }
+            return num1 + num2;
         }
     }
-    //abstraction
+
+    class Subtraction : Operations
+    {
+        public override double Execute(double num1, double num2)
+        {
+            return num1 - num2;
+        }
+    }
+
+    class Multiplication : Operations
+    {
+        public override double Execute(double num1, double num2)
+        {
+            return num1 * num2;
+        }
+    }
+
+    class Division : Operations
+    {
+        public override double Execute(double num1, double num2)
+        {
+            if (num2 == 0)
+            {
+                throw new ArgumentException("Undefined");
+            }
+            return num1 / num2;
+        }
+    }
+
     class Program
     {
-        static void Main(string[] args)
+        static string InputOperator() // Encapsulation
         {
-            Console.WriteLine(">>>>> Basic Calculator <<<<<");
-
-            string value;
-            Calculator calculator = new Calculator();
-
+            string op;
             do
             {
-                Console.Write("\nEnter first number: ");
+                Console.WriteLine("Enter Operator: ");
+                op = Console.ReadLine().Trim();
+
+                if (op != "+" && op != "-" && op != "*" && op != "/" && op != "=")
+                {
+                    Console.WriteLine("Invalid Operator. Please enter a valid operator.");
+                }
+            } while (op != "+" && op != "-" && op != "*" && op != "/" && op != "=");
+
+            return op;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("====================================");
+            Console.WriteLine("          Basic Calculator");
+            Console.WriteLine("====================================");
+            Console.WriteLine(" Enter valid numbers and operations");
+            Console.WriteLine(" (+, -, *, /) or '=' to calculate");
+            Console.WriteLine("====================================");
+
+            bool calculateAgain = true;
+
+            while (calculateAgain)
+            {
+                double result = 0;
                 double num1;
-                if (!double.TryParse(Console.ReadLine(), out num1))
+
+                Console.WriteLine("Enter Number: ");
+                while (!double.TryParse(Console.ReadLine(), out num1))
                 {
-                    Console.WriteLine("\nInvalid input. \nProgram Terminated.");
-                    break;
+                    Console.WriteLine("Invalid Input. Please enter a valid number: ");
+                }
+                result = num1;
+
+                while (true)
+                {
+                    string op = InputOperator();
+
+                    if (op == "=")
+                    {
+                        Console.WriteLine("------------------------------");
+                        Console.WriteLine("Result: " + result);
+                        break;
+                    }
+
+                    double num2;
+
+                    Console.WriteLine("Enter Number: ");
+                    while (!double.TryParse(Console.ReadLine(), out num2))
+                    {
+                        Console.WriteLine("Invalid Input. Please enter a valid number: ");
+                    }
+
+                    Operations operation;
+                    switch (op) // Polymorphism
+                    {
+                        case "+":
+                            operation = new Addition();
+                            break;
+                        case "-":
+                            operation = new Subtraction();
+                            break;
+                        case "*":
+                            operation = new Multiplication();
+                            break;
+                        case "/":
+                            operation = new Division();
+                            break;
+                        default:
+                            throw new ArgumentException("Invalid operator.");
+                    }
+
+                    try
+                    {
+                        result = operation.Execute(result, num2);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
 
-                Console.Write("Enter symbol(/,+,-,*): ");
-                string operation = Console.ReadLine();
-                if (operation != "/" && operation != "+" && operation != "-" && operation != "*")
-                {
-                    Console.WriteLine("\nInvalid operation. \nProgram Terminated.");
-                    break;
-                }
+                Console.WriteLine("\nDo you want to calculate again? (Y/N)");
+                string again = Console.ReadLine().Trim();
+                Console.WriteLine("\n");
 
-                Console.Write("Enter second number: ");
-                double num2;
-                if (!double.TryParse(Console.ReadLine(), out num2))
-                {
-                    Console.WriteLine("\nInvalid input. \nProgram Terminated.");
-                    break;
-                }
+                calculateAgain = (again.Equals("Y", StringComparison.OrdinalIgnoreCase));
+            }
 
-                try
-                {
-                    double answer = calculator.Calculate(num1, num2, operation);
-                    Console.WriteLine($"\n{num1} {operation} {num2} = {answer}\n");
-                }
-
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine($"\n{ex.Message}\n");
-                }
-
-                Console.Write("Do you want to continue (y/n): ");
-                value = Console.ReadLine();
-            } while (value == "y" || value == "Y");
+            Console.WriteLine("Program Terminated.");
         }
     }
 }
