@@ -1,74 +1,124 @@
 using System;
 
-class Calculator
+namespace CalculatorApp
 {
-    static void Main()
+    class Calculator
     {
-        Console.WriteLine("Welcome to my Calculator!");
-        Console.WriteLine("\n");
-
-        while (true)
+        // Method to add two numbers
+        public double Add(double num1, double num2)
         {
-            Console.Write("Enter the first number: ");
-            double num1;
-            if (!double.TryParse(Console.ReadLine(), out num1))
+            return num1 + num2;
+        }
+
+        // Method to subtract two numbers
+        public double Subtract(double num1, double num2)
+        {
+            return num1 - num2;
+        }
+
+        // Method to multiply two numbers
+        public double Multiply(double num1, double num2)
+        {
+            return num1 * num2;
+        }
+
+        // Method to divide two numbers
+        public double Divide(double num1, double num2)
+        {
+            if (num2 == 0)
             {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-                break; // Terminate the program if the input is not a valid number
+                Console.WriteLine("CAN'T BE DIVIDED BY ZERO!");
+                return double.NaN; // Not a Number
             }
+            return num1 / num2;
+        }
 
-            Console.WriteLine("Select an operator: ( +, -, *, / )");
-            Console.Write("Enter your choice: ");
-            string operatorChoice = Console.ReadLine();
-            double result = 0;
+        static void Main(string[] args)
+        {
+            Calculator calculator = new Calculator();
+            Console.WriteLine("WELCOME TO RAINE'S CALCULATOR!");
 
-            // Check if the operator choice is not valid
-            if (operatorChoice != "+" && operatorChoice != "-" && operatorChoice != "*" && operatorChoice != "/")
+            while (true)
             {
-                Console.WriteLine("\n");
-                Console.WriteLine("Invalid choice! Please enter a valid operator.");
-                Console.WriteLine("\n");
-                continue; // Restart the loop
-            }
+                double result = 0;
+                bool isFirstNumber = true;
+                double currentNumber = 0;
+                char operation = '+';
 
-            Console.Write("Enter the second number: ");
-            double num2;
-            if (!double.TryParse(Console.ReadLine(), out num2))
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-                continue;
-            }
+                while (true)
+                {
+                    if (isFirstNumber)
+                    {
+                        Console.Write("\nENTER A NUMBER: ");
+                        string input = Console.ReadLine();
 
-            // Perform calculation based on operator choice
-            switch (operatorChoice)
-            {
-                case "+":
-                    result = num1 + num2;
-                    break;
-                case "-":
-                    result = num1 - num2;
-                    break;
-                case "*":
-                    result = num1 * num2;
-                    break;
-                case "/":
-                    if (num2 != 0)
-                        result = num1 / num2;
+                        if (input == "=")
+                            break;
+
+                        if (!double.TryParse(input, out currentNumber))
+                        {
+                            Console.WriteLine("\nINVALID INPUT. PLEASE ENTER A VALID NUMBER.");
+                            continue;
+                        }
+
+                        result = currentNumber; // Assign the first number to result
+                        isFirstNumber = false;
+                    }
                     else
                     {
-                        Console.WriteLine("Cannot divide by zero!");
-                        continue;
+                        Console.Write("\nSELECT AN OPERATOR (+, -, *, /) \nENTER ( = ) TO SHOW RESULT : ");
+                        operation = Console.ReadKey().KeyChar;
+                        Console.WriteLine();
+
+                        if (operation == '=')
+                            break;
+
+                        if (operation != '+' && operation != '-' && operation != '*' && operation != '/')
+                        {
+                            Console.WriteLine("\nINVALID OPERATOR. PLEASE ENTER A VALID OPERATOR.");
+                            continue;
+                        }
+
+                        double nextNumber;
+                        while (true)
+                        {
+                            Console.Write("\nENTER NUMBER: ");
+                            string input = Console.ReadLine();
+                            if (!double.TryParse(input, out nextNumber))
+                            {
+                                Console.WriteLine("\nINVALID INPUT. PLEASE ENTER A VALID NUMBER.");
+                                continue;
+                            }
+                            break;
+                        }
+
+                        switch (operation)
+                        {
+                            case '+':
+                                result = calculator.Add(result, nextNumber);
+                                break;
+                            case '-':
+                                result = calculator.Subtract(result, nextNumber);
+                                break;
+                            case '*':
+                                result = calculator.Multiply(result, nextNumber);
+                                break;
+                            case '/':
+                                result = calculator.Divide(result, nextNumber);
+                                break;
+                        }
                     }
+                }
+
+                Console.WriteLine("RESULT: " + result);
+                Console.Write("\nDO YOU WANT TO PERFORM ANOTHER CALCULATION? (y/n): ");
+                char repeat = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+                if (repeat != 'y' && repeat != 'Y')
                     break;
+
+                Console.Clear(); // Clear the screen for the next calculation
             }
-           
-            Console.WriteLine("Result: " + result);
-            Console.WriteLine("\n");
-            Console.Write("Do you want to perform another calculation? (yes/no): ");
-            string again = Console.ReadLine();
-            if (again.ToLower() != "yes")
-                break;
-            Console.WriteLine("\n");
         }
     }
 }
