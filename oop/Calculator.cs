@@ -1,6 +1,6 @@
-//HALILI, MA. ALEX BSIT 2-2
 using System;
 
+//Halili, Ma. Alex P. BSIT 2-2
 namespace MyCalculator
 {
     class Calculator
@@ -10,89 +10,96 @@ namespace MyCalculator
             string value = "y"; // initializing the value with y 
             do
             {
-                float number1, number2;
-                Console.Write("Enter the first number: ");
-              // converting the input into float value and using the parameter to pass the value if its converted
-                if (!float.TryParse(Console.ReadLine(), out number1))
-                {
-                    Console.WriteLine("Invalid input. Terminating the calculator");
-                    break;
-                }
+                List<float> numbers = new List<float>(); // for numbers
+                List<string> symbols = new List<string>(); // for symbols
 
-                Console.Write("Enter the second number: ");
-                if (!float.TryParse(Console.ReadLine(), out number2))
+                while (true)
                 {
-                    Console.WriteLine("Invalid input. Terminating the calculator");
-                    break;
-                }
+                    Console.Write("Enter a number (enter '=' to calculate): ");
+                    string input = Console.ReadLine();
 
-                string symbol;
-                while (true) 
-                {
-                    Console.Write("Enter symbol you want to use (+, -, *, /): ");
-                    symbol = Console.ReadLine();
-
-                    if (symbol == "+" || symbol == "-" || symbol == "*" || symbol == "/")
+                    if (input == "=")
                         break;
-                    else
-                        Console.WriteLine("Invalid symbol");
-                }
-                // method for doing the math ;o
-                PerformOperation(number1, number2, symbol);
+                //converting the input into float and pass it using out
+                    if (!float.TryParse(input, out float number))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid number or '=' to calculate.");
+                        continue;
+                    }
+                    numbers.Add(number);
 
-              //asking the user if they want to continue
+                    Console.Write("Enter symbol you want to use (+, -, *, /) or '=' to calculate: ");
+                    string symbol = Console.ReadLine();
+
+                    if (symbol == "=")
+                        break;
+
+                    if (symbol != "+" && symbol != "-" && symbol != "*" && symbol != "/")
+                    {
+                        Console.WriteLine("Invalid symbol. Please enter a valid symbol or '=' to calculate.");
+                        continue;
+                    }
+                    symbols.Add(symbol); // adding d symbol in the list
+                }
+
+                PerformOperation(numbers, symbols); //calling d method
+
                 Console.WriteLine("Do you want to continue? (Y/N)");
-                value = Console.ReadLine().ToLower(); //reading the value and converting it to a lowercase if the user input uppercase
+                value = Console.ReadLine().ToLower();
                 if (value == "n")
                 {
                     Console.WriteLine("Closing Calculator");
                     break;
                 }
 
-            }
-            while (value.ToLower() == "y");
+            } while (value.ToLower() == "y");
         }
-        //method for performing arithmetic operation
-        private void PerformOperation(float number1, float number2, string symbol) //calling the input 
+
+        private void PerformOperation(List<float> numbers, List<string> symbols)//method for math functions
         {
-            switch (symbol)
+            if (numbers.Count != symbols.Count + 1)
             {
-                case "+":
-                    Console.WriteLine("Addition");
-                    Console.WriteLine($"{number1} + {number2} is equal to {number1 + number2}"); //printing and perform the math
-                    break;
-                case "-":
-                    Console.WriteLine("Subtraction");
-                    Console.WriteLine($"{number1} - {number2} is equal to {number1 - number2}");
-                    break;
-                case "*":
-                    Console.WriteLine("Multiplication");
-                    Console.WriteLine($"{number1} * {number2} is equal to {number1 * number2}");
-                    break;
-                case "/":
-                    if (number2 == 0)// if user input zero it will be invalid 
-                    {
-                        Console.WriteLine("Division by zero is not allowed");
-                        return;
-                    }
-                    Console.WriteLine("Divison");
-                    Console.WriteLine($"{number1} / {number2} is equal to {number1 / number2}");
-                    break;
-              //if the user input is not in the case this will be the default output 
-                default:
-                    Console.WriteLine("Invalid symbol");
-                    break;
+                Console.WriteLine("Invalid input.");
+                return;
             }
+
+            float result = numbers[0];
+            for (int i = 0; i < symbols.Count; i++)
+            {
+                switch (symbols[i])
+                {
+                    case "+":
+                        result += numbers[i + 1];
+                        break;
+                    case "-":
+                        result -= numbers[i + 1];
+                        break;
+                    case "*":
+                        result *= numbers[i + 1];
+                        break;
+                    case "/":
+                        if (numbers[i + 1] == 0)
+                        {
+                            Console.WriteLine("Division by zero is not allowed");
+                            return;
+                        }
+                        result /= numbers[i + 1];
+                        break;
+                    default:
+                        Console.WriteLine("Invalid symbol");
+                        return;
+                }
+            }
+            Console.WriteLine($"Result: {result}");
         }
     }
 
-    //entry point
     class Program
     {
         static void Main(string[] args)
         {
             Calculator calculator = new Calculator();
-            calculator.RunCalculator(); //calling the method for user input for number
+            calculator.RunCalculator();
         }
     }
 }
