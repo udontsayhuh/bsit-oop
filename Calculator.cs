@@ -1,65 +1,74 @@
 using System;
+using System.Collections.Generic;
 
 namespace SimpleCalculator
 {
+    // Main program class
     class Program
     {
+        // Main method
         static void Main(string[] args)
         {
-            BasicCalculator calculator = new BasicCalculator(); // Encapsulation: Create an object of BasicCalculator class to encapsulate all calculator functionality
+            // Encapsulation: Create an instance of the BasicCalculator class to encapsulate all calculator functionality
+            BasicCalculator calculator = new BasicCalculator();
 
+            // Loop to allow for multiple calculations
             while (true)
             {
-                // Prompt the user to enter the first numerical value
-                Console.WriteLine("Please enter a numerical value: ");
-                string userInput1 = Console.ReadLine();
+                List<double> numbers = new List<double>();
+                List<string> operators = new List<string>();
 
-                // Validate if the user input is numeric
-                if (!calculator.IsNumeric(userInput1)) // Abstraction: Check if the user input is numeric, abstracting away the details of numeric validation
+                // Prompt the user to enter numerical values and operators
+                Console.WriteLine("Enter numerical values and operators. Enter '=' to calculate.");
+
+                // Inner loop to gather user input for one calculation
+                while (true)
                 {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                    return;
+                    string userInput = Console.ReadLine();
+
+                    // Check if user input is to calculate
+                    if (userInput == "=")
+                    {
+                        try
+                        {
+                            // Abstraction: Calculate the result using the BasicCalculator
+                            double result = calculator.Calculate(numbers, operators);
+                            // Display the result
+                            Console.WriteLine($"Result: {result}");
+                        }
+                        catch (Exception ex)
+                        {
+                            // Handle errors and display error message
+                            Console.WriteLine($"Error: {ex.Message}");
+                        }
+
+                        break; // Exit inner loop
+                    }
+                    else if (calculator.IsNumeric(userInput))
+                    {
+                        // Abstraction: Add numeric input to the list of numbers
+                        numbers.Add(Convert.ToDouble(userInput));
+                    }
+                    else if (calculator.IsValidOperator(userInput))
+                    {
+                        // Abstraction: Add operator input to the list of operators
+                        operators.Add(userInput);
+                    }
+                    else
+                    {
+                        // Display error message for invalid input
+                        Console.WriteLine("Invalid input.");
+                    }
                 }
-
-                double number1 = Convert.ToDouble(userInput1);
-
-                // Prompt the user to enter an operator
-                Console.WriteLine("Please enter one of the four fundamental operators (+, -, /, *): ");
-                string userInput2 = Console.ReadLine();
-
-                // Validate if the entered operator is valid
-                if (!calculator.IsValidOperator(userInput2)) // Abstraction: Validate the operator, abstracting away the details of operator validation
-                {
-                    Console.WriteLine("Invalid operator. Please enter one of the following operators: +, -, /, *");
-                    return;
-                }
-
-                // Prompt the user to enter the second numerical value
-                Console.WriteLine("Please enter another numerical value: ");
-                string userInput3 = Console.ReadLine();
-
-                // Validate if the user input is numeric
-                if (!calculator.IsNumeric(userInput3)) // Abstraction: Check if the user input is numeric, abstracting away the details of numeric validation
-                {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                    return;
-                }
-
-                double number2 = Convert.ToDouble(userInput3);
-
-                // Perform calculation based on user inputs
-                double result = calculator.Calculate(number1, number2, userInput2);
-
-                // Display the result of the calculation
-                Console.WriteLine($"Result: {result}");
 
                 // Ask the user if they want to perform another calculation
-                Console.WriteLine("Do you want to do another calculation? (yes/no)");
+                Console.WriteLine("Do you want to perform another calculation? (yes/no)");
                 string userInput4 = Console.ReadLine();
 
-                if (userInput4 == "no")
+                // Check if the user wants to perform another calculation
+                if (userInput4.ToLower() != "yes")
                 {
-                    break;
+                    break; // Exit the outer loop if the user does not want to perform another calculation
                 }
             }
         }
@@ -68,39 +77,59 @@ namespace SimpleCalculator
     // Calculator class
     public class BasicCalculator
     {
-        // Method to check if a string represents a numeric value
+        // Abstraction: Method to check if a string represents a numeric value
         public bool IsNumeric(string input)
         {
             double number;
             return double.TryParse(input, out number);
         }
 
-        // Method to validate if an operator is one of the four fundamental operators
+        // Abstraction: Method to validate if an operator is one of the four fundamental operators
         public bool IsValidOperator(string @operator)
         {
             return @operator == "+" || @operator == "-" || @operator == "*" || @operator == "/";
         }
 
-        // Method to perform arithmetic calculation based on the operator
-        public double Calculate(double num1, double num2, string @operator)
+        // Abstraction: Method to perform arithmetic calculation based on the numbers and operators provided
+        public double Calculate(List<double> numbers, List<string> operators)
         {
-            switch (@operator)
+            // Encapsulation: Check if the number of numbers is one more than the number of operators
+            if (numbers.Count == operators.Count + 1)
             {
-                case "+":
-                    return num1 + num2;
-                case "-":
-                    return num1 - num2;
-                case "*":
-                    return num1 * num2;
-                case "/":
-                    if (num2 == 0)
+                double result = numbers[0];
+                for (int i = 0; i < operators.Count; i++)
+                {
+                    // Encapsulation: Perform the calculation based on the operator
+                    switch (operators[i])
                     {
-                        throw new DivideByZeroException();
+                        case "+":
+                            result += numbers[i + 1];
+                            break;
+                        case "-":
+                            result -= numbers[i + 1];
+                            break;
+                        case "*":
+                            result *= numbers[i + 1];
+                            break;
+                        case "/":
+                            // Encapsulation: Check for division by zero
+                            if (numbers[i + 1] == 0)
+                            {
+                                throw new DivideByZeroException("Cannot divide by zero.");
+                            }
+                            result /= numbers[i + 1];
+                            break;
+                        default:
+                            // Encapsulation: Throw exception for invalid operator
+                            throw new InvalidOperationException("Invalid operator.");
                     }
-
-                    return num1 / num2;
-                default:
-                    throw new InvalidOperationException();
+                }
+                return result;
+            }
+            else
+            {
+                // Encapsulation: Throw exception for invalid expression
+                throw new InvalidOperationException("Invalid expression.");
             }
         }
     }
