@@ -48,41 +48,74 @@ class Calculator
 {
     static void Main(string[] args)
     {
-        bool repeat = false;
-        do
+        bool repeat = true;
+
+        while (repeat)
         {
-            Console.WriteLine("OOP Calculator");
+            double result = 0;
 
-            Console.Write("Enter the first number: ");
-            double num1 = Convert.ToDouble(Console.ReadLine());
-
-            Console.Write("Enter the second number: ");
-            double num2 = Convert.ToDouble(Console.ReadLine());
-
-            string operation;
-            Operator op;
-
-            do
+            bool validInput = false;
+            while (!validInput)
             {
-                Console.WriteLine("Choose an operation: +, -, *, /");
-                operation = Console.ReadLine();
-                op = GetOperator(operation);
-
-                if (op == null)
+                validInput = true;
+                while (true)
                 {
-                    Console.WriteLine("Invalid operation. Please try again.");
+                    Console.WriteLine("Enter a number, operator (+, -, *, /), or = to calculate:");
+                    string input = Console.ReadLine();
+
+                    if (input == "=")
+                    {
+                        break;
+                    }
+
+                    double number;
+                    bool isValidNumber = double.TryParse(input, out number);
+
+                    if (!isValidNumber && input != "+" && input != "-" && input != "*" && input != "/")
+                    {
+                        Console.WriteLine("Invalid input. Please enter a number, operator (+, -, *, /), or = to calculate:");
+                        validInput = false;
+                        break;
+                    }
+
+                    if (result == 0)
+                    {
+                        result = number;
+                    }
+                    else
+                    {
+                        char operation = char.Parse(input);
+                        Operator op = GetOperator(operation.ToString());
+
+                        if (op != null)
+                        {
+                            Console.WriteLine("Enter the next number:");
+                            double num2;
+                            bool validNumberInput = double.TryParse(Console.ReadLine(), out num2);
+                            if (!validNumberInput)
+                            {
+                                Console.WriteLine("Invalid number input. Please try again.");
+                                validInput = false;
+                                break;
+                            }
+                            result = op.Calculate(result, num2);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid operator.");
+                            validInput = false;
+                            break;
+                        }
+                    }
                 }
+            }
 
-            } while (op == null);
-
-            double result = op.Calculate(num1, num2);
             Console.WriteLine($"Result: {result}");
 
-            Console.WriteLine("Do you want to perform another operation? (yes/no)");
+            Console.WriteLine("Do you want to perform another calculation? (yes/no)");
             string response = Console.ReadLine();
             repeat = (response.ToLower() == "yes");
-
-        } while (repeat);
+        }
     }
 
     static Operator GetOperator(string operation)
