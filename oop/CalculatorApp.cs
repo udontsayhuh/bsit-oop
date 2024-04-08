@@ -37,61 +37,84 @@ namespace CalculatorApp
     public class UserInterface : Calculator
     {
         // Method to view and get the user queries
-        public int DisplayMenu()
+        public void DisplayMenu()
         {
+            Console.Clear();
             Console.WriteLine("[Main Menu]");
             Console.WriteLine("Calculator Application\n");
             Console.WriteLine("Operation");
-            Console.WriteLine("[1] Addition");
-            Console.WriteLine("[2] Subtraction");
-            Console.WriteLine("[3] Multiplication");
-            Console.WriteLine("[4] Division");
-            Console.WriteLine("[5] Exit");
-            Console.Write("[Main Menu] Enter Choice: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            return choice;
+            Console.WriteLine("[+] Addition");
+            Console.WriteLine("[-] Subtraction");
+            Console.WriteLine("[*] Multiplication");
+            Console.WriteLine("[/] Division");
         }
 
         // Perform selected operation
-        public void PerformOperation(int choice)
+        public void PerformOperation()
         {
-            double num1, num2;
-            switch (choice)
-            {
-                case 1:
-                    num1 = GetNumber("Enter First Number: ");
-                    num2 = GetNumber("Enter Second Number: ");
-                    Console.WriteLine($"The sum of {num1} and {num2} is: {Add(num1, num2)}");
-                    break;
-                case 2:
-                    num1 = GetNumber("Enter First Number: ");
-                    num2 = GetNumber("Enter Second Number: ");
-                    Console.WriteLine($"The difference {num1} and {num2} is: {Subtract(num1, num2)}");
-                    break;
-                case 3:
-                    num1 = GetNumber("Enter First Number: ");
-                    num2 = GetNumber("Enter Second Number: ");
-                    Console.WriteLine($"The product {num1} and {num2} is: {Multiply(num1, num2)}");
-                    break;
-                case 4:
-                    num1 = GetNumber("Enter First Number: ");
-                    num2 = GetNumber("Enter Second Number: ");
-                    try
+                double num1, num2;
+                char operation;
+                num1 = GetNumber("Enter a Number: ");
+                Console.Write("Enter Operation ( + , - , * , / ) : ");
+                operation = Convert.ToChar(Console.ReadLine());
+                num2 = GetNumber("Enter a Number: ");
+                if (operation == '+')
+                {
+                    num1 = Add(num1, num2);
+                    Console.WriteLine(num1);
+                }
+                else if (operation == '-')
+                {
+                    num1 = Subtract(num1, num2);
+                    Console.WriteLine(num1);
+                }
+                else if (operation == '*')
+                {
+                    num1 = Multiply(num1, num2);
+                    Console.WriteLine(num1);
+                }
+                else if (operation == '/')
+                {
+                    num1 = Divide(num1, num2);
+                    Console.WriteLine(num1);
+                }
+                while (operation != '=')
+                {
+                    Console.Write("Enter Operation ( + , - , * , / , =) : ");
+                    operation = Convert.ToChar(Console.ReadLine());
+                    if (operation == '=')
                     {
-                        Console.WriteLine($"The quotient {num1} and {num2} is: {Divide(num1, num2)}");
+                        break;
                     }
-                    catch (DivideByZeroException ex)
+                    num2 = GetNumber("Enter a Number: ");
+                    if (operation == '+')
                     {
-                        Console.WriteLine(ex.Message);
+                        num1 = Add(num1, num2);
+                        Console.WriteLine(num1);
                     }
-                    break;
-                case 5:
-                    Console.WriteLine("Exiting...");
-                    break;
-                default:
-                    Console.WriteLine("Invalid Input");
-                    break;
-            }
+                    else if (operation == '-')
+                    {
+                        num1 = Subtract(num1, num2);
+                        Console.WriteLine(num1);
+                    }
+                    else if (operation == '*')
+                    {
+                        num1 = Multiply(num1, num2);
+                        Console.WriteLine(num1);
+                    }
+                    else if (operation == '/')
+                    {
+                        num1 = Divide(num1, num2);
+                        Console.WriteLine(num1);
+                    }
+                    else if (operation == '=')
+                    {
+                        Console.WriteLine(num1);
+                        break;
+                    }
+
+                }
+                Console.WriteLine($"The output is: {num1}");
         }
 
         private double GetNumber(string message)
@@ -114,11 +137,16 @@ namespace CalculatorApp
         static void Main(string[] args)
         {
             UserInterface ui = new UserInterface();
-            int choice = 0;
-            while (choice != 5)
+            while (true)
             {
-                choice = ui.DisplayMenu();
-                ui.PerformOperation(choice);
+                ui.DisplayMenu();
+                ui.PerformOperation();
+                Console.WriteLine("Would you like to try again? [y] yes, [n] no: ");
+                char choice = Convert.ToChar(Console.ReadLine());
+                if (choice == 'n')
+                {
+                    break;
+                }
             }
         }
     }
