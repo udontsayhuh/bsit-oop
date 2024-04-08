@@ -2,91 +2,98 @@
 
 namespace Calculator
 {
-    class Program//Methods are encapsulated in the Program class.
+    class Program
     {
         static void Main(string[] args)
         {
-            while (true) //Will continue to get user input when 'y' is entered unless user inputs 'n'.
+            while (true)
             {
-                Console.Write("\nEnter the first number: ");
-                string userInput1 = Console.ReadLine();
-                if (double.TryParse(userInput1, out double firstNumber)) //Will try to convert user input into a double.
-                                                                         //If successful, the input is a number.
-                                                                         //If not, the input is not a number.
+                Console.WriteLine("\nCalculator. Press (=) to finish the calculation");
+                double result = 0;
+                double num;
+                string userInput;
+                // Prompts for the first number then assigns it to result
+                while (true)
                 {
-                    while (true)//Will continue to ask for user input unless +, -, * or / is entered.
+                    userInput = Console.ReadLine();
+                    if (double.TryParse(userInput, out num))
                     {
-                        Console.Write("\nOperator (+, -, *, /): ");
-                        string operatr = Console.ReadLine();
-                        if (operatr == "+" || operatr == "-" || operatr == "*" || operatr == "/") //Checks for valid operator.
-                        {
-                            while (true)
-                            {
-                                Console.Write("\nEnter the second number: ");
-                                string userInput2 = Console.ReadLine();
-                                if (double.TryParse(userInput2, out double secondNumber))//Will try to convert user input into a double.
-                                                                                         //If successful, the input is a number.
-                                                                                         //If not, the input is not a number.
-                                {
-                                    double result = 0;
-                                    //Abstraction - only asks the user for inputs and hides the how's of getting the result to the user.
-                                    switch (operatr)//Calculates for the result based on number inputs and operator chosen.
-                                    {
-                                        case "+":
-                                            result = firstNumber + secondNumber;
-                                            Console.WriteLine($"\n{firstNumber} + {secondNumber} = " + result);
-                                            break;
-                                        case "-":
-                                            result = firstNumber - secondNumber;
-                                            Console.WriteLine($"\n{firstNumber} - {secondNumber} = " + result);
-                                            break;
-                                        case "*":
-                                            result = firstNumber * secondNumber;
-                                            Console.WriteLine($"\n{firstNumber} * {secondNumber} = " + result);
-                                            break;
-                                        case "/":
-                                            if (secondNumber != 0)//Handles erroneous calculations.
-                                            {
-                                                result = firstNumber / secondNumber;
-                                                Console.WriteLine($"\n{firstNumber} / {secondNumber} = " + result);
-                                            }
-                                            else
-                                                Console.WriteLine("\nCannot divide by zero.");
-                                            break;
-                                    }
-                                    Console.Write("\nDo you want to perform another calculation? (y/n): ");//Asks user to keep asking for input.
-                                    string another = Console.ReadLine().ToLower();
-
-                                    if (another == "y")//Goes back to asking for a number to the user.
-                                    {
-                                        break;
-                                    }
-                                    else if (another == "n")//Exits the program.
-                                    {
-                                        Console.WriteLine("Exiting the program...");
-                                        return;
-                                    }
-                                    else//Handles invalid inputs.
-                                    {
-                                        Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
-                                    }
-                                }
-                                else//Handles invalid inputs.
-                                {
-                                    Console.WriteLine("Invalid input. Please enter a number.");
-                                }
-                            }
-                            break;
-                        }
-                        else//Handles invalid inputs.
-                        {
-                            Console.WriteLine("Invalid input. Please enter +, -, * or / only.");
-                        }
+                        result = num;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a number.");
                     }
                 }
-                else//Handles invalid inputs.
+                // Prompts for an operator and number to be calculated with result
+                while (true)
                 {
-                    Console.WriteLine("Invalid input. Please enter a number.");
+                    string operatr = Console.ReadLine();
+                    if (operatr == "=") // Will check for (=) to exit the loop
+                    {
+                        break;
+                    }
+                    // will reiterate the loop if operator entered is invalid
+                    if (operatr != "+" && operatr != "-" && operatr != "*" && operatr != "/")
+                    {
+                        Console.WriteLine("Invalid operator. Please enter (+, -, *, /) only or (=) to finish the calculation.");
+                        continue;
+                    }
+                    // Prompts for the num to be calculated wit the result
+                    double nextNum;
+                    if (!double.TryParse(Console.ReadLine(), out nextNum))
+                    {
+                        Console.WriteLine("Invalid input. Please enter a number.");
+                        continue;
+                    }
+                    // Calculations to do based of operator
+                    switch (operatr)
+                    {
+                        case "+":// Addition
+                            result += nextNum;
+                            break;
+                        case "-": // Subtraction
+                            result -= nextNum;
+                            break;
+                        case "*": // Multiplication
+                            result *= nextNum;
+                            break;
+                        case "/": // Division
+                            if (nextNum != 0)
+                            {
+                                result /= nextNum;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Cannot divide by zero.");
+                                continue;
+                            }
+                            break;
+                    }
+                }
+                // Prints the result of the calculation
+                Console.WriteLine("Result: " + result);
+
+                string another;
+                while (true)// Will continue to prompt untill user inputs a valid choice
+                {
+                    Console.Write("Do you want to perform another calculation (y/n)? ");
+                    another = Console.ReadLine().ToLower();
+                    if (another == "n" || another == "y")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
+                    }
+                }
+                // Will only stop the program if the user enters N/n
+                if (another == "n")
+                {
+                    Console.WriteLine("\nExiting the program...");
+                    break;
                 }
             }
         }
