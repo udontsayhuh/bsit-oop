@@ -1,55 +1,41 @@
 using System;
 
-namespace SimpleCalculator
+namespace Calculator
 {
-    // Base class for arithmetic operations
-    abstract class Operation
+    // Absclass representing a calculator
+    abstract class Calculator
     {
-        // Abstract method to perform calculation
-        public abstract double Calculate(double num1, double num2);
+        protected int result;
+
+        // Abs method to calculate operation between two numbers
+        public abstract int Calculate(int num1, int num2, string operation);
     }
 
-    // Derived class for addition operation
-    class Addition : Operation
+    // Calculations of basic arithmetic operations
+    class BasicCalculator : Calculator // Inheritance: BasicCalculator inherits from Calculator
     {
-        // Method to perform addition calculation
-        public override double Calculate(double num1, double num2)
+        // Method to calculate operation between two numbers
+        public override int Calculate(int num1, int num2, string operation)
         {
-            return num1 + num2;
-        }
-    }
-
-    // Derived class for subtraction operation
-    class Subtraction : Operation
-    {
-        // Method to perform subtraction calculation
-        public override double Calculate(double num1, double num2)
-        {
-            return num1 - num2;
-        }
-    }
-
-    // Derived class for multiplication operation
-    class Multiplication : Operation
-    {
-        // Method to perform multiplication calculation
-        public override double Calculate(double num1, double num2)
-        {
-            return num1 * num2;
-        }
-    }
-
-    // Derived class for division operation
-    class Division : Operation
-    {
-        // Method to perform division calculation
-        public override double Calculate(double num1, double num2)
-        {
-            if (num2 == 0)
+            switch (operation)
             {
-                throw new ArgumentException("Cannot divide by zero");
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 != 0)
+                        result = num1 / num2;
+                    else
+                        throw new DivideByZeroException("Error: Division by zero!");
+                    break;
             }
-            return num1 / num2;
+            return result;
         }
     }
 
@@ -57,84 +43,105 @@ namespace SimpleCalculator
     {
         static void Main(string[] args)
         {
-            // Initialize variables
-            Operation operation;
-            string choice;
+            // Loop to calculate again
+            bool shouldContinueCalculating = true;
 
-            // Main program loop
-            do
+            // Main loop for calculator
+            while (shouldContinueCalculating)
             {
-                // Display menu
-                Console.WriteLine("Enter your choice:");
-                Console.WriteLine("+. Add");
-                Console.WriteLine("-. Subtract");
-                Console.WriteLine("*. Multiply");
-                Console.WriteLine("/. Divide");
-                Console.WriteLine("5. Exit");
-                choice = Console.ReadLine();
-
-                // Perform operation based on user choice
-                switch (choice)
+                try
                 {
-                    case "+":
-                        operation = new Addition();
-                        break;
-                    case "-":
-                        operation = new Subtraction();
-                        break;
-                    case "*":
-                        operation = new Multiplication();
-                        break;
-                    case "/":
-                        operation = new Division();
-                        break;
-                    case "5":
-                        Console.WriteLine("Exiting...");
-                        Console.WriteLine("Thanks for using Simple Calculator.");
-                        continue;
-                    default:
-                        Console.WriteLine("Invalid choice. Please enter +, -, *, /, or 5 to exit.");
-                        continue;
+                    // Start of calculation process
+                    Console.WriteLine("Simple Calculator:");
+
+                    // Input the first number
+                    int num1 = GetValidNumber("Enter a number: ");
+
+                    BasicCalculator calculator = new BasicCalculator(); // Abstraction: Calculations are abstracted behind Calculator interface
+
+                    // Input the operator or '=' to calculate
+                    string currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
+
+                    // Loop to input numbers and operators until '=' is entered
+                    while (currentOperator != "=")
+                    {
+                        // Check if the entered operator is valid
+                        if (currentOperator != "+" && currentOperator != "-" && currentOperator != "*" && currentOperator != "/")
+                        {
+                            Console.WriteLine("Invalid operator! Please enter a valid operator (+, -, *, /) or '='.");
+                            currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
+                            continue;
+                        }
+
+                        // Input the next number
+                        int num2 = GetValidNumber("Enter a number: ");
+
+                        // Calculate based on current operator
+                        num1 = calculator.Calculate(num1, num2, currentOperator); // Polymorphism: The actual method called depends on the object type
+
+                        // Input the next operator or '=' to calculate
+                        currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
+                    }
+
+                    // Output the result
+                    Console.WriteLine($"Result: {num1}");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input! Please enter a valid number.");
+                }
+                catch (DivideByZeroException ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
 
-                // Get input numbers from user
-                Console.WriteLine("Enter number 1:");
-                double num1;
-                if (!double.TryParse(Console.ReadLine(), out num1))
-                {
-                    Console.WriteLine("Invalid input. Please enter a numeric value for number 1.");
-                    continue;
-                }
+                // Ask user to calculate again
+                Console.Write("Do you want to calculate again? (Y/N): ");
+                string choice = Console.ReadLine().ToUpper();
 
-                Console.WriteLine("Enter number 2:");
-                double num2;
-                if (!double.TryParse(Console.ReadLine(), out num2))
-                {
-                    Console.WriteLine("Invalid input. Please enter a numeric value for number 2.");
-                    continue;
-                }
+                // Exit loop if 'N' is entered
+                if (choice != "Y")
+                    shouldContinueCalculating = false;
+            }
 
-                // Check for division by zero
-                if (choice == "/" && num2 == 0)
-                {
-                    Console.WriteLine("Error: Cannot divide by zero");
-                    continue;
-                }
+            // Just a closing message
+            Console.WriteLine("Thank you for using the calculator!");
+            Console.ReadKey();
+        }
 
-                // Perform calculation and display result
-                Console.WriteLine($"Result: {operation.Calculate(num1, num2)}");
-
-                // Ask if user wants to do another calculation
-                Console.WriteLine("Do you want to do another calculation? (Y/N).");
-                string playAgain = Console.ReadLine().ToLower();
-                if (playAgain != "y")
-                {
-                    Console.WriteLine("Exiting...");
-                    Console.WriteLine("Thanks for using Simple Calculator.");
+        // Method to get a valid number input from the user
+        static int GetValidNumber(string message)
+        {
+            int number;
+            while (true)
+            {
+                Console.Write(message);
+                if (int.TryParse(Console.ReadLine(), out number))
                     break;
+                else
+                {
+                    Console.WriteLine("Invalid input! Please enter a valid number.");
                 }
+            }
+            return number;
+        }
 
-            } while (choice != "5"); // Loop until user chooses to exit
+        // Method to get a valid operator input from the user
+        static string GetValidOperator(string message)
+        {
+            string op;
+            while (true)
+            {
+                Console.Write(message);
+                op = Console.ReadLine();
+                if (op == "+" || op == "-" || op == "*" || op == "/" || op == "=")
+                    break;
+                else
+                {
+                    Console.WriteLine("Invalid operator! Please enter a valid operator or '='.");
+                }
+            }
+            return op;
         }
     }
 }
