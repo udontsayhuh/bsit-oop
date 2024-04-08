@@ -31,42 +31,66 @@ namespace MyFirstCalculator
         // Method to perform calculation
         public void PerformCalculation()
         {
-            double num1, num2;
-            char op;
+            double result = 0;
+            bool isFirstInput = true;
 
-            // Prompt user for first number
-            Console.Write(" Enter the first number: ");
-            if (!double.TryParse(Console.ReadLine(), out num1))
+            while (true)
             {
-                // If parsing fails, display error message and return
-                Console.WriteLine(" Invalid input. Please enter a numerical value.");
-                return;
+                double num;
+                char op;
+
+                // Prompt user for input
+                if (isFirstInput)
+                {
+                    Console.Write(" Enter a number: ");
+                }
+                else
+                {
+                    Console.Write(" Enter an operator (+, -, *, /, or =): ");
+                }
+
+                string input = Console.ReadLine().Trim();
+
+                if (input == "=")
+                {
+                    // Display result when equal sign is entered
+                    Console.WriteLine(" Result: " + result);
+                    break;
+                }
+
+                if (isFirstInput)
+                {
+                    if (!double.TryParse(input, out num))
+                    {
+                        // If parsing fails, display error message and prompt again
+                        Console.WriteLine(" Invalid input. Please enter a numerical value.");
+                        continue;
+                    }
+                    isFirstInput = false;
+                    result = num;
+                    continue;
+                }
+
+                if (!char.TryParse(input, out op) || (op != '+' && op != '-' && op != '*' && op != '/'))
+                {
+                    // If parsing fails or operator is invalid, display error message and prompt again
+                    Console.WriteLine(" Invalid operator. Please enter one of the following:");
+                    Console.WriteLine(" +, -, *, /");
+                    continue;
+                }
+
+                // Prompt user for number
+                Console.Write(" Enter the next number: ");
+                if (!double.TryParse(Console.ReadLine(), out num))
+                {
+                    // If parsing fails, display error message and prompt again
+                    Console.WriteLine(" Invalid input. Please enter a numerical value.");
+                    continue;
+                }
+
+                // Perform calculation
+                result = Calculate(result, num, op);
             }
-
-            // Prompt user for operator
-            Console.Write(" Enter an operator (+, -, *, /): ");
-            if (!char.TryParse(Console.ReadLine(), out op) || (op != '+' && op != '-' && op != '*' && op != '/'))
-            {
-                // If parsing fails or operator is invalid, display error message and return
-                Console.WriteLine(" Invalid operator. Please enter one of the following:");
-                Console.WriteLine(" +, -, *, /");
-                return;
-            }
-
-            // Prompt user for second number
-            Console.Write(" Enter the second number: ");
-            if (!double.TryParse(Console.ReadLine(), out num2))
-            {
-                // If parsing fails, display error message and return
-                Console.WriteLine(" Invalid input. Please enter a numerical value.");
-                return;
-            }
-
-            // Perform calculation
-            double result = Calculate(num1, num2, op);
-
-            // Display result
-            Console.WriteLine(" Result: " + result);
         }
 
         // Method to perform actual calculation based on operator
@@ -96,3 +120,9 @@ namespace MyFirstCalculator
         }
     }
 }
+
+// All the data and behavior related to the calculator are encapsulated within the Calculator class.
+// that contains the methods to perform calculations and interacts with the user.
+
+// Used abstraction which abstract away the implementation details of the calculator operations,
+//allowing users to interact with it through a simple interface.
