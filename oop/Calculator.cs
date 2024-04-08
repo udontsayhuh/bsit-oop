@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 // Base class for operations
 abstract class Operation
@@ -54,50 +55,79 @@ class Calculator
 
         do
         {
-            Console.Write("Enter the first number: ");
-            int num1 = Convert.ToInt32(Console.ReadLine());
+            List<int> numbers = new List<int>();
+            List<string> operations = new List<string>();
 
-            Console.Write("Enter the second number: ");
-            int num2 = Convert.ToInt32(Console.ReadLine());
-
-            string operation;
-            Operation op;
-            do
+            while (true)
             {
-                Console.Write("Choose an operation: +, -, *, /: ");
-                operation = Console.ReadLine();
-                op = GetOperation(operation);
-                if (op == null)
+                Console.Write("Enter a number: ");
+                string input = Console.ReadLine();
+
+                if (!int.TryParse(input, out int num))
                 {
-                    Console.WriteLine($"Invalid operation: {operation}");
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    continue;
                 }
-            } while (op == null);
 
-            int result;
-            try
-            {
-                result = op.Calculate(num1, num2);
-                Console.WriteLine($"Result: {result}");
+                numbers.Add(num);
 
-                Console.WriteLine("----------------------------------------------");
-                Console.Write("Do you want to perform another calculation? (Y/N): ");
-                string choice = Console.ReadLine();
-                if (choice.ToLower() != "y" && choice.ToLower() != "yes")
+                if (numbers.Count > operations.Count) // Check if there's enough numbers for an operation
                 {
-                    exit = true;
+                    string operation;
+                    do
+                    {
+                        Console.Write("Choose an operation (+, -, *, /, =): ");
+                        operation = Console.ReadLine();
+
+                        if (operation != "+" && operation != "-" && operation != "*" && operation != "/" && operation != "=")
+                        {
+                            Console.WriteLine("Invalid operation. Please choose +, -, *, /, or =.");
+                        }
+                        else if (operation == "=" && numbers.Count < 2)
+                        {
+                            Console.WriteLine("Insufficient numbers to calculate. Please enter at least two numbers.");
+                        }
+                        else
+                        {
+                            operations.Add(operation);
+                            break;
+                        }
+                    } while (true);
+
+                    if (operation == "=")
+                    {
+                        break;
+                    }
                 }
             }
-            catch (DivideByZeroException ex)
-            {
-                Console.WriteLine($"Division by zero error: {ex.Message}");
 
-                Console.WriteLine("----------------------------------------------");
-                Console.Write("Do you want to perform another calculation? (Y/N): ");
-                string choice = Console.ReadLine();
-                if (choice.ToLower() != "y" && choice.ToLower() != "yes")
+            // Perform the calculations if there are at least two numbers
+            if (numbers.Count >= 2)
+            {
+                int result = numbers[0];
+                for (int i = 0; i < operations.Count; i++)
                 {
-                    exit = true;
+                    Operation op;
+                    if (operations[i] == "=")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        op = GetOperation(operations[i]);
+                    }
+                    result = op.Calculate(result, numbers[i + 1]);
                 }
+
+                Console.WriteLine($"Result: {result}");
+            }
+
+            Console.WriteLine("----------------------------------------------");
+            Console.Write("Do you want to perform another calculation? (Y/N): ");
+            string choice = Console.ReadLine();
+            if (choice.ToLower() != "y" && choice.ToLower() != "yes")
+            {
+                exit = true;
             }
         } while (!exit);
     }
@@ -115,7 +145,7 @@ class Calculator
             case "/":
                 return new Division();
             default:
-                return null;
+                throw new ArgumentException("Invalid operation");
         }
     }
 }
