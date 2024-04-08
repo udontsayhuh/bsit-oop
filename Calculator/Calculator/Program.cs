@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 
 namespace Calculator
 {
@@ -34,7 +36,11 @@ namespace Calculator
             Operand = operand;
         }
     }
-    //Application of inheritance and polymorphism of the calculator base class
+
+
+    //  Application of inheritance and polymorphism of the calculator base class
+    //  Changes: instead of just printing the result of each inherited polymorphed classes each classes will return their result
+
     class Calculator_Addition : Calculator
     {
         public Calculator_Addition(double firstvalue, double secondvalue, char operand) : base(firstvalue, secondvalue, operand)
@@ -44,10 +50,10 @@ namespace Calculator
             Secondvalue = secondvalue;
         }
 
-        public void compute(double firstvalue, double secondvalue, char operand)
+        public double compute(double firstvalue, double secondvalue, char operand)
         {
             double result = Firstvalue + Secondvalue;
-            Console.WriteLine($"| The sum of {Firstvalue} {operand} {Secondvalue} = " + result);
+            return result;
         }
 
 
@@ -61,10 +67,10 @@ namespace Calculator
             Secondvalue = secondvalue;
         }
 
-        public void compute(double firstvalue, double secondvalue, char operand)
+        public double compute(double firstvalue, double secondvalue, char operand)
         {
             double result = Firstvalue - Secondvalue;
-            Console.WriteLine($"| The minuend of {Firstvalue} {operand} {Secondvalue} = " + result);
+            return result;
         }
     }
     class Calculator_Multiplication : Calculator
@@ -76,10 +82,10 @@ namespace Calculator
             Secondvalue = secondvalue;
         }
 
-        public void compute(double firstvalue, double secondvalue, char operand)
+        public double compute(double firstvalue, double secondvalue, char operand)
         {
             double result = Firstvalue * Secondvalue;
-            Console.WriteLine($"| The product of {Firstvalue} {operand} {Secondvalue} = " + result);
+            return result;
         }
     }
     class Calculator_Division : Calculator
@@ -91,64 +97,70 @@ namespace Calculator
             Secondvalue = secondvalue;
         }
 
-        public void compute(double firstvalue, double secondvalue, char operand)
+        public double compute(double firstvalue, double secondvalue, char operand)
         {
             double result = Firstvalue / Secondvalue;
-            Console.WriteLine($"| The quotient of {Firstvalue} {operand} {Secondvalue} = " + result);
+            return result;
         }
     }
     class Program
     {
+        
+
+
         static void Main(string[] args)
         {
-            char operand;
+            char operand, repeat_choice;
             double num1, num2;
-            char repeat_choice;
             do
             {
                 Console.Clear();
-                Console.WriteLine("|--------------------------------------------------------|");
-                Console.WriteLine("|                   RUBEN'S CALCULATOR                   |");
-                Console.WriteLine("|--------------------------------------------------------|");
-                Console.Write("| Please Enter first value: ");
+                Console.WriteLine("|-------------------------------------------------------------------|");
+                Console.WriteLine("|                   RUBEN'S CALCULATOR (UPDATED)                    |");
+                Console.WriteLine("|-------------------------------------------------------------------|");
+                Console.Write("| Please Enter a value: ");
                 while (!double.TryParse(Console.ReadLine(), out num1))
                 {
                     Console.WriteLine("| Invalid input. Please enter a numerical value.");
-                    Console.Write("| Please Enter first value: ");
-                }
-
-                Console.Write("| Please Enter second value: ");
-                while (!double.TryParse(Console.ReadLine(), out num2))
-                {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                    Console.Write("| Please Enter second value: ");
+                    Console.WriteLine("| Please Enter first value: ");
                 }
                 Console.Write("| Choose an operation (+, -, *, /): ");
                 while (!char.TryParse(Console.ReadLine(), out operand) ||
                        (operand != '+' && operand != '-' && operand != '*' && operand != '/'))
                 {
-                    Console.WriteLine("| Invalid operation. Please choose from '+', '-', '*', or '/'.");
-                    Console.Write("| Choose an operation (+, -, *, /): ");
+                    Console.WriteLine("| Invalid operation. Please choose from '+', '-', '*', '/'");
+                    Console.Write("| Choose an operation (+, -, *, /: ");
                 }
-                switch (operand)
+                Console.Write("| Please Enter a value: ");
+                while (!double.TryParse(Console.ReadLine(), out num2))
                 {
-                    case '+':
-                        Calculator_Addition calculate1 = new Calculator_Addition(num1, num2, operand);
-                        calculate1.compute(num1, num2, operand);
-                        break;
-                    case '-':
-                        Calculator_Subtraction calculate2 = new Calculator_Subtraction(num1, num2, operand);
-                        calculate2.compute(num1, num2, operand);
-                        break;
-                    case '*':
-                        Calculator_Multiplication calculate3 = new Calculator_Multiplication(num1, num2, operand);
-                        calculate3.compute(num1, num2, operand);
-                        break;
-                    case '/':
-                        Calculator_Division calculate4 = new Calculator_Division(num1, num2, operand);
-                        calculate4.compute(num1, num2, operand);
-                        break;
+                    Console.WriteLine("| Invalid input. Please enter a numerical value.");
+                    Console.WriteLine("| Please Enter first value: ");
                 }
+                num1 = function(num1, num2, operand);
+                do
+                {
+                    
+                    Console.Write("| Choose an operation (+, -, *, / or '='(to end computation)): ");
+                    while (!char.TryParse(Console.ReadLine(), out operand) ||
+                           (operand != '+' && operand != '-' && operand != '*' && operand != '/' && operand != '='))
+                    {
+                        Console.WriteLine("| Invalid operation. Please choose from '+', '-', '*', '/' or '='");
+                        Console.Write("| Choose an operation (+, -, *, / or '='(to end computation)): ");
+                    }
+                    if (operand == '=')
+                    {
+                        break;
+                    }
+                    Console.Write("| Please Enter a value: ");
+                    while (!double.TryParse(Console.ReadLine(), out num2))
+                    {
+                        Console.WriteLine("| Invalid input. Please enter a numerical value.");
+                        Console.WriteLine("| Please Enter first value: ");
+                    }
+                    num1 = function(num1, num2, operand);
+                } while (operand != '=');
+                Console.WriteLine($"| The result is: {num1}");
                 Console.Write("| Would you like to try again? (Y) yes / (N) no: ");
                 while (!char.TryParse(Console.ReadLine(), out repeat_choice) ||
                        (repeat_choice != 'Y' && repeat_choice != 'y' && repeat_choice != 'N' && repeat_choice != 'n'))
@@ -158,10 +170,34 @@ namespace Calculator
                     Console.Write("| Would you like to try again? (Y)yes / (N)no: ");
                 }
             } while (repeat_choice == 'Y' || repeat_choice == 'y');
-            Console.WriteLine("|--------------------------------------------------------|");
-            Console.WriteLine("|        \"Thank you for using RUBEN'S CALCULATOR\"        |");
-            Console.WriteLine("|--------------------------------------------------------|");
+            Console.WriteLine("|-------------------------------------------------------------------|");
+            Console.WriteLine("|             \"Thank you for using RUBEN'S CALCULATOR\"              |");
+            Console.WriteLine("|-------------------------------------------------------------------|");
             Console.ReadKey();
+        }
+
+        static double function(double num1, double num2, char operand)
+        {
+            switch (operand)
+            {
+                case '+':
+                    Calculator_Addition calculate1 = new Calculator_Addition(num1, num2, operand);
+                    num1 = calculate1.compute(num1, num2, operand);
+                    break;
+                case '-':
+                    Calculator_Subtraction calculate2 = new Calculator_Subtraction(num1, num2, operand);
+                    num1 = calculate2.compute(num1, num2, operand);
+                    break;
+                case '*':
+                    Calculator_Multiplication calculate3 = new Calculator_Multiplication(num1, num2, operand);
+                    num1 = calculate3.compute(num1, num2, operand);
+                    break;
+                case '/':
+                    Calculator_Division calculate4 = new Calculator_Division(num1, num2, operand);
+                    num1 = calculate4.compute(num1, num2, operand);
+                    break;
+            }
+            return num1;
         }
     }
 }
