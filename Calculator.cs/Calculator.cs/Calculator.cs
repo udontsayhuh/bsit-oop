@@ -1,5 +1,6 @@
 ﻿using System;
 namespace MyCalculatorApp
+{
 // Class representing a calculator
 class Calculator
 {
@@ -134,4 +135,5 @@ class Program {
         Console.ReadKey();
         Console.Clear();
     }
+}
 }
