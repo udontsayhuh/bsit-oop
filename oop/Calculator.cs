@@ -1,160 +1,124 @@
 using System;
 
-// Abstract class Option
-// abstract base class that represents an option in the calculator program
-abstract class Option
+namespace Calculator
 {
-    // fields that will store the num1 and num2, result, and operation
-    // Encapsulated variables
-    public double num1;
-    public double num2;
-    public double result;
-    public string operation;
-
-    // a subclass that will execute an abstract method
-    public abstract void Enter();
-}
-
-// FirstNum subclass inheriting from Option
-class FirstNum : Option // a class that will enter a first number 
-{
-    public override void Enter()
+    // option class represents a calculator operation
+    public class Option
     {
-        try
-        {
-            Console.Write("Enter first number: ");
-            num1 = Convert.ToDouble(Console.ReadLine());
-        }
+        // fields that store the nums, results, and operation
+        public double num1 = 0;
+        public double num2 = 0;
+        public double result = 0;
+        public string operation = "";
 
-        catch (Exception)
+        //method to get a valid number from the user 
+        //encapsulation
+        public double GetValue()
         {
-            Console.WriteLine("Invalid input! End of Calculator Program.\n"); // handle the invalid input and terminates the program
-            Environment.Exit(0);
-        }
-        }
-    }
-
-// OperatorInput subclass inheriting from Option
-class OperatorInput : Option  // a class that will choose/enter an operator
-{
-        // Enter() method
-        public override void Enter()
-        {
-            Console.WriteLine("Options: ");
-            Console.WriteLine("\t+ : Add");
-            Console.WriteLine("\t- : Subtract");
-            Console.WriteLine("\t* : Multiply");
-            Console.WriteLine("\t/ : Divide\n");
-
             while (true)
             {
-                Console.WriteLine("Enter an operator you would like: ");
-                operation = Convert.ToString(Console.ReadLine());
-                
-                // check if the operator chose/enterned is valid
-                if (operation == "+" || operation == "-" || operation == "*" || operation == "/")
+                Console.Write("Enter a number: ");
+                if (double.TryParse(Console.ReadLine(), out double value))
                 {
-                    break;
+                    return value;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid operator! Please choose again.\n"); // handle the invalid input that the user will still choose a valid operator
+                    Console.WriteLine("Invalid input! Please enter a number only.");
                 }
             }
+        }
 
+        //method to display and get the valid operator options from the user
+        //encapsulation
+        public void GetOptions()
+        {
+            do
+            {
+                Console.WriteLine("Operators: ");
+                Console.WriteLine("\t+ : Add");
+                Console.WriteLine("\t- : Subtract");
+                Console.WriteLine("\t* : Multiply");
+                Console.WriteLine("\t/ : Divide");
+                Console.WriteLine("\t= : Result");
+                operation = Convert.ToString(Console.ReadLine());
 
+                if (operation != "+" && operation != "-" && operation != "*" && operation != "/" && operation != "=")
+                {
+                    Console.WriteLine("Invalid Operator! Please choose again.");
+                }
+            } while (operation != "+" && operation != "-" && operation != "*" && operation != "/" && operation != "=");
+        }
 
+        //method to calculate the result based on the selected operation
+        //abstraction
+        public void CalculateResult()
+        {
+            switch (operation)
+            {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Division by zero is not allowed.");
+                    }
+                    break;
+                case "=":
+                    break;
+                default:
+                    Console.WriteLine("Invalid Operator!");
+                    break;
+            }
         }
     }
 
-// SecondNum subclass inheriting from Option
-class SecondNum : Option // a class that will enter a second number
-{
-        // Enter() method
-        public override void Enter()   
-        {
-
-        while (true)
-        {
-            Console.Write("Enter second number: ");
-            string input = Console.ReadLine();
-            try
-            {
-                num2 = Convert.ToDouble(input);
-                break;
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input! Please input a valid number.\n"); // handle the invalid input and will still input a valid numerical value
-            }
-        }
-        }
-}
-
-// main program class
-class Program
+    class Program
     {
-        static void Main(string[] args)
+        static void Main(String[] args)
         {
-            // creating objects of subclasses
-            FirstNum first = new FirstNum();
-            OperatorInput second = new OperatorInput();
-            SecondNum third = new SecondNum();
-            
-            // main loop for calculator program
+            string continueOption;
+            bool runAgain;
             do
             {
+                Option userOption = new Option();
                 Console.WriteLine("------------------------------");
                 Console.WriteLine("Welcome to Calculator Program!");
                 Console.WriteLine("------------------------------");
-
-            // an interface to call Enter() method polymorphism
-            // input process for each part of the operation
-                first.Enter();
-                second.Enter();
-                third.Enter();
-
-            // perform the selected operation and display the results
-                switch (second.operation)
+                userOption.num1 = userOption.GetValue();   //get the first number
+                do
                 {
-                    case "+":
-                        second.result = first.num1 + third.num2;
-                        Console.WriteLine($"Result in Addition: {second.result}\n");
-                        break;
+                    userOption.GetOptions(); //get the operation
+                    if (userOption.operation != "=")
+                    {
+                        userOption.num2 = userOption.GetValue(); //get the second num
+                        userOption.CalculateResult(); //calculate the result
+                        userOption.num1 = userOption.result; //store the result for next operation
+                        
+                    }
+                } while (userOption.operation != "="); //repeat until the user selecs the "=" operator
+                Console.WriteLine($"Result: {userOption.result}");
 
-                    case "-":
-                        second.result = first.num1 - third.num2;
-                        Console.WriteLine($"Result in Subtraction: {second.result}\n");
-                        break;
+                Console.Write("\nWould you like to continue? Y/N: ");
+                continueOption = Convert.ToString(Console.ReadLine());
+                continueOption = continueOption.ToUpper();
 
-                    case "*":
-                        second.result = first.num1 * third.num2;
-                        Console.WriteLine($"Result in Multiplication: {second.result}\n");
-                        break;
+                runAgain = continueOption == "Y";
 
-                    case "/":
-                        if (third.num2 != 0)
-                        {
-                            second.result = first.num1 / third.num2;
-                            Console.WriteLine($"Result in Division: {second.result}\n");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Division by zero is not allowed.\n");
-                        }
-                        break;
+            } while (runAgain); //repeat the whole process if the user wants to continue
 
-                    default:
-                        Console.WriteLine("Invalid Operator!");
-                        break;
-                }
-                
-                // check if the user wants to continue using this calculator program
-                Console.WriteLine("Would you like to continue? Y/N: ");
-            } while (Console.ReadLine().ToUpper() == "Y");
-           
-            // end of program
-            Console.WriteLine("Thank You for using this Calculator!");
-
+            Console.WriteLine("Thank You for using this Calculator!"); //end of program
         }
+    }
 }
