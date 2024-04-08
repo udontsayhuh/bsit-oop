@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace CalculatorApp
 {
@@ -45,40 +46,48 @@ namespace CalculatorApp
 
             while (repeat)
             {
-                Console.WriteLine("Enter a number:");
-                string input1 = Console.ReadLine();
+                List<double> numbers = new List<double>();
+                List<char> operators = new List<char>();
 
-                if (!IsValidNumber(input1))
+                Console.WriteLine("Enter an equation (or '=' to calculate):");
+                string input = Console.ReadLine();
+
+                while (input != "=")
                 {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                    return;
+                    if (!IsValidNumber(input) && input != "+" && input != "-" && input != "*" && input != "/")
+                    {
+                        Console.WriteLine("Invalid input. Please enter a numerical value, '+' '-' '*' '/' or '=' to calculate.");
+                        input = Console.ReadLine();
+                        continue;
+                    }
+
+                    if (IsValidNumber(input))
+                    {
+                        numbers.Add(double.Parse(input));
+                    }
+                    else
+                    {
+                        operators.Add(char.Parse(input));
+                    }
+
+                    input = Console.ReadLine();
                 }
 
-                double num1 = double.Parse(input1);
-
-                Console.WriteLine("Enter one of the four fundamental mathematical operators (+-*/):");
-                char op = char.Parse(Console.ReadLine());
-
-                if (!IsValidOperator(op))
+                if (numbers.Count == 0 || operators.Count == 0)
                 {
-                    Console.WriteLine("Invalid operator. Please enter one of the four fundamental mathematical operators.");
-                    return;
+                    Console.WriteLine("No equation to calculate.");
+                    continue;
                 }
-
-                Console.WriteLine("Enter another number:");
-                string input2 = Console.ReadLine();
-
-                if (!IsValidNumber(input2))
-                {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                    return;
-                }
-
-                double num2 = double.Parse(input2);
 
                 try
                 {
-                    double result = PerformCalculation(num1, num2, op);
+                    double result = numbers[0];
+
+                    for (int i = 0; i < operators.Count; i++)
+                    {
+                        result = PerformCalculation(result, numbers[i + 1], operators[i]);
+                    }
+
                     Console.WriteLine($"Result: {result}");
 
                     Console.WriteLine("Do you want to perform another calculation? (yes/no)");
@@ -90,7 +99,6 @@ namespace CalculatorApp
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error: {ex.Message}");
-                    return;
                 }
             }
         }
