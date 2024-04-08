@@ -24,12 +24,12 @@ namespace SimpleCalculator
                 try 
                 {
                     // display the operators
-                    Console.WriteLine("\n\t+(Additon)\n\t-(Subtraction)\n\t*(Multiplication)\n\t/(Division)");
+                    Console.WriteLine("\n\t+(Additon)\n\t-(Subtraction)\n\t*(Multiplication)\n\t/(Division)\n\t=(See Result)");
                     Console.Write("Enter the Operator: ");
                     choiceOperator = (Console.ReadLine());
                     
                     // Check if the input is valid operator, then exit the loop if true.
-                    if (choiceOperator == "+"||choiceOperator == "-"||choiceOperator == "*"||choiceOperator == "/") 
+                    if (choiceOperator == "+"||choiceOperator == "-"||choiceOperator == "*"||choiceOperator == "/"||choiceOperator=="=") 
                     {
                         break;
                     }
@@ -44,30 +44,6 @@ namespace SimpleCalculator
                 {
                     Console.WriteLine("Invalid Input. Please choose from the Four Operators only.");
                 }
-            }
-        }
-    }
-    
-    // Class for handling the first number input.
-    // Inheritance: First class inherit the properties and methods define in the Input class.
-    class First : Input 
-    {
-        // Polymorphism: Override the base class method to provide specialized behavior.
-        // Override the Choice method to handle the first number input.
-        public override void Choice() 
-        {
-            // to catch the error and execute code to handle it
-            // Catch FormatException occurs due to invalid input, will display error message and exit the program
-            try 
-            {
-               Console.Write("\nEnter the First Number: ");
-               // Read and convert the code from string to double.
-               num1 = Convert.ToDouble(Console.ReadLine());
-            }
-            catch (FormatException) 
-            {
-                Console.WriteLine("Invalid Input. End of the Program.");
-                Environment.Exit(0);
             }
         }
     }
@@ -89,7 +65,14 @@ namespace SimpleCalculator
                 {
                     Console.Write("\nEnter the Second Number: ");
                     // Read and convert the code from string to double, if valid input then exit the loop.
-                    num2 = Convert.ToDouble(Console.ReadLine());
+                    if (num1 == 0)
+                    {
+                        num1 = Convert.ToDouble(Console.ReadLine());
+                    }
+                    else
+                    {
+                        num2 = Convert.ToDouble(Console.ReadLine()); 
+                    }
                     break;
                 }
                 catch (FormatException) 
@@ -105,41 +88,61 @@ namespace SimpleCalculator
     {
         static void Main(string[] args) 
         {
+            int x = 1;
             // main program loop
             do 
             {
                 // Instantiate First class to get the first number.
-                First first = new First();
-                first.Choice();
+                Second second = new Second();
                 
                 // Instantiate Input class to get the chosen operator.
                 Input input = new Input();
-                input.Choice();
                 
-                // Instantiate Second class to get the second number.
-                Second second = new Second();
-                second.Choice();
-                
-                // Perform the calculation based on the chosen operator.
-                switch (input.choiceOperator) 
+                while (true)
                 {
-                    case "+": 
-                        input.result = first.num1 + second.num2;
+                        if (x == 1) //if user will enter the first number
+                    {
+                        second.Choice(); //calls the method (First Class)
+                    }
+                    else //if user will enter another number
+                    {
+                        second.num1 = input.result; //store the answer to the variable num1
+                    }
+    
+                    input.Choice(); //calls the method (Enter Class)
+    
+                    if (input.choiceOperator == "=") //if operator is =, then it prints the result
+                    {
+                        Console.WriteLine($"\n The final result is {input.result}\n");
                         break;
-                    case "-": 
-                        input.result = first.num1 - second.num2;
-                        break;
-                    case "*": 
-                        input.result = first.num1 * second.num2;
-                        break;    
-                    case "/": 
-                        input.result = first.num1 / second.num2;
-                        break; 
-                    default:  
-                        break;
+                    }
+    
+                    second.Choice(); //calls the method (Second Class)
+                
+                    // Perform the calculation based on the chosen operator.
+                    switch (input.choiceOperator) 
+                    {
+                        case "+": 
+                            input.result = second.num1 + second.num2;
+                            x = 2;
+                            break;
+                        case "-": 
+                            input.result = second.num1 - second.num2;
+                            x = 2;
+                            break;
+                        case "*": 
+                            input.result = second.num1 * second.num2;
+                            x = 2;
+                            break;    
+                        case "/": 
+                            input.result = second.num1 / second.num2;
+                            x = 2;
+                            break; 
+                        default:  
+                            break;
+                    }
                 }
                 // Display the result and will ask to continue or exit the program.
-                Console.WriteLine("The Result: " + input.result);
                 Console.WriteLine("\nWould you like to do another calculation?");
                 Console.Write("Enter 'Y' to continue and enter any key to exit the program: ");
             } 
