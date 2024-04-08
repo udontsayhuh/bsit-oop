@@ -2,140 +2,138 @@ using System;
 
 namespace CalculatorApp
 {
-    // Base Class: Parent
     public class Calculator
     {
-        // Method for performing arithmetic operation
-        public virtual double Operation(double a, double b)
+        public double Add(double num1, double num2) => num1 + num2;
+        public double Subtract(double num1, double num2) => num1 - num2;
+        public double Multiply(double num1, double num2) => num1 * num2;
+        public double Divide(double num1, double num2)
         {
-            return a + b; // Addition as default operation
+            if (num2 == 0)
+            {
+                throw new DivideByZeroException("Cannot divided by zero.");
+            }
+            return num1 / num2;
         }
     }
 
-    // Derived Class: Child
-    public class Subtraction : Calculator
-    {
-        // Inheritance principle by overriding operation method for Subtraction
-        public override double Operation(double a, double b)
-        {
-            return a - b;
-        }
-    }
-
-    // Derived Class: Child
-    public class Multiplication : Calculator
-    {
-        // Inheritance principle by overriding operation method for Multiplication
-        public override double Operation(double a, double b)
-        {
-            return a * b;
-        }
-    }
-
-    // Derived Class: Child
-    public class Division : Calculator
-    {
-        // Inheritance principle by overriding operation method for Division
-        public override double Operation(double a, double b)
-        {
-            return a / b;
-        }
-    }
-
-    // UserInterface class to handle user interactions
     public class UserInterface
     {
-        // Method to display menu and get user choice
+        private readonly Calculator calculator;
+
+        public UserInterface()
+        {
+            calculator = new Calculator();
+        }
+
         public void DisplayMenu()
         {
+            Console.Clear();
             Console.WriteLine("[Main Menu]");
             Console.WriteLine("Calculator Application\n");
-            Console.WriteLine("Choose the operations:");
-            Console.WriteLine("A. Addition");
-            Console.WriteLine("B. Subtraction");
-            Console.WriteLine("C. Multiplication");
-            Console.WriteLine("E. Division");
-            Console.WriteLine("0. Exit");
+            Console.WriteLine("Operations");
+            Console.WriteLine("[+] Addition");
+            Console.WriteLine("[-] Subtraction");
+            Console.WriteLine("[*] Multiplication");
+            Console.WriteLine("[/] Division");
         }
 
-        // Method to get user input and perform operation
-        public void GetUserInput()
+        public void PerformOperation()
         {
-            Console.Write("[Main Menu] Enter Choice: ");
-            int choice;
-            if (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 5)
-            {
-                Console.WriteLine("Invalid input. Please enter a valid menu option (1-5).");
-                return;
-            }
-
-            if (choice == 5)
-            {
-                Console.WriteLine("Exiting...");
-                Environment.Exit(0);
-            }
-
             double num1, num2;
-            Console.WriteLine("Enter First Number: ");
-            num1 = double.Parse(Console.ReadLine());
-            Console.WriteLine("Enter Second Number: ");
-            num2 = double.Parse(Console.ReadLine());
+            char operation;
 
-            Calculator calculator;
-            switch (choice)
+            num1 = GetNumber("Enter the first number: ");
+            operation = GetOperation();
+
+            while (operation != '=')
             {
-                case 1:
-                    calculator = new Calculator();
+                num2 = GetNumber("Enter the second number: ");
+                try
+                {
+                    num1 = PerformOperation(num1, num2, operation);
+                    Console.WriteLine($"Result: {num1}");
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
                     break;
-                case 2:
-                    calculator = new Subtraction();
-                    break;
-                case 3:
-                    calculator = new Multiplication();
-                    break;
-                case 4:
-                    calculator = new Division();
-                    break;
-                default:
-                    Console.WriteLine("Invalid Input");
-                    return;
+                }
+
+                operation = GetOperation();
             }
 
-            double result = calculator.Operation(num1, num2);
-            Console.WriteLine($"Result: {num1} {GetOperatorSymbol(choice)} {num2} = {result}");
+            Console.WriteLine($"The result is: {num1}");
         }
 
-        // Method to get the operator symbol based on user's choice
-        private string GetOperatorSymbol(int choice)
+        private double PerformOperation(double num1, double num2, char operation)
         {
-            switch (choice)
+            switch (operation)
             {
-                case 1:
-                    return "+";
-                case 2:
-                    return "-";
-                case 3:
-                    return "*";
-                case 4:
-                    return "/";
+                case '+':
+                    return calculator.Add(num1, num2);
+                case '-':
+                    return calculator.Subtract(num1, num2);
+                case '*':
+                    return calculator.Multiply(num1, num2);
+                case '/':
+                    return calculator.Divide(num1, num2);
                 default:
-                    return string.Empty;
+                    throw new ArgumentException("Invalid operation entered.");
             }
+        }
+
+        private double GetNumber(string message)
+        {
+            double number;
+            while (true)
+            {
+                Console.Write(message);
+                if (double.TryParse(Console.ReadLine(), out number))
+                {
+                    return number;
+                }
+                Console.WriteLine("Input invalid. Please enter a valid number.");
+            }
+        }
+
+        private char GetOperation()
+        {
+            char operation;
+            while (true)
+            {
+                Console.Write("Enter Operation ( + , - , * , / , = ) : ");
+                if (char.TryParse(Console.ReadLine(), out operation) && IsValidOperation(operation))
+                {
+                    return operation;
+                }
+                Console.WriteLine("Operation invalid. Please enter a valid operation symbol.");
+            }
+        }
+
+        private bool IsValidOperation(char operation)
+        {
+            return operation == '+' || operation == '-' || operation == '*' || operation == '/' || operation == '=';
         }
     }
 
-    // Main program class
     class Program
     {
         static void Main(string[] args)
         {
             UserInterface ui = new UserInterface();
-
             while (true)
             {
                 ui.DisplayMenu();
-                ui.GetUserInput();
+                ui.PerformOperation();
+                Console.WriteLine("Would you want to try it again? [y] yes, [n] no: ");
+                char choice = Console.ReadLine().Trim().ToLower()[0];
+                if (choice == 'n')
+                {
+                    break;
+                }
             }
         }
     }
 }
+
