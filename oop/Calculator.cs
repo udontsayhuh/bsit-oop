@@ -12,62 +12,57 @@ namespace Calculator
     abstract class Calculator
     {
         //Attributes
-        public int FirstVal;
-        public int SecondVal;
-        public int Result;
+        public double Result;
+        public double Val;
 
         //Constructor
-        public Calculator(int firstVal, int secondVal)
+        public Calculator(double result, double val)
         {
-            FirstVal = firstVal;
-            SecondVal = secondVal;
+            Result = result;
+            Val = val;
         }
 
         //Method
-        public abstract void Compute();
+        public abstract double Compute(double result, double val);
     }
 
     //Derived Class
     class Addition : Calculator
     {
-        public Addition(int firstVal, int secondVal) : base(firstVal, secondVal) { }
-
-        public override void Compute()
+        public Addition(double result, double val) : base(result, val) { }
+        public override double Compute(double result, double val)
         {
-            Result = FirstVal + SecondVal; //Addition method
+            return result + val; //Addition method
         }
     }
 
     //Derived Class
     class Subtraction : Calculator
     {
-        public Subtraction(int firstVal, int secondVal) : base(firstVal, secondVal) { }
-
-        public override void Compute()
+        public Subtraction(double result, double val) : base(result, val) { }
+        public override double Compute(double result, double val)
         {
-            Result = FirstVal - SecondVal; //Subtraction method
+            return result - val; //Subtraction method
         }
     }
 
     // Derived Class
     class Multiplication : Calculator
     {
-        public Multiplication(int firstVal, int secondVal) : base(firstVal, secondVal) { }
-
-        public override void Compute()
+        public Multiplication(double result, double val) : base(result, val) { }
+        public override double Compute(double result, double val)
         {
-            Result = FirstVal * SecondVal; //Multiplication method
+            return result * val; //Multiplication method
         }
     }
 
     //Derived Class
     class Division : Calculator
     {
-        public Division(int firstVal, int secondVal) : base(firstVal, secondVal) { }
-
-        public override void Compute()
+        public Division(double result, double val) : base(result, val) { }
+        public override double Compute(double result, double val)
         {
-            Result = FirstVal / SecondVal; //Division method
+            return result / val; //Division method
         }
     }
 
@@ -79,96 +74,128 @@ namespace Calculator
             Console.WriteLine("                       CALCULATOR");
             Console.WriteLine("===========================================================");
 
-            int firstVal, secondVal;
-            try
+            bool computing = true;
+            while (computing)  // Creating list to store the values and operation
             {
-                while (true)
+                List<string> elements = new List<string>();
+
+                bool calculationInProgress = true;
+                while (calculationInProgress)
                 {
-                    Console.Write("\nEnter the first value: ");
-                    firstVal = int.Parse(Console.ReadLine()); //Reads the input and check if the data type entered is right, otherwise, throw it to the exception
-
-                    Console.WriteLine("\nOPERATIONS");
-                    Console.WriteLine("[1] Addition (+)");
-                    Console.WriteLine("[2] Subtraction (-)");
-                    Console.WriteLine("[3] Multiplication (*)");
-                    Console.WriteLine("[4] Division (/)");
-
-                    Console.Write("\nEnter the operator in symbols: ");
-                    string math = Console.ReadLine(); 
-                    if (math != "+" && math != "-" && math != "*" && math != "/") // to verify if the operator entered is valid
+                    bool validInput = true;
+                    while (validInput) // Prompts the user to input a value
                     {
-                        throw new InvalidOperationException();
+                        Console.Write("Enter a value: ");
+                        string valueInput = Console.ReadLine();
+
+                        int value;
+                        if (int.TryParse(valueInput, out value))  //Check if the user input is valid
+                        {
+                            elements.Add(value.ToString()); // add the value to the list
+                            validInput = false; // initialize to false to break the loop
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid integer value.");
+                        }
                     }
-
-                    Console.Write("\nEnter the second value: ");
-                    secondVal = int.Parse(Console.ReadLine());
-
-                    switch (math) // process depending on the user's choice
+                    if (elements.Count > 0) // To ensure that value is entered first before asking for operator
                     {
-                        case "+":
-                            Addition add = new Addition(firstVal, secondVal);
-                            add.Compute();
-                            Console.WriteLine($"\n{firstVal} + {secondVal} = {add.Result}");
-                            break;
-                        case "-":
-                            Subtraction subtract = new Subtraction(firstVal, secondVal);
-                            subtract.Compute();
-                            Console.WriteLine($"\n{firstVal} - {secondVal} = {subtract.Result}");
-                            break;
-                        case "*":
-                            Multiplication multiply = new Multiplication(firstVal, secondVal);
-                            multiply.Compute();
-                            Console.WriteLine($"\n{firstVal} * {secondVal} = {multiply.Result}");
-                            break;
-                        case "/":
-                            if (firstVal == 0 || secondVal == 0)
+                        validInput = true;
+                        while (validInput) // Once a value is added, program will ask for an operator
+                        {
+                            Console.Write("Enter an operator (+, -, *, /) or '=' to calculate: ");
+                            string operatorInput = Console.ReadLine();
+
+                            if (operatorInput == "+" || operatorInput == "-" || operatorInput == "*" || operatorInput == "/")  //evaluate if user entered a valid symbol
                             {
-                                Console.WriteLine("\nValues cannot be divided.");
+                                elements.Add(operatorInput); // add the valid operator to the list
+                                validInput = false;
+                            }
+                            else if (operatorInput == "=")  // program will display the result if the user entered '='
+                            {
+                                try
+                                {
+                                    int result = Calculate(elements); // call the 'Calculate' method to display the result
+                                    Console.WriteLine("Result: " + result);
+                                    while (true)  // ask the user if they want to enter another calculation
+                                    {
+                                        Console.Write("\nDo you want to perform another calculation? (Y/N): ");
+                                        char choice = char.ToUpper(Console.ReadKey().KeyChar);
+                                        Console.WriteLine();
+                                        if (choice == 'N')
+                                        {
+                                            computing = false;  // breaks the loop, no creation of list will happen and exit the program
+                                            break;
+                                        }
+                                        else if (choice == 'Y')
+                                        {
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nEnter a valid choice.");
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)  // Notify user for their errors
+                                {
+                                    Console.WriteLine($"{ex.Message}");
+                                }
+                                finally
+                                {
+                                    calculationInProgress = false;  // program will not prompt the user to enter value or operator anymore
+                                }
                                 break;
                             }
-                            Division divide = new Division(firstVal, secondVal);
-                            divide.Compute();
-                            Console.WriteLine($"\n{firstVal} / {secondVal} = {divide.Result}");
-                            break;
-                        default:
-                            Console.WriteLine("\nInvalid operator.");
-                            break;
-                    }
-
-                    while (true)
-                    {
-                    Console.WriteLine("\nDo you want to perform another calculation? (Y/N)"); // ask the user if they want to continue
-                    char choice = char.ToUpper(Console.ReadKey().KeyChar);
-                    if (choice == 'N')
-                    {
-                        Console.WriteLine("\nThank you for using the Calculator. Adios mi amigo, mi amiga! mwamwa <3");
-                        return;
-                    }
-                    else if (choice == 'Y')
-                        {
-                            break;
-                        }
-                    else
-                        {
-                            Console.WriteLine("\nEnter a valid key.");
-                            continue;
+                            else
+                            {
+                                Console.WriteLine("Invalid symbol for operator. Please enter a valid operator or '=' to calculate.");
+                            }
                         }
                     }
-
                 }
             }
-            catch (FormatException) //If the user input is not compatible with the expected data type
+            Console.WriteLine("\nThank you for using the Calculator. Adios mi amigo, mi amiga! mwamwa <3");
+        }
+
+        //Method to calculate expression in the list
+        static int Calculate(List<string> elements)
+        {
+            if (elements.Count % 2 == 0) // Evaluate if the list creates a complete expression
             {
-                Console.WriteLine("\nInvalid input. The calculator only accepts numerical values.");
+                throw new InvalidOperationException("Invalid expression. Operator missing.");
             }
-            catch (InvalidOperationException) //If the user input is not compatible with the expected operation
+
+            int result = int.Parse(elements[0]); // intialize that the result is the first value in the list
+
+            for (int i = 1; i < elements.Count; i += 2)
             {
-                Console.WriteLine("\nInvalid symbol for operator.");
+                string op = elements[i];
+                int val = int.Parse(elements[i + 1]);
+
+                switch (op)
+                {
+                    case "+":
+                        result = result + val;
+                        break;
+                    case "-":
+                        result = result - val;
+                        break;
+                    case "*":
+                        result = result * val;
+                        break;
+                    case "/":
+                        if (val == 0)
+                            throw new DivideByZeroException("Values cannot be divided by 0.");
+                        result = result / val;
+                        break;
+                    default:
+                        throw new InvalidOperationException("Invalid operator.");
+                }
             }
-            finally //General error messaage
-            {
-                Console.WriteLine("\nEnd of program!");
-            }
+
+            return result;
         }
     }
 }
