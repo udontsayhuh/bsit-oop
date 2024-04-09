@@ -1,154 +1,134 @@
 using System;
-using System.Runtime.ExceptionServices;
 
-namespace Calculator_Program
+class Choice
 {
-    abstract class Calculator_Program
+    public double num1;
+    public double num2;
+    public double ans;
+    public char option;
+    public int count = 1;
+
+    public virtual void Enter()
     {
-        public int val1;
-        public int val2;
-        public int output;
+        Console.WriteLine("\n\tEnter + for Addition");
+        Console.WriteLine("\tEnter - for Subtraction");
+        Console.WriteLine("\tEnter * for Multiplication");
+        Console.WriteLine("\tEnter / for Division");
+        Console.WriteLine("\tEnter = for Total Result \n");
 
-        public Calculator_Program(int value1, int value2)
+        while (true)
         {
-            val1 = value1;
-            val2 = value2;
-        }
+            Console.Write("Enter operator: ");
+            option = Convert.ToChar(Console.ReadLine());
 
-        public abstract void compute();
-    }
-
-    class Addition : Calculator_Program
-    {
-        public Addition (int value1, int value2) : base (value1, value2) { }
-
-        public override void compute()
-        {
-            output = val1 + val2;
-        }
-    }
-    class Subtraction : Calculator_Program
-    {
-        public Subtraction(int value1, int value2) : base(value1, value2) { }
-
-        public override void compute()
-        {
-            output = val1 - val2;
-        }
-    }
-    class Multiplication : Calculator_Program
-    {
-        public Multiplication(int value1, int value2) : base(value1, value2) { }
-
-        public override void compute()
-        {
-            output = val1 * val2;
-        }
-    }
-    class Division : Calculator_Program
-    {
-        public Division (int value1, int value2) : base(value1, value2) { }
-
-        public override void compute()
-        {
-            output = val1 / val2;
-        }
-    }
-
-    class MainProgram
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("-------------------------------------");
-            Console.WriteLine("WELCOME TO MY CALCULATOR PROGRAM");
-            Console.WriteLine("-------------------------------------");
-
-            int val1, val2;
-
-            try
+            if (option == '+' || option == '-' || option == '*' || option == '/' || option == '=')
             {
-                while (true)
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid. \n");
+            }
+        }
+    }
+}
+
+
+class First : Choice
+{
+    public override void Enter()
+    {
+        Console.Write("\nEnter value: ");
+        while (!double.TryParse(Console.ReadLine(), out num1))
+        {
+            Console.WriteLine("Invalid input.\n");
+            Console.Write("Enter value: ");
+        }
+    }
+}
+
+class Second : Choice
+{
+    public override void Enter()
+    {
+        Console.Write("\nEnter value: ");
+        while (!double.TryParse(Console.ReadLine(), out num2))
+        {
+            Console.WriteLine("Invalid input.\n");
+            Console.Write("Enter value: ");
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("-------------------------------------");
+        Console.WriteLine("WELCOME TO MY CALCULATOR PROGRAM");
+        Console.WriteLine("-------------------------------------");
+
+        do
+        {
+            First first = new First();
+            Choice choice = new Choice();
+            Second second = new Second();
+
+            choice.count = 1;
+
+            while (true)
+            {
+
+                if (choice.count == 1)
                 {
-                    Console.Write("\n\nENTER FIRST OPERAND: ");
-                    val1 = int.Parse(Console.ReadLine());
+                    first.Enter();
+                }
+                else
+                {
+                    first.num1 = choice.ans;
+                }
 
-                    Console.WriteLine("\n\nCHOOSE YOUR OPERATOR");
-                    Console.WriteLine("\nEnter + for Addition");
-                    Console.WriteLine("\nEnter - for Subtraction");
-                    Console.WriteLine("\nEnter * for Multiplication");
-                    Console.WriteLine("\nEnter / for Division");
-                    Console.Write("\n\nOperator to be used: ");
-                    string op = Console.ReadLine();
-                    if (op != "+" && op != "-" && op != "*" && op != "/")
-                    {
-                        throw new InvalidOperationException();
-                    }
+                choice.Enter();
 
-                    Console.Write("\n\nENTER SECOND OPERAND: ");
-                    val2 = int.Parse(Console.ReadLine());
+                if (choice.option == '=')
+                {
+                    Console.WriteLine($"\n Total Result: {choice.ans}\n");
+                    break;
+                }
 
-                    switch (op)
-                    {
-                        case "+":
-                            Addition plus = new Addition(val1, val2);
-                            plus.compute();
-                            Console.WriteLine($"Addition Result: {val1} + {val2} = {plus.output}");
-                            break;
-                        case "-":
-                            Subtraction minus = new Subtraction(val1, val2);
-                            minus.compute();
-                            Console.WriteLine($"Subtraction Result: {val1} - {val2} = {minus.output}");
-                            break;
-                        case "*":
-                            Multiplication mul = new Multiplication(val1, val2);
-                            mul.compute();
-                            Console.WriteLine($"Addition Result: {val1} * {val2} = {mul.output}");
-                            break;
-                        case "/":
-                            Division divide = new Division(val1, val2);
-                            divide.compute();
-                            Console.WriteLine($"Addition Result: {val1} / {val2} = {divide.output}");
-                            break;
-                        default:
-                            Console.WriteLine("\n Please enter a valid operator (+, -, *, /)");
-                            break;
-                    }
-                    while (true)
-                    {
-                        Console.WriteLine("Would you still like to continue? (Y = yes, N = no)");
-                        char answer = char.ToUpper(Console.ReadKey().KeyChar);
-                        if (answer == 'Y')
-                        {
-                            break;
-                        }
-                        else if (answer == 'N')
-                        {
-                            Console.WriteLine("\n\nTerminating Program");
-                            return;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Enter valid key. (Y/N)");
-                            continue;
+                second.Enter();
 
-                        }
-                    }
+                switch (choice.option)
+                {
+                    case '+':
+                        choice.ans = first.num1 + second.num2;
+                        choice.count = 2;
+                        break;
+
+                    case '-':
+                        choice.ans = first.num1 - second.num2;
+                        choice.count = 2;
+                        break;
+
+                    case '*':
+                        choice.ans = first.num1 * second.num2;
+                        choice.count = 2;
+                        break;
+
+                    case '/':
+                        choice.ans = first.num1 / second.num2;
+                        choice.count = 2;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid.\n");
+                        break;
                 }
             }
-            catch (FormatException) 
-            {
-                Console.WriteLine("\nPlease try again. Integer only.");
-            }
-            catch (InvalidOperationException)
-            {
-                Console.WriteLine("\nInvalid operator. + - & / only.");
-            }
-            finally
-            {
-                Console.WriteLine("Terminating Program");
-            }
+            Console.Write("Continue? Yes = any key. No = N");
         }
+        while (Console.ReadLine().ToUpper() != "N");
+
+        Console.WriteLine("\nThat's my Calculator Program!\n");
     }
-
-
 }
