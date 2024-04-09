@@ -9,17 +9,9 @@ namespace oop.Assignment_2
     internal class Operation : Calculator
     {
         public double add(double num1, double num2)
-        {
-            if(num1 != null)
-            {
-                sum = num1 + num2;
-                return sum;
-            }
-            else
-            {
-                num1 += num2;
-                return num1;
-            }
+        { 
+             sum = num1 + num2;
+             return sum;
             
         }
         public double sub(double num1, double num2)
