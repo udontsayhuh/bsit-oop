@@ -60,7 +60,7 @@ namespace Calculator
             {
                 Console.Clear();
                 Console.WriteLine("===================================");
-                Console.WriteLine("          Basic Calculator         ");
+                Console.WriteLine("             Calculator            ");
                 Console.WriteLine("===================================\n");
 
                 // Prompt the user to enter the first number
