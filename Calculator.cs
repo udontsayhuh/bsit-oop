@@ -1,161 +1,64 @@
 using System;
 
-namespace MyCalculator
+class Calculator
 {
-    // Define different mathematical operations
-    public abstract class Operation
+    static void Main()
     {
-        public abstract double Apply(double operand1, double operand2);
-    }
+        bool doAnotherCalculation = true;
 
-    public class Addition : Operation
-    {
-        public override double Apply(double operand1, double operand2)
+        while (doAnotherCalculation)
         {
-            return operand1 + operand2;
-        }
-    }
+            double result = 0;
 
-    public class Subtraction : Operation
-    {
-        public override double Apply(double operand1, double operand2)
-        {
-            return operand1 - operand2;
-        }
-    }
+            Console.WriteLine("Enter an expression (e.g., 3 + 5 * 2 / 2 =):");
 
-    public class Multiplication : Operation
-    {
-        public override double Apply(double operand1, double operand2)
-        {
-            return operand1 * operand2;
-        }
-    }
+            string input = Console.ReadLine();
+            string[] tokens = input.Split(' ');
 
-    public class Division : Operation
-    {
-        public override double Apply(double operand1, double operand2)
-        {
-            if (operand2 == 0)
+            bool validInput = false;
+            while (!validInput)
             {
-                throw new DivideByZeroException("Cannot divide by zero.");
-            }
-            return operand1 / operand2;
-        }
-    }
-
-    // Calculator class to perform calculations
-    public class MyCalculator : IDisposable
-    {
-        private Operation[] operations = { new Addition(), new Subtraction(), new Multiplication(), new Division() };
-
-        // Start the calculator application
-        public void Start()
-        {
-            bool repeat = true;
-            while (repeat)
-            {
-                Console.WriteLine("Hey there! Let's do some math!");
-
-                // Get user input for first number
-                Console.WriteLine("Enter the first number:");
-                double num1 = GetNumberInput();
-
-                // Get user input for operator
-                Console.WriteLine("Enter the operator (+, -, *, /):");
-                char op = GetOperatorInput();
-
-                // Get user input for second number
-                Console.WriteLine("Enter the second number:");
-                double num2 = GetNumberInput();
-
                 try
                 {
-                    // Perform calculation and display result
-                    double result = Calculate(num1, op, num2);
-                    Console.WriteLine($"The answer is: {result}");
+                    result = double.Parse(tokens[0]); // Change: Parsing the first token
+                    validInput = true;
                 }
-                catch (Exception ex)
+                catch (FormatException)
                 {
-                    // Display error message if calculation fails
-                    Console.WriteLine($"Oops! Something went wrong: {ex.Message}");
+                    Console.WriteLine("Invalid input. Please enter a valid number:");
+                    input = Console.ReadLine();
+                    tokens = input.Split(' ');
                 }
-
-                // Ask user if they want to perform another calculation
-                Console.WriteLine("Do you want to do more math? (yes/no)");
-                string again = Console.ReadLine();
-                repeat = again.ToLower() == "yes";
             }
-        }
 
-        // Get valid number input from the user
-        private double GetNumberInput()
-        {
-            double number;
-            while (!double.TryParse(Console.ReadLine(), out number))
+            for (int i = 1; i < tokens.Length - 1; i += 2)
             {
-                Console.WriteLine("Invalid input. Please enter a valid number:");
+                switch (tokens[i])
+                {
+                    case "/": // Change: Added handling for division by zero
+                        double divisor;
+                        bool parsed = double.TryParse(tokens[i + 1], out divisor);
+                        if (!parsed || divisor == 0)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid non-zero divisor:");
+                            input = Console.ReadLine();
+                            tokens = input.Split(' ');
+                            i = 0; // Change: Reset the loop to reparse the input
+                            result = double.Parse(tokens[0]);
+                            continue; // Change: Skip the calculation
+                        }
+                        result /= divisor;
+                        break;
+                }
             }
-            return number;
-        }
 
-        // Get valid operator input from the user
-        private char GetOperatorInput()
-        {
-            char op;
-            while (!char.TryParse(Console.ReadLine(), out op) || !IsOperator(op))
+            Console.WriteLine("Result: " + result);
+
+            Console.WriteLine("Do you want to perform another calculation? (yes/no)");
+            string response = Console.ReadLine().ToLower();
+            if (response != "yes")
             {
-                Console.WriteLine("Invalid operator. Please enter one of the following: +, -, *, /");
-            }
-            return op;
-        }
-
-        // Check if the given character is a valid operator
-        private bool IsOperator(char op)
-        {
-            return op == '+' || op == '-' || op == '*' || op == '/';
-        }
-
-        // Perform calculation based on user input
-        private double Calculate(double num1, char op, double num2)
-        {
-            Operation operation = GetOperation(op);
-            return operation.Apply(num1, num2);
-        }
-
-        // Get the appropriate operation based on the operator
-        private Operation GetOperation(char op)
-        {
-            switch (op)
-            {
-                case '+':
-                    return new Addition();
-                case '-':
-                    return new Subtraction();
-                case '*':
-                    return new Multiplication();
-                case '/':
-                    return new Division();
-                default:
-                    throw new InvalidOperationException("Hmm...that's not a valid operator.");
-            }
-        }
-
-        // Cleanup method
-        public void Dispose()
-        {
-            // Thanks for using MyCalculator! Have a great day!
-        }
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            
-            using (var myCalculator = new MyCalculator())
-            {
-                myCalculator.Start();
+                doAnotherCalculation = false;
             }
         }
     }
