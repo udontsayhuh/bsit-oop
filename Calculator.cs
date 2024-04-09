@@ -73,27 +73,29 @@ class Program
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("    ");
 
-                Console.WriteLine("———————————————————————————————————");
-                Console.WriteLine("|          > OPERATORS <          |");
-                Console.WriteLine("|                                 |");
-                Console.WriteLine("|   >> Addition (+)               |");
-                Console.WriteLine("|   >> Subtraction (-)            |");
-                Console.WriteLine("|   >> Multiplication (*)         |");
-                Console.WriteLine("|   >> Division (/)               |");
-                Console.WriteLine("|   >> Equals to get Result (=)   |");
-                Console.WriteLine("———————————————————————————————————");
+            Console.WriteLine("———————————————————————————————————");
+            Console.WriteLine("|          > OPERATORS <          |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("|   >> Addition (+)               |");
+            Console.WriteLine("|   >> Subtraction (-)            |");
+            Console.WriteLine("|   >> Multiplication (*)         |");
+            Console.WriteLine("|   >> Division (/)               |");
+            Console.WriteLine("|   >> Equals to get Result (=)   |");
+            Console.WriteLine("———————————————————————————————————");
             Console.WriteLine("    ");
-
-            Console.WriteLine("Current Equation: ");
 
             double result = 0; // Store the result of each operation
             bool isFirstNumber = true; // Flag to determine whether it's the first number input
             bool validOperator = true; // Flag to validate the operator input
+            bool validNumber = true;
             char currentOperator = ' '; // Store the current operator
+            Console.WriteLine("Current Equation: " + result);
+            Console.WriteLine("    ");
 
             while (true)
             {
                 double num;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("> Enter a number: ");
                 string? input = Console.ReadLine();
 
@@ -106,11 +108,11 @@ class Program
                     }
                     else
                     {
-                        if (!validOperator)
+                        if (!validNumber)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("= WARNING: Invalid operator! Please enter a valid operator...");
-                            validOperator = true; // Reset validOperator flag
+                            Console.WriteLine("= WARNING: Invalid input! Please enter a valid integer");
+                            validNumber = true; // Reset validOperator flag
                             continue; // Continue to next iteration to prompt for operator again
                         }
 
@@ -151,17 +153,30 @@ class Program
                     Console.WriteLine("Current result: " + result);
                 }
 
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("> Enter an operator: ");
-                string? operatorInput = Console.ReadLine();
+                    string? operatorInput = Console.ReadLine();
+
+                // Validate the operator input
+                while (!IsValidOperator(operatorInput))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("= WARNING: Invalid operator! Please enter a valid operator");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("> Enter an operator: ");
+                    operatorInput = Console.ReadLine();
+                }
+                // Once the input is validated
+
+                static bool IsValidOperator(string input)
+                {
+                    string allowedOperators = "+-*/=";// List of allowed operators
+                    return input.Length == 1 && allowedOperators.Contains(input);// Check if the input is a single character and it's one of the allowed operators
+                }
 
                 if (operatorInput == "=")
                 {
                     break; // Break out of the loop to perform calculation
-                }
-                else if (operatorInput?.Length != 1 || (operatorInput[0] != '+' && operatorInput[0] != '-' && operatorInput[0] != '*' && operatorInput[0] != '/'))
-                {
-                    validOperator = false; // Set flag to indicate invalid operator input
-                    currentOperator = ' '; // Reset currentOperator
                 }
                 else
                 {
