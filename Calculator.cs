@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Threading; // Importing the System.Threading namespace for using Thread.Sleep()
 
 // Abstract class for different arithmetic operations
 abstract class Operation
@@ -85,9 +83,8 @@ class Program
             Console.WriteLine("    ");
 
             double result = 0; // Store the result of each operation
+
             char currentOperator = ' '; // Store the current operator
-            Console.WriteLine("Current Equation: " + result);
-            Console.WriteLine("    ");
 
             while (true)
             {
@@ -98,70 +95,60 @@ class Program
 
                 if (double.TryParse(input, out num)) // Validate and parse user input for the number
                 {
-                        switch (currentOperator)
-                        {
-                            case '+':
-                                result += num;
-                                break;
-                            case '-':
-                                result -= num;
-                                break;
-                            case '*':
-                                result *= num;
-                                break;
-                            case '/':
-                                if (num != 0)
-                                    result /= num;
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("= WARNING: Cannot divide by zero! Please enter a valid divisor");
-                                    continue; // Continue to next iteration to prompt for operator again
-                                }
-                                break;
-                        }
+                    switch (currentOperator)
+                    {
+                        case '+':
+                            result += num;
+                            break;
+                        case '-':
+                            result -= num;
+                            break;
+                        case '*':
+                            result *= num;
+                            break;
+                        case '/':
+                            if (num != 0)
+                                result /= num;
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("= WARNING: Cannot divide by zero! Please enter a valid divisor...");
+                                continue; // Continue to next iteration to prompt for operator again
+                            }
+                            break;
+                        default:
+                            result = num;
+                            break;
                     }
-
+                }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("= WARNING: Invalid input! Please enter a valid number");
+                    Console.WriteLine("= WARNING: Invalid input! Please enter a valid number...");
                     continue; // Continue to next iteration to prompt for number again
                 }
 
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("> Enter an operator: ");
-                    string? operatorInput = Console.ReadLine();
+                string? operatorInput = Console.ReadLine();
 
                 // Validate the operator input
-                while (!IsValidOperator(operatorInput))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("= WARNING: Invalid operator! Please enter a valid operator");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("> Enter an operator: ");
-                    operatorInput = Console.ReadLine();
-                }
-                // Once the input is validated
-
-                static bool IsValidOperator(string input)
-                {
-                    string allowedOperators = "+-*/=";// List of allowed operators
-                    return input.Length == 1 && allowedOperators.Contains(input);// Check if the input is a single character and it's one of the allowed operators
-                }
-
                 if (operatorInput == "=")
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Final result: " + result); // Display the final result
                     break; // Break out of the loop to perform calculation
+                }
+                else if (operatorInput.Length == 1 && "+-*/".Contains(operatorInput))
+                {
+                    currentOperator = operatorInput[0];
                 }
                 else
                 {
-                    continue;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("= WARNING: Invalid operator! Please enter a valid operator");
                 }
             }
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Final result: " + result); // Display the final result
 
             bool validChoice = false;
             while (!validChoice)
