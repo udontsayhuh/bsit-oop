@@ -108,14 +108,6 @@ class Program
                     }
                     else
                     {
-                        if (!validNumber)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("= WARNING: Invalid input! Please enter a valid integer");
-                            validNumber = true; // Reset validOperator flag
-                            continue; // Continue to next iteration to prompt for operator again
-                        }
-
                         switch (currentOperator)
                         {
                             case '+':
