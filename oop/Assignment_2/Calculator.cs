@@ -12,8 +12,8 @@ namespace oop.Assignment_2
         private double num1, num2;
         protected double sum, diff, prod, quo;
         protected char op { get; set; }
-        public abstract void getNumbers();
-        public abstract void getOperation();
+        public abstract void getNumbers(int i);
+        public abstract void getOperation(int j, List<double> myList);
 
         public double Num1
         {

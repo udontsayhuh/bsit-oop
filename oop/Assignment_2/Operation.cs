@@ -10,8 +10,17 @@ namespace oop.Assignment_2
     {
         public double add(double num1, double num2)
         {
-            sum = num1 + num2;
-            return sum;
+            if(num1 != null)
+            {
+                sum = num1 + num2;
+                return sum;
+            }
+            else
+            {
+                num1 += num2;
+                return num1;
+            }
+            
         }
         public double sub(double num1, double num2)
         {
@@ -30,23 +39,24 @@ namespace oop.Assignment_2
         }
 
         // Method for asking user input for numbers
-        public override void getNumbers()
+        public override void getNumbers(int i)
         {
             bool x = true;
 
             while (x) // it loops when true, else terminate
             {
+                
                 try
                 {
-                        // Input first number
-                        Console.Write("Enter your first number: ");
+                    // Input first number
+                    
+
+                    if (i <= 0)
+                    {
+                        Console.Write("Enter number: ");
                         Num1 = Convert.ToDouble(Console.ReadLine());
-
-                        // Input second number
-                        Console.Write("Enter your second number: ");
-                        Num2 = Convert.ToDouble(Console.ReadLine());
-
-                        // Ask if you want to continue using Calculator
+                    }
+                    // Ask if you want to continue using Calculator
                         
                     x = false; // new value for x, so the loop will stop because x = false
                 }
@@ -58,40 +68,87 @@ namespace oop.Assignment_2
             }
         }
         // Method for asking user input for operation
-        public override void getOperation()
+        public override void getOperation(int j, List<double> myList)
         {
             bool y = true;
-            while (y)   // it loops when true, else terminate
+            do  // it loops when true, else terminate
             {
                 try
                 {
-                    Console.Write("Enter Operation\n:[+] Addition\n[-] Subtraction\n[*] Multiplication\n-> ");
+                    Console.Write("Enter Operation:[+] Addition [-] Subtraction [*] Multiplication [/] Division, PRINT RESULT[=]: ");
                     op = Convert.ToChar(Console.ReadLine());
-                    switch (op)
+                    if (op == '=')
                     {
-                        case '+':
-                            Console.WriteLine("= " + add(Num1, Num2));
-                            break;
-                        case '-':
-                            Console.WriteLine("= " + sub(Num1, Num2));
-                            break;
-                        case '*':
-                            Console.WriteLine("= " + mul(Num1, Num2));
-                            break;
-                        case '/':
-                            Console.WriteLine("= " + div(Num1, Num2));
-                            break;
-                        default:
-                            throw new Exception(); // throw exception
+                        if (myList.Count > 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("= " + myList[myList.Count - 1]);
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.WriteLine("The list is empty.");
+                        }
+                        y = false;
                     }
-                    y = false; // new value for y, so the loop will stop because y = false
+                    else
+                    {
+                        switch (op)
+                        {
+                            case '+':
+                                // Input second number
+                                Console.Write("Enter number: ");
+                                Num2 = Convert.ToDouble(Console.ReadLine());
+
+                                myList.Add(add(Num1, Num2));
+                                Num1 = sum;
+                                y = false;
+                                break;
+                            case '-':
+                                // Input second number
+                                Console.Write("Enter number: ");
+                                Num2 = Convert.ToDouble(Console.ReadLine());
+
+                                myList.Add(sub(Num1, Num2));
+                                Num1 = diff;
+                                y = false;
+                                break;
+                            case '*':
+                                // Input second number
+                                Console.Write("Enter number: ");
+                                Num2 = Convert.ToDouble(Console.ReadLine());
+
+                                myList.Add(mul(Num1, Num2));
+                                Num1 = prod;
+                                y = false;
+                                break;
+                            case '/':
+                                // Input second number
+                                Console.Write("Enter number: ");
+                                Num2 = Convert.ToDouble(Console.ReadLine());
+
+                                myList.Add(div(Num1, Num2));
+                                Num1 = quo;
+                                y = false;
+
+                                break;
+                            default:
+                                throw new Exception(); // throw exception
+                        }
+
+                    }
+                         // new value for y, so the loop will stop because y = false
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Input Valid Operations Only!"); // Display this when the input is wrong
                 }
-            }
+                // if the user choose equals sign
+                
+            } while (y);
             
         }
+
+    
     }
 }

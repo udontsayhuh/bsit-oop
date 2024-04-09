@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,22 @@ namespace oop.Assignment_2
         {
             Operation op = new Operation();
             char choice;
+            List<double> valueList = new List<double>();
             do
             {
-                op.getNumbers();
-                op.getOperation();
+                for (int i = 0; i <= valueList.Count; i++)
+                {
+                    op.getNumbers(i);
+                    op.getOperation(i, valueList);
+                }
+                
 
                 bool a = true;
                 do
                 {
-                    Console.WriteLine("Do you want to Continue Using Calculator? [Y or y] Yes, [N or n] No: ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("Do you want to Continue Using Calculator? [Y or y] Yes, [N or n] No: ");
+                    Console.ResetColor();
                     choice = Convert.ToChar(Console.ReadLine());
 
                     if(choice == 'Y' || choice == 'y')
@@ -38,6 +46,8 @@ namespace oop.Assignment_2
                 } while (a);
                 
             } while (choice == 'Y' || choice == 'y');
+
+
             
         }
     }
