@@ -1,12 +1,10 @@
 using System;
 
-// Abstract class for different arithmetic operations
 abstract class Operation
 {
-    public abstract double Calculate(double num1, double num2); // Abstract method for calculation
+    public abstract double Calculate(double num1, double num2);
 }
 
-// Concrete class for addition operation
 class Addition : Operation
 {
     public override double Calculate(double num1, double num2)
@@ -15,7 +13,6 @@ class Addition : Operation
     }
 }
 
-// Concrete class for subtraction operation
 class Subtraction : Operation
 {
     public override double Calculate(double num1, double num2)
@@ -24,7 +21,6 @@ class Subtraction : Operation
     }
 }
 
-// Concrete class for multiplication operation
 class Multiplication : Operation
 {
     public override double Calculate(double num1, double num2)
@@ -33,7 +29,6 @@ class Multiplication : Operation
     }
 }
 
-// Concrete class for division operation
 class Division : Operation
 {
     public override double Calculate(double num1, double num2)
@@ -41,16 +36,15 @@ class Division : Operation
         if (num2 != 0)
             return num1 / num2;
         else
-            throw new DivideByZeroException("WARNING: Cannot divide by zero!"); // Throw exception for division by zero
+            throw new DivideByZeroException("WARNING: Cannot divide by zero!");
     }
 }
 
-// Calculator class encapsulating the calculator logic
 class Calculator
 {
     public double PerformOperation(Operation operation, double num1, double num2)
     {
-        return operation.Calculate(num1, num2); // Perform calculation based on selected operation
+        return operation.Calculate(num1, num2);
     }
 }
 
@@ -58,8 +52,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Calculator calculator = new Calculator(); // Instantiate Calculator object
-
+        Calculator calculator = new Calculator();
         bool keepCalculating = true;
 
         while (keepCalculating)
@@ -69,7 +62,7 @@ class Program
             Console.WriteLine("||        CALCULATOR        ||");
             Console.WriteLine("==============================");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("    ");
+            Console.WriteLine();
 
             Console.WriteLine("———————————————————————————————————");
             Console.WriteLine("|          > OPERATORS <          |");
@@ -80,97 +73,76 @@ class Program
             Console.WriteLine("|   >> Division (/)               |");
             Console.WriteLine("|   >> Equals to get Result (=)   |");
             Console.WriteLine("———————————————————————————————————");
-            Console.WriteLine("    ");
+            Console.WriteLine();
 
-            double result = 0; // Store the result of each operation
-
-            char currentOperator = ' '; // Store the current operator
+            double result = 0;
+            bool isFirstNumber = true;
+            char currentOperator = ' ';
+            Console.WriteLine("Current Equation: " + result);
+            Console.WriteLine();
 
             while (true)
             {
                 double num;
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("> Enter a number: ");
-                string? input = Console.ReadLine();
+                string input = Console.ReadLine();
 
-                if (double.TryParse(input, out num)) // Validate and parse user input for the number
+                if (double.TryParse(input, out num))
                 {
-                    switch (currentOperator)
-                    {
-                        case '+':
-                            result += num;
-                            break;
-                        case '-':
-                            result -= num;
-                            break;
-                        case '*':
-                            result *= num;
-                            break;
-                        case '/':
-                            if (num != 0)
-                                result /= num;
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("= WARNING: Cannot divide by zero! Please enter a valid divisor...");
-                                continue; // Continue to next iteration to prompt for operator again
-                            }
-                            break;
-                        default:
-                            result = num;
-                            break;
-                    }
+                    result = isFirstNumber ? num : PerformOperation(currentOperator, result, num);
+                    isFirstNumber = false;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("= WARNING: Invalid input! Please enter a valid number...");
-                    continue; // Continue to next iteration to prompt for number again
+                    continue;
                 }
 
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("> Enter an operator: ");
-                string? operatorInput = Console.ReadLine();
+                string operatorInput = Console.ReadLine();
 
-                // Validate the operator input
-                if (operatorInput == "=")
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Final result: " + result); // Display the final result
-                    break; // Break out of the loop to perform calculation
-                }
-                else if (operatorInput.Length == 1 && "+-*/".Contains(operatorInput))
-                {
-                    currentOperator = operatorInput[0];
-                }
-                else
+                while (!IsValidOperator(operatorInput))
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("= WARNING: Invalid operator! Please enter a valid operator");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("> Enter an operator: ");
+                    operatorInput = Console.ReadLine();
                 }
+
+                if (operatorInput == "=")
+                    break;
+                else
+                    currentOperator = operatorInput[0];
             }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Final result: " + result);
 
             bool validChoice = false;
             while (!validChoice)
             {
-                Console.WriteLine(" ");
+                Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(">> Do you want to Calculate again? (y/n)");
                 Console.Write(">> ");
-                string contchoice = Console.ReadLine().ToLower(); // Get user's choice to continue or exit
+                string contchoice = Console.ReadLine().ToLower();
 
                 if (contchoice == "n" || contchoice == "no")
                 {
-                    keepCalculating = false; // Exit the loop if user chooses 'n' or 'no'
+                    keepCalculating = false;
                     validChoice = true;
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine(" ");
+                    Console.WriteLine();
                     Console.WriteLine(">> Calculator closed. <<");
                 }
                 else if (contchoice == "y" || contchoice == "yes")
                 {
-                    validChoice = true; // Continue the loop if user chooses 'y' or 'yes'
-                    Console.Clear(); // Clear the console screen
+                    validChoice = true;
+                    Console.Clear();
                 }
                 else
                 {
@@ -178,6 +150,36 @@ class Program
                     Console.WriteLine("= WARNING: Invalid Choice! Please type 'y' or 'n'... =");
                 }
             }
+        }
+    }
+
+    static bool IsValidOperator(string input)
+    {
+        string allowedOperators = "+-*/=";
+        return input.Length == 1 && allowedOperators.Contains(input);
+    }
+
+    static double PerformOperation(char operation, double num1, double num2)
+    {
+        switch (operation)
+        {
+            case '+':
+                return num1 + num2;
+            case '-':
+                return num1 - num2;
+            case '*':
+                return num1 * num2;
+            case '/':
+                if (num2 != 0)
+                    return num1 / num2;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("= WARNING: Cannot divide by zero! Please enter a valid divisor...");
+                    return num1;
+                }
+            default:
+                throw new ArgumentException("Invalid operation");
         }
     }
 }
