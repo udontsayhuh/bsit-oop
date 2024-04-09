@@ -85,9 +85,6 @@ class Program
             Console.WriteLine("    ");
 
             double result = 0; // Store the result of each operation
-            bool isFirstNumber = true; // Flag to determine whether it's the first number input
-            bool validOperator = true; // Flag to validate the operator input
-            bool validNumber = true;
             char currentOperator = ' '; // Store the current operator
             Console.WriteLine("Current Equation: " + result);
             Console.WriteLine("    ");
@@ -101,13 +98,6 @@ class Program
 
                 if (double.TryParse(input, out num)) // Validate and parse user input for the number
                 {
-                    if (isFirstNumber)
-                    {
-                        result = num;
-                        isFirstNumber = false;
-                    }
-                    else
-                    {
                         switch (currentOperator)
                         {
                             case '+':
@@ -125,24 +115,18 @@ class Program
                                 else
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("= WARNING: Cannot divide by zero! Please enter a valid divisor...");
-                                    validOperator = true; // Reset validOperator flag
+                                    Console.WriteLine("= WARNING: Cannot divide by zero! Please enter a valid divisor");
                                     continue; // Continue to next iteration to prompt for operator again
                                 }
                                 break;
                         }
                     }
-                }
+
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("= WARNING: Invalid input! Please enter a valid number...");
+                    Console.WriteLine("= WARNING: Invalid input! Please enter a valid number");
                     continue; // Continue to next iteration to prompt for number again
-                }
-
-                if (!isFirstNumber)
-                {
-                    Console.WriteLine("Current result: " + result);
                 }
 
                 Console.ForegroundColor = ConsoleColor.White;
@@ -172,8 +156,7 @@ class Program
                 }
                 else
                 {
-                    validOperator = true;
-                    currentOperator = operatorInput[0];
+                    continue;
                 }
             }
 
