@@ -1,0 +1,142 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace Calculator
+{
+    // Interface for basic calculator operations 
+    public interface IOperation
+    {
+        double Perform(double num1, double num2);
+    }
+
+    // Concrete class for addition operation
+    public class Addition : IOperation
+    {
+        public double Perform(double num1, double num2)
+        {
+            return num1 + num2;
+        }
+    }
+
+    // Concrete class for subtraction operation
+    public class Subtraction : IOperation
+    {
+        public double Perform(double num1, double num2)
+        {
+            return num1 - num2;
+        }
+    }
+
+    // Concrete class for multiplication operation
+    public class Multiplication : IOperation
+    {
+        public double Perform(double num1, double num2)
+        {
+            return num1 * num2;
+        }
+    }
+
+    // Concrete class for division operation
+    public class Division : IOperation
+    {
+        public double Perform(double num1, double num2)
+        {
+            if (num2 == 0)
+            {
+                throw new DivideByZeroException("Cannot divide by zero.");
+            }
+            return num1 / num2;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, IOperation> operations = new Dictionary<string, IOperation>()
+            {
+                { "+", new Addition() },
+                { "-", new Subtraction() },
+                { "*", new Multiplication() },
+                { "/", new Division() }
+            };
+
+            while (true)
+            {
+                Console.WriteLine("WELCOME TO CALCULATOR APP!\n");
+
+                List<double> numbers = new List<double>(); // Store entered numbers
+                string selectedOperator = null; // Store selected operator (if applicable)
+
+                // Get multiple numerical values or an operator until equal sign encountered
+                while (true)
+                {
+                    Console.WriteLine("Enter a numerical value (or '=' to calculate, or an operator for multi-step calculation):");
+                    string input = Console.ReadLine();
+
+                    if (double.TryParse(input, out double num))
+                    {
+                        numbers.Add(num);
+                    }
+                    else if (input == "=")
+                    {
+                        break; // Exit the inner loop when equal sign is entered
+                    }
+                    else if (operations.ContainsKey(input)) // Check for valid operator
+                    {
+                        if (selectedOperator != null) // Disallow multiple operators without numbers
+                        {
+                            Console.WriteLine("Invalid input! Please enter a number after the previous operator.");
+                            continue;
+                        }
+                        selectedOperator = input;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input! Please enter a number, '=' to calculate, or a valid operator (+, -, *, /).");
+                    }
+                }
+
+                if (numbers.Count < 2 && selectedOperator == null) // Handle case with less than 2 numbers and no operator
+                {
+                    Console.WriteLine("Insufficient numbers for calculation. Please enter at least two numbers.");
+                    continue;
+                }
+
+                // Perform calculation based on number of entries and operator (if applicable)
+                double result = numbers[0];
+                if (selectedOperator != null)
+                {
+                    for (int i = 1; i < numbers.Count; i++)
+                    {
+                        result = operations[selectedOperator].Perform(result, numbers[i]);
+                    }
+                }
+                else
+                {
+                    // Handle basic arithmetic for multiple numbers without an operator (can be modified for specific needs)
+                    for (int i = 1; i < numbers.Count; i++)
+                    {
+                        result += numbers[i]; // Simple addition for demonstration (replace with desired operation)
+                    }
+                }
+
+                // Display result
+                Console.WriteLine($"Result: {result}");
+
+                // Ask user if they want to perform another calculation
+                Console.WriteLine("\nDo you want to perform another calculation? (yes/no)");
+                string response = Console.ReadLine().ToLower();
+                if (response != "yes")
+                {
+                    Console.WriteLine("\nBye bye! Come back anytime!");
+                    break;
+                }
+
+                numbers.Clear(); // Clear the list for next iteration
+                selectedOperator = null; // Reset operator for next calculation
+            }
+        }
+    }
+}
