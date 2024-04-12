@@ -1,0 +1,111 @@
+using System;
+
+public class Calculator
+{
+    private double num1;
+    private double num2;
+
+    public Calculator(double n1, double n2)
+    {
+        num1 = n1;
+        num2 = n2;
+    }
+
+    public double Add() => num1 + num2;
+    public double Subtract() => num1 - num2;
+    public double Multiply() => num1 * num2;
+
+    public double Divide()
+    {
+        if (num2 == 0)
+        {
+            Console.WriteLine("Division by zero is not allowed!");
+            return double.NaN;
+        }
+        return num1 / num2;
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.Clear();
+            DisplayCal();
+
+            try
+            {
+                double num1 = GetNumericInput("Enter First Number: ");
+                string operation = GetOperationInput();
+                double result = num1;
+
+                while (true)
+                {
+                    if (operation == "=")
+                        break;
+
+                    double num2 = GetNumericInput("Enter Next Number (or = to calculate): ");
+                    Calculator calculator = new Calculator(result, num2);
+                    result = PerformCalculation(calculator, operation);
+
+                    operation = GetOperationInput();
+                }
+
+                Console.WriteLine("\nResult: {0}", result);
+                AskForAnotherCalculation();
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter numbers only!");
+            }
+        }
+    }
+
+    private static void DisplayCal()
+    {
+        Console.WriteLine("**********CALCULATOR*************");
+        Console.WriteLine("--------------------------------");
+    }
+
+    private static double GetNumericInput(string prompt)
+    {
+        double input;
+        while (true)
+        {
+            Console.Write(prompt);
+            if (double.TryParse(Console.ReadLine(), out input))
+                return input;
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+        }
+    }
+
+    private static string GetOperationInput()
+    {
+        Console.Write("Select operation (+, -, *, /, or =): ");
+        return Console.ReadLine();
+    }
+
+    private static double PerformCalculation(Calculator calculator, string operation)
+    {
+        switch (operation)
+        {
+            case "+": return calculator.Add();
+            case "-": return calculator.Subtract();
+            case "*": return calculator.Multiply();
+            case "/": return calculator.Divide();
+            default:
+                Console.WriteLine("Invalid operation. Please choose +, -, *, /, or =.");
+                return double.NaN;
+        }
+    }
+
+    private static void AskForAnotherCalculation()
+    {
+        Console.Write("Perform another calculation? (y/n): ");
+        string response = Console.ReadLine();
+        if (response.ToLower() != "y")
+            Environment.Exit(0);
+    }
+}
