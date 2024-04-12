@@ -9,97 +9,137 @@ namespace MyCalculator
             string value = "Y"; // initializing the value with Y 
             do
             {
-                float num1, num2;
+                float result = 0;
+                float temp = 0;
+                char lastOperation = '+';
+                bool firstInput = true;
 
-                Console.Clear(); // clear the console screen before each new calculation
+                Console.Clear();
 
-                Console.Write("Enter the first number: ");
-                if (!float.TryParse(Console.ReadLine(), out num1))
-                {
-                    Console.WriteLine("INVALID INPUT! CLOSING THE CALCULATOR . . .");
-                    return;  // terminate if the first number is invalid
-                }
-
-                Console.Write("Enter the second number: ");
-                if (!float.TryParse(Console.ReadLine(), out num2))
-                {
-                    Console.WriteLine("INVALID INPUT! CLOSING THE CALCULATOR . . .");
-                    return;  // terminate if the second number is invalid
-                }
-
-                string opsymbol;
                 while (true)
                 {
-                    Console.Clear(); // clear the console screen for a new calculation
-                    Console.Write("Enter operation symbol you want to use (+, -, *, /): ");
-                    opsymbol = Console.ReadLine();
+                    Console.Write("\nEnter a number: ");
+                    string input = Console.ReadLine();
 
-                    if (opsymbol == "+" || opsymbol == "-" || opsymbol == "*" || opsymbol == "/")
-                        break;
+                    if (input == "=")
+                    {
+                        if (!firstInput)
+                        {
+                            result = CalculateResult(result, temp, lastOperation);
+                            Console.WriteLine($"Result: {result}");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("INVALID INPUT! PLEASE ENTER A VALID EXPRESSION.");
+                            continue;
+                        }
+                    }
+
+                    if (float.TryParse(input, out float num))
+                    {
+                        if (lastOperation == '/')
+                        {
+                            if (num == 0)
+                            {
+                                Console.WriteLine("CANNOT DIVIDE BY ZERO. PLEASE ENTER A VALID NUMBER.");
+                                continue;
+                            }
+                            else
+                            {
+                                temp = num;
+                            }
+                        }
+                        else if (firstInput)
+                        {
+                            result = num;
+                            firstInput = false;
+                        }
+                        else
+                        {
+                            temp = num;
+                        }
+                    }
                     else
                     {
-                        Console.WriteLine("INVALID INPUT!");
-                        Console.Write("\nPress any key to start a new calculation.");
-                        Console.ReadKey();
-                        Console.Clear(); // clear the console screen for a fresh start
-                        Console.Write("Enter the first number: ");
-                        if (!float.TryParse(Console.ReadLine(), out num1))
-                        {
-                            Console.WriteLine("INVALID INPUT! CLOSING THE CALCULATOR . . .");
-                            return;  // terminate if the first number is invalid
-                        }
+                        Console.WriteLine("INVALID INPUT! MUST BE A NUMERICAL VALUE.");
+                        continue;
+                    }
 
-                        Console.Write("Enter the second number: ");
-                        if (!float.TryParse(Console.ReadLine(), out num2))
+                    while (true)
+                    {
+                        Console.Write("Enter an operator (+, -, *, /) or (=) to calculate: ");
+                        input = Console.ReadLine();
+
+                        if (input == "=")
                         {
-                            Console.WriteLine("INVALID INPUT! CLOSING THE CALCULATOR . . .");
-                            return;  // terminate if the second number is invalid
+                            result = CalculateResult(result, temp, lastOperation);
+                            Console.WriteLine($"Result: {result}");
+
+                            Console.Write("\nDo you want to do another calculation again? (y/n): ");
+                            value = Console.ReadLine().ToUpper();
+
+                            if (value == "N")
+                            {
+                                Console.WriteLine("\n-------------------------------------");
+                                Console.WriteLine("   BYE T-T EXITING THE CALCULATOR ...");
+                                Console.WriteLine("-------------------------------------");
+                                return;
+                            }
+                            else if (value != "Y")
+                            {
+                                Console.WriteLine("INVALID INPUT! PLEASE ENTER 'Y' OR 'N'.");
+                                continue;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        else if (IsOperationSymbol(input))
+                        {
+                            lastOperation = input[0];
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("INVALID INPUT! MUST BE AN OPERATION SYMBOL OR =.");
                         }
                     }
-                }
-
-                PerformOperation(num1, num2, opsymbol);
-
-                // ask user if they want to do another calculation again
-                Console.WriteLine("\nPress 'Y' to continue or 'N' to exit...");
-                value = Console.ReadLine().ToUpper();
-
-                if (value == "N")
-                {
-                    Console.WriteLine("\n-------------------------------------");
-                    Console.WriteLine("   BYE T-T EXITING THE CALCULATOR ...");
-                    Console.WriteLine("-------------------------------------");
-                    break;  // terminate the program if the user enter n
+                    Console.Clear(); 
                 }
             }
-            while (value != "N");
+            while (value == "Y");
         }
 
-        private void PerformOperation(float num1, float num2, string opsymbol)
+        private bool IsOperationSymbol(string symbol)
         {
-            switch (opsymbol)
+            return symbol == "+" || symbol == "-" || symbol == "*" || symbol == "/";
+        }
+
+        private float CalculateResult(float result, float temp, char lastOperation)
+        {
+            switch (lastOperation)
             {
-                case "+":
-                    Console.WriteLine($"{num1} + {num2} is equal to {num1 + num2}");
+                case '+':
+                    result += temp;
                     break;
-                case "-":
-                    Console.WriteLine($"{num1} - {num2} is equal to {num1 - num2}");
+                case '-':
+                    result -= temp;
                     break;
-                case "*":
-                    Console.WriteLine($"{num1} * {num2} is equal to {num1 * num2}");
+                case '*':
+                    result *= temp;
                     break;
-                case "/":
-                    if (num2 == 0)
+                case '/':
+                    if (temp == 0)
                     {
-                        Console.WriteLine("CANNOT DIVIDE BY ZERO.");
-                        return;
+                        Console.WriteLine("CANNOT DIVIDE BY ZERO. PLEASE ENTER A VALID NUMBER.");
+                        return result;
                     }
-                    Console.WriteLine($"{num1} / {num2} is equal to {num1 / num2}");
-                    break;
-                default:
-                    Console.WriteLine("INVALID INPUT! CLOSING THE CALCULATOR . . .");
+                    result /= temp;
                     break;
             }
+            return result;
         }
     }
 
