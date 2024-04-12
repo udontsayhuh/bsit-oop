@@ -1,92 +1,163 @@
-using System;
+using System.Collections;
 
 class Calculator
 {
-    private string repeat; // Encapsulation: The repeat variable is encapsulated as private to the Calculator class.
-    private double double_result; // Encapsulation: The double_result variable is encapsulated as private to the Calculator class.
+    private double num1;
+    private double result;
+    private char operator1;
+    private char repeat;
 
     public void Calculate()
     {
+        var arlist = new ArrayList();
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("(Enter a number)\n");
-            if (!double.TryParse(Console.ReadLine(), out double double_num1))
+            result = 0;
+            operator1 = '+';
+            arlist.Clear();
+
+            while (true)
             {
-                Console.WriteLine("\nThe program will terminate due to non-numeric input.");
-                break;
-            }
-
-            Console.Clear();
-            Console.WriteLine("(Enter an operator (+ - * /))\n");
-            Console.Write($"{double_num1} ");
-            if (!char.TryParse(Console.ReadLine(), out char char_operator) || !(char_operator == '+' || char_operator == '-' || char_operator == '*' || char_operator == '/'))
-            {
-                Console.WriteLine("\nThe program will terminate due to invalid operator input.");
-                break;
-            }
-
-            Console.Clear();
-            Console.WriteLine("(Enter another number)\n");
-            Console.Write($"{double_num1} {char_operator} ");
-            if (!double.TryParse(Console.ReadLine(), out double double_num2))
-            {
-                Console.WriteLine("\nThe program will terminate due to non-numeric input.");
-                break;
-            }
-
-            Console.Clear();
-            Console.WriteLine("\n");
-
-            // Abstraction: The arithmetic operations are abstracted within the switch-case statement.
-            switch (char_operator)
-            {
-                case '+':
-                    double_result = double_num1 + double_num2;
-                    break;
-
-                case '-':
-                    double_result = double_num1 - double_num2;  
-                    break;
-
-                case '*':
-                    double_result = double_num1 * double_num2;
-                    break;
-
-                case '/':
-                    if (double_num2 == 0)
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("(enter a number)");
+                    if (arlist.Count != 0)
                     {
-                        Console.WriteLine($"{double_num1} {char_operator} {double_num2} = Undefined/Infinity");
-                        break;
+                        foreach (var item in arlist)
+                        {
+                            Console.Write($"{item} ");
+                        }
                     }
 
-                    double_result = double_num1 / double_num2;
-                    break;
-            }
+                    if (!double.TryParse(Console.ReadLine(), out num1))
+                    {
+                        Console.WriteLine("Invalid number. Please enter a valid number.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    else if (operator1 == '/' && num1 == 0)
+                    {
+                        Console.WriteLine("Cannot divide by zero!");
+                        Console.ReadKey();
+                        result = 0;
+                        operator1 = '+';
+                        arlist.Clear();
+                        continue;
+                    }
+                    else
+                    {
+                        arlist.Add(num1);
+                        break;
+                    }
+                }
 
-            // Polymorphism: The behavior of calculating and displaying results varies based on the operator used.
-            if (!(double_num2 == 0) || !(char_operator == '/'))
-            {
-                Console.WriteLine($"{double_num1} {char_operator} {double_num2} = {double_result:n}");
+                switch (operator1)
+                {
+                    case '+':
+                        result += num1;
+                        break;
+                    case '-':
+                        result -= num1;
+                        break;
+                    case '*':
+                        result *= num1;
+                        break;
+                    case '/':
+                        if (num1 == 0)
+                        {
+                            Console.WriteLine("Cannot divide by zero.");
+                            Console.ReadKey();
+                            break;
+                        }
+                        result /= num1;
+                        break;
+                }
+
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("(enter + - * / or = to calculate)");
+                    if (arlist.Count != 0)
+                    {
+                        foreach (var item in arlist)
+                        {
+                            Console.Write($"{item} ");
+                        }
+                    }
+
+                    if (!char.TryParse(Console.ReadLine(), out operator1))
+                    {
+                        Console.WriteLine("Invalid operator. Please enter a valid operator (+ - * / =).");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    if (operator1 == '=')
+                    {
+                        arlist.Add(operator1);
+                        break;
+                    }
+                    else if (!(operator1 == '+' || operator1 == '-' || operator1 == '*' || operator1 == '/'))
+                    {
+                        Console.WriteLine("Invalid operator. Please enter a valid operator (+ - * / =).");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    else
+                    {
+                        arlist.Add(operator1);
+                        break;
+                    }
+                }
+
+                if (operator1 == '=')
+                {
+                    break;
+                }
             }
 
             while (true)
             {
-                Console.Write("\n\nDo you want to continue? (Y/N): ");
-                repeat = Console.ReadLine().ToUpper();
+                while (true)
+                {
+                    Console.Clear();
+                    foreach (var item in arlist)
+                    {
+                        Console.Write($"{item} ");
+                    }
+                    Console.Write($"{result}");
 
-                if (repeat == "N")
+                    Console.Write("\n\nDo you want to continue? (Y/N): ");
+                    if (!char.TryParse(Console.ReadLine().ToUpper(), out repeat) || !(repeat == 'Y' || repeat == 'N'))
+                    {
+                        Console.WriteLine("Invalid input. Please enter Y or N.");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                }
+
+
+                if (repeat == 'N')
                 {
                     Console.WriteLine("Program has terminated.");
+                    Console.ReadKey();
                     return;
                 }
-                else if (repeat == "Y")
+                else if (repeat == 'Y')
                 {
                     break;
                 }
                 else
                 {
                     Console.WriteLine("Invalid input. Please enter Y or N.");
+                    Console.ReadKey();
                 }
             }
         }
@@ -101,3 +172,7 @@ class Program
         calculator.Calculate();
     }
 }
+
+// Only Encapsulation and Abstraction are used in this code.
+// Encapsulation: The class Calculator is an example of encapsulation. It encapsulates the data and methods that operate on the data.
+// Abstraction: The class Calculator is an example of abstraction. It hides the implementation details of the calculation process and provides a simple interface for the user to interact with.
