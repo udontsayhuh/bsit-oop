@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 namespace CalculatorApp
 {
     // Base class representing arithmetic operations
     public abstract class Operation
     {
-        public abstract double PerformOperation(double num1, double num2); // This abstract class serves as the base for all arithmetic operations and defines a common method for performing operations with two numbers.
+        public abstract double PerformOperation(double num1, double num2);
     }
 
     // Addition operation class inherits from Operation class
@@ -54,30 +55,37 @@ namespace CalculatorApp
     // Calculator class
     public class Calculator
     {
-        private Operation operation; // Demonstrates Encapsulation by keeping the current operation private within the Calculator class, ensuring that it is inaccessible from outside the class, thereby encapsulating its functionality and data to maintain code integrity and security.
+        private Operation operation;
 
         // Method to perform calculation
-        public double PerformCalculation(double num1, double num2, string op)
+        public double PerformCalculation(List<double> numbers, List<string> operators)
         {
-            switch (op)
+            double result = numbers[0];
+
+            for (int i = 0; i < operators.Count; i++)
             {
-                case "+":
-                    operation = new Addition(); // Demonstrates Polymorphism (Inheritance) by instantiating an object of the Addition class based on the input operator.
-                    break;
-                case "-":
-                    operation = new Subtraction();
-                    break;
-                case "*":
-                    operation = new Multiplication();
-                    break;
-                case "/":
-                    operation = new Division();
-                    break;
-                default:
-                    throw new ArgumentException("Invalid operator.");
+                switch (operators[i])
+                {
+                    case "+":
+                        operation = new Addition();
+                        break;
+                    case "-":
+                        operation = new Subtraction();
+                        break;
+                    case "*":
+                        operation = new Multiplication();
+                        break;
+                    case "/":
+                        operation = new Division();
+                        break;
+                    default:
+                        throw new ArgumentException("Invalid operator.");
+                }
+
+                result = operation.PerformOperation(result, numbers[i + 1]);
             }
 
-            return operation.PerformOperation(num1, num2); // Polymorphism (Inheritance) that calls the PerformOperation method specific to the current operation object.
+            return result;
         }
     }
 
@@ -91,36 +99,36 @@ namespace CalculatorApp
 
             while (repeat)
             {
-                Console.WriteLine("Please enter a numerical value to proceed with the calculation:");
-                string input1 = Console.ReadLine();
+                List<double> numbers = new List<double>();
+                List<string> operators = new List<string>();
 
-                if (!double.TryParse(input1, out double num1))
+                Console.WriteLine("Enter a numerical value:");
+
+                string input = Console.ReadLine();
+
+                while (input != "=")
                 {
-                    Console.WriteLine("Invalid input detected ! Please enter a numerical value to continue with the calculation.");
-                    return;
-                }
+                    if (double.TryParse(input, out double number))
+                    {
+                        numbers.Add(number);
+                        Console.WriteLine("Enter an operator (+, -, *, /) or '=' to display result:");
+                    }
+                    else if (input == "+" || input == "-" || input == "*" || input == "/")
+                    {
+                        operators.Add(input);
+                        Console.WriteLine("Enter a numerical value:");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a numerical value or '=' to display result:");
+                    }
 
-                Console.WriteLine("Please enter an operator to perform the calculation. You can use symbols like + (addition), - (subtraction), * (multiplication), or / (division):");
-                string op = Console.ReadLine();
-
-                if (op != "+" && op != "-" && op != "*" && op != "/")
-                {
-                    Console.WriteLine("Invalid operator detected. Please enter one of the following mathematical operators: addition (+), subtraction (-), multiplication (*), or division (/) to perform the calculation.");
-                    return;
-                }
-
-                Console.WriteLine("Provide another numerical value to continue with the calculation process:");
-                string input2 = Console.ReadLine();
-
-                if (!double.TryParse(input2, out double num2))
-                {
-                    Console.WriteLine("Invalid input detected. Please enter a valid numerical value to continue with the calculation.");
-                    return;
+                    input = Console.ReadLine();
                 }
 
                 try
                 {
-                    double result = calculator.PerformCalculation(num1, num2, op);
+                    double result = calculator.PerformCalculation(numbers, operators);
                     Console.WriteLine("Result: " + result);
                 }
                 catch (Exception ex)
@@ -141,3 +149,21 @@ namespace CalculatorApp
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
