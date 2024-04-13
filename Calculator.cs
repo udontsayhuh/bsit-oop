@@ -58,6 +58,7 @@ namespace Calculator
             }
         }
     }
+
     internal class Program
     {
         static void Main(string[] args)
@@ -109,7 +110,6 @@ namespace Calculator
                         break;
                     }
 
-
                     // Check if the input is a valid operator
                     if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
                     {
@@ -152,8 +152,8 @@ namespace Calculator
                             // Check for division by zero
                             if (nextNumber == 0)
                             {
-                                Console.WriteLine("Cannot divide by zero");
-                                continue ;
+                                Console.WriteLine("You cannot divide by zero");
+                                break;
                             }
                             result /= nextNumber;
                             break;
@@ -171,7 +171,6 @@ namespace Calculator
 
             Console.ReadKey();
         }
-
-
     }
 }
+
