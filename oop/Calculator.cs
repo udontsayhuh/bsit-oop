@@ -1,15 +1,18 @@
-﻿// This is the second version of the Calculator program
-// If the user input is invalid, the program will ask the user to input again
-// This version of calculator is not limited to two operands
-
-﻿using System;
+﻿/*
+Calculator 3rd Version
+Updates:
+    - Calculate() method was optimized by changing the logic for calculation
+    - DisplayResult() method was modified as well.
+*/
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
 // Implementation of abstraction
-// For me, putting all the methods in an abstract class help me identify the methods used inside the program
+// Methods below are declared as abstract as they will be overriden by the subclass Calculator
 public abstract class Operations {
     public abstract void DisplayOperations();
+    public abstract void GetUserInput();
     public abstract void Calculate(List<double> numbers, List<char> operators);   
     public abstract void DisplayResult();
     public abstract void ClearLists(List<double> numbers, List<char> operators);
@@ -48,182 +51,138 @@ public class Calculator : Operations {
     }
 
     // Method to get user input for the 'numbers' and 'operators' list
-    public void GetUserInput() {
-        double num;     // stores the number w/c will be added to the 'numbers' list
-        char op = '+';  // stores the operator w/c will be added to the 'operators' list
+    public override void GetUserInput()
+    {
+        // Clear lists before starting a new calculation
+        ClearLists(numbers, operators);
 
-        // Continue getting user input until the operator is equals to this sybmol '='
-        while(op != '=') {
-            // User input for 'numbers' list
-            // Continue getting user input for number until the inputted number is valid
-            while(true) {
-                try {
-                    Console.Write("Enter a number: ");
-                    if(!double.TryParse(Console.ReadLine(), out num)) {
-                        // Throw ArgumentException if user input for number is invalid
-                        throw new ArgumentException("Invalid input. Please enter a valid number.");
-                    }
-                    // Store the number to the 'numbers' list if the user input is valid
-                    numbers.Add(num);
-                    // Exit the loop if the user input for number is valid
+        // Get the first number
+        double num;
+        while (true)
+        {
+            try
+            {
+                Console.Write("Enter the first number: ");
+                if (!double.TryParse(Console.ReadLine(), out num))
+                {
+                    throw new ArgumentException("Invalid input. Please enter a valid number.");
+                }
+                // Store the number in the 'numbers' list
+                numbers.Add(num);
+                break;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        // Get user inputs until '=' is entered
+        char op;
+        while (true)
+        {
+            try
+            {
+                Console.Write("Enter the operator (+, -, *, /, =): ");
+                if (!char.TryParse(Console.ReadLine(), out op))
+                {
+                    throw new ArgumentException("Invalid input. Please enter a valid operator.");
+                }
+                if (op == '=')
+                {
                     break;
                 }
-                catch(ArgumentException e) {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine();
-                } 
-            }
+                else if (op != '+' && op != '-' && op != '*' && op != '/')
+                {
+                    throw new ArgumentException("Invalid input. Please enter a valid operator.");
+                }
 
-            // User input for 'operators' list
-            // Continue getting user input for operator until the inputted operator is valid
-            while(true) {
-                try {
-                    Console.Write("Enter the operator ('=' to get result): ");
-                    if (!char.TryParse(Console.ReadLine(), out op)) {
-                        // Throw ArgumentException if user input for operator is invalid
-                        throw new ArgumentException("Invalid input. Please enter a valid operator.");
-                    }
-                    // If user input is '=', store it to operators list then terminate the loop
-                    if (op == '=') {
-                        operators.Add(op);
-                        break;
-                    }
-                    // Another set of conditions to check if the user input for operator is valid or not
-                    if (op != '+' && op != '-' && op != '*' && op != '/') {
-                        // Throw ArgumentException if user input for operator is invalid
-                        throw new ArgumentException("Invalid input. Please enter a valid operator.");
-                    }
-                    // Store the operator to the 'operators' list if the user input is valid
-                    operators.Add(op);
-                    // Exit the loop if the user input is valid
-                    break;
+                // Store the operator in the 'operators' list
+                operators.Add(op);
+
+                // Get the next number
+                Console.Write("Enter the next number: ");
+                if (!double.TryParse(Console.ReadLine(), out num))
+                {
+                    throw new ArgumentException("Invalid input. Please enter a valid number.");
                 }
-                catch(ArgumentException e) {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine();
-                }
+                // Store the number in the 'numbers' list
+                numbers.Add(num);
             }
-        } 
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
     }
 
     // Method for calculations
-    public override void Calculate(List<double> numbers, List<char> operators) {
-        // Computation process
-        // Below are the increment variables used as indices to access the elements of the list
-        // i serves as the index used to access the elements in the 'numbers' list
-        // j servers as the index used to access the elements in the 'operators' list
-        // limit is used to determine how many numbers are going to be solved
-        int i, j, k;
-        i = j = 0;     // all initialized as zero to access the first element of the lists
-        int limit; 
-        // result stores the final value
-        result = 0;
-        // size_of_list stores the size or length of the 'operators' list
-        int size_of_list = operators.Count;
-
-        // This while loop below is the main algorithm that functions as the calculator
-        // It will stop solving the moment it encounters the last operator which is the '=' operator
-        while(j < size_of_list) {
-            // k is an increment variable that determines how many number will be solved between an operator
-            k = 0;
-            // j == 0 only means that during the first operator, there are maximum of two numbers that will be solved
-            // that is why limit is equals to 2
-            if (j == 0) {
-                limit = 2;
-            }
-            // But on succeeding operators, the maximum number involved is only one
-            // that is why limit is equals to 1
-            else {
-                limit = 1;
-            }
-            
-            // switch case
-            switch(operators[j]) {
+    // The logic for calculation is optimized
+    public override void Calculate(List<double> numbers, List<char> operators)
+    {
+        // Perform calculations based on the provided inputs
+        result = numbers[0];
+        for (int i = 0; i < operators.Count; i++)
+        {
+            switch (operators[i])
+            {
                 case '+':
-                    while(k < limit) {
-                        result = result + numbers[i];
-                        i++; // increment i to access the next number in the 'numbers' list
-                        k++; // increment k to know if there is still another number that needs to be added in the result
-                    }
+                    result += numbers[i + 1];
                     break;
                 case '-':
-                    // j == 0 pertains to the first operator in the 'operators' list
-                    // If the loop is currently in the first operator, the value of the result variable
-                    // should be the value of the first number in the list
-                    // Note: this only applies to subtraction, multiplication and division
-                    if (j == 0) {
-                        result = numbers[i];
-                        k = 1;
-                        i++;
-                    }
-                    while(k < limit) {
-                        result = result - numbers[i];
-                        i++; // increment i to access the next number in the 'numbers' list
-                        k++; // increment k to know if there is still another number that needs to be added in the result
-                    }
+                    result -= numbers[i + 1];
                     break;
                 case '*':
-                    if (j == 0) {
-                        result = numbers[i];
-                        k = 1;
-                        i++;
-                    }
-                    while(k < limit) {
-                        result = result * numbers[i];
-                        i++; // increment i to access the next number in the 'numbers' list
-                        k++; // increment k to know if there is still another number that needs to be added in the result
-                    }
+                    result *= numbers[i + 1];
                     break;
                 case '/':
-                    if (j == 0) {
-                        result = numbers[i];
-                        k = 1;
-                        i++;
+                    if (numbers[i + 1] != 0)
+                    {
+                        result /= numbers[i + 1];
                     }
-                    while(k < limit) {
-                        result = result / numbers[i];
-                        i++; // increment i to access the next number in the 'numbers' list
-                        k++; // increment k to know if there is still another number that needs to be added in the result
+                    else
+                    {
+                        Console.WriteLine("Error: Division by zero.");
                     }
-                    break;
-                case '=':
-                    result = result;
                     break;
                 default:
-                    throw new ArgumentException("Invalid input.");
+                    Console.WriteLine("Error: Invalid operator.");
+                    break;
             }
-            j++;
         }
     }
-
+    
     // Method to display final output
-    public override void DisplayResult() {
-        int i, j;
-        i = j = 0;
+    public override void DisplayResult()
+    {
         ClearConsole();
         DisplayOperations();
 
-        // Display the result this way if there are two or more operands / numbers
-        if (numbers.Count > 1) {
-            Console.WriteLine(" =====================================================");
-            Console.Write(" EQUATION: ");
-            while (i < numbers.Count) {
-                Console.Write(numbers[i] + " " + operators[j] + " ");
-                i++;
-                j++;
-            }
-            Console.Write(result);
-            Console.WriteLine("\n RESULT: " + result);
-            Console.WriteLine(" =====================================================");
-            Console.WriteLine("\n");
-        }
-        
+        // Display the result
+        Console.WriteLine("Result:");
 
-        // Display the result this way if there is only operand / number
-        else {
-            Console.WriteLine(" =====================================================");
-            Console.WriteLine(" RESULT: " + numbers[0]);
-            Console.WriteLine(" =====================================================");
+        // Check if there is at least one number provided
+        if (numbers.Count > 0)
+        {
+            // If there's only one number provided, display it directly
+            if (numbers.Count == 1)
+            {
+                Console.WriteLine(numbers[0]);
+            }
+            // If there are multiple numbers and operators, display the calculation expression
+            else
+            {
+                Console.Write(numbers[0]);
+                for (int i = 0; i < operators.Count; i++)
+                {
+                    Console.Write($" {operators[i]} ");
+                    if (i + 1 < numbers.Count)
+                    {
+                        Console.Write(numbers[i + 1]);
+                    }
+                }
+                Console.WriteLine($" = {result}");
+            }
         }
     }
 
@@ -276,18 +235,17 @@ public class CalculatorApp {
             calculator.DisplayResult();
 
             // Ask the user for another calculation
-            Console.Write(" Do you want to calculate again? (y / n): ");
+            Console.Write("Do you want to calculate again? (y / n): ");
             char ans = char.ToLower(Convert.ToChar(Console.ReadLine()));
             if (ans == 'n') {
-                Console.Write("\n Exiting program ");
+                Console.Write("\nExiting program ");
                 calculator.Loading();
                 calculator.ClearConsole();
                 calculator.ThankYou();
                 break;
             }
-
             // Clear the lists
-            Console.Write("\n Clearing lists ");
+            Console.Write("\nClearing lists ");
             calculator.Loading();
             calculator.ClearLists(numbers, operators);
 
