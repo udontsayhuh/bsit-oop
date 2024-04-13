@@ -4,45 +4,45 @@ using System;
 abstract class Operator
 {
     // Abstract method for performing an arithmetic operation
-    public abstract double Perform(double num1, double num2);
+    public abstract double Perform(double firstNum, double secondNum);
 }
 
 // Inheritance was applied in the following subclasses
 // Addition Operation Class
 class Addition : Operator
 {
-    public override double Perform(double num1, double num2)
+    public override double Perform(double firstNum, double secondNum)
     {
-        return num1 + num2;
+        return firstNum + secondNum;
     }
 }
 
 // Subtraction Operation Class
 class Subtraction : Operator
 {
-    public override double Perform(double num1, double num2)
+    public override double Perform(double firstNum, double secondNum)
     {
-        return num1 - num2;
+        return firstNum - secondNum;
     }
 }
 
 // Multiplication Operation Class
 class Multiplication : Operator
 {
-    public override double Perform(double num1, double num2)
+    public override double Perform(double firstNum, double secondNum)
     {
-        return num1 * num2;
+        return firstNum * secondNum;
     }
 }
 
 // Division Operation Class
 class Division : Operator
 {
-    public override double Perform(double num1, double num2)
+    public override double Perform(double firstNum, double secondNum)
     {
         // Check for division by zero
-        if (num2 != 0)
-            return num1 / num2;
+        if (secondNum != 0)
+            return firstNum / secondNum;
         else
         {
             Console.WriteLine("Cannot divide by zero.");
@@ -55,7 +55,7 @@ class Division : Operator
 class Calculator
 {
     // Fields for storing user inputs and operator
-    public double num1, num2;
+    public double firstNum, secondNum;
     public char symbol;
     public bool answer;
     private Operator chosenOpe;
@@ -120,14 +120,14 @@ class Calculator
     // Method to calculate the input numbers
     public void Calculate()
     {
-        if (symbol == '/' && num2 == 0)
+        if (symbol == '/' && secondNum == 0)
         {
             Console.WriteLine("Cannot divide by zero.");
         }
         else
         {
-            double result = chosenOpe.Perform(num1, num2);
-            num1 = result; // Update num1 for further calculations
+            double result = chosenOpe.Perform(firstNum, secondNum);
+            firstNum = result; // Update num1 for further calculations
         }
     }
 
@@ -166,7 +166,7 @@ class Program
         {
             Console.WriteLine("\n+----------+----------+----------+----------+----------+");
 
-            calculator.num1 = calculator.InputNum(); // Get the first input number from user
+            calculator.firstNum = calculator.InputNum(); // Get the first input number from user
 
             // Loop to get the operator symbol and perform the calculations
             while (true)
@@ -176,11 +176,11 @@ class Program
                 // Check if '=' is entered so it can display the result
                 if (calculator.symbol == '=')
                 {
-                    Console.WriteLine($"\nResult: {calculator.num1}");
+                    Console.WriteLine($"\nResult: {calculator.firstNum}");
                     break;
                 }
 
-                calculator.num2 = calculator.InputNum(); // Get the second (or further) number/s from user
+                calculator.secondNum = calculator.InputNum(); // Get the second (or further) number/s from user
                 calculator.Calculate(); // Perform the calculation based on the operator
             }
 
