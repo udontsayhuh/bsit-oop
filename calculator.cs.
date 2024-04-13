@@ -93,7 +93,7 @@ namespace CalculatorApp
                 {
                     return number;
                 }
-                Console.WriteLine("Input invalid. Please enter a valid number.");
+                Console.WriteLine("Input invalid. Please enter a valid  numbers.");
             }
         }
 
@@ -107,7 +107,7 @@ namespace CalculatorApp
                 {
                     return operation;
                 }
-                Console.WriteLine("Operation invalid. Please enter a valid operation symbol.");
+                Console.WriteLine("Operation invalid. Please enter a valid  operation symbols.");
             }
         }
 
