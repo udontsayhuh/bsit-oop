@@ -3,6 +3,7 @@
 // Prompt user to enter valid input: /
 // Input several values: /
 // Applied OOP principles: Abstraction, Polymorphism, & Encapsulation
+// Cleaned and Refactored
 
 using System;
 
