@@ -2,27 +2,33 @@ using System;
 
 namespace Calculator_Program
 {
-    public class Program
+    public class Calculator
     {
         static void Main(string[] args)
         {
             do
             {
+                //Clear the screen
                 Console.Clear();
-
-                Console.WriteLine("\n-----------------------------------------------------------------");
-                Console.WriteLine("                         Calculator Program                      ");
-                Console.WriteLine("-----------------------------------------------------------------");
+                
+                //Display program header
+                Console.WriteLine("\n          --------------------------------------------------------------------------");
+                Console.WriteLine("         |                  ||                                   ||                 |");
+                Console.WriteLine("         |                  ||                                   ||                 |");
+                Console.WriteLine("         |                  ||         Calculator Program        ||                 |");
+                Console.WriteLine("         |                  ||                                   ||                 |");
+                Console.WriteLine("         |                  ||                                   ||                 |");
+                Console.WriteLine("          --------------------------------------------------------------------------");
 
                 double result = 0;
-                double currentNum = 0;
+                double CurrentNum = 0;
                 char mathOperator = ' ';
-                bool isFirstInput = true;
+                bool IsFirstNumberInput = true;
 
                 do
                 {
                     // Get the operator
-                    if (!isFirstInput)
+                    if (!IsFirstNumberInput)
                     {
                         Console.Write("Enter the operation (+, -, *, /, =): ");
                         while (true)
@@ -36,6 +42,7 @@ namespace Calculator_Program
                                 Console.WriteLine("   * (to multiply)");
                                 Console.WriteLine("   / (to divide) ");
                                 Console.WriteLine("   = (to get the final result)");
+                                Console.Write("\nThe operation is:  ");
                             }
                             else
                             {
@@ -59,10 +66,10 @@ namespace Calculator_Program
                         input = Console.ReadLine();
                     }
 
-                    if (isFirstInput)
+                    if (IsFirstNumberInput)
                     {
-                        currentNum = num;
-                        isFirstInput = false;
+                        CurrentNum = num;
+                        IsFirstNumberInput = false;
                         continue;
                     }
                     else
@@ -71,39 +78,46 @@ namespace Calculator_Program
                         switch (mathOperator)
                         {
                             case '+':
-                                result = currentNum + num;
+                                result = CurrentNum + num;
                                 break;
                             case '-':
-                                result = currentNum - num;
+                                result = CurrentNum - num;
                                 break;
                             case '*':
-                                result = currentNum * num;
+                                result = CurrentNum * num;
                                 break;
                             case '/':
                                 if (num != 0)
-                                    result = currentNum / num;
+                                    result = CurrentNum / num;
                                 else
                                     Console.WriteLine("\n------Division by zero (0) is not allowed.------");
                                 break;
                             default:
-                                result = currentNum;
+                                result = CurrentNum;
                                 break;
                         }
 
-                        // Update currentNum with the new number
-                        currentNum = result;
+                        // Update CurrentNum with the new number
+                        CurrentNum = result;
                     }
 
-                } while (true);
+                }
 
+                while (true);
+
+                //Display final result 
                 Console.WriteLine($"\n\nResult: {result}");
 
+                //Ask if the user wants to perform another calculation and starts again from the beginning 
                 Console.WriteLine("\nDo you want to perform another calculation? (Y/N)");
                 string repeatInput = Console.ReadLine();
                 if (repeatInput.ToUpper() != "Y")
                     break;
 
-            } while (true);
+            }
+
+            while (true);
         }
     }
 }
+
