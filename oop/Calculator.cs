@@ -1,164 +1,196 @@
+using System;
 using System.Collections;
 
-class Calculator
+class BaseCalculator
 {
-    private double num1;
-    private double result;
-    private char operator1;
-    private char repeat;
+    protected double numberInput;
+    protected double calculatorResult;
+    protected char operatorInput;
+    protected char repeatCalculate;
+    protected readonly ArrayList inputList;
 
-    public void Calculate()
+    // Constructor
+    public BaseCalculator()
     {
-        var arlist = new ArrayList();
+        numberInput = 0;
+        calculatorResult = 0;
+        operatorInput = '+';
+        inputList = [];
+    }
+
+    protected virtual void DefaultValues()
+    {
+        calculatorResult = 0;
+        operatorInput = '+';
+        inputList.Clear();
+    }
+
+    public virtual void Calculate()
+    {
+    }
+
+    protected virtual void UserInput()
+    {
+    }
+
+    protected virtual void PerformCalculation()
+    {
+    }
+
+    protected virtual void DisplayList()
+    {
+    }
+}
+
+class GeneralCalculator : BaseCalculator
+{
+    public override void Calculate()
+    {
+        Console.Clear();
+        DefaultValues();
+        UserInput();
+    }
+
+    protected override void UserInput()
+    {
         while (true)
         {
-            Console.Clear();
-            result = 0;
-            operator1 = '+';
-            arlist.Clear();
-
+            // Number Input
             while (true)
             {
-                while (true)
+                Console.Clear();
+                Console.WriteLine("(enter a number)");
+                DisplayList();
+
+                try
                 {
-                    Console.Clear();
-                    Console.WriteLine("(enter a number)");
-                    if (arlist.Count != 0)
-                    {
-                        foreach (var item in arlist)
-                        {
-                            Console.Write($"{item} ");
-                        }
-                    }
+                    numberInput = double.Parse(Console.ReadLine());
 
-                    if (!double.TryParse(Console.ReadLine(), out num1))
+                    if (operatorInput == '/' && numberInput == 0)
                     {
-                        Console.WriteLine("Invalid number. Please enter a valid number.");
+                        Console.WriteLine("\nError! Cannot divide by zero!");
                         Console.ReadKey();
-                        continue;
-                    }
-                    else if (operator1 == '/' && num1 == 0)
-                    {
-                        Console.WriteLine("Cannot divide by zero!");
-                        Console.ReadKey();
-                        result = 0;
-                        operator1 = '+';
-                        arlist.Clear();
-                        continue;
-                    }
-                    else
-                    {
-                        arlist.Add(num1);
-                        break;
-                    }
-                }
-
-                switch (operator1)
-                {
-                    case '+':
-                        result += num1;
-                        break;
-                    case '-':
-                        result -= num1;
-                        break;
-                    case '*':
-                        result *= num1;
-                        break;
-                    case '/':
-                        if (num1 == 0)
-                        {
-                            Console.WriteLine("Cannot divide by zero.");
-                            Console.ReadKey();
-                            break;
-                        }
-                        result /= num1;
-                        break;
-                }
-
-                while (true)
-                {
-                    Console.Clear();
-                    Console.WriteLine("(enter + - * / or = to calculate)");
-                    if (arlist.Count != 0)
-                    {
-                        foreach (var item in arlist)
-                        {
-                            Console.Write($"{item} ");
-                        }
-                    }
-
-                    if (!char.TryParse(Console.ReadLine(), out operator1))
-                    {
-                        Console.WriteLine("Invalid operator. Please enter a valid operator (+ - * / =).");
-                        Console.ReadKey();
+                        DefaultValues();
                         continue;
                     }
 
-                    if (operator1 == '=')
-                    {
-                        arlist.Add(operator1);
-                        break;
-                    }
-                    else if (!(operator1 == '+' || operator1 == '-' || operator1 == '*' || operator1 == '/'))
-                    {
-                        Console.WriteLine("Invalid operator. Please enter a valid operator (+ - * / =).");
-                        Console.ReadKey();
-                        continue;
-                    }
-                    else
-                    {
-                        arlist.Add(operator1);
-                        break;
-                    }
-                }
-
-                if (operator1 == '=')
-                {
+                    inputList.Add(numberInput);
                     break;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("\nInvalid input. Please enter a valid numeric value.");
+                    Console.ReadKey();
+                    continue;
                 }
             }
 
+            PerformCalculation();
+
+            // Operator Input
             while (true)
             {
-                while (true)
-                {
-                    Console.Clear();
-                    foreach (var item in arlist)
-                    {
-                        Console.Write($"{item} ");
-                    }
-                    Console.Write($"{result}");
+                Console.Clear();
+                Console.WriteLine("(enter + - * / or = to calculate)");
+                DisplayList();
 
-                    Console.Write("\n\nDo you want to continue? (Y/N): ");
-                    if (!char.TryParse(Console.ReadLine().ToUpper(), out repeat) || !(repeat == 'Y' || repeat == 'N'))
+                try
+                {
+                    operatorInput = char.Parse(Console.ReadLine().Trim());
+
+                    if (operatorInput != '+' && operatorInput != '-' && operatorInput != '*' && operatorInput != '/' && operatorInput != '=')
                     {
-                        Console.WriteLine("Invalid input. Please enter Y or N.");
+                        Console.WriteLine("\nInvalid operator. Please enter a valid operator (+ - * / =).");
                         Console.ReadKey();
                         continue;
                     }
                     else
                     {
+                        inputList.Add(operatorInput);
                         break;
                     }
-
                 }
-
-
-                if (repeat == 'N')
+                catch (FormatException)
                 {
-                    Console.WriteLine("Program has terminated.");
+                    Console.WriteLine("\nInvalid operator. Please enter a valid operator (+ - * / =).");
                     Console.ReadKey();
-                    return;
+                    continue;
                 }
-                else if (repeat == 'Y')
+            }
+
+            if (operatorInput == '=')
+            {
+                return;
+            }
+        }
+    }
+
+    protected override void PerformCalculation()
+    {
+        switch (operatorInput)
+        {
+            case '+':
+                calculatorResult += numberInput;
+                break;
+            case '-':
+                calculatorResult -= numberInput;
+                break;
+            case '*':
+                calculatorResult *= numberInput;
+                break;
+            case '/':
+                calculatorResult /= numberInput;
+                break;
+        }
+    }
+
+    protected override void DisplayList()
+    {
+        if (inputList.Count != 0)
+        {
+            foreach (var item in inputList)
+            {
+                Console.Write($"{item} ");
+            }
+        }
+
+    }
+
+    public bool AskForRepeat()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.Write("\n");
+            DisplayList();
+            Console.Write($"{calculatorResult}\n");
+            Console.Write("\nDo you want to continue? (Y/N): ");
+
+            try
+            {
+                repeatCalculate = char.Parse(Console.ReadLine().Trim().ToUpper());
+                if (repeatCalculate == 'N')
                 {
-                    break;
+                    Console.WriteLine("\nExiting Calculator...");
+                    Console.ReadKey();
+                    return false;
+                }
+                else if (repeatCalculate == 'Y')
+                {
+                    return true;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter Y or N.");
+                    Console.WriteLine("\nInvalid input. Please enter either Y to continue or N to terminate the program.");
                     Console.ReadKey();
+                    continue;
                 }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("\nInvalid input. Please enter either Y to continue or N to terminate the program.");
+                Console.ReadKey();
+                continue;
             }
         }
     }
@@ -168,11 +200,29 @@ class Program
 {
     static void Main(string[] args)
     {
-        Calculator calculator = new Calculator();
-        calculator.Calculate();
+        GeneralCalculator calculator = new();
+
+        while (true)
+        {
+            calculator.Calculate(); // Start the calculation process
+            if (!calculator.AskForRepeat()) break; // Ask if the user wants to repeat the calculation
+        }
     }
 }
 
-// Only Encapsulation and Abstraction are used in this code.
-// Encapsulation: The class Calculator is an example of encapsulation. It encapsulates the data and methods that operate on the data.
-// Abstraction: The class Calculator is an example of abstraction. It hides the implementation details of the calculation process and provides a simple interface for the user to interact with.
+// Encapsulation: Encapsulation is implemented through the use of private and protected access modifiers for data members,
+// and properties are used to control access to these members. For example, properties like NumberInput, CalculatorResult,
+// OperatorInput, and RepeatCalculate encapsulate their respective data members and provide controlled access to them.
+
+// Abstraction: Abstraction is achieved by hiding the internal implementation details of methods and data structures.
+// The BaseCalculator class exposes only the necessary methods and properties for performing calculations and interacting
+// with the calculator, hiding the complexity of the underlying operations.
+
+// Inheritance: Inheritance is demonstrated by the GeneralCalculator class inheriting from the BaseCalculator class.
+// This allows GeneralCalculator to inherit the properties and methods of BaseCalculator, promoting code reusability and
+// establishing an "is-a" relationship between the two classes.
+
+// Polymorphism: Polymorphism is implemented through method overriding in the GeneralCalculator class.
+// Methods like Calculate, UserInput, PerformCalculation, DisplayList, and AskForRepeat are overridden with specific
+// implementations in GeneralCalculator, allowing for different behaviors based on the context of GeneralCalculator
+// while maintaining a common interface defined in BaseCalculator.
