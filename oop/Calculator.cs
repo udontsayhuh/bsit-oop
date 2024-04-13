@@ -2,33 +2,33 @@ using System;
 
 namespace MyCalculator
 {
-    class Calculator // Demonstrates Encapsulation with private members
+    class Calculator // Demonstrates encapsulation with private members
     {
-        private double accumulator;
+        private double _accumulator;
 
         public Calculator() // Constructor
         {
-            accumulator = 0;
+            _accumulator = 0;
         }
 
         public double Accumulator
         {
-            get { return accumulator; }
-            set { accumulator = value; }
+            get { return _accumulator; }
+            set { _accumulator = value; }
         }
 
-        public double PerformOperation(double number, char op)
+        public double PerformOperation(double number, char operation)
         {
-            switch (op)
+            switch (operation)
             {
                 case '+':
-                    accumulator += number;
+                    _accumulator += number;
                     break;
                 case '-':
-                    accumulator -= number;
+                    _accumulator -= number;
                     break;
                 case '*':
-                    accumulator *= number;
+                    _accumulator *= number;
                     break;
                 case '/':
                     if (number == 0)
@@ -36,13 +36,13 @@ namespace MyCalculator
                         Console.WriteLine("Error: Division by zero.");
                         return double.NaN; // Indicate error by returning NaN
                     }
-                    accumulator /= number;
+                    _accumulator /= number;
                     break;
                 default:
                     Console.WriteLine("Invalid operation.");
                     return double.NaN;
             }
-            return accumulator;
+            return _accumulator;
         }
     }
 
@@ -55,29 +55,29 @@ namespace MyCalculator
             Console.WriteLine("Basic Calculator Program");
 
             double currentNumber;
-            char currentOp = '+';
+            char currentOperation = '+';
 
             while (true)
             {
-                double num = GetUserNumber("Enter a numerical value: ");
-                if (num == double.NaN) 
+                double number = GetUserNumber("Enter a numerical value: ");
+                if (double.IsNaN(number)) // Returns true if value is not a number.
                     continue;
 
-                calculator.PerformOperation(num, currentOp);
+                calculator.PerformOperation(number, currentOperation);
 
-                char op = GetOperation();
-                if (op == '=')
+                char operation = GetOperation();
+                if (operation == '=')
                 {
                     Console.WriteLine("Final result: " + calculator.Accumulator);
                     if (!PromptForAnotherCalculation())
                         break;
                     calculator.Accumulator = 0;
-                    currentOp = '+';
+                    currentOperation = '+';
                     Console.Clear();
                     continue;
                 }
 
-                currentOp = op;
+                currentOperation = operation;
             }
 
             Console.WriteLine("Goodbye");
@@ -99,20 +99,20 @@ namespace MyCalculator
 
         static char GetOperation()
         {
-            char op = ' ';
+            char operation = ' ';
             while (true)
             {
                 Console.Write("Enter an operation (+, -, *, /, =): ");
                 string input = Console.ReadLine().Trim();
                 if (input.Length == 1 && (input[0] == '+' || input[0] == '-' || input[0] == '*' || input[0] == '/' || input[0] == '=')) // Check validity of input
                 {
-                    op = input[0];
+                    operation = input[0];
                     break;
                 }
                 else
                     Console.WriteLine("Invalid operation. Please enter a valid operation.");
             }
-            return op;
+            return operation;
         }
 
         static bool PromptForAnotherCalculation()
