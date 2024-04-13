@@ -3,7 +3,7 @@ using System;
 namespace Calculator
 {
     // option class represents a calculator operation
-    public class Option
+    public class CalculatorOption
     {
         // fields that store the nums, results, and operation
         public double num1 = 0;
@@ -31,7 +31,7 @@ namespace Calculator
 
         //method to display and get the valid operator options from the user
         //encapsulation
-        public void GetOptions()
+        public void GetOperation()
         {
             do
             {
@@ -92,14 +92,14 @@ namespace Calculator
             bool runAgain;
             do
             {
-                Option userOption = new Option();
+                CalculatorOption userOption = new CalculatorOption();
                 Console.WriteLine("------------------------------");
                 Console.WriteLine("Welcome to Calculator Program!");
                 Console.WriteLine("------------------------------");
                 userOption.num1 = userOption.GetValue();   //get the first number
                 do
                 {
-                    userOption.GetOptions(); //get the operation
+                    userOption.GetOperation(); //get the operation
                     if (userOption.operation != "=")
                     {
                         userOption.num2 = userOption.GetValue(); //get the second num
