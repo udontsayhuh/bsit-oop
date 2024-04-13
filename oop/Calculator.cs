@@ -9,7 +9,7 @@ namespace oop
     class SimpleCalculator
     {
         //Stores the expression
-        public string expression = "";
+        public string expression = String.Empty;
 
         //Calculator Logic
         public void CalculatorMain()
