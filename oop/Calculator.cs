@@ -4,44 +4,39 @@ using System;
 abstract class Operation
 {
     // Method signature for performing an operation
-    public abstract double Perform(double num1, double num2);
+    public abstract double Execute(double num1, double num2);
 }
 
-// Concrete subclass for addition operation
+// Concrete subclass for operation
 class AdditionOperation : Operation
 {
-    // Implementation of the addition operation
-    public override double Perform(double num1, double num2)
+    public override double Execute(double num1, double num2)
     {
         return num1 + num2;
     }
 }
 
-// Concrete subclass for subtraction operation
+
 class SubtractionOperation : Operation
 {
-    // Implementation of the subtraction operation
-    public override double Perform(double num1, double num2)
+    public override double Execute(double num1, double num2)
     {
         return num1 - num2;
     }
 }
 
-// Concrete subclass for multiplication operation
 class MultiplicationOperation : Operation
 {
-    // Implementation of the multiplication operation
-    public override double Perform(double num1, double num2)
+
+    public override double Execute(double num1, double num2)
     {
         return num1 * num2;
     }
 }
 
-// Concrete subclass for division operation
 class DivisionOperation : Operation
 {
-    // Implementation of the division operation
-    public override double Perform(double num1, double num2)
+    public override double Execute(double num1, double num2)
     {
         if (num2 == 0)
         {
@@ -77,13 +72,13 @@ class Calculator
         switch (op)
         {
             case '+':
-                return addition.Perform(num1, num2);
+                return addition.Execute(num1, num2);
             case '-':
-                return subtraction.Perform(num1, num2);
+                return subtraction.Execute(num1, num2);
             case '*':
-                return multiplication.Perform(num1, num2);
+                return multiplication.Execute(num1, num2);
             case '/':
-                return division.Perform(num1, num2);
+                return division.Execute(num1, num2);
             default:
                 Console.WriteLine("Invalid operator.");
                 return double.NaN;
@@ -113,7 +108,7 @@ class Program
             bool isFirstValue = true;
             char prevOperator = '+';
 
-            Calculator calculator = new Calculator(); // Instantiate a basic calculator
+            Calculator calculator = new Calculator();
 
             // Loop to handle user inputs for calculations
             while (true)
@@ -171,10 +166,8 @@ class Program
             Console.WriteLine("Do you want to start a new calculation session? (yes/no)");
             string response = Console.ReadLine().ToLower();
             if (response != "yes")
-                
             {
                 repeat = false;
-                
             }
         }
     }
