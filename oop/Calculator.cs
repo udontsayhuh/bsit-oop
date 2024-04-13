@@ -37,25 +37,21 @@ namespace oop
                 //Prompts user to input Y or N, will not terminate unless Y or N
                 while (true)
                 {
-                    try
+                    Console.Write("Try Again? (Y/N): ");
+                    string yes_no = Console.ReadLine()?.ToUpper()?? String.Empty;
+
+                    if (yes_no == "Y")
                     {
-                        Console.Write("Try Again? (Y/N): ");
-                        string yes_no = Console.ReadLine().ToUpper();
-                        if (yes_no == "Y")
-                        {
-                            expression = String.Empty;
-                            break;
-                        }
-                        else if (yes_no == "N")
-                        {
-                            will_try_again = false;
-                            Console.Clear();
-                            break;
-                        }
-                        else
-                            Console.WriteLine("Y or N only!");
+                        expression = String.Empty;
+                        break;
                     }
-                    catch
+                    else if (yes_no == "N")
+                    {
+                        will_try_again = false;
+                        Console.Clear();
+                        break;
+                    }
+                    else
                     {
                         Console.WriteLine("Y or N only!");
                     }
@@ -67,22 +63,22 @@ namespace oop
         {
             while (true)
             {
-                try
+                PrintExpression();
+                Console.Write("Enter number: ");
+                string? input = Console.ReadLine();
+                if (double.TryParse(input, out double num))
                 {
-                    PrintExpression();
-                    Console.Write("Enter number: ");
-                    double num = Convert.ToDouble(Console.ReadLine());
                     if (num < 0)
-                        expression = $"{expression} ({Convert.ToString(num)})";
+                        expression = $"{expression} ({num})";
                     else
-                        expression = $"{expression} {Convert.ToString(num)}"; //Adds the input to expression
+                        expression = $"{expression} {num}"; //Adds the input to expression
                     Console.Clear();
                     return num;
                 }
-                catch (Exception ex)
+                else
                 {
                     Console.Clear();
-                    Console.WriteLine("INVALID INPUT: " + ex.Message);
+                    Console.WriteLine("INVALID INPUT: Please enter a valid number.");
                 }
             }
         }
@@ -91,29 +87,25 @@ namespace oop
         {
             while (true)
             {
-                try
+                PrintExpression();
+                Console.Write("Enter Operator (+, -, /, *, =): ");
+                string? input = Console.ReadLine();
+
+                if (input?.Length == 1)
                 {
-                    PrintExpression();
-                    Console.Write("Enter Operator ( + , - , / , * , = ): ");
-                    char operation = Convert.ToChar(Console.ReadLine());
+                    char operation = input[0];
                     if (operation == '+' || operation == '-' || operation == '/' || operation == '*' || operation == '=')
                     {
-                        expression = $"{expression} {operation}"; //Adds input to expression
+                        expression = $"{expression} {operation}"; // Adds input to expression
                         Console.Clear();
                         return operation;
                     }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Invalid Operator");
-                    }
                 }
-                catch (Exception ex)
-                {
-                    Console.Clear();
-                    Console.WriteLine("INVALID INPUT: " + ex.Message);
-                }
+
+                Console.Clear();
+                Console.WriteLine("Invalid Operator");
             }
+
         }
 
         public double Calculate(double num_1, char operation, double num_2) //Calculates result
@@ -188,15 +180,14 @@ namespace oop
             bool exit_program = false;
             while (!exit_program)
             {
-                try
-                {
-                    Console.WriteLine("Choose Calculator type:");
-                    Console.WriteLine("NOTE: CALCULATOR CALCULATES LEFT TO RIGHT, NO PEMDAS!");
-                    Console.WriteLine("1 Simple Calculator");
-                    Console.WriteLine("2 Binary Calculator");
-                    Console.WriteLine("3 EXIT");
+                Console.WriteLine("Choose Calculator type:");
+                Console.WriteLine("NOTE: CALCULATOR CALCULATES LEFT TO RIGHT, NO PEMDAS!");
+                Console.WriteLine("1 Simple Calculator");
+                Console.WriteLine("2 Binary Calculator");
+                Console.WriteLine("3 EXIT");
 
-                    int choice = Convert.ToInt32(Console.ReadLine());
+                if (int.TryParse(Console.ReadLine(), out int choice))
+                {
                     switch (choice)
                     {
                         case 1:
@@ -216,12 +207,13 @@ namespace oop
                             break;
                     }
                 }
-                catch
+                else
                 {
                     Console.Clear();
-                    Console.WriteLine("Enter 1, 2, or 3 only!!!!");
+                    Console.WriteLine("Enter a valid integer!");
                 }
             }
+
         }
     }
 }
