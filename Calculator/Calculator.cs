@@ -1,9 +1,7 @@
-﻿//continuous calcu
+﻿// push change
+//continuous calcu
 
 using System;
-using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 // abstract class (OOP Concepts application)
 public abstract class Calculator
