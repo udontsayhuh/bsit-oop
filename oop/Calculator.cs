@@ -1,3 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+// ACTIVITY 2: REVISED CALCULATOR FOR LOOPING AND ALLOWING SEVERAL VALUES UNTIL = IS ENTERED
+
+// ABSTRACTION: here po, i applied the concept of abstraction by creating an abstract class called Calculator bali po, nagdedefine ito sa method na Calculate without specifying pano ito nagiimplement
+// INHERITANCE: and then created four classes that inherit from the Calculator class (INHERITANCE)
+// POLYMORPHISM: i created a method called Calculate in the Calculator class and then overrode it in the four classes (POLYMORPHISM)
+// ENCAPSULATION: para naman po sa encapsulation, i used the access modifier private to hide the implementation details of the classes and only expose the Calculate method. for instance po, the AddCalculator class only has the Calculate method and the rest of the methods are hidden from the user.
 public abstract class Calculator
 {
     public abstract double Calculate(double[] numbers);
