@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 
 //*** Abstraction :3 ***
-abstract class invalid_0 {
+abstract class Invalid_0 {
     //Method
-    virtual public void error_messsage() {
+    virtual public void ErrorMesssage() {
         Console.WriteLine("Invalid because of something");
     }
 
@@ -12,41 +12,41 @@ abstract class invalid_0 {
 
 //*** Inheritance :3 ***
 //*** Polymorphism :3 ***
-class invalid_1 : invalid_0 
+class Invalid_1 : Invalid_0 
 {
-    override public void error_messsage() 
+    override public void ErrorMesssage() 
     {
         Console.WriteLine("Invalid! You must enter a valid number");
     }
 }
 
-class invalid_2 : invalid_0 
+class Invalid_2 : Invalid_0 
 {
-    override public void error_messsage() 
+    override public void ErrorMesssage() 
     {
         Console.WriteLine("Invalid! You cannot divide by 0. Enter a non-zero number");
     }
 }
 
-class invalid_3 : invalid_0 
+class Invalid_3 : Invalid_0 
 {
-    override public void error_messsage() 
+    override public void ErrorMesssage() 
     {
         Console.WriteLine("Invalid! first operation must not be =");
     }
 }
 
-class invalid_4 : invalid_0 
+class Invalid_4 : Invalid_0 
 {
-    override public void error_messsage() 
+    override public void ErrorMesssage() 
     {
         Console.WriteLine("Invalid! You must enter +, -, *, /, or =");
     }
 }
 
-class invalid_5 : invalid_0 
+class Invalid_5 : Invalid_0 
 {
-    override public void error_messsage() 
+    override public void ErrorMesssage() 
     {
         Console.WriteLine("Invalid! You must enter 'Yes' or 'No'\n");
     }
@@ -56,18 +56,18 @@ class Calculator
 {
     static void Main(string[] args) {
 
-        invalid_0 IE1 = new invalid_1();
-        invalid_0 IE2 = new invalid_2();
-        invalid_0 IE3 = new invalid_3();
-        invalid_0 IE4 = new invalid_4();
-        invalid_0 IE5 = new invalid_5();
+        Invalid_0 IE1 = new Invalid_1();
+        Invalid_0 IE2 = new Invalid_2();
+        Invalid_0 IE3 = new Invalid_3();
+        Invalid_0 IE4 = new Invalid_4();
+        Invalid_0 IE5 = new Invalid_5();
         
     {
         // Starting Loop
         while (true) 
         {
-            List<double> numbers = new List<double>();
-            List<char> operations = new List<char>();
+            List<double> Numbers = new List<double>();
+            List<char> Operations = new List<char>();
 
             bool hasPerformedCalculation = false;
 
@@ -80,7 +80,7 @@ class Calculator
                     string input = Console.ReadLine();
                     
 
-                    if (input == "=" && numbers.Count >= 1 && numbers.Count == operations.Count)
+                    if (input == "=" && Numbers.Count >= 1 && Numbers.Count == Operations.Count)
                     {
                         break;
                     }
@@ -88,9 +88,9 @@ class Calculator
                     double num;
                     if (double.TryParse(input, out num))
                     {
-                        if (num == 0 && operations.Count > 0 && operations[operations.Count - 1] == '/')
+                        if (num == 0 && Operations.Count > 0 && Operations[Operations.Count - 1] == '/')
                         {
-                            IE2.error_messsage();
+                            IE2.ErrorMesssage();
                             continue;
                         }
                         numbers.Add(num);
@@ -100,22 +100,22 @@ class Calculator
                     {
                         break;
                     }
-                    else if (input == "=" && numbers.Count >= 1 && numbers.Count != operations.Count)
+                    else if (input == "=" && Numbers.Count >= 1 && Numbers.Count != Operations.Count)
                     {
-                        IE1.error_messsage();
+                        IE1.ErrorMesssage();
                     }
                     else if (input == "=")
                     {
-                        IE1.error_messsage();
+                        IE1.ErrorMesssage();
                     }
                     else
                     {
-                        IE1.error_messsage();
+                        IE1.ErrorMesssage();
                     }
                 }
 
                 // Equals
-                if (numbers.Count >= 1 && numbers.Count == operations.Count && operations.Contains('='))
+                if (Numbers.Count >= 1 && Numbers.Count == Operations.Count && Operations.Contains('='))
                 {
                     break;
                 }
@@ -129,54 +129,54 @@ class Calculator
 
                     if (input.Length == 1 && "+-*/=".Contains(input))
                     {
-                        if (input == "=" && numbers.Count == 0) // '=' is not allowed as the first operation
+                        if (input == "=" && Numbers.Count == 0) // '=' is not allowed as the first operation
                         {
-                            IE1.error_messsage();
+                            IE1.ErrorMesssage();
                         }
-                        else if (input == "=" && operations.Count == 0)
+                        else if (input == "=" && Operations.Count == 0)
                         {
-                            IE3.error_messsage();
+                            IE3.ErrorMesssage();
                             continue;
                         }
                         else
                         {
-                            operations.Add(input[0]);
+                            Operations.Add(input[0]);
                         }
                         break;
                     }
                     else
                     {
-                        IE4.error_messsage();
+                        IE4.ErrorMesssage();
                     }
                 }
 
                 // Calculations
-                double result = numbers[0];
-                if (numbers.Count >= 2 && numbers.Count == operations.Count && operations.Contains('='))
+                double result = Numbers[0];
+                if (Numbers.Count >= 2 && Numbers.Count == Operations.Count && Operations.Contains('='))
                 {
                     
-                    for (int i = 0; i < operations.Count; i++)
+                    for (int i = 0; i < Operations.Count; i++)
                     {
-                        if (operations[i] == '/' && numbers[i + 1] == 0)
+                        if (Operations[i] == '/' && Numbers[i + 1] == 0)
                         {
                             IE2.error_messsage();
                             hasPerformedCalculation = false;
                             break;
                         }
 
-                        switch (operations[i])
+                        switch (Operations[i])
                         {
                             case '+':
-                                result += numbers[i + 1];
+                                result += Numbers[i + 1];
                                 break;
                             case '-':
-                                result -= numbers[i + 1];
+                                result -= Numbers[i + 1];
                                 break;
                             case '*':
-                                result *= numbers[i + 1];
+                                result *= Numbers[i + 1];
                                 break;
                             case '/':
-                                result /= numbers[i + 1];
+                                result /= Numbers[i + 1];
                                 break;
                         }
                     }
@@ -185,8 +185,8 @@ class Calculator
                     hasPerformedCalculation = true;
 
                     // Clear Index Values
-                    numbers.Clear();
-                    operations.Clear();
+                    Numbers.Clear();
+                    Operations.Clear();
 
                     // Try Again
                     while (true)
@@ -211,7 +211,7 @@ class Calculator
                         // Ask
                         else
                         {
-                            IE5.error_messsage();
+                            IE5.ErrorMesssage();
                         }
                     }
                 }
