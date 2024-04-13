@@ -43,16 +43,17 @@ class Division : Operation
 {
     public override double PerformOperation(double num1, double num2)
     {
-        if (num2 != 0)
-            return num1 / num2;
-        else
+        if (num2 == 0)
+        {
             throw new DivideByZeroException("Cannot divide by zero");
+        }
+        return num1 / num2;
     }
 }
 
 class Calculator
 {
-    // Method to get user input, validate and display output
+    // Method to get user input, validate, and display output
     public void PerformCalculation()
     {
         List<double> numbers = new List<double>();
@@ -60,14 +61,17 @@ class Calculator
 
         Console.WriteLine("\nEnter numbers and operators alternately, end with '=':");
 
-        bool expectNumber = true; //input should be a number
-        //loop for user input
+        bool expectNumber = true; // Input should be a number
+
+        // Loop for user input
         while (true)
         {
             string input = Console.ReadLine();
 
             if (input == "=")
+            {
                 break;
+            }
 
             double number;
             if (double.TryParse(input, out number))
@@ -75,7 +79,7 @@ class Calculator
                 if (expectNumber)
                 {
                     numbers.Add(number);
-                    expectNumber = false; //input should be an operator
+                    expectNumber = false; // Input should be an operator
                 }
                 else
                 {
@@ -100,14 +104,14 @@ class Calculator
             }
         }
 
-        // To check if the expression is incomplete
+        // Check if the expression is incomplete
         if (numbers.Count != operators.Count + 1)
         {
             Console.WriteLine("Invalid input. Input an operator.");
             return;
         }
 
-        // To perform calculation of the expression
+        // Perform calculation of the expression
         double result = numbers[0];
         for (int i = 0; i < operators.Count; i++)
         {
@@ -116,15 +120,19 @@ class Calculator
             result = PerformOperation(result, nextNumber, op);
         }
 
-        Console.WriteLine($"Result: {result}"); //to display result
+        Console.WriteLine($"Result: {result}"); // Display result
 
-        //To prompt the user if they want to perform another calculation
+        // Prompt the user if they want to perform another calculation
         Console.Write("\nDo you want to perform another calculation? (y/n): ");
         string response = Console.ReadLine().ToLower();
         if (response == "n")
+        {
             Environment.Exit(0);
+        }
         else if (response != "y")
+        {
             Console.WriteLine("Invalid input. Please enter 'y' or 'n'.");
+        }
     }
 
     // Method to perform arithmetic operation based on operator
@@ -152,6 +160,7 @@ class Calculator
         return operation.PerformOperation(num1, num2);
     }
 }
+
 // Main 
 class Program
 {
