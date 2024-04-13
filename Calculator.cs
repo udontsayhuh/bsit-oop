@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace CalculatorApp
 {
@@ -54,9 +55,9 @@ namespace CalculatorApp
 
                 while (input != "=")
                 {
-                    if (!IsValidNumber(input) && input != "+" && input != "-" && input != "*" && input != "/")
+                    if (!IsValidNumber(input) && !IsValidOperator(input[0]))
                     {
-                        Console.WriteLine("Invalid input. Please enter a numerical value, '+' '-' '*' '/' or '=' to calculate.");
+                        Console.WriteLine("Invalid input. Please enter a numerical value, '+', '-', '*', '/', or '=' to calculate.");
                         input = Console.ReadLine();
                         continue;
                     }
@@ -67,7 +68,7 @@ namespace CalculatorApp
                     }
                     else
                     {
-                        operators.Add(char.Parse(input));
+                        operators.Add(input[0]);
                     }
 
                     input = Console.ReadLine();
@@ -93,7 +94,7 @@ namespace CalculatorApp
                     Console.WriteLine("Do you want to perform another calculation? (yes/no)");
                     string choice = Console.ReadLine().ToLower();
 
-                    if (choice != "yes")
+                    if (choice != String.Empty && choice != "yes")
                         repeat = false;
                 }
                 catch (Exception ex)
