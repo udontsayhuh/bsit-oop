@@ -43,7 +43,7 @@ namespace oop
                         string yes_no = Console.ReadLine().ToUpper();
                         if (yes_no == "Y")
                         {
-                            this.expression = "";
+                            expression = String.Empty;
                             break;
                         }
                         else if (yes_no == "N")
@@ -73,9 +73,9 @@ namespace oop
                     Console.Write("Enter number: ");
                     double num = Convert.ToDouble(Console.ReadLine());
                     if (num < 0)
-                        this.expression = this.expression + $" ({Convert.ToString(num)})";
+                        expression = $"{expression} ({Convert.ToString(num)})";
                     else
-                        this.expression = this.expression + $" {Convert.ToString(num)}"; //Adds the input to expression
+                        expression = $"{expression} {Convert.ToString(num)}"; //Adds the input to expression
                     Console.Clear();
                     return num;
                 }
@@ -98,7 +98,7 @@ namespace oop
                     char operation = Convert.ToChar(Console.ReadLine());
                     if (operation == '+' || operation == '-' || operation == '/' || operation == '*' || operation == '=')
                     {
-                        this.expression = this.expression + ' ' + operation; //Adds input to expression
+                        expression = $"{expression} {operation}"; //Adds input to expression
                         Console.Clear();
                         return operation;
                     }
@@ -147,10 +147,10 @@ namespace oop
         public void PrintExpression()
         {
             Console.Write("=");
-            foreach (char c in this.expression)
+            for (int i = 0; i < expression.Length; i++)
                 Console.Write("=");
-            Console.WriteLine("\n" + $"{this.expression}");
-            foreach (char c in this.expression)
+            Console.WriteLine("\n" + $"{expression}");
+            for (int i = 0; i < expression.Length; i++)
                 Console.Write("=");
             Console.Write("=");
             Console.WriteLine("\n\n");
@@ -160,7 +160,7 @@ namespace oop
         public virtual void PrintResult(double result)
         {
             Console.Clear();
-            Console.WriteLine($"\n{this.expression} {result}\n");
+            Console.WriteLine($"\n{expression} {result}\n");
         }
     }
 
@@ -174,9 +174,9 @@ namespace oop
         {
             Console.Clear();
             if (result < 0)
-                Console.WriteLine($"\nResult in Binary: {this.expression} -{Convert.ToString((int)Math.Abs(result), 2)}\n");
+                Console.WriteLine($"\nResult in Binary: {expression} -{Convert.ToString((int)Math.Abs(result), 2)}\n");
             else
-                Console.WriteLine($"\nResult in Binary: {this.expression} {Convert.ToString((int)result, 2)}\n");
+                Console.WriteLine($"\nResult in Binary: {expression} {Convert.ToString((int)result, 2)}\n");
         }
     }
  
