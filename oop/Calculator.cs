@@ -49,6 +49,25 @@ class Calculator
     }
     // main loop. handles the functionalities and provides UI
 
+    private double Calculation()
+    {
+        double result = 0;
+        double currentNumber = GetValidNumber("\tEnter number: ");
+        result = currentNumber;
+
+        while (true) // loop for ongoing calculation within a session
+        {
+            string operationSymbol = GetValidOperationOrEqual();
+            if (operationSymbol == "=")
+            {
+                return result;
+            }
+            double nextNumber = GetValidNumber("\tEnter number: ");
+            Operation operation = GetOperation(operationSymbol);
+            result = operation.Execute(result, nextNumber);
+        }
+    }
+
     public void Start()
     {
         Console.WriteLine("\t\t\t>>>Simple Calculator<<<\n\nEnter operands with an operator in between each. Press '=' to get the result.");
@@ -57,32 +76,17 @@ class Calculator
         bool continueSession = true;
         while (continueSession) // loop for new sessions
         {
-            double result = 0;
-            double currentNumber = GetValidNumber("\tEnter number: ");
-            result = currentNumber;
-
-            while (true) // loop for ongoing calculation within a session
+            try
             {
-                string operationSymbol = GetValidOperationOrEqual();
-                if (operationSymbol == "=")
-                {
-                    Console.WriteLine($"\n\n\t\t\tResult: {result}");
-                    Console.WriteLine("\n--------------------------------------------\n");
-                    break;
-                }
-
-                double nextNumber = GetValidNumber("\tEnter number: ");
-                try // handles and cathes thrown exceptions
-                {
-                    // performs the operation based on user-input
-                    Operation operation = GetOperation(operationSymbol);
-                    result = operation.Execute(result, nextNumber);
-                }
-                catch (DivideByZeroException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                double result = Calculation();
+                Console.WriteLine($"\n\n\t\t\tResult: {result}");
+                Console.WriteLine("\n--------------------------------------------\n");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
             continueSession = AskToContinue(); // start new session
         }
         Console.WriteLine("\n-----------------------------------------------------------------------------");
@@ -126,15 +130,15 @@ class Calculator
         Console.Write("Do you want to start a new session? (y/n): ");
         while (true) 
         {
-            string response = Console.ReadLine().ToLower();
-            if (response.ToLower == "y")
+            var response = Console.ReadLine().ToLower();
+            if (response == "y")
             {
                 Console.WriteLine("\n---------------------------------------------");
                 Console.WriteLine("\n\n\t\t\t>>>New Calculator Session!<<<\n\nEnter operands with an operator in between each. Press '=' to get the result.");
                 Console.WriteLine("-----------------------------------------------------------------------------\n");
                 return true;
             }
-            else if (response.ToLower == "n")
+            else if (response == "n")
             {
                 return false;
             }
@@ -155,3 +159,6 @@ class Program
         calculator.Start();
     }
 }
+
+// i created a new method in class Calculator, Calculation(), to handle the actual calculation logic of the program instead of piling it up together with other functions on Start(), i believe this avoids spaghetti code 
+// i also removed the redundancy of using response.ToLower, i already used the conversion method beforehand and didn't notice it. 
