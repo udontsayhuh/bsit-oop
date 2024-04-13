@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 abstract class Calculator
 {
-    protected double num1;
-    protected double num2;
-    protected List<string> inputs = new List<string>();
+    protected double Num1;
+    protected double Num2;
+    protected List<string> Inputs = new List<string>();
 
     public abstract void Solve();
 
@@ -29,7 +29,7 @@ abstract class Calculator
 
                 if (input == "=")
                 {
-                    if (inputs.Count < 2)
+                    if (Inputs.Count < 2)
                     {
                         Console.WriteLine("Invalid input! Please enter at least one operator and one number before '='.");
                         continue;
@@ -45,7 +45,7 @@ abstract class Calculator
                     continue;
                 }
 
-                inputs.Add(input);
+                Inputs.Add(input);
                 result = number;
                 isFirstInput = false;
                 inputNumber++;
@@ -57,7 +57,7 @@ abstract class Calculator
 
                 if (op == "=")
                 {
-                    if (inputs.Count < 3 || inputs.Count % 2 != 1)
+                    if (Inputs.Count < 3 || Inputs.Count % 2 != 1)
                     {
                         Console.WriteLine("Invalid input! Please enter a number after every operator.");
                         continue;
@@ -103,22 +103,22 @@ abstract class Calculator
                         break;
                 }
 
-                inputs.Add(op);
-                inputs.Add(input);
+                Inputs.Add(op);
+                Inputs.Add(input);
                 inputNumber++;
                 operatorNumber++;
             }
 
-            if (inputs.Count > 0)
+            if (Inputs.Count > 0)
             {
-                Console.WriteLine($"\nCurrent expression: {string.Join(" ", inputs)}\n");
+                Console.WriteLine($"\nCurrent expression: {string.Join(" ", Inputs)}\n");
             }
         }
     }
 
     public void ClearInputs()
     {
-        inputs.Clear();
+        Inputs.Clear();
     }
 }
 
