@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-// ACTIVITY 2: REVISED CALCULATOR FOR LOOPING AND ALLOWING SEVERAL VALUES UNTIL = IS ENTERED
-
-// ABSTRACTION: here po, i applied the concept of abstraction by creating an abstract class called Calculator bali po, nagdedefine ito sa method na Calculate without specifying pano ito nagiimplement
-// INHERITANCE: and then created four classes that inherit from the Calculator class (INHERITANCE)
-// POLYMORPHISM: i created a method called Calculate in the Calculator class and then overrode it in the four classes (POLYMORPHISM)
-// ENCAPSULATION: para naman po sa encapsulation, i used the access modifier private to hide the implementation details of the classes and only expose the Calculate method. for instance po, the AddCalculator class only has the Calculate method and the rest of the methods are hidden from the user.
 public abstract class Calculator
 {
     public abstract double Calculate(double[] numbers);
@@ -69,10 +59,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        DisplayHeader();
+        Console.WriteLine("".PadLeft(42, '='));
+        Console.WriteLine("||".PadRight(40) + "||");
+        Console.WriteLine("||".PadRight(13) + "Migo's Calculator" + "".PadRight(10) + "||");
+        Console.WriteLine("||".PadRight(40) + "||");
+        Console.WriteLine("".PadLeft(42, '='));
 
         while (true)
         {
+            Console.WriteLine();
+            Console.WriteLine("Enter numbers followed by an operator (+, -, *, /) or '=' to calculate:");
+
             List<double> numbers = new List<double>();
             List<string> operators = new List<string>();
 
@@ -85,7 +82,7 @@ class Program
                 {
                     numbers.Add(number);
                 }
-                else if (IsOperator(input))
+                else if (input == "+" || input == "-" || input == "*" || input == "/")
                 {
                     operators.Add(input);
                 }
@@ -95,55 +92,29 @@ class Program
                 }
             } while (input != "=");
 
-            if (IsValidInput(numbers, operators))
+            if (numbers.Count < 2 || operators.Count + 1 != numbers.Count)
             {
-                double result = PerformCalculation(numbers, operators);
-                Console.WriteLine($"The result is: {result}");
+                Console.WriteLine("Invalid input. Please provide correct numbers and operators.");
+                continue;
             }
 
-            if (!ContinueProgram())
+            double result = numbers[0];
+            for (int i = 0; i < operators.Count; i++)
+            {
+                Calculator calculator = GetCalculator(operators[i]);
+                result = calculator.Calculate(new double[] { result, numbers[i + 1] });
+            }
+
+            Console.WriteLine($"The result is: {result}");
+
+            Console.WriteLine();
+            Console.Write("Do you want to perform another calculation from the start? (y/n): ");
+            string continueProgram = Console.ReadLine();
+            if (continueProgram.ToLower() != "y")
             {
                 break;
             }
         }
-    }
-
-    static void DisplayHeader()
-    {
-        Console.WriteLine("".PadLeft(42, '='));
-        Console.WriteLine("||".PadRight(40) + "||");
-        Console.WriteLine("||".PadRight(13) + "Migo's Calculator" + "".PadRight(10) + "||");
-        Console.WriteLine("||".PadRight(40) + "||");
-        Console.WriteLine("".PadLeft(42, '='));
-    }
-
-    static bool IsOperator(string input)
-    {
-        return input == "+" || input == "-" || input == "*" || input == "/";
-    }
-
-    static bool IsValidInput(List<double> numbers, List<string> operators)
-    {
-        return numbers.Count >= 2 && operators.Count + 1 == numbers.Count;
-    }
-
-    static double PerformCalculation(List<double> numbers, List<string> operators)
-    {
-        double result = numbers[0];
-        for (int i = 0; i < operators.Count; i++)
-        {
-            Calculator calculator = GetCalculator(operators[i]);
-            result = calculator.Calculate(new double[] { result, numbers[i + 1] });
-        }
-        return result;
-    }
-
-    static bool ContinueProgram()
-    {
-        Console.WriteLine();
-        Console.Write("Do you want to perform another calculation from the start? (y/n): ");
-        string continueProgram = Console.ReadLine();
-        return continueProgram.ToLower() == "y";
     }
 
     static Calculator GetCalculator(string operatorSymbol)
