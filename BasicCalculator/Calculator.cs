@@ -46,13 +46,13 @@ class BaseCalculator
             switch (operand)
             {
                 case '+':
-                    result += nextNumber;
+                    result = (result) + (nextNumber);
                     break;
                 case '-':
-                    result -= nextNumber;
+                    result = (result) - (nextNumber);
                     break;
                 case '*':
-                    result *= nextNumber;
+                    result = (result) * (nextNumber);
                     break;
                 case '/':
                     if (nextNumber == 0)
@@ -63,7 +63,7 @@ class BaseCalculator
                     }
                     else
                     {
-                        result /= nextNumber;
+                        result = (result) / (nextNumber);
                     }
                     break;
                 default:
@@ -99,8 +99,8 @@ class Calculator
 
     static void Main(string[] args)
     {
-        // calls the UserInput method to start asking for input
-        UserInput();
+        // calls the InputNumbers() method to start asking for input
+        InputNumbers();
     }
 
     // method to display header
@@ -112,7 +112,7 @@ class Calculator
     }
 
     // method to get the user input for numbers and operand
-    static void UserInput()
+    static void InputNumbers()
     {
         Console.Clear(); // clear the previous display
 
@@ -130,62 +130,94 @@ class Calculator
                 Array.Resize(ref numbers, numbers.Length + 1);
                 // add the number to the array
                 numbers[numbers.Length - 1] = number;
-
-                // get the operator from user input
-                while (true)
-                {
-                    Console.Write("Enter an operator (+, -, *, /): ");
-                    
-                    if (char.TryParse(Console.ReadLine(), out char operand))
-                    {
-                        if (operand == '+' || operand == '-' || operand == '*' || operand == '/')
-                        {
-                            // resize the array
-                            Array.Resize(ref operators, operators.Length + 1);
-                            // add the operator to the array
-                            operators[operators.Length - 1] = operand;
-                            break;
-                        }
-                        else if (operand == '=')
-                        {
-                            if (numbers.Length >= 2 && operators.Length >= 1)
-                            {
-                                Calculate calcu = new Calculate(numbers, operators);
-                                calcu.CalculateResult();
-
-                                // call the TryAgain method
-                                CalculateAgain();
-                                return; // Exit the method
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid input! Must have at least two numbers and one operator");
-                                Console.WriteLine("Press any key to continue...");
-                                Console.ReadKey();
-
-                                // reset the elements inside the array
-                                Array.Resize(ref numbers, 0);
-                                Array.Resize(ref numbers, 0);
-                                UserInput(); // ask user to input again from the start
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid input! Must be a valid operator");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input! Must be a valid operator");
-                    }
-
-                }
+                
+                // calls the method to ask for operator 
+                AskForOperator();
             }
             catch (FormatException)
             {
                 Console.WriteLine("Invalid input! Must be a numeric value");
             }
+        }
+    }
+    
+    // a method to ask operator
+    static void AskForOperator()
+    {
+        // get the operator from user input
+        while (true)
+        {
+            try
+            {
+                Console.Write("Enter an operator (or = to calculate): ");
+                char operand = char.Parse(Console.ReadLine());
+                
+                // checks if input is equal
+                if (operand == '=')
+                {
+                    // calls the method to start calculating
+                    StartCalculating();
+                }
+                
+                // checks if the operand is valid
+                if (ValidateOperator(operand) == true)
+                {
+                    // resize the array
+                    Array.Resize(ref operators, operators.Length + 1);
+                    // add the operator to the array
+                    operators[operators.Length - 1] = operand;
+                    break;
+                }
+                else 
+                {
+                    throw new FormatException();
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input! Please enter +, -, *, or /");
+            }
+        }
+               
+    }
+    
+    // a method to check if the operator is valid
+    static bool ValidateOperator(char operand)
+    {
+        if (operand == '+' || operand == '-' || operand == '*' || operand == '/')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    // method if user input equal
+    static void StartCalculating()
+    {
+        // checks if numbers and operators array are not empty
+        if (numbers.Length >= 2 && operators.Length >= 1)
+        {
+            Calculate calcu = new Calculate(numbers, operators);
+            calcu.CalculateResult();
+            
+            // calls the CalculateAgain() method to ask if the user want to do another calculation
+            CalculateAgain();
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Invalid input! Must have at least two numbers and one operator");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+
+            // reset the elements inside the array
+            Array.Resize(ref numbers, 0);
+            Array.Resize(ref operators, 0);
+            InputNumbers(); // ask user to input again from the start
+            return;
         }
     }
 
@@ -202,7 +234,7 @@ class Calculator
                 // reset the elements inside the array
                 Array.Resize(ref numbers, 0);
                 Array.Resize(ref numbers, 0);
-                UserInput(); // ask user to input again from the start
+                InputNumbers(); // ask user to input again from the start
                 break;
             }
             else if (answer == "n")
