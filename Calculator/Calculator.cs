@@ -9,12 +9,9 @@ namespace Calculator
 
     namespace Calculator
     {
-        public class Calculator
+        public class Calculator:Opt //inheritance
         {   //declare variables
             public double num = 0;
-            public double num2 = 0;
-            public double ans = 0;
-            public string operators = "";
 
             public double GetValue() //encapsulation
             {
@@ -33,23 +30,26 @@ namespace Calculator
                 }
                 return num;
             }
+        }
 
-
+        public class Opt() 
+        {
+            public string Operators;
             public void GetOpt() //encapsulation
             {
                 Console.Write("Select Operation [+, -, *, /, =]:");
-                operators = Convert.ToString(Console.ReadLine());
+                Operators = Convert.ToString(Console.ReadLine());
 
-                while (operators != "+" && operators != "-" && operators != "*" && operators != "/" && operators != "=") // if input for operator is not in the choices, terminate the program
+                while (Operators != "+" && Operators != "-" && Operators != "*" && Operators != "/" && Operators != "=") // if input for operator is not in the choices, terminate the program
                 {
                     Console.WriteLine("Invalid Operation...");
                     Console.Write("Select Operation [+, -, *, /, =]:");
-                    operators = Convert.ToString(Console.ReadLine());
+                    Operators = Convert.ToString(Console.ReadLine());
                 }
             }
         }
 
-        class Multiplication : Calculator //inheritance
+        class Multiplication
         {
             
             public double Multiply(double num1, double num2) //multiply 2 numbers
@@ -58,7 +58,7 @@ namespace Calculator
             }
         }
 
-        class Addition : Calculator //inheritance
+        class Addition
         {
             public double Add(double num1, double num2) //add 2 numbers
             {
@@ -66,7 +66,7 @@ namespace Calculator
             }
         }
 
-        class Subtraction : Calculator //inheritance
+        class Subtraction
         {
             public double Subtract(double num1, double num2) //subtract 2 numbers
             {
@@ -74,7 +74,7 @@ namespace Calculator
             }
         }
 
-        class Division : Calculator  //inheritance
+        class Division
         {
             public double Divide(double num1, double num2) //divide 2 numbers
             {
@@ -97,11 +97,11 @@ namespace Calculator
                 string repeat;
                 double Num1;
                 bool Continue;
-                bool notEqual = true;
+                bool NotEqual = true;
                 do
                 {
                     Console.Clear();
-                    notEqual = true;
+                    NotEqual = true;
                     Calculator calculator = new Calculator();
                     Console.WriteLine("=========================");//spacing
                     Console.WriteLine("        CALCULATOR       ");//spacing
@@ -110,11 +110,11 @@ namespace Calculator
                     do
                     {
                         calculator.GetOpt(); // get the operator for calculation
-                        if (calculator.operators != "=")
+                        if (calculator.Operators != "=")
                             calculator.GetValue(); //get the value of 1st number
 
 
-                        switch (calculator.operators) //calculate with the chosen operator
+                        switch (calculator.Operators) //calculate with the chosen operator
                         {
                             case "*":
                                 Multiplication multiplication = new Multiplication();
@@ -133,13 +133,13 @@ namespace Calculator
                                 Num1 = Convert.ToDouble(division.Divide(Num1, calculator.num));
                                 break;
                             case "=":
-                                notEqual = false;
+                                NotEqual = false;
                                 break;
                             default:
                                 Console.WriteLine("Invalid Operator");
                                 break;
                         }
-                    } while (notEqual);
+                    } while (NotEqual);
                     Console.WriteLine($"answer:{Num1}");
 
 
@@ -157,6 +157,7 @@ namespace Calculator
                     } while (repeat != "Y" && repeat != "N");//if input is not Y or N, ask again
 
                 } while (Continue); //repeat from thhe start if chosen is Y (yes)
+                Console.Clear();
                 Console.WriteLine("\nTerminating Program"); //closing the program if chosen is N (No)
             }
         }
