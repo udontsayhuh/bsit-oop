@@ -5,16 +5,16 @@ namespace Calculator
 {
     //polymorphism
     //INVALID INPUT 
-    public class Displayerrormessage    //base class (parent) 
+    public class DisplayErrorMessage    //base class (parent) 
     {
-        public virtual void errormessage()
+        public virtual void ErrorMessage()
         {
             // Base implementation can be left empty
         }
     }
-    public class Invalidoperator : Displayerrormessage
+    public class InvalidOperator : DisplayErrorMessage
     {
-        public override void errormessage()
+        public override void ErrorMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("INVALID INPUT: ");
@@ -23,9 +23,9 @@ namespace Calculator
         }
     }
 
-    public class Invalidinteger : Displayerrormessage
+    public class InvalidInteger : DisplayErrorMessage
     {
-        public override void errormessage()
+        public override void ErrorMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("INVALID INPUT: ");
@@ -34,9 +34,9 @@ namespace Calculator
         }
     }
 
-    public class InvalidEqual : Displayerrormessage
+    public class InvalidEqual : DisplayErrorMessage
     {
-        public override void errormessage()
+        public override void ErrorMessage()
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("INVALID INPUT: ");
@@ -45,31 +45,46 @@ namespace Calculator
         }
     }
 
-    public class Calculatorf
+    public class InvalidProceed : DisplayErrorMessage
+    {
+        public override void ErrorMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("INVALID INPUT: ");
+            Console.WriteLine("Please enter either 1 or 2.");
+            Console.ResetColor();
+        }
+    }
+
+
+    public class Calcu
     {
         //encapsulation 
+        //declaring variables 
         private double nextValue;
         private double result;
-        private string operation = " ";
+        private string operation = string.Empty;
 
+        //Getting the first input of the user 
         public void GetUserInput()
         {
-            bool validUserInput = false;
-            while (!validUserInput)
+            bool ValidUserInput = false;
+            while (!ValidUserInput)
             {
                 Console.Write("\nEnter a value: ");
                 if (!double.TryParse(Console.ReadLine(), out result))
                 {
-                    Displayerrormessage myInvalidinteger = new Invalidinteger();
-                    myInvalidinteger.errormessage();
+                    DisplayErrorMessage myInvalidInteger = new InvalidInteger();
+                    myInvalidInteger.ErrorMessage();
                     continue;
                 }
                 else
                 {
-                    validUserInput = true;
+                    ValidUserInput = true;
                 }
             }
 
+            //Getting the operator (+, - , * , / , =)
             while (true)
             {
                 Console.Write("\nEnter your arithmetic operator: ");
@@ -77,12 +92,13 @@ namespace Calculator
 
                 if (operation == "=")
                 {
-                    if (nextValue == 0 && result != 0)  //if the user enter a equal sign in the first entry ofthe arithmetic operator. 
+                    if (nextValue == 0 && result != 0)  //if the user enter equal sign in the first entry of the arithmetic operator. 
                     {
-                        Displayerrormessage myInvalidEqual = new InvalidEqual();
-                        myInvalidEqual.errormessage();
+                        DisplayErrorMessage myInvalidEqual = new InvalidEqual();
+                        myInvalidEqual.ErrorMessage();
                         continue;
                     }
+                    //if you put equal sign and it has 2 variables, it will print the result. 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"\nThe result is: {result}");
                     Console.ResetColor();
@@ -91,24 +107,24 @@ namespace Calculator
 
                 if (operation != "+" && operation != "-" && operation != "*" && operation != "/") // checking if valid ba yung input 
                 {
-                    Displayerrormessage myInvalidoperator = new Invalidoperator();
-                    myInvalidoperator.errormessage();
+                    DisplayErrorMessage myInvalidOperator = new InvalidOperator();
+                    myInvalidOperator.ErrorMessage();
                     continue;
                 }
 
-                validUserInput = false; // Update the existing validInput variable
-                while (!validUserInput)
+                ValidUserInput = false; // Update the existing validInput variable
+                while (!ValidUserInput)
                 {
-                    Console.Write("\nEnter a value: "); 
+                    Console.Write("\nEnter a value: "); //Getting the 2nd variable
                     if (!double.TryParse(Console.ReadLine(), out nextValue))
                     {
-                        Displayerrormessage myInvalidinteger = new Invalidinteger();
-                        myInvalidinteger.errormessage();
+                        DisplayErrorMessage myInvalidinteger = new InvalidInteger();
+                        myInvalidinteger.ErrorMessage();
                         continue;
                     }
                     else
                     {
-                        validUserInput = true;
+                        ValidUserInput = true;
                     }
                 }
 
@@ -140,7 +156,7 @@ namespace Calculator
         }
 
         //abstraction: displaying 
-        public void DisplayHeader()
+        public static void DisplayHeader()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("++++++++++++++++++++++++++++++++++");
@@ -149,7 +165,7 @@ namespace Calculator
             Console.ResetColor();
         }
 
-        public void DisplayArithmeticOperators()
+        public static void DisplayArithmeticOperators()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("|--------------------------------|");
@@ -163,37 +179,53 @@ namespace Calculator
             Console.WriteLine("|            = : RESULT          |");
             Console.WriteLine("|--------------------------------|");
             Console.ResetColor();
-        } 
+        }
+
+        public static void DisplayingPress1and2()
+        {
+            Console.ReadKey(); // to delay the the press 1 
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\n|--------------------------------|");
+            Console.WriteLine("|        Press 1 to proceed      |");
+            Console.WriteLine("|        Press 2 to exit         |");
+            Console.WriteLine("|--------------------------------|");
+            Console.ResetColor();
+        }
 
         static void Main(string[] args)
         {
-            Calculatorf calculator = new Calculatorf();
+            //Creating a new instance
+            Calcu calculator = new();
+            InvalidProceed myInvalidproceed = new();
 
             do
             {
-                calculator.DisplayHeader();
-                calculator.DisplayArithmeticOperators();
+                Calcu.DisplayHeader();
+                Calcu.DisplayArithmeticOperators();
                 calculator.GetUserInput();
+                Calcu.DisplayingPress1and2();
 
-                Console.ReadKey(); // to delay the the press 1 
-
-                Console.WriteLine("\n|--------------------------------|");
-                Console.WriteLine("|        Press 1 to proceed      |");
-                Console.WriteLine("|        Press 2 to exit         |");
-                Console.WriteLine("|--------------------------------|");
-
-                Console.Write("Enter your choice: ");  // asking the user to continue or not 
-                string repeat = Console.ReadLine();
-
-                if (repeat != "1")
+                while (true)
                 {
-                    break; // Exit the loop if the user doesn't want to proceed
+                    Console.Write("Enter your choice: ");
+                    string repeat = Console.ReadLine();
+
+                    if (repeat != "1" && repeat != "2")
+                    {
+                        myInvalidproceed.ErrorMessage();
+                        continue; // Continue the loop to ask for input again
+                    }
+                    else if (repeat == "2")
+                    {
+                        return; // Exit the loop if the user doesn't want to proceed
+                    }
+                    else
+                    {
+                        break; // Proceed to the next iteration if the user chooses to continue
+                    }
                 }
                 Console.Clear(); // Clear the console for the next calculation
-            }
-            while (true);
-            Console.ReadLine(); //used to pause the console output and wait for the user to press Enter before the console application is closed.
+            } while (true);
         }
     }
 }
-
