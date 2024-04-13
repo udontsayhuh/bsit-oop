@@ -71,11 +71,12 @@ namespace MyFirstCalculator
                     continue;
                 }
 
+                // Code optimization: short-circuiting logical operators are used.
                 if (!char.TryParse(input, out op) || (op != '+' && op != '-' && op != '*' && op != '/'))
                 {
                     // If parsing fails or operator is invalid, display error message and prompt again
                     Console.WriteLine(" Invalid operator. Please enter one of the following:");
-                    Console.WriteLine(" +, -, *, /");
+                    Console.WriteLine(" +, -, *, =");
                     continue;
                 }
 
