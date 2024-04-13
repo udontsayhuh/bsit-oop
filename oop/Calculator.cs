@@ -1,6 +1,6 @@
 ﻿using System;
 
-class Choice
+class ChoosingOperator
 {
     //attributes
     public double num1;
@@ -35,7 +35,7 @@ class Choice
 }
 //inheritance from class Choice
 
-class First : Choice //class for the first input 
+class FirstElement : ChoosingOperator //class for the first input 
 {
     public override void Enter() //uses polymorphism
     {
@@ -48,7 +48,7 @@ class First : Choice //class for the first input
     }
 }
 
-class Second : Choice //class for the second input
+class AnotherElement : ChoosingOperator //class for the second input
 {
     public override void Enter() //uses polymorphism
     {
@@ -67,55 +67,55 @@ class Program
     {
         do //uses do-while loop
         {
-            First first = new First(); //instantiate class First
-            Choice choice = new Choice(); //instantiate class Choice
-            Second second = new Second(); //instantiate class Second
+            FirstElement firstelemet = new FirstElement(); //instantiate class First
+            ChoosingOperator choosingoperator = new ChoosingOperator(); //instantiate class Choice
+            AnotherElement anotherelement = new AnotherElement(); //instantiate class Second
 
-            choice.count = 1;
+            choosingoperator.count = 1;
 
             while (true)
             {
 
-                if (choice.count == 1) //if condition is correct
+                if (choosingoperator.count == 1) //if condition is correct
                 {
-                    first.Enter(); //calls the method (First Class)
+                    firstelemet.Enter(); //calls the method (First Class)
                 }
                 else //if count is not equal to 1
                 {
-                    first.num1 = choice.ans; //store the answer to the variable num1
+                    firstelemet.num1 = choosingoperator.ans; //store the answer to the variable num1
                 }
 
-                choice.Enter(); //calls the method (Enter Class)
+                choosingoperator.Enter(); //calls the method (Enter Class)
 
-                if (choice.option == '=') //if operator is =, then it prints the result
+                if (choosingoperator.option == '=') //if operator is =, then it prints the result
                 {
-                    Console.WriteLine($"\n The final result is {choice.ans}\n");
+                    Console.WriteLine($"\n The final result is {choosingoperator.ans}\n");
                     break;
                 }
 
-                second.Enter(); //calls the method (Second Class)
+                anotherelement.Enter(); //calls the method (Second Class)
 
 
-                switch (choice.option) //will perform the selected option
+                switch (choosingoperator.option) //will perform the selected option
                 {
                     case '+': //addition
-                        choice.ans = first.num1 + second.num2;
-                        choice.count = 2;
+                        choosingoperator.ans = firstelemet.num1 + anotherelement.num2;
+                        choosingoperator.count = 2;
                         break;
 
                     case '-': //subtraction
-                        choice.ans = first.num1 - second.num2;
-                        choice.count = 2;
+                        choosingoperator.ans = firstelemet.num1 - anotherelement.num2;
+                        choosingoperator.count = 2;
                         break;
 
                     case '*': //multiplication
-                        choice.ans = first.num1 * second.num2;
-                        choice.count = 2;
+                        choosingoperator.ans = firstelemet.num1 * anotherelement.num2;
+                        choosingoperator.count = 2;
                         break;
 
                     case '/': //division
-                        choice.ans = first.num1 / second.num2;
-                        choice.count = 2;
+                        choosingoperator.ans = firstelemet.num1 / anotherelement.num2;
+                        choosingoperator.count = 2;
                         break;
 
                     default: //for invalid operation
