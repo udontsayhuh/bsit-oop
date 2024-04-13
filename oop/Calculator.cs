@@ -1,66 +1,21 @@
 ﻿using System;
 
 namespace oop
-{
-    abstract class Operation // Abstract class for Pillars.
-    {
-        // Protected property.
-        protected int Num { get; }
-
-        protected Operation(int num) // For Operation Class.
-        {
-            // Initializing Num with value.
-            Num = num;
-        }
-
-        public abstract int PerformOperation(); // Abstract Method.
-    }
-
-    // Inheritance for the Pillars.
-    class Addition : Operation // Defining class that inherits from Operation.
-    {
-        public Addition(int num) : base(num) { } // Constructor for this class.
-
-        public override int PerformOperation()
-        {
-            return Num + Num; // Returning the result.
-        }
-    }
-
-    class Subtraction : Operation
-    {
-        public Subtraction(int num) : base(num) { }
-
-        public override int PerformOperation()
-        {
-            return Num - Num;
-        }
-    }
-
-    class Multiplication : Operation
-    {
-        public Multiplication(int num1, int num2) : base(num1) { }
-
-        public override int PerformOperation()
-        {
-            return Num * Num;
-        }
-    }
-
-    class Calculator // Class for the Calculator.
+{  
+    class Calculator 
     {
         static void Main(string[] args) // Entry point.
         {
-            bool tryAgain = true; // Boolean
+            bool wantsToTryAgain = true; // Boolean
 
-            while (tryAgain) // While loop; It will loop until the user input "No."
+            while (wantsToTryAgain)
             {
                 List<int> numbers = new List<int>(); // Initialize an empty list
                 List<string> symbols = new List<string>();
 
-                bool NumberInput = true; // Boolean
+                bool NumberInput = true;
 
-                while (true) // Loop until the conditon is met.
+                while (true)
                 {
                     if (NumberInput)
                     {
@@ -112,7 +67,7 @@ namespace oop
                 // Perform calculations based on the lists of numbers and symbols.
                 int result = numbers[0]; 
 
-                for (int i = 0; i < symbols.Count; i++) // For loop; It will iterate through each symbol in the symbol list.
+                for (var i = 0; i < symbols.Count; i++) // It will iterate through each symbol in the symbol list.
                 {
                     switch (symbols[i]) // It will check the current index in the symbol list.
                     {
@@ -143,14 +98,14 @@ namespace oop
 
                     try // Error Handling.
                     {
-                        if (tryAgainInput.ToLower() == "yes") // Convert the user's input to lowercase and check if it equals "yes". 
+                        if (tryAgainInput.ToLower() == "yes") // Convert the user's input to lowercases.
                         {
-                            tryAgain = true; // Set tryAgain to true.
+                            wantsToTryAgain = true; // Set tryAgain to true.
                             break;
                         }
                         else if (tryAgainInput.ToLower() == "no") // Equals to "no".
                         {
-                            tryAgain = false; // Set tryAgain to false.
+                            wantsToTryAgain = false; // Set tryAgain to false.
                             break;
                         }
                         else
@@ -160,7 +115,7 @@ namespace oop
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error: " + ex.Message); // Print the error message.
+                        Console.WriteLine("Error: " + ex.Message);
                     }
                 }
             }
