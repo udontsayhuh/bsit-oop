@@ -1,48 +1,33 @@
 using System;
 using System.Collections.Generic;
 
-// Base class for operations
 abstract class Operation
 {
     public abstract int Calculate(int num1, int num2);
 }
 
-// Derived class for addition
 class Addition : Operation
 {
-    public override int Calculate(int num1, int num2)
-    {
-        return num1 + num2;
-    }
+    public override int Calculate(int num1, int num2) => num1 + num2;
 }
 
-// Derived class for subtraction
 class Subtraction : Operation
 {
-    public override int Calculate(int num1, int num2)
-    {
-        return num1 - num2;
-    }
+    public override int Calculate(int num1, int num2) => num1 - num2;
 }
 
-// Derived class for multiplication
 class Multiplication : Operation
 {
-    public override int Calculate(int num1, int num2)
-    {
-        return num1 * num2;
-    }
+    public override int Calculate(int num1, int num2) => num1 * num2;
 }
 
-// Derived class for division
 class Division : Operation
 {
     public override int Calculate(int num1, int num2)
     {
         if (num2 == 0)
-        {
             throw new DivideByZeroException("Cannot divide by zero.");
-        }
+
         return num1 / num2;
     }
 }
@@ -51,9 +36,7 @@ class Calculator
 {
     static void Main(string[] args)
     {
-        bool exit = false;
-
-        do
+        while (true)
         {
             List<int> numbers = new List<int>();
             List<string> operations = new List<string>();
@@ -61,9 +44,7 @@ class Calculator
             while (true)
             {
                 Console.Write("Enter a number: ");
-                string input = Console.ReadLine();
-
-                if (!int.TryParse(input, out int num))
+                if (!int.TryParse(Console.ReadLine(), out int num))
                 {
                     Console.WriteLine("Invalid input. Please enter a valid number.");
                     continue;
@@ -79,14 +60,10 @@ class Calculator
                         Console.Write("Choose an operation (+, -, *, /, =): ");
                         operation = Console.ReadLine();
 
-                        if (operation != "+" && operation != "-" && operation != "*" && operation != "/" && operation != "=")
-                        {
+                        if (!IsValidOperation(operation))
                             Console.WriteLine("Invalid operation. Please choose +, -, *, /, or =.");
-                        }
                         else if (operation == "=" && numbers.Count < 2)
-                        {
                             Console.WriteLine("Insufficient numbers to calculate. Please enter at least two numbers.");
-                        }
                         else
                         {
                             operations.Add(operation);
@@ -95,49 +72,45 @@ class Calculator
                     } while (true);
 
                     if (operation == "=")
-                    {
                         break;
-                    }
                 }
             }
 
-            // Perform the calculations if there are at least two numbers
-            if (numbers.Count >= 2)
-            {
-                int result = numbers[0];
-                try
-                {
-                    for (int i = 0; i < operations.Count; i++)
-                    {
-                        Operation op;
-                        if (operations[i] == "=")
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            op = GetOperation(operations[i]);
-                        }
-                        result = op.Calculate(result, numbers[i + 1]);
-                    }
+            if (numbers.Count < 2)
+                continue;
 
-                    Console.WriteLine($"Result: {result}");
-                }
-                catch (DivideByZeroException ex)
+            int result = numbers[0];
+            try
+            {
+                for (int i = 0; i < operations.Count; i++)
                 {
-                    Console.WriteLine($"Error: {ex.Message}");
+                    if (operations[i] == "=")
+                        break;
+
+                    Operation op = GetOperation(operations[i]);
+                    result = op.Calculate(result, numbers[i + 1]);
                 }
+
+                Console.WriteLine($"Result: {result}");
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
             }
 
             Console.WriteLine("----------------------------------------------");
             Console.Write("Do you want to perform another calculation? (Y/N): ");
             string choice = Console.ReadLine();
-            if (choice.ToLower() != "y" && choice.ToLower() != "yes")
-            {
-                exit = true;
-            }
-        } while (!exit);
+            if (!IsAffirmative(choice))
+                break;
+        }
     }
+
+    static bool IsValidOperation(string operation) =>
+        operation == "+" || operation == "-" || operation == "*" || operation == "/" || operation == "=";
+
+    static bool IsAffirmative(string input) =>
+        input?.Trim().ToLower() == "y" || input?.Trim().ToLower() == "yes";
 
     static Operation GetOperation(string operation)
     {
