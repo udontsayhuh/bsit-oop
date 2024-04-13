@@ -36,9 +36,9 @@ class Calculator
 {
     // ENCAPSULATION
     // private GetOperation hides the logic of creating Operation objects from users
-    private Operation GetOperation(string operatorSymbol)
+    private Operation GetOperation(string operationSymbol)
     {
-        switch (operatorSymbol)
+        switch (operationSymbol)
         {
             case "+": return new Addition();
             case "-": return new Subtraction();
