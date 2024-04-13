@@ -15,10 +15,7 @@ namespace Calculator
 
         //Polymorphism
         //Override inherited method
-        public override double GetResult(double x, double y)
-        {
-            return x + y;
-        }
+        public override double GetResult(double x, double y) => x + y;
     }
 
     //Inheritance
@@ -26,10 +23,7 @@ namespace Calculator
     {
 
         //Override inherited method
-        public override double GetResult(double x, double y)
-        {
-            return x - y;
-        }
+        public override double GetResult(double x, double y) => x - y;
     }
 
     //Inheritance
@@ -37,10 +31,7 @@ namespace Calculator
     {
 
         //Override inherited method
-        public override double GetResult(double x, double y)
-        {
-            return x * y;
-        }
+        public override double GetResult(double x, double y) => x * y;
     }
 
     //Inheritance
@@ -48,18 +39,15 @@ namespace Calculator
     {
 
         //Override inherited method
-        public override double GetResult(double x, double y)
-        {
-            return x / y;
-        }
+        public override double GetResult(double x, double y) => x / y;
     }
 
     class Calculator
     {
         //Attributes
-        private double num, result;
-        private char operation;
-        public bool retry;
+        private double _num, _result;
+        private char _operation;
+        public bool Retry;
 
         //Attribute Object
         //The attribute can have the instance from any children of the Arithmetic class
@@ -78,22 +66,22 @@ namespace Calculator
                 {
 
                     //Get First Input
-                    result = GetNum();
+                    _result = GetNum();
 
                     //Set as False, so this if block doesn't execute anymore
                     firstIteration = false;
                 }
 
-                operation = GetOperation();
+                _operation = GetOperation();
 
                 //Get out of Main Method if User Input is Terminate
-                if (operation == '=')
+                if (_operation == '=')
                 {
-                    Console.WriteLine(result);
+                    Console.WriteLine($"\nResult is {_result}");
                     return;
                 }
 
-                num = GetNum();
+                _num = GetNum();
                 GetResult();
 
             }
@@ -113,7 +101,7 @@ namespace Calculator
 
                     //Condition is for the second number input only
                     //Check if the second number is Zero and Division has been selected
-                    if (operation == '/' && num == 0)
+                    if (_operation == '/' && num == 0)
                     {
                         //Show Message and Continue the input loop
                         Console.WriteLine("\nCannot Divide By 0!\n");
@@ -177,7 +165,7 @@ namespace Calculator
                             Operation = new Division();
                             break;
                         case '=':
-                            Console.WriteLine("Terminating Calculator!");
+                            Console.WriteLine("\nTerminating Calculator!");
                             break;
                         default:
                             Console.WriteLine("\nInput a Correct Operation!\n");
@@ -191,18 +179,9 @@ namespace Calculator
 
         }
 
-        public void GetResult()
-        {
-
-            //Console.Write($"{result} {operation} {num}");
-
-            //Get the associated GetResult method from the x child of Arithmetic
-            result = Operation.GetResult(result, num);
-
-            //Console.WriteLine($" = {result}\n");
-
-        }
-
+        //Get the associated GetResult method from the x child of Arithmetic
+        public void GetResult() => _result = Operation.GetResult(_result, _num);
+       
         public void TryAgain()
         {
             char reply = ' ';
@@ -219,7 +198,7 @@ namespace Calculator
             }
 
             //Change the value of attribute retry based on reply
-            retry = (reply == 'Y') ? true : false;
+            Retry = (reply == 'Y') ? true : false;
         }
     }
 
@@ -238,7 +217,7 @@ namespace Calculator
                 calculator.Main();
                 calculator.TryAgain();
 
-            } while (calculator.retry);
+            } while (calculator.Retry);
 
         }
     }
