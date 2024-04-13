@@ -5,22 +5,13 @@ namespace CalculatorApp
     class Calculator
     {
         // Method to add two numbers
-        public double Add(double num1, double num2)
-        {
-            return num1 + num2;
-        }
+        public double Add(double num1, double num2) => num1 + num2;
 
         // Method to subtract two numbers
-        public double Subtract(double num1, double num2)
-        {
-            return num1 - num2;
-        }
+        public double Subtract(double num1, double num2) => num1 - num2;
 
         // Method to multiply two numbers
-        public double Multiply(double num1, double num2)
-        {
-            return num1 * num2;
-        }
+        public double Multiply(double num1, double num2) => num1 * num2;
 
         // Method to divide two numbers
         public double Divide(double num1, double num2)
@@ -32,7 +23,10 @@ namespace CalculatorApp
             }
             return num1 / num2;
         }
+    }
 
+    class Program
+    {
         static void Main(string[] args)
         {
             Calculator calculator = new Calculator();
@@ -41,72 +35,52 @@ namespace CalculatorApp
             while (true)
             {
                 double result = 0;
-                bool isFirstNumber = true;
-                double currentNumber = 0;
-                char operation = '+';
+
+                Console.Write("\nENTER A NUMBER: ");
+                if (!double.TryParse(Console.ReadLine(), out double currentNumber))
+                {
+                    Console.WriteLine("\nINVALID INPUT. PLEASE ENTER A VALID NUMBER.");
+                    continue;
+                }
+
+                result = currentNumber; // Assign the first number to result
 
                 while (true)
                 {
-                    if (isFirstNumber)
+                    Console.Write("\nSELECT AN OPERATOR (+, -, *, /) \nENTER ( = ) TO SHOW RESULT : ");
+                    char operation = Console.ReadKey().KeyChar;
+                    Console.WriteLine();
+
+                    if (operation == '=')
+                        break;
+
+                    if (operation != '+' && operation != '-' && operation != '*' && operation != '/')
                     {
-                        Console.Write("\nENTER A NUMBER: ");
-                        string input = Console.ReadLine();
-
-                        if (input == "=")
-                            break;
-
-                        if (!double.TryParse(input, out currentNumber))
-                        {
-                            Console.WriteLine("\nINVALID INPUT. PLEASE ENTER A VALID NUMBER.");
-                            continue;
-                        }
-
-                        result = currentNumber; // Assign the first number to result
-                        isFirstNumber = false;
+                        Console.WriteLine("\nINVALID OPERATOR. PLEASE ENTER A VALID OPERATOR.");
+                        continue;
                     }
-                    else
+
+                    Console.Write("\nENTER NUMBER: ");
+                    if (!double.TryParse(Console.ReadLine(), out double nextNumber))
                     {
-                        Console.Write("\nSELECT AN OPERATOR (+, -, *, /) \nENTER ( = ) TO SHOW RESULT : ");
-                        operation = Console.ReadKey().KeyChar;
-                        Console.WriteLine();
+                        Console.WriteLine("\nINVALID INPUT. PLEASE ENTER A VALID NUMBER.");
+                        continue;
+                    }
 
-                        if (operation == '=')
+                    switch (operation)
+                    {
+                        case '+':
+                            result = calculator.Add(result, nextNumber);
                             break;
-
-                        if (operation != '+' && operation != '-' && operation != '*' && operation != '/')
-                        {
-                            Console.WriteLine("\nINVALID OPERATOR. PLEASE ENTER A VALID OPERATOR.");
-                            continue;
-                        }
-
-                        double nextNumber;
-                        while (true)
-                        {
-                            Console.Write("\nENTER NUMBER: ");
-                            string input = Console.ReadLine();
-                            if (!double.TryParse(input, out nextNumber))
-                            {
-                                Console.WriteLine("\nINVALID INPUT. PLEASE ENTER A VALID NUMBER.");
-                                continue;
-                            }
+                        case '-':
+                            result = calculator.Subtract(result, nextNumber);
                             break;
-                        }
-
-                        switch (operation)
-                        {
-                            case '+':
-                                result = calculator.Add(result, nextNumber);
-                                break;
-                            case '-':
-                                result = calculator.Subtract(result, nextNumber);
-                                break;
-                            case '*':
-                                result = calculator.Multiply(result, nextNumber);
-                                break;
-                            case '/':
-                                result = calculator.Divide(result, nextNumber);
-                                break;
-                        }
+                        case '*':
+                            result = calculator.Multiply(result, nextNumber);
+                            break;
+                        case '/':
+                            result = calculator.Divide(result, nextNumber);
+                            break;
                     }
                 }
 
