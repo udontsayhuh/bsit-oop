@@ -1,51 +1,51 @@
-using System;
- 
-//Implementing Abstraction
-//Implementing Polymorphism
-//Implementing Inheritance
-//Implementing Encapsulation
-
-abstract class Operation
-{   //Method to execute the operation
-    public abstract double Execute(double num_1, double num_2);
-}
-
-class Add:Operation //Addition Operation
-{
-    public override double Execute(double num_1, double num_2)
-    {
-        return num_1 + num_2;
+    using System;
+    //Implementing Abstraction
+    //Implementing Polymorphism
+    //Implementing Inheritance
+    //Implementing Encapsulation
+    //Single Responsibility already applied to abstract class Operation and its derived 4 classes that perform single responsibility on solving mathematical calculations
+    //Open/Closed Principle already applied to Operation Class that is open for extension but closed to modification
+    abstract class Operation
+    {   //Method to execute the operation
+        public abstract double Execute(double num_1, double num_2);
     }
-}
 
-class Subtract:Operation //Subtraction Operation
-{
-    public override double Execute(double num_1, double num_2)
+    class Add: Operation //Addition Operation
     {
-        return num_1 - num_2;
-    }
-}
-
-class Multiply:Operation //Multiplication Operation
-{
-    public override double Execute(double num_1, double num_2)
-    {
-        return num_1 * num_2;
-    }
-}
-
-class Divide:Operation //Division Operation
-{
-    public override double Execute(double num_1, double num_2)
-    {
-        if (num_2 != 0)
-            return num_1 / num_2;
-        else
+        public override double Execute(double num_1, double num_2)
         {
-            return 0; //return 0 if the divisor is 0
+            return num_1 + num_2;
         }
     }
-}
+
+    class Subtract: Operation //Subtraction Operation
+    {
+        public override double Execute(double num_1, double num_2)
+        {
+            return num_1 - num_2;
+        }
+    }
+
+    class Multiply: Operation //Multiplication Operation
+    {
+        public override double Execute(double num_1, double num_2)
+        {
+            return num_1 * num_2;
+        }
+    }
+
+    class Divide: Operation //Division Operation
+    {
+        public override double Execute(double num_1, double num_2)
+        {
+            if (num_2 != 0)
+                return num_1 / num_2;
+            else
+            {
+                return 0; //return 0 if the divisor is 0
+            }
+        }
+    }
 
 class Calculator
 {   
@@ -55,7 +55,7 @@ class Calculator
         Console.WriteLine("         BASIC CALCULATOR       ");
         Console.WriteLine("--------------------------------");
 
-        string val;
+        string value;
 
         do //Using do-while loop to allow the user to calculate numbers as many as the user wants
         {
@@ -70,7 +70,7 @@ class Calculator
             }
             result = num_1; //To display the first number entered by user when '=' is encountered even though there's no another number
 
-            while (true) //If the user's input is valid, it will now perform multiple calculation as many as user wants 
+            while (true) //If the user's input is valid, it will now perform multiple calculations as many as user wants 
             {
                 string op = InputOperator(); //To get the operator entered by user
                 
@@ -94,10 +94,10 @@ class Calculator
 
             //To ask the user if they want to perform calculation again
             Console.WriteLine("\nDO YOU WANT TO CALCULATE AGAIN? (yes/no): ");
-            val = Console.ReadLine();
+            value = Console.ReadLine();
             
             //Valid inputs if the user don't want to calculate. The program will terminate
-            if (val.ToLower() == "n" || val.ToLower() == "no" || val.ToUpper() == "NO" || val.ToUpper() == "N")
+            if (value.ToLower() == "n" || value.ToLower() == "no") //removed value.ToUpper to reduce code redundancy
             {
                 Console.WriteLine("--------------------------------");
                 Console.WriteLine("PROGRAM TERMINATED.");
@@ -106,7 +106,7 @@ class Calculator
             }
         }   
         //Valid inputs if the user wants to calculate again 
-        while (val.ToLower() == "y" || val.ToLower() == "yes" || val.ToUpper() == "YES" || val.ToUpper() == "Y");
+        while (value.ToLower() == "y" || value.ToLower() == "yes"); //removed value.ToUpper to reduce code redundancy
     }
 
     private static string InputOperator() //InputOperator method set to private to get the operator from user
