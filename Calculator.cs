@@ -1,180 +1,255 @@
 //GHAZI, ZAINA E. BSIT 2-2
-//Modify Calculator
-//Laboratory #3
+//Apply Coding Practices, Optimisation & OOP Concepts to Calculator
+//Laboratory #4
 
 using System;
 
 namespace c_sharp_calculator
 {
-    //separate class for exception handling (division by zero)
-public class DivisionByZeroException : Exception
+
+class BaseCalculator //base class for calculator
 {
-    public DivisionByZeroException(string message) : base(message)
+    //encapsulation 
+    private double[] numbers;
+    private char[] operators;
+    protected double result;
+
+    //properties for numbers, operators and operands
+    public double[] Numbers
     {
+        get { return numbers; }
+        set { numbers = value; }
+    }
+
+    public char[] Operators
+    {
+        get { return operators; }
+        set { operators = value; }
+    }
+
+    //constructor for expression
+    public BaseCalculator(double[] numbers, char[] operators)
+    {
+        Numbers = numbers;
+        Operators = operators;
+    }
+
+    //Method for performing mathematical calcuations
+    public virtual void CalculateResult()
+    {
+        //setting result to the first number in the array
+        result = numbers[0];
+
+        //loop through the array
+        for (int index = 0; index < numbers.Length - 1; index++)
+        {
+            //assign value to the variables
+            char operand = operators[index];
+            double nextNumber = numbers[index + 1];
+
+            switch (operand)
+            {
+                case '+':
+                    result = (result) + (nextNumber);
+                    break;
+                case '-':
+                    result = (result) - (nextNumber);
+                    break;
+                case '*':
+                    result = (result) * (nextNumber);
+                    break;
+                case '/':
+                    if (nextNumber == 0)
+                    {
+                        Console.WriteLine("ERROR: Cannot divide by ZERO.");
+                        result = 0;
+                        break;
+                    }
+                    else
+                    {
+                        result = (result) / (nextNumber);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
-//base class
-public class Calculator
+
+//inheritance
+class Calculate : BaseCalculator
 {
-    //method for performing calculations using operators and operands
-    protected virtual double Calculate(double Num1, double Num2, char Symbol)
+    public Calculate(double[] numbers, char[] operators) : base(numbers, operators)
     {
-        switch (Symbol)
+        Numbers = numbers;
+        Operators = operators;
+    }
+
+    //polymorphism
+    public void CalculateResult()
+    {
+        base.CalculateResult();
+        Console.WriteLine("\nResult: " + result);
+    }
+}
+
+
+class Calculator  //MAIN CLASS
+{
+    //declaring empty arrays
+    static double[] numbers = new double[0];
+    static char[] operators = new char[0];
+
+    static void Main(string[] args)
+    {
+        //calling function to prompt user imput
+        InputNumbers();
+    }
+
+    //displaying header with method
+    static void Header()
+    {
+        Console.WriteLine("------------------------------------");
+        Console.WriteLine("           CALCULATOR: C# EDITION   ");
+        Console.WriteLine("------------------------------------");
+    }
+
+    //method for getting numbers and operands through user input
+    static void InputNumbers()
+    {
+        Console.Clear(); //clear the previous display
+
+        //calling header method
+        Header();
+
+        while (true)
         {
-            case '+':
-                return Num1 + Num2;
-            case '-':
-                return Num1 - Num2;
-            case '*':
-                return Num1 * Num2;
-            case '/':
-                if (Num2 == 0)
+            try
+            {
+                Console.Write("Enter a number: ");
+                double number = double.Parse(Console.ReadLine());
+
+                //resizing array
+                Array.Resize(ref numbers, numbers.Length + 1);
+                //adding the number to the array
+                numbers[numbers.Length - 1] = number;
+                
+                //calling the method to ask for operator 
+                AskForOperator();
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input! Please enter a Number.");
+            }
+        }
+    }
+    
+    static void AskForOperator()
+    {
+        //getting operator from user input
+        while (true)
+        {
+            try
+            {
+                Console.Write("Enter operator (+, -, *, /) OR '=' to calculate the answer: ");
+                char operand = char.Parse(Console.ReadLine());
+                
+                //checks if input is equal
+                if (operand == '=')
                 {
-                    throw new DivisionByZeroException("ERROR: Cannot divide by Zero!");
+                    //calls the method to start calculating
+                    StartCalculating();
                 }
-                return firstNumber / secondNumber;
-            default:
-                throw new InvalidOperationException("Invalid Operator! Please enter one of the four Operators: +, -, *, /");
+                
+                // checks if the operand is valid
+                if (ValidateOperator(operand) == true)
+                {
+                    // resize the array
+                    Array.Resize(ref operators, operators.Length + 1);
+                    // add the operator to the array
+                    operators[operators.Length - 1] = operand;
+                    break;
+                }
+                else 
+                {
+                    throw new FormatException();
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid operator! Please enter one of the four operators: +, -, *, /");
+            }
         }
+               
     }
-}
-
-//subclass for mathematical expression
-public class Expression : Calculator
-{
-    //properties for storing expression components
-    public double num1 { get; set; }
-    public char symbol { get; set; }
-
-    // Constructor to initialize the expression components
-    public Expression(double Num1, char Symbol)
+    
+    //method to check if the operator is valid
+    static bool ValidateOperator(char operand)
     {
-        num1 = Num1;
-        symbol = Symbol;
+        if (operand == '+' || operand == '-' || operand == '*' || operand == '/')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-
-    //method for evaluating expressions using Calculator's Calculate method
-    public double Evaluate(double Num2)
+    
+    //method if user input equal
+    static void StartCalculating()
     {
-        try
+        //checks if numbers and operators array are not empty
+        if (numbers.Length >= 2 && operators.Length >= 1)
         {
-            return Calculate(Num1, Num2, Symbol);
+            Calculate calcu = new Calculate(numbers, operators);
+            calcu.CalculateResult();
+            
+            //calls this method to ask if the user wants to calculate again
+            CalculateAgain();
+            return;
         }
-        catch (DivisionByZeroException ex)
+        else
         {
-            Console.WriteLine(ex.Message);
-            throw; //rethrow the exception to be caught in the Main method
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            return double.NaN;
+            Console.WriteLine("Invalid input: Must have at least two numbers and one operator.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+
+            // reset the elements inside the array
+            Array.Resize(ref numbers, 0);
+            Array.Resize(ref operators, 0);
+            InputNumbers(); // ask user to input again from the start
+            return;
         }
     }
-}
 
-//MAIN CLASS
-class MainClass
-{
-    public static void Main(string[] args)
+    //method for asking user if they want to calculate again
+    static void CalculateAgain()
     {
         while (true)
         {
-            double result = 0;
-            double NUm = 0;
-            char operatorSymbol = ' ';
-            bool isFirstIteration = true;
+            Console.Write("\nDo you want to calculate again? (y/n): ");
+            string answer = Console.ReadLine().ToLower();
 
-            Console.Clear(); // Clear the console screen
-            Console.WriteLine("=====================================================");
-            Console.WriteLine("                 CALCULATOR: C# EDITION");
-            Console.WriteLine("=====================================================");
-
-            while (true)
+            if (answer == "y")
             {
-                //input 1st num
-                if (isFirstIteration)
-                {
-                    Console.Write("Enter a Number: ");
-                    if (!double.TryParse(Console.ReadLine(), out Num1))
-                    {
-                        Console.WriteLine("Invalid input. Please enter a Number.");
-                        continue;
-                    }
-                    isFirstIteration = false;
-                }
-                else
-                {
-                    while (true)
-                    {
-                        Console.Write("Enter operator (+, -, *, /) OR '=' to calculate the answer: ");
-                        char.TryParse(Console.ReadLine(), out Symbol);
-
-                        if (Symbol == '=')
-                            break;
-
-                        if (Symbol != '+' && Symbol != '-' && Symbol != '*' && Symbol != '/')
-                        {
-                            Console.WriteLine("Invalid operator! Please enter one of the four operators: +, -, *, /");
-                            continue;
-                        }
-
-                        break;
-                    }
-
-                    if (Symbol == '=')
-                    {
-                        result = Num1;
-                        break;
-                    }
-
-                    double Num2;
-                    while (true)
-                    {
-                        Console.Write("Enter a Number: ");
-                        string input = Console.ReadLine();
-
-                        if (!double.TryParse(input, out Num2))
-                        {
-                            Console.WriteLine("Invalid input! Please enter a Number.");
-                            continue;
-                        }
-
-                        break;
-                    }
-
-                    Expression expression = new Expression(Num1, Symbol);
-                    try
-                    {
-                        result = expression.Evaluate(Num2);
-                    }
-                    catch (DivisionByZeroException)
-                    {
-                        //calculation must reset once there exists division by zero
-                        Console.WriteLine("Resetting calculation due to Division by Zero.\nPress any key to continue...");
-                        Console.ReadLine(); //before clearing the screen for a reset
-                        isFirstIteration = true;
-                        break;
-                    }
-
-                    Num1 = result;
-                }
-            }
-
-            if (isFirstIteration) //continue to the next iteration (if calculation has been reset)
-                continue;
-
-            Console.WriteLine($"Final result: {Math.Round(result, 2)} "); //Result becomes rounded to 2 decimal places
-
-            //Ask user if they wish to try the Calculator again
-            Console.Write("\nWould you like to calculate again?\n(Y or y if yes): ");
-            string choice2 = Console.ReadLine().ToUpper();
-            if (choice2 != "Y")
-            {
-                Console.WriteLine("\Terminating program.\nThank you for using this Calculator! :D");
+                // reset the elements inside the array
+                Array.Resize(ref numbers, 0);
+                Array.Resize(ref numbers, 0);
+                InputNumbers(); // ask user to input again from the start
                 break;
+            }
+            else if (answer == "n")
+            {
+                // exits the program
+                Console.WriteLine("Exiting program. Thank you for using this Calculator!");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input! Must be 'y' or 'n'");
             }
         }
     }
-}
 }
