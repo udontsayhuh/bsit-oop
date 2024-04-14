@@ -9,16 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-class CalculatorProgram
+class CalculatorMainProgram
 {
     static void Main(string[] args)
     {
-        bool useCalcuAgain = true;
+        bool useCalculatorAgain = true;
 
-        while (useCalcuAgain) //to use the calculator again
+        while (useCalculatorAgain) //to use the calculator again
         {
             Operation op = new Operation();
-            op.Validator();                     //calling the validator method which includes the user input w/validations
+            op.Compute();                     //calling the validator method which includes the user input w/validations
 
             string response;
             bool validResponse = false;         //validation for user response
@@ -40,11 +40,11 @@ class CalculatorProgram
             } while (!validResponse) ;
             if (response == "yes" || response == "YES")
             {
-                Console.WriteLine("\nYou may now use the calculator again.");
+                Console.WriteLine("\nYou may now use the calculator again.\n");
             }
             if (response == "no" || response == "NO")
             {
-                useCalcuAgain = false;                                                  // to stop the loop
+                useCalculatorAgain = false;                                                  // to stop the loop
             }
         }
 

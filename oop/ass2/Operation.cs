@@ -12,7 +12,7 @@ namespace oop.ass2
         private double total = 0;
 
         //Validator Method loops continuously until the user enters "="
-        public void Validator()
+        public void Compute()
         {
             //Instruction for users
             Console.WriteLine("Enter values and operators ALTERNATIVELY. Press '=' to calculate.");
