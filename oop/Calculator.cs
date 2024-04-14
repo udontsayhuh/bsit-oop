@@ -53,6 +53,8 @@ namespace oop
                     }
                     else
                     {
+                        Console.Clear();
+                        PrintResult(num_1);
                         Console.WriteLine("Y or N only!");
                     }
                 }
@@ -121,7 +123,7 @@ namespace oop
                     {
                         Console.WriteLine("You cannot divide by 0");
                         Console.ReadKey();
-                        Environment.Exit(1);
+                        Environment.Exit(0);
                         return 0;
                     }
                     else
