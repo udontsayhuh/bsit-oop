@@ -33,7 +33,7 @@ public class Program
         while (true)
         {
             Console.Clear();
-            DisplayCalculatorHeader();
+            DisplayCal();
 
             try
             {
@@ -46,6 +46,7 @@ public class Program
                     double num2 = GetNumericInput("Enter Next Number (or = to calculate): ");
                     Calculator calculator = new Calculator(result, num2);
                     result = PerformCalculation(calculator, operation);
+
                     operation = GetOperationInput();
                 }
 
@@ -59,7 +60,7 @@ public class Program
         }
     }
 
-    private static void DisplayCalculatorHeader()
+    private static void DisplayCal()
     {
         Console.WriteLine("********** CALCULATOR *************");
         Console.WriteLine("----------------------------------");
