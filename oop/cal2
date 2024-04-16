@@ -2,8 +2,8 @@ using System;
 
 public class Calculator
 {
-    private double num1;
-    private double num2;
+    private readonly double num1;
+    private readonly double num2;
 
     public Calculator(double n1, double n2)
     {
@@ -33,7 +33,7 @@ public class Program
         while (true)
         {
             Console.Clear();
-            DisplayCal();
+            DisplayCalculatorHeader();
 
             try
             {
@@ -41,15 +41,11 @@ public class Program
                 string operation = GetOperationInput();
                 double result = num1;
 
-                while (true)
+                while (operation != "=")
                 {
-                    if (operation == "=")
-                        break;
-
                     double num2 = GetNumericInput("Enter Next Number (or = to calculate): ");
                     Calculator calculator = new Calculator(result, num2);
                     result = PerformCalculation(calculator, operation);
-
                     operation = GetOperationInput();
                 }
 
@@ -63,27 +59,25 @@ public class Program
         }
     }
 
-    private static void DisplayCal()
+    private static void DisplayCalculatorHeader()
     {
-        Console.WriteLine("**********CALCULATOR*************");
-        Console.WriteLine("--------------------------------");
+        Console.WriteLine("********** CALCULATOR *************");
+        Console.WriteLine("----------------------------------");
     }
 
     private static double GetNumericInput(string prompt)
     {
         double input;
-        while (true)
+        while (!double.TryParse(Console.ReadLine(), out input))
         {
-            Console.Write(prompt);
-            if (double.TryParse(Console.ReadLine(), out input))
-                return input;
-            Console.WriteLine("Invalid input. Please enter a valid number.");
+            Console.WriteLine("Invalid input. Please enter a valid number:");
         }
+        return input;
     }
 
     private static string GetOperationInput()
     {
-        Console.Write("Select operation (+, -, *, /, or =): ");
+        Console.Write("Enter operation (+, -, *, /, or =): ");
         return Console.ReadLine();
     }
 
@@ -91,21 +85,27 @@ public class Program
     {
         switch (operation)
         {
-            case "+": return calculator.Add();
-            case "-": return calculator.Subtract();
-            case "*": return calculator.Multiply();
-            case "/": return calculator.Divide();
+            case "+":
+                return calculator.Add();
+            case "-":
+                return calculator.Subtract();
+            case "*":
+                return calculator.Multiply();
+            case "/":
+                return calculator.Divide();
             default:
-                Console.WriteLine("Invalid operation. Please choose +, -, *, /, or =.");
+                Console.WriteLine("Invalid operation. Please enter a valid operator.");
                 return double.NaN;
         }
     }
 
     private static void AskForAnotherCalculation()
     {
-        Console.Write("Perform another calculation? (y/n): ");
+        Console.Write("Do you want to perform another calculation? (y/n): ");
         string response = Console.ReadLine();
         if (response.ToLower() != "y")
+        {
             Environment.Exit(0);
+        }
     }
 }
