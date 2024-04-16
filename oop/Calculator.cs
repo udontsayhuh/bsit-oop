@@ -6,7 +6,7 @@ using System;
 
 namespace Calculator
 {
-    // Abstract
+    // Abstract class for simple calculator
     abstract class SimpleCalculator
     {
         // Method to run the calculator
@@ -15,27 +15,27 @@ namespace Calculator
             while (true)
             {
                 // Arrays to store numbers and operators
-                double[] numbers = new double[100]; // Maximum number of input numbers
-                char[] operators = new char[100]; // Maximum number of input operators
+                string[] numbers = new string[100]; // Maximum number of input numbers - Changed data type to string
+                string[] operators = new string[100]; // Maximum number of input operators - Changed data type to string
 
                 // Get input until "=" is entered
-                int num_count = 0;
-                int op_count = 0;
+                int numCount = 0; // Changed variable name to camelCase
+                int opCount = 0; // Changed variable name to camelCase
                 while (true)
                 {
                     // Get number
-                    double num = number_input("Enter a number: ");
-                    numbers[num_count++] = num;
+                    string num = NumberInput("Enter a number: "); // Changed method name to camelCase
+                    numbers[numCount++] = num;
 
                     // Get operator
-                    char op = operator_input();
-                    operators[op_count++] = op;
+                    string op = OperatorInput(); // Changed method name to camelCase
+                    operators[opCount++] = op;
 
                     // If "=" is entered, calculate the result
-                    if (op == '=')
+                    if (op == "=")
                     {
                         // Perform calculation and display result
-                        double result = Calculate(numbers, operators, num_count, op_count);
+                        double result = Calculate(numbers, operators, numCount, opCount);
                         Console.WriteLine("Result: " + result);
                         break;
                     }
@@ -52,30 +52,30 @@ namespace Calculator
         }
 
         // Private method for performing calculations
-        private double Calculate(double[] numbers, char[] operators, int num_count, int op_count)
+        private double Calculate(string[] numbers, string[] operators, int numCount, int opCount)
         {
-            double result = numbers[0];
-            for (int i = 0; i < op_count; i++)
+            double result = Convert.ToDouble(numbers[0]);
+            for (int i = 0; i < opCount; i++)
             {
                 switch (operators[i])
                 {
-                    case '+':
-                        result += numbers[i + 1];
+                    case "+":
+                        result += Convert.ToDouble(numbers[i + 1]);
                         break;
-                    case '-':
-                        result -= numbers[i + 1];
+                    case "-":
+                        result -= Convert.ToDouble(numbers[i + 1]);
                         break;
-                    case '/':
-                        if (numbers[i + 1] == 0)
+                    case "/":
+                        if (Convert.ToDouble(numbers[i + 1]) == 0)
                         {
                             // Handle division by zero
                             Console.WriteLine("Cannot divide by zero.");
                             return 0;
                         }
-                        result /= numbers[i + 1];
+                        result /= Convert.ToDouble(numbers[i + 1]);
                         break;
-                    case '*':
-                        result *= numbers[i + 1];
+                    case "*":
+                        result *= Convert.ToDouble(numbers[i + 1]);
                         break;
                 }
             }
@@ -83,17 +83,17 @@ namespace Calculator
         }
 
         // Common method for getting numerical input
-        private double number_input(string prompt)
+        private string NumberInput(string prompt)
         {
-            double num;
+            string num;
             while (true) // Loop until valid input is provided
             {
                 Console.WriteLine(prompt);
                 string input = Console.ReadLine();
-                if (double.TryParse(input, out num))
+                if (double.TryParse(input, out double result))
                 {
                     // If parsing was successful, return the number
-                    return num;
+                    return result.ToString();
                 }
                 else
                 {
@@ -104,9 +104,9 @@ namespace Calculator
         }
 
         // Method for getting operator input
-        private char operator_input()
+        private string OperatorInput()
         {
-            char op;
+            string op;
             while (true) // Loop until valid input is provided
             {
                 Console.WriteLine("Enter an operator (+, -, /, *, =):");
@@ -115,9 +115,9 @@ namespace Calculator
                 // Check if the input is a single character
                 if (input.Length == 1)
                 {
-                    op = input[0]; // Get the first character
+                    op = input; // Get the first character
                     // Check if the character is a valid operator
-                    if (op == '+' || op == '-' || op == '/' || op == '*' || op == '=')
+                    if (op == "+" || op == "-" || op == "/" || op == "*" || op == "=")
                     {
                         // If it's a valid operator, return the operator
                         return op;
@@ -147,3 +147,4 @@ namespace Calculator
         }
     }
 }
+
