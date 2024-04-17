@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ma. Elisa T. Garrote\\source\\repos\\Calculator.cs\\Calculator.cs\\Calculator.cs.csproj",
+      "projectUniqueName": "C:\\Users\\Ma. Elisa T. Garrote\\source\\repos\\bsit - oop\\bsit-oop\\Calculator.cs\\Calculator.cs\\Calculator.cs.csproj",
       "projectName": "Calculator.cs",
-      "projectPath": "C:\\Users\\Ma. Elisa T. Garrote\\source\\repos\\Calculator.cs\\Calculator.cs\\Calculator.cs.csproj",
+      "projectPath": "C:\\Users\\Ma. Elisa T. Garrote\\source\\repos\\bsit - oop\\bsit-oop\\Calculator.cs\\Calculator.cs\\Calculator.cs.csproj",
       "packagesPath": "C:\\Users\\Ma. Elisa T. Garrote\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ma. Elisa T. Garrote\\source\\repos\\Calculator.cs\\Calculator.cs\\obj\\",
+      "outputPath": "C:\\Users\\Ma. Elisa T. Garrote\\source\\repos\\bsit - oop\\bsit-oop\\Calculator.cs\\Calculator.cs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ma. Elisa T. Garrote\\AppData\\Roaming\\NuGet\\NuGet.Config",
