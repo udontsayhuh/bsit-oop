@@ -85,7 +85,7 @@ namespace MyCalculatorApp
             }
         }
 
-        private static double isValid(string message)
+        private static double isValid(string message) // checking if input is a number, if not; it is invalid
         {
             double number;
             bool isTrue;
@@ -102,7 +102,7 @@ namespace MyCalculatorApp
             return number;
         }
 
-        private static char GetOperator()
+        private static char GetOperator() // getting the operator and checks if input is an operator, else it is invalid
         {
             Console.WriteLine("Choose Operator [ +  - / * = ] : ");
             char choice = Console.ReadKey().KeyChar;
@@ -118,16 +118,16 @@ namespace MyCalculatorApp
             return choice;
         }
 
-        private static bool AskAnotherCalculation()
+        private static bool AskAnotherCalculation() 
         {
             Console.WriteLine("Do you want to perform another calculation? (yes / no): ");
-            string input = Console.ReadLine()!.Trim().ToLower();
+            string input = Console.ReadLine()!.Trim().ToLower(); // converting capitalize input into lowercase
             ClearScreen();
             return input == "yes" || input == "y";
             //ClearScreen();
         }
 
-        private static double CalculateExpression(Calculator calc, List<double> numbers, List<char> operators)
+        private static double CalculateExpression(Calculator calculateNumber, List<double> numbers, List<char> operators) // calculation once "=" is entered
         {
             double result = numbers[0];
             int operatorIndex = 0;
@@ -137,18 +137,18 @@ namespace MyCalculatorApp
                 switch (operators[operatorIndex])
                 {
                     case '+':
-                        result = calc.Add(result, numbers[i]);
+                        result = calculateNumber.Add(result, numbers[i]);
                         break;
                     case '-':
-                        result = calc.Subtract(result, numbers[i]);
+                        result = calculateNumber.Subtract(result, numbers[i]);
                         break;
                     case '*':
-                        result = calc.Multiply(result, numbers[i]);
+                        result = calculateNumber.Multiply(result, numbers[i]);
                         break;
                     case '/':
                         try
                         {
-                            result = calc.Divide(result, numbers[i]);
+                            result = calculateNumber.Divide(result, numbers[i]);
                         }
                         catch (DivideByZeroException e)
                         {
