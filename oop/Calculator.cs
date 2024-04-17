@@ -15,7 +15,7 @@ namespace Calculator
             this.Name = name;
         }
 
-        public abstract double solve(double num1, double num2);
+        public abstract double Solve(double num1, double num2);
     }
 
     // Child Classes
@@ -26,7 +26,7 @@ namespace Calculator
         {
 
         }
-        public override double solve(double num1, double num2)
+        public override double Solve(double num1, double num2)
         {
             return num1 + num2;
         }
@@ -39,7 +39,7 @@ namespace Calculator
 
         }
 
-        public override double solve(double num1, double num2)
+        public override double Solve(double num1, double num2)
         {
             return num1 - num2;
         }
@@ -53,7 +53,7 @@ namespace Calculator
 
         }
 
-        public override double solve(double num1, double num2)
+        public override double Solve(double num1, double num2)
         {
             return num1 * num2;
         }
@@ -67,7 +67,7 @@ namespace Calculator
 
         }
 
-        public override double solve(double num1, double num2)
+        public override double Solve(double num1, double num2)
         {
             return num1 / num2;
         }
@@ -77,12 +77,12 @@ namespace Calculator
     // Main Method
     public class Calculator
     {
-        static bool operatorIsValid(char c)
+        static bool OperatorIsValid(char c)
         {
             return c == '+' || c == '-' || c == '*' || c == '/';
         }
 
-        static double calculate(double operand1, char operation, double operand2)
+        static double Calculate(double operand1, char operation, double operand2)
         {
             switch (operation)
             {
@@ -149,7 +149,7 @@ namespace Calculator
                     continue;
                 }
 
-                if (!char.TryParse(input, out operation) || !operatorIsValid(operation))
+                if (!char.TryParse(input, out operation) || !OperatorIsValid(operation))
                 {
                     Console.WriteLine("Invalid operator!!");
                     continue;
@@ -162,7 +162,7 @@ namespace Calculator
                     continue;
                 }
 
-                answer = calculate(answer, operation, operand);
+                answer = Calculate(answer, operation, operand);
 
 
             }
