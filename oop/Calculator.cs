@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Calculator
     abstract class Calculator
     {
         // Attributes
-        public List<dynamic> AllValues = new List<dynamic>();    // List to store the values of operands (declared as dynamic to store any data type).
+        public List<dynamic> AllValues = new List<dynamic>();    // List to store all values that the user input including operations (declared as dynamic to store any data type).
         public double Result;
 
         // Constructor
@@ -22,11 +23,11 @@ namespace Calculator
         }
 
         // Abstract method.
+        public abstract void GetUserInput();    // Method to get the input of the user.
         public abstract double Calculate();   // Method for calculation.
     }
 
-
-    // Create another class called Display
+    // Create another class called "Display".
     class Display
     {
         // Regular Method.
@@ -47,7 +48,7 @@ namespace Calculator
             Console.Clear();    // Clear the console screen.
             DisplayOperationOption();   // Method call to DisplayOperationOption method.
 
-            // Display all the values that the user's input (including operation).
+            // Display all the values that the user's input (including operations).
             for (int i = 0; i < userInputValues.Count; i++)
             {
                 Console.Write($"{userInputValues[i]} ");
@@ -67,33 +68,36 @@ namespace Calculator
         }
     }
 
-    // Create another class called UserInput
-    class UserInput
+    // Create another class called "UserInput" that inherits from "Calculator".
+    class UserInput : Calculator
     {
-        public static List<dynamic> GetUserInput()
+        public UserInput(List<dynamic> allValues, double result) : base(allValues, result) { }
+
+        // Implementation of abstract method from "Calculator" class (Polymorphism as well).
+        public override void GetUserInput()
         {
-            List<dynamic> values = new List<dynamic>(); // List to store all the values that the user input (declared as dynamic to store any data type).
             char chosenOperator = ' ';
 
             while (chosenOperator != '=')   // Loop as long as the user does not enter an equal sign for the operator. (Outer loop)
             {
-                // Error handling.
+                // Ask user to enter number for operand. Error handling.
                 while (true)    // First inner loop.
                 {
                     try // Execute and test for errors, if any occurs handle them with cath statement.
                     {
                         Console.Write("\nEnter number for Operand: ");
-                        values.Add(Convert.ToDouble(Console.ReadLine()));  // Add the user input to the list of values.
-                        Display.DisplayAllValuesInput(values); // Method call to DisplayAllValuesInput method in the Display class with parameter values(list).
-                        break;  // Exit the while loop.
+                        AllValues.Add(Convert.ToDouble(Console.ReadLine()));  // Add the user input to the list of AllValues.
+                        Display.DisplayAllValuesInput(AllValues); // Method call to DisplayAllValuesInput method in the Display class with parameter AllValues(list).
+                        break;  // Exit the first inner loop.
                     }
                     catch (Exception e)
                     {   // Execute this statement if the user input is not a number.
-                        Display.DisplayAllValuesInput(values); // Method call to DisplayAllValuesInput method in the Display class with parameter values(list).
+                        Display.DisplayAllValuesInput(AllValues); // Method call to DisplayAllValuesInput method in the Display class with parameter AllValues(list).
                         Console.Write("\n\nInvalid input! Please input a valid value!");
                     }
                 }   // End of first inner loop.
 
+                // Ask user to enter operator.
                 Console.Write("\nEnter operator: ");
                 chosenOperator = Convert.ToChar(Console.Read());
 
@@ -101,21 +105,23 @@ namespace Calculator
                 while (chosenOperator != '+' && chosenOperator != '*' && chosenOperator != '-' && chosenOperator != '/' && chosenOperator != '=')   // Second inner loop.
                 {
                     Console.ReadLine();
-                    Display.DisplayAllValuesInput(values); // Method call to DisplayAllValuesInput method in the Display class with parameter values(list).
+                    Display.DisplayAllValuesInput(AllValues); // Method call to DisplayAllValuesInput method in the Display class with parameter AllValues(list).
 
                     Console.Write("\n\nInvalid operator!\nEnter valid operator (+, *, -, /, =): ");
                     chosenOperator = Convert.ToChar(Console.Read());
                 }   // End of second inner loop.
                 Console.ReadLine();
-                values.Add(chosenOperator);    // Add the user input for the operator to the list of values.
+                AllValues.Add(chosenOperator);    // Add the user's input for the operator to the list of AllValues.
 
+                // Display all values input if the operator is not "=".
                 if (chosenOperator != '=')  // Check and execute if the chosenOperator is not an equal sign.
                 {
-                    Display.DisplayAllValuesInput(values);     // Method call to DisplayAllValuesInput method in the Display class with parameter values(list).
+                    Display.DisplayAllValuesInput(AllValues);     // Method call to DisplayAllValuesInput method in the Display class with parameter AllValues(list).
                 }
             }   // End of outer loop.
-            return values;  // Return the list that the user input for the values to the calling method.
         }
+
+        public override double Calculate() => throw new NotImplementedException();
     }
 
     // Create another class called BasicCalcualtor that inherits from the "Calculator".
@@ -171,6 +177,8 @@ namespace Calculator
             }
             return Result;  // Return the result to the calling method.
         }
+
+        public override void GetUserInput() => throw new NotImplementedException();
     }
 
     class Program
@@ -181,13 +189,15 @@ namespace Calculator
             while (anotherCalcu == 'Y')
             {   // Loop as long as the value of anotherCalcu is 'Y' (outer loop).
                 Display.DisplayOperationOption();   // Diplay operation option using the DisplayOperationOption method from the Display class.
-                List<dynamic> valuesInput = UserInput.GetUserInput();   // Method call to GetUserInput method from the UserInput class, then assign the return value to valuesInput(list).
-                Display.DisplayAllValuesInput(valuesInput); // Diplay all values that the user input (including operations) using the DisplayAllValuesInput method from the Display class.
 
-                // Create an instance of the BasicCalculator class with a list of user input values and an initial result of 0.0.
-                BasicCalculator calculateValues = new BasicCalculator(valuesInput, 0.0);
+                // Create an instance of the UserInput class with an empty list and an initial result of 0.0.
+                UserInput userInput = new UserInput(new List<dynamic>(), 0.0);
+                userInput.GetUserInput();   // Method call to GetUserInput method from the UserInput class.
+                Display.DisplayAllValuesInput(userInput.AllValues); // Method call to DisplayAllValuesInput from the Display class with parameter of AllValues(list).
 
-                // Method call to Calculate method then the result of the calculation is passed as an argument to call the DisplayResult method.
+                // Create an instance of the BasicCalculator class with two parameters of AllValues(list) and Result(which is 0.0).
+                BasicCalculator calculateValues = new BasicCalculator(userInput.AllValues, userInput.Result);
+                // Method call to Calculate method from the BasicCalculator class then the result of the calculation is passed as an argument to call the DisplayResult method from the Display class.
                 Display.DisplayResult(calculateValues.Calculate());
 
                 // Ask user if the user want to perform another calculation.
