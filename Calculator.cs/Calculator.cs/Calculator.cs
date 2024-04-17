@@ -6,25 +6,25 @@ namespace MyCalculatorApp
     // Class representing a calculator
     class Calculator
     {
-        /* Method for addition and Encapsulation - methods encapsulate behavior */
+        // Method for addition and Encapsulation - methods encapsulate behavior
         public double Add(double x, double y) 
         {
             return x + y;
         }
 
-        /* Method for subtraction and Encapsulation - methods encapsulate behavior */
+        // Method for subtraction and Encapsulation - methods encapsulate behavior 
         public double Subtract(double x, double y) 
         {
             return x - y;
         }
 
-        /* Method for multiplication and Encapsulation - methods encapsulate behavior */
+        // Method for multiplication and Encapsulation - methods encapsulate behavior 
         public double Multiply(double x, double y) 
         {
             return x * y;
         }
 
-        /* Method for division and Encapsulation - methods encapsulate behavior */
+        // Method for division and Encapsulation - methods encapsulate behavior 
         public double Divide(double x, double y) 
         {
             if (y == 0)
