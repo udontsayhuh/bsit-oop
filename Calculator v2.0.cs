@@ -100,7 +100,7 @@ namespace Calculator
 
                 if (numbers.Count < 2 && selectedOperator == null) // Handle case with less than 2 numbers and no operator
                 {
-                    Console.WriteLine("Insufficient numbers for calculation. Please enter at least two numbers.");
+                    Console.WriteLine("SYNTAX ERROR! Please enter at least two numbers.");
                     continue;
                 }
 
@@ -140,3 +140,7 @@ namespace Calculator
         }
     }
 }
+
+//ASSIGNMENT#02 executed by ABABA, JULIA E. --> BSIT 2-1, 03-25-2024
+//ASSIGNMENT#03 MODIFIED patch version 2.0.0 --> 04-08-10 - 04-10-2024
+//ASSIGNMENT#04 MODIFIED patch version 2.1.0 --> 04-17-2024
