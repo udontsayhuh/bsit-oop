@@ -2,47 +2,45 @@
 // BSIT 2-2
 
 using System;
-
 abstract class Calculation
-{ // creating a class that will store the abtract methods add(), subtract(), multiply(), divide()
-    public abstract double add(double num1, double num2);
-    public abstract double subtract(double num1, double num2);
-    public abstract double multiply(double num1, double num2);
-    public abstract double divide(double num1, double num2);
-}
-
-class Calculator : Calculation // inherits the methods inside the calculation
 {
-    private double num1, num2;
-    private string operation;
+    public abstract double Add(double num1, double num2);
+    public abstract double Subtract(double num1, double num2);
+    public abstract double Multiply(double num1, double num2);
+    public abstract double Divide(double num1, double num2);
+}
+class Calculator : Calculation // Inherits the abstract class Calculation
+{
+    private double result; // Store the result of the computation, can only be access through setters and getters
 
-    public void getNum1(double num)
+    public void setResult(double result) // Store result
     {
-        num1 = num;
+        this.result = result;
     }
-    public void getNum2(double num)
+    public double getResult() // Display result
     {
-        num2 = num;
+        return result;
     }
-    public void getOperation(string operation)
+    public override double Add(double num1, double num2) // Overriding method from different class
     {
-        this.operation = operation;
+        return num1 + num2;
     }
-    public override double add(double num1, double num2) //override the method add, also applying Polymorphism
-    { // creating a method add, with 2 parameters (double num1, double num2)
-        return num1 + num2; // return the computation to the main class
+    public override double Subtract(double num1, double num2) // Overriding method from different class
+    {
+        return num1 - num2;
     }
-    public override double subtract(double num1, double num2) //override the method subtract, also applying Polymorphism
-    { // creating a method subtract, with 2 parameters (double num1, double num2)
-        return num1 - num2; // return the computation to the main class
+    public override double Multiply(double num1, double num2) // Overriding method from different class
+    {
+        return num1 * num2;
     }
-    public override double multiply(double num1, double num2) //override the method multiply, also applying Polymorphism
-    { // creating a method multiply, with 2 parameters (double num1, double num2)
-        return num1 * num2; // return the computation to the main class
-    }
-    public override double divide(double num1, double num2) //override the method divide, also applying Polymorphism
-    { // creating a method divide, with 2 parameters (double num1, double num2)
-        return num1 / num2; // return the computation to the main class
+    public override double Divide(double num1, double num2) // Overriding method from different class
+    {
+        if (num2 == 0)
+        {
+            Console.WriteLine("Error: Division by zero."); // If the user inputs 0
+            return double.NaN;
+        }
+        return num1 / num2;
     }
 }
 
@@ -50,96 +48,106 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("\n*****************************************************");
-        Console.WriteLine("                      CALCULATOR                     "); // Header
-        Console.WriteLine("*****************************************************");
+        Console.ForegroundColor = ConsoleColor.Yellow; // Change the text color to Yellow
+        Console.WriteLine("\n*************************************************************************");
+        Console.BackgroundColor = ConsoleColor.DarkYellow; // Change the text background color to Dark Yellow
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.WriteLine("                                 CALCULATOR                              ");
+        Console.ResetColor(); // Reset the foreground color and background color
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("*************************************************************************");
+        Console.ResetColor(); // Reset the text background color
 
-        Calculator calculation = new Calculator(); // creating an object named "calculation" from the class Calculator (line 1)
-        double num1, num2;
-        string choice; // string choice was used to have the user decide whether exit the program or do another calculation
-        string operation = "";
-        bool isExit = false; // used to perform the loop for exit or redo
+        Calculator calculation = new Calculator(); // Creating a calculation object
+        double num, result;
+        string choice;
+        string operation = "", input = "";
+        bool isExit = false;
 
-        while (!isExit) // using while loop to add exit or redo option for the user
+        while (!isExit) // Continue the loop while isExit varaible is not true
         {
-            Console.Write("\nEnter 1st number: ");
+            result = 0; // Reset result for each calculation
 
-            if (!double.TryParse(Console.ReadLine(), out num1)) // identify if the user inputed the right format, (numeric format)
+            while (true) // Continue the loop unless changed to false or a (break) is called
             {
-                Console.Write("\nInvalid Input! Terminating system... \nPress any key to exit...");
-                Console.ReadKey();
-                return; // if not in a numeric format, the system will terminate.
-            }
-
-            calculation.getNum1(num1);
-
-            while (operation != "+" && operation != "-" && operation != "*" && operation != "/")
-            {
-                Console.Write("Enter Operation (+, -, *, /): ");
-                operation = Console.ReadLine();
-
-                if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
+                if (input == "=") // If <input> varible is equals to =, display result
                 {
-                    Console.WriteLine("Invalid Operation!");
-                    Console.WriteLine("\n");
-                }
-                else
-                {
+                    calculation.setResult(result); // Store result to the object class
+                    Console.Write("\n\tThe answer is: ");
+                    Console.ForegroundColor = ConsoleColor.Green; // Change the text color
+                    Console.Write(calculation.getResult()); // Call the result from the object class
+                    Console.ResetColor(); // Reset the text color
                     break;
                 }
-            }
 
-            calculation.getOperation(operation);
+                Console.Write("\nEnter number: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                if (!double.TryParse(Console.ReadLine(), out num)) // Continue the loop if user input  a non-double varible element
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // Change the text color
+                    Console.Write("Please enter a valid number.\n");
+                    Console.ResetColor(); // Reset the text color
+                    continue; // Continue to loop
+                }
+                Console.ResetColor();
 
-            Console.Write("Enter 2nd number: ");
-            while (!double.TryParse(Console.ReadLine(), out num2)) // ensure that the user types a numerical value
-            {
-                Console.WriteLine("Invalid Input! Please enter a valid number.\n");
-                Console.Write("Enter 2nd number: ");
-            }
+                switch (operation)
+                {
+                    case "+":
+                        result = calculation.Add(result, num); // Call add method from the object
+                        break;
+                    case "-":
+                        result = calculation.Subtract(result, num); // Call subtract method from the object
+                        break;
+                    case "*":
+                        result = calculation.Multiply(result, num); // Call multiply method from the object
+                        break;
+                    case "/":
+                        result = calculation.Divide(result, num); // Call divide method from the object
+                        break;
+                    default:
+                        result = num; // If no operation yet, start with the first number
+                        break;
+                }
 
-            calculation.getNum2(num2);
+                operation = ""; // Reset the value of <operation> variable
 
-            switch (operation) // using switch to implement conditional statement. Comparing "operation" 
-            {
-                case "+": // in case that the operation is equals to +
-                    Console.WriteLine($"\n\tThe calculated result is:\n\n\t{num1} + {num2} = {calculation.add(num1, num2)}"); // calling the object method, passing the parameters (num1, num2)
-                    break; // break the case statement
-                case "-": // in case that the operation is equals to -
-                    Console.WriteLine($"\n\tThe calculated result is:\n\n\t{num1} - {num2} = {calculation.subtract(num1, num2)}"); // calling the object method, passing the parameters (num1, num2)
-                    break; // break the case statement
-                case "*": // in case that the operation is equals to *
-                    Console.WriteLine($"\n\tThe calculated result is:\n\n\t{num1} * {num2} = {calculation.multiply(num1, num2)}"); // calling the object method, passing the parameters (num1, num2)
-                    break; // break the case statement
-                case "/": // in case that the operation is equals to /
-                    Console.WriteLine($"\n\tThe calculated result is:\n\n\t{num1} / {num2} = {calculation.divide(num1, num2)}"); // calling the object method, passing the parameters (num1, num2)
-                    break; // break the case statement
-                default: // this is the else statement, in case the operation is different
-                    Console.WriteLine("Invalid Operation!");
-                    break; // break the case statement
+                while (operation != "+" && operation != "-" && operation != "*" && operation != "/" && operation != "=") // continue to loop while the condition is not meet
+                {
+                    Console.Write("Enter operation (+, -, *, /) or '=' to calculate: ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    operation = Console.ReadLine();
+                    Console.ResetColor(); // Reset the text color
+
+                    if (operation != "+" && operation != "-" && operation != "*" && operation != "/" && operation != "=")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red; // Change the text color
+                        Console.Write("Invalid operation. ");
+                        Console.ResetColor(); // Reset the text color
+
+                    }
+                }
+
+                if (operation == "=")
+                {
+                    input = operation; // Store the value of <operation> to the <input> to be use in the next iteration of the loop
+                }
             }
 
             Console.Write("\n\nType Y to try again, press any other key to exit: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             choice = Console.ReadLine();
+            Console.ResetColor(); // Reset the text color
 
-            if (choice != "Y" && choice != "y")
+            if (choice.ToUpper() != "Y")
             {
-                isExit = true; // if the user type any key beside Y or y, then the boolean isExit will be true, hence breaking the while loop 
+                isExit = true;
             }
             else
             {
-                operation = "";
+                operation = ""; // Reset <operation> for the next computation
+                input = ""; // Reset <input> for the next computation
             }
         }
     }
 }
-
-/* 
-User input: Done
-Invalid message display if not numerical: Done
-Termination if input is invalid: Done
-Invalid Operation display: Done
-Input another numerical value if operation is valid: Done
-Display the result if input is already valid: Done
-Another Calculation: Done
- */
