@@ -38,8 +38,8 @@ class Calculator
     {
         while (true)
         {
-            List<int> numbers = new List<int>();
-            List<string> operations = new List<string>();
+            var numbers = new List<int>();
+            var operations = new List<string>();
 
             while (true)
             {
@@ -100,8 +100,7 @@ class Calculator
 
             Console.WriteLine("----------------------------------------------");
             Console.Write("Do you want to perform another calculation? (Y/N): ");
-            string choice = Console.ReadLine();
-            if (!IsAffirmative(choice))
+            if (!IsAffirmative(Console.ReadLine()))
                 break;
         }
     }
