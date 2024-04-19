@@ -120,15 +120,8 @@ class Calculator
     // Method to calculate the input numbers
     public void Calculate()
     {
-        if (symbol == '/' && secondNum == 0)
-        {
-            Console.WriteLine("Cannot divide by zero.");
-        }
-        else
-        {
-            double result = chosenOpe.Perform(firstNum, secondNum);
-            firstNum = result; // Update num1 for further calculations
-        }
+        double result = chosenOpe.Perform(firstNum, secondNum);
+        firstNum = result; // Update num1 for further calculations
     }
 
     // Method to ask the user if they want to perform another calculation
