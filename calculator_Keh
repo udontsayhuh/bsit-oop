@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 abstract class SimpleCalculator
 {
-    protected List<string> numbers = new List<string>();
-    protected List<char> operators = new List<char>();
+    protected List<string> numbers = new List<string>(); // List to store input numbers
+    protected List<char> operators = new List<char>();   // List to store input operators
 
+    // Method to get input from the user
     protected void GetInput()
     {
         while (true)
@@ -13,15 +14,15 @@ abstract class SimpleCalculator
             try
             {
                 Console.Write("PLEASE! Enter a number: ");
-                string num = NumberInput();
+                string num = NumberInput(); // Get numerical input from the user
 
                 Console.Write("Enter an operator (+, -, *, /) or '=' to calculate: ");
-                char op = OperatorInput();
+                char op = OperatorInput(); // Get operator input from the user
 
-                numbers.Add(num);
-                operators.Add(op);
+                numbers.Add(num);   // Add the number to the list of numbers
+                operators.Add(op); // Add the operator to the list of operators
 
-                if (op == '=')
+                if (op == '=') // Break the loop if the user inputs '='
                     break;
             }
             catch (FormatException)
@@ -31,24 +32,25 @@ abstract class SimpleCalculator
         }
     }
 
+    // Method to perform the calculation
     protected double Calculate()
     {
-        double result = Convert.ToDouble(numbers[0]);
-        for (int i = 0; i < operators.Count; i++)
+        double result = Convert.ToDouble(numbers[0]); // Initialize result with the first number
+        for (int i = 0; i < operators.Count; i++)    // Loop through the operators
         {
             switch (operators[i])
             {
-                case '+':
+                case '+': // Addition operation
                     result += Convert.ToDouble(numbers[i + 1]);
                     break;
-                case '-':
+                case '-': // Subtraction operation
                     result -= Convert.ToDouble(numbers[i + 1]);
                     break;
-                case '*':
+                case '*': // Multiplication operation
                     result *= Convert.ToDouble(numbers[i + 1]);
                     break;
-                case '/':
-                    if (Convert.ToDouble(numbers[i + 1]) == 0)
+                case '/': // Division operation
+                    if (Convert.ToDouble(numbers[i + 1]) == 0) // Check for division by zero
                     {
                         Console.WriteLine("Cannot divide by zero!");
                         return double.NaN;
@@ -60,6 +62,7 @@ abstract class SimpleCalculator
         return result;
     }
 
+    // Method to get numerical input from the user
     protected string NumberInput()
     {
         while (true)
@@ -72,6 +75,7 @@ abstract class SimpleCalculator
         }
     }
 
+    // Method to get operator input from the user
     protected char OperatorInput()
     {
         while (true)
@@ -84,36 +88,30 @@ abstract class SimpleCalculator
         }
     }
 
+    // Abstract method for performing the calculation (to be implemented by subclasses)
     public abstract void PerformCalculation();
 }
 
 class BasicCalculator : SimpleCalculator
 {
+    // Method to perform the calculation and handle user interaction
     public override void PerformCalculation()
     {
         while (true)
         {
-            GetInput();
-            if (operators.Count > 0 && operators[operators.Count - 1] == '=' && numbers.Count >= 2)
-            {
-                double result = Calculate();
-                Console.WriteLine("Result: " + result);
+            GetInput(); // Get input from the user
+            double result = Calculate(); // Perform the calculation
+            Console.WriteLine("Result: " + result); // Display the result
 
-                Console.Write("Do you want to perform another calculation? (G lang/ayoko na): ");
-                string choice = Console.ReadLine().ToLower();
+            // Ask the user if they want to perform another calculation
+            Console.Write("Do you want to perform another calculation? (G lang/ayoko na): ");
+            string choice = Console.ReadLine().ToLower();
 
-                if (choice == "ayoko na")
-                    break;
+            if (choice == "ayoko na") // Break the loop if the user wants to stop
+                break;
 
-                numbers.Clear();
-                operators.Clear();
-            }
-            else
-            {
-                Console.WriteLine("Invalid input! Please provide at least two numbers and an operator followed by '=' to calculate.");
-                numbers.Clear();
-                operators.Clear();
-            }
+            numbers.Clear();    // Clear the list of numbers for the next calculation
+            operators.Clear();  // Clear the list of operators for the next calculation
         }
         Console.WriteLine("Thank you for using Calculanot 2.0! Goodbye!");
     }
@@ -129,5 +127,4 @@ class Program
         calculator.PerformCalculation();
     }
 }
-
 
