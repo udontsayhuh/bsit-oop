@@ -1,41 +1,37 @@
 using System;
 
-namespace Calculator
+namespace CalculatorApp
 {
-    // Absclass representing a calculator
-    abstract class Calculator
+    // Interface representing a calculator
+    interface ICalculator
     {
-        protected int result;
-
-        // Abs method to calculate operation between two numbers
-        public abstract int Calculate(int num1, int num2, string operation);
+        float Calculate(float num1, float num2, string operation);
     }
 
-    // Calculations of basic arithmetic operations
-    class BasicCalculator : Calculator // Inheritance: BasicCalculator inherits from Calculator
+    // Basic calculator implementation
+    class BasicCalculator : ICalculator
     {
-        // Method to calculate operation between two numbers
-        public override int Calculate(int num1, int num2, string operation)
+        // Method to perform calculation based on operation
+        public float Calculate(float num1, float num2, string operation)
         {
             switch (operation)
             {
                 case "+":
-                    result = num1 + num2;
-                    break;
+                    return num1 + num2;
                 case "-":
-                    result = num1 - num2;
-                    break;
+                    return num1 - num2;
                 case "*":
-                    result = num1 * num2;
-                    break;
+                    return num1 * num2;
                 case "/":
+                    // Check for division by zero
                     if (num2 != 0)
-                        result = num1 / num2;
+                        return num1 / num2;
                     else
                         throw new DivideByZeroException("Error: Division by zero!");
-                    break;
+                default:
+                    // Handle invalid operations
+                    throw new ArgumentException("Invalid operation!");
             }
-            return result;
         }
     }
 
@@ -43,7 +39,6 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            // Loop to calculate again
             bool shouldContinueCalculating = true;
 
             // Main loop for calculator
@@ -51,13 +46,11 @@ namespace Calculator
             {
                 try
                 {
-                    // Start of calculation process
                     Console.WriteLine("Simple Calculator:");
 
                     // Input the first number
-                    int num1 = GetValidNumber("Enter a number: ");
-
-                    BasicCalculator calculator = new BasicCalculator(); // Abstraction: Calculations are abstracted behind Calculator interface
+                    float num1 = GetValidNumber("Enter a number: ");
+                    ICalculator calculator = new BasicCalculator(); // Using abstraction with interface
 
                     // Input the operator or '=' to calculate
                     string currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
@@ -66,7 +59,7 @@ namespace Calculator
                     while (currentOperator != "=")
                     {
                         // Check if the entered operator is valid
-                        if (currentOperator != "+" && currentOperator != "-" && currentOperator != "*" && currentOperator != "/")
+                        if (!IsValidOperator(currentOperator))
                         {
                             Console.WriteLine("Invalid operator! Please enter a valid operator (+, -, *, /) or '='.");
                             currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
@@ -74,10 +67,10 @@ namespace Calculator
                         }
 
                         // Input the next number
-                        int num2 = GetValidNumber("Enter a number: ");
+                        float num2 = GetValidNumber("Enter a number: ");
 
-                        // Calculate based on current operator
-                        num1 = calculator.Calculate(num1, num2, currentOperator); // Polymorphism: The actual method called depends on the object type
+                        // Perform calculation based on current operator
+                        num1 = calculator.Calculate(num1, num2, currentOperator);
 
                         // Input the next operator or '=' to calculate
                         currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
@@ -95,7 +88,7 @@ namespace Calculator
                     Console.WriteLine(ex.Message);
                 }
 
-                // Ask user to calculate again
+                // Ask user if they want to calculate again
                 Console.Write("Do you want to calculate again? (Y/N): ");
                 string choice = Console.ReadLine().ToUpper();
 
@@ -104,19 +97,19 @@ namespace Calculator
                     shouldContinueCalculating = false;
             }
 
-            // Just a closing message
+            // Closing message
             Console.WriteLine("Thank you for using the calculator!");
             Console.ReadKey();
         }
 
         // Method to get a valid number input from the user
-        static int GetValidNumber(string message)
+        static float GetValidNumber(string message)
         {
-            int number;
+            float number;
             while (true)
             {
                 Console.Write(message);
-                if (int.TryParse(Console.ReadLine(), out number))
+                if (float.TryParse(Console.ReadLine(), out number))
                     break;
                 else
                 {
@@ -134,7 +127,7 @@ namespace Calculator
             {
                 Console.Write(message);
                 op = Console.ReadLine();
-                if (op == "+" || op == "-" || op == "*" || op == "/" || op == "=")
+                if (IsValidOperator(op) || op == "=")
                     break;
                 else
                 {
@@ -142,6 +135,12 @@ namespace Calculator
                 }
             }
             return op;
+        }
+
+        // Method to check if the operator is valid
+        static bool IsValidOperator(string op)
+        {
+            return op == "+" || op == "-" || op == "*" || op == "/";
         }
     }
 }
