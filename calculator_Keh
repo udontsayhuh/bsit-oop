@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-class Calculator
+abstract class SimpleCalculator
 {
-    protected List<double> numbers = new List<double>();
+    protected List<string> numbers = new List<string>();
     protected List<char> operators = new List<char>();
 
     protected void GetInput()
@@ -12,77 +12,110 @@ class Calculator
         {
             try
             {
-                Console.Write("Enter a number!:");
-                string input = Console.ReadLine();
-
-                double num = Convert.ToDouble(input);
-                numbers.Add(num);
+                Console.Write("PLEASE! Enter a number: ");
+                string num = NumberInput();
 
                 Console.Write("Enter an operator (+, -, *, /) or '=' to calculate: ");
-                char op = Convert.ToChar(Console.ReadLine());
+                char op = OperatorInput();
+
+                numbers.Add(num);
+                operators.Add(op);
+
                 if (op == '=')
                     break;
-                operators.Add(op);
             }
             catch (FormatException)
             {
-                Console.WriteLine("NYAK! Invalid input! Please enter a numerical value or '=' to calculate.");
+                Console.WriteLine("NYAK!! Invalid input! Please enter a numerical value or '=' to calculate.");
             }
         }
     }
 
     protected double Calculate()
     {
-        double result = numbers[0];
-        int j = 1;
+        double result = Convert.ToDouble(numbers[0]);
         for (int i = 0; i < operators.Count; i++)
         {
             switch (operators[i])
             {
                 case '+':
-                    result += numbers[j];
+                    result += Convert.ToDouble(numbers[i + 1]);
                     break;
                 case '-':
-                    result -= numbers[j];
+                    result -= Convert.ToDouble(numbers[i + 1]);
                     break;
                 case '*':
-                    result *= numbers[j];
+                    result *= Convert.ToDouble(numbers[i + 1]);
                     break;
                 case '/':
-                    if (numbers[j] == 0)
+                    if (Convert.ToDouble(numbers[i + 1]) == 0)
                     {
-                        Console.WriteLine("Oops! Cannot divide by zero!");
-                        return double.NaN; // Return NaN as result when dividing by zero
+                        Console.WriteLine("Cannot divide by zero!");
+                        return double.NaN;
                     }
-                    result /= numbers[j];
+                    result /= Convert.ToDouble(numbers[i + 1]);
                     break;
             }
-            j++;
         }
         return result;
     }
+
+    protected string NumberInput()
+    {
+        while (true)
+        {
+            string input = Console.ReadLine();
+            if (double.TryParse(input, out double result))
+                return result.ToString();
+            else
+                Console.WriteLine("NYAK!! Invalid input! Please enter a numerical value.");
+        }
+    }
+
+    protected char OperatorInput()
+    {
+        while (true)
+        {
+            string input = Console.ReadLine();
+            if (input.Length == 1 && "+-*/=".Contains(input))
+                return input[0];
+            else
+                Console.WriteLine("NYAK!! Invalid input! Please enter a valid operator (+, -, *, /) or '=' to calculate.");
+        }
+    }
+
+    public abstract void PerformCalculation();
 }
 
-class BasicCalculator : Calculator
+class BasicCalculator : SimpleCalculator
 {
-    public void PerformCalculation()
+    public override void PerformCalculation()
     {
         while (true)
         {
             GetInput();
-            double result = Calculate();
-            Console.WriteLine("Result: " + result);
+            if (operators.Count > 0 && operators[operators.Count - 1] == '=' && numbers.Count >= 2)
+            {
+                double result = Calculate();
+                Console.WriteLine("Result: " + result);
 
-            Console.Write("Do you want to perform another calculation? (G lang or ayaw ko po): ");
-            string choice = Console.ReadLine().ToLower();
+                Console.Write("Do you want to perform another calculation? (G lang/ayoko na): ");
+                string choice = Console.ReadLine().ToLower();
 
-            if (choice == "ayaw ko po")
-                break;
+                if (choice == "ayoko na")
+                    break;
 
-            numbers.Clear();
-            operators.Clear();
+                numbers.Clear();
+                operators.Clear();
+            }
+            else
+            {
+                Console.WriteLine("Invalid input! Please provide at least two numbers and an operator followed by '=' to calculate.");
+                numbers.Clear();
+                operators.Clear();
+            }
         }
-        Console.WriteLine("Thank you for using Calculanot 2.0! BYE :( ");
+        Console.WriteLine("Thank you for using Calculanot 2.0! Goodbye!");
     }
 }
 
@@ -96,4 +129,5 @@ class Program
         calculator.PerformCalculation();
     }
 }
+
 
