@@ -5,7 +5,7 @@ namespace MyCalculator
 {
     class Calculator
     {
-        public void RunCalculator()
+        public void Run_Calculator()
         {
             string value = "y"; // initializing the value with y 
             do
@@ -42,7 +42,7 @@ namespace MyCalculator
                     symbols.Add(symbol); // adding d symbol in the list
                 }
 
-                PerformOperation(numbers, symbols); //calling d method
+                Perform_Operation(numbers, symbols); //calling d method
 
                 Console.WriteLine("Do you want to continue? (Y/N)");
                 value = Console.ReadLine().ToLower();
@@ -55,7 +55,7 @@ namespace MyCalculator
             } while (value.ToLower() == "y");
         }
 
-        private void PerformOperation(List<float> numbers, List<string> symbols)//method for math functions
+        private void Perform_Operation(List<float> numbers, List<string> symbols)//method for math functions
         {
             if (numbers.Count != symbols.Count + 1)
             {
@@ -99,7 +99,7 @@ namespace MyCalculator
         static void Main(string[] args)
         {
             Calculator calculator = new Calculator();
-            calculator.RunCalculator();
+            calculator.Run_Calculator();
         }
     }
 }
