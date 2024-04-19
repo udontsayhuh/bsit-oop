@@ -5,12 +5,10 @@ namespace CalculatorApp
     // Abstract base class for mathematical operations
     public abstract class Operation
     {
-        // Encapsulation: The PerformOperation method is encapsulated within the Operation class.
         public abstract double PerformOperation(double num1, double num2);
     }
 
-    // This is the Concrete classes for each mathematical operation
-    // Inheritance: The Addition, Subraction, Multiplication, and Division class inherits from the Operation base class
+    // Concrete classes for each mathematical operation
     public class Addition : Operation
     {
         public override double PerformOperation(double num1, double num2)
@@ -48,6 +46,14 @@ namespace CalculatorApp
         }
     }
 
+    // Custom exception for unsupported operations
+    public class UnsupportedOperationException : Exception
+    {
+        public UnsupportedOperationException(string message) : base(message)
+        {
+        }
+    }
+
     // Calculator class
     public class Calculator
     {
@@ -55,9 +61,6 @@ namespace CalculatorApp
 
         public Calculator()
         {
-            // Encapsulation: The operations array is encapsulated within the Calculator class.
-            // Abstraction: The operations array is an abstraction that hides the specific operations.
-            // This will initialize the available operations
             operations = new Operation[]
             {
                 new Addition(),
@@ -130,7 +133,7 @@ namespace CalculatorApp
             {
                 isValid = char.TryParse(Console.ReadLine(), out op);
 
-                if (!isValid || (op != '+' && op != '-' && op != '*' && op != '/' && op != '='))
+                if (!isValid || !IsValidOperator(op))
                 {
                     Console.WriteLine("Invalid operator. Please enter a valid operator (+, -, *, /), or = to display the result:");
                     isValid = false;
@@ -140,32 +143,43 @@ namespace CalculatorApp
             return op;
         }
 
+        private bool IsValidOperator(char op)
+        {
+            return op == '+' || op == '-' || op == '*' || op == '/' || op == '=';
+        }
+
         private double PerformCalculation(double num1, double num2, char op)
         {
-            Operation selectedOperation = null;
-
-            switch (op)
-            {
-                case '+':
-                    selectedOperation = new Addition();
-                    break;
-                case '-':
-                    selectedOperation = new Subtraction();
-                    break;
-                case '*':
-                    selectedOperation = new Multiplication();
-                    break;
-                case '/':
-                    selectedOperation = new Division();
-                    break;
-            }
+            Operation selectedOperation = GetOperation(op);
 
             if (selectedOperation == null)
             {
-                throw new InvalidOperationException("Invalid operation.");
+                throw new UnsupportedOperationException("Unsupported operation: " + op);
             }
 
             return selectedOperation.PerformOperation(num1, num2);
+        }
+
+        private Operation GetOperation(char op)
+        {
+            if (op == '+')
+            {
+                return new Addition();
+            }
+            else if (op == '-')
+            {
+                return new Subtraction();
+            }
+            else if (op == '*')
+            {
+                return new Multiplication();
+            }
+            else if (op == '/')
+            {
+                return new Division();
+            }
+
+            throw new UnsupportedOperationException("Unsupported operation: " + op);
         }
     }
 
@@ -174,8 +188,15 @@ namespace CalculatorApp
     {
         static void Main(string[] args)
         {
-            Calculator calculator = new Calculator();
-            calculator.Run();
+            try
+            {
+                Calculator calculator = new Calculator();
+                calculator.Run();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
         }
     }
 }
