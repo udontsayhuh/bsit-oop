@@ -1,4 +1,4 @@
-﻿// push change
+﻿// Optimized Code
 //continuous calcu
 
 using System;
@@ -48,7 +48,7 @@ public class Input : Calculator
             // Attempt to parse the input as a numerical value
             if (!double.TryParse(input, out double result))
             {
-                Console.WriteLine("Invalid Input");
+                Console.WriteLine("Invalid Input, Enter Valid Integer. ");
             }
             else
             {
@@ -83,25 +83,14 @@ public class Input : Calculator
 
                 // New case operator =
                 case "=":
-                    if(pass == 0)
-                    {
-                        Console.WriteLine("Incomplete argument");
-                       
-                    }
-                    else
-                    {
-                        return "=";
-                    }
-                    break;
+                    return "=";
             }
-            Console.WriteLine("it passed here");
-            Console.WriteLine("invalid input");
+            Console.WriteLine("invalid input, enter valid operator");
         }
     }
 
     // Confirmation Method
     public static void get_confirmation()
-        
     {
         while(true){
             Console.WriteLine("Would you like to do another calculation? (y,n) ");
@@ -119,8 +108,6 @@ public class Input : Calculator
             Console.WriteLine("invalid input");
             break;
         }
-
-
     }
 }
 
@@ -178,9 +165,7 @@ public class Calculate : Calculator
             {
                 break;
             }
-
         }
-
         init = true;
         switch (operand)
         {
@@ -200,8 +185,6 @@ public class Calculate : Calculator
                 num = num1 / num2;
                 total = num;
                 break;
-
-
         }
         return false;
     }
@@ -212,9 +195,6 @@ class Program
 {
     static void Main(string[] args)
     {
-
-
-        
         while (true)
         {
             Power.turn_on();
@@ -228,7 +208,6 @@ class Program
                     break;
                 }
             }
-            
             Input.get_confirmation();
         }
 
