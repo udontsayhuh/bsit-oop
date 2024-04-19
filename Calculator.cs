@@ -4,42 +4,77 @@ using System;
 
 namespace Calculator
 {
+    // Class for addition operation
+    class Addition
+    {
+        public static double Perform(double num1, double num2)
+        {
+            return num1 + num2;
+        }
+    }
+
+    // Class for subtraction operation
+    class Subtraction
+    {
+        public static double Perform(double num1, double num2)
+        {
+            return num1 - num2;
+        }
+    }
+
+    // Class for multiplication operation
+    class Multiplication
+    {
+        public static double Perform(double num1, double num2)
+        {
+            return num1 * num2;
+        }
+    }
+
+    // Class for division operation
+    class Division
+    {
+        public static double Perform(double num1, double num2)
+        {
+            if (num2 == 0)
+            {
+                Console.WriteLine("Cannot divide by zero. Please enter a number or operator");
+                return double.NaN; // Returning NaN (Not a Number) for division by zero
+            }
+            return num1 / num2;
+        }
+    }
+
     // Base class for calculator functionality
     class Calculator
     {
-        //encapsulation, Fields are declared as private to restrict direct access from outside the class
         private double result;
 
-        //abstraction, Protected modifier allows derived classes to access this method which are numbers and operator
-        protected double Calculate(double num1, double num2, double result, char op)
-        { //polymorphism, switch statement operation
+        // Method to perform calculation based on operator
+        protected double Calculate(double num1, double num2, char op)
+        {
             switch (op)
             {
                 case '+':
-                    return result + num1;
+                    return Addition.Perform(num1, num2);
                 case '-':
-                    return result - num1;
+                    return Subtraction.Perform(num1, num2);
                 case '*':
-                    return result * num1;
+                    return Multiplication.Perform(num1, num2);
                 case '/':
-                    if (num1 == 0)
-                    {
-                        Console.WriteLine("Cannot divide by zero. Please enter a number or operator");
-                        return result;
-                    }
-                    return result / num1;
+                    return Division.Perform(num1, num2);
                 default:
-                    return result;
+                    return double.NaN; // Returning NaN for invalid operator
             }
         }
 
-        //abstraction, Protected modifier allows derived classes to access this method
+        // Method to check if input is an operator
         protected bool IsOperator(string input)
         {
             return input == "+" || input == "-" || input == "*" || input == "/";
         }
 
-        //abstraction, Public method to perform calculation and display result
+        // Method to perform calculation and display result
         public void PerformCalculation()
         {
             string userInput = "";
@@ -57,7 +92,7 @@ namespace Calculator
                 {
                     break;
                 }
-                //encapsulation, convert string to double and checks valid parameter
+
                 if (double.TryParse(input, out double number))
                 {
                     if (userInput == "")
@@ -68,8 +103,8 @@ namespace Calculator
                         {
                             Console.WriteLine("Invalid input. Please enter a valid operator.");
                             continue;
-                        }  //anstraction, update number and operator used...
-                        result = Calculate(number, result, result, userInput[0]);
+                        }
+                        result = Calculate(result, number, userInput[0]);
                     }
                 }
                 else if (IsOperator(input))
@@ -87,7 +122,7 @@ namespace Calculator
             PrintResult();
         }
 
-        // Public method to print the result
+        // Method to print the result
         public void PrintResult()
         {
             Console.WriteLine($"Result: {result}");
@@ -97,8 +132,7 @@ namespace Calculator
     class Program
     {
         static void Main(string[] args)
-        { //polymorphism, create New instance...
-            //abstraction, calling the method used to start the program...
+        {
             do
             {
                 Calculator calculator = new Calculator();
@@ -111,10 +145,9 @@ namespace Calculator
                     break;
 
             } while (true);
-            //choice NO display 
+
             Console.WriteLine("Thank you for using the calculator!!!");
             Console.ReadKey();
         }
     }
 }
-   
