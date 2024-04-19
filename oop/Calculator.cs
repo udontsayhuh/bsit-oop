@@ -1,59 +1,60 @@
 using System;
 
-class Calculator
+// Interface for operations
+public interface IOperation
 {
-    static void Main(string[] args)
+    float Calculate(float num1, float num2);
+}
+
+// Addition operation
+public class Addition : IOperation
+{
+    public float Calculate(float num1, float num2) => num1 + num2;
+}
+
+// Subtraction operation
+public class Subtraction : IOperation
+{
+    public float Calculate(float num1, float num2) => num1 - num2;
+}
+
+// Multiplication operation
+public class Multiplication : IOperation
+{
+    public float Calculate(float num1, float num2) => num1 * num2;
+}
+
+// Division operation
+public class Division : IOperation
+{
+    public float Calculate(float num1, float num2)
     {
-        Console.Title = "Mark's Calculator";
-
-        while (true)
-        {
-            Console.WriteLine("Welcome to Mark's Calculator\n");
-
-            float result = GetUserInput("Enter a number:"); // Initialize result with the first number entered by the user
-
-            // Loop until user decides to stop
-            while (true)
-            {
-                // Input operator
-                char op = GetOperator();
-
-                // If the operator is "=", break the inner loop
-                if (op == '=')
-                    break;
-
-                // Input second number
-                float num2 = GetUserInput("Enter another number:");
-
-                try
-                {
-                    // Perform calculation based on the operator
-                    result = Calculate(result, num2, op);
-                    Console.WriteLine($"Result so far: {result}");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error: {ex.Message}");
-                }
-            }
-
-            // Display the final result
-            Console.WriteLine($"Final result: {result}");
-
-            // Ask user if they want to do another calculation
-            Console.WriteLine("\nDo you want to do another calculation? (yes/no)");
-
-            string choice = Console.ReadLine().ToLower();
-            if (choice != "yes")
-                break; // Exit the loop if the user doesn't want to perform another calculation
-        }
-
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Thank you for using Simple Calculator!");
+        if (num2 == 0)
+            throw new ArgumentException("Cannot divide by zero.");
+        return num1 / num2;
     }
+}
 
-    // Encapsulation: Method for encapsulating input handling.
-    static float GetUserInput(string message)
+// Factory for creating operations
+public static class OperationFactory
+{
+    public static IOperation GetOperation(char op)
+    {
+        return op switch
+        {
+            '+' => new Addition(),
+            '-' => new Subtraction(),
+            '*' => new Multiplication(),
+            '/' => new Division(),
+            _ => throw new ArgumentException("Invalid operator."),
+        };
+    }
+}
+
+// Class responsible for user interaction
+public class UserInterface
+{
+    public static float GetUserInput(string message)
     {
         float num;
         while (true)
@@ -69,8 +70,7 @@ class Calculator
         }
     }
 
-    // Encapsulation: Method for encapsulating input handling
-    static char GetOperator()
+    public static char GetOperator()
     {
         char op;
         while (true)
@@ -84,25 +84,52 @@ class Calculator
                 Console.WriteLine("Invalid operator! Please enter one of +, -, *, /, =");
         }
     }
+}
 
-    // Abstraction: Method that abstracts the process of performing calculations.
-    static float Calculate(float num1, float num2, char op)
+// Main calculator class
+public class Calculator
+{
+    public static void Main(string[] args)
     {
-        switch (op)
-        {
-            case '+':
-                return num1 + num2;
-            case '-':
-                return num1 - num2;
-            case '*':
-                return num1 * num2;
-            case '/':
-                if (num2 == 0)
-                    throw new Exception("Cannot divide by zero.");
+        Console.Title = "Mark's Calculator";
 
-                return num1 / num2;
-            default:
-                throw new Exception("Invalid operator.");
+        while (true)
+        {
+            Console.WriteLine("Welcome to Mark's Calculator\n");
+
+            float result = UserInterface.GetUserInput("Enter a number:");
+
+            while (true)
+            {
+                char op = UserInterface.GetOperator();
+
+                if (op == '=')
+                    break;
+
+                float num2 = UserInterface.GetUserInput("Enter another number:");
+
+                try
+                {
+                    IOperation operation = OperationFactory.GetOperation(op);
+                    result = operation.Calculate(result, num2);
+                    Console.WriteLine($"Result so far: {result}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+            }
+
+            Console.WriteLine($"Final result: {result}");
+
+            Console.WriteLine("\nDo you want to do another calculation? (yes/no)");
+
+            string choice = Console.ReadLine().ToLower();
+            if (choice != "yes")
+                break;
         }
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Thank you for using Simple Calculator!");
     }
 }
