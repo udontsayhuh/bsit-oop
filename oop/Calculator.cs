@@ -1,10 +1,9 @@
-// Base Class
+//Base class
 abstract class Operator
 {
     public abstract double Calculate(double num1, double num2);
 }
-
-// Subclass for Addition
+// Subclass for Addition (Good practice of Single Responsibility Principle/OCP)
 class Add : Operator
 {
     public override double Calculate(double num1, double num2)
@@ -12,8 +11,7 @@ class Add : Operator
         return num1 + num2;
     }
 }
-
-// Subclass for Subtraction
+// Subclass for Subtraction (Good practice of Single Responsibility Principle/OCP)
 class Subtract : Operator
 {
     public override double Calculate(double num1, double num2)
@@ -21,8 +19,7 @@ class Subtract : Operator
         return num1 - num2;
     }
 }
-
-// Subclass for Multiplication
+// Subclass for Multiplication (Good practice of Single Responsibility Principle/OCP)
 class Multiply : Operator
 {
     public override double Calculate(double num1, double num2)
@@ -30,8 +27,7 @@ class Multiply : Operator
         return num1 * num2;
     }
 }
-
-// Subclass for Division
+// Subclass for Division (Good practice of Single Responsibility Principle/OCP)
 class Divide : Operator
 {
     public override double Calculate(double num1, double num2)
@@ -43,96 +39,128 @@ class Divide : Operator
         return num1 / num2;
     }
 }
-
+//Handles flow of repeated calculations and interaction with the user.
 class Calculator
 {
-    static void Main(string[] args)
+    private InputHandler inputHandler;
+    private CalculatorService calculatorService;
+
+    public Calculator()
+    {
+        inputHandler = new InputHandler();
+        calculatorService = new CalculatorService();
+    }
+
+    public void Start()
     {
         bool repeat = true;
 
         while (repeat)
         {
-            double result = 0;
-
-            bool validInput = false;
-            while (!validInput)
-            {
-                validInput = true;
-                while (true)
-                {
-                    Console.WriteLine("Enter a number, operator (+, -, *, /), or = to calculate:");
-                    string input = Console.ReadLine();
-
-                    if (input == "=")
-                    {
-                        break;
-                    }
-
-                    double number;
-                    bool isValidNumber = double.TryParse(input, out number);
-
-                    if (!isValidNumber && input != "+" && input != "-" && input != "*" && input != "/")
-                    {
-                        Console.WriteLine("Invalid input. Please enter a number, operator (+, -, *, /), or = to calculate:");
-                        validInput = false;
-                        break;
-                    }
-
-                    if (result == 0)
-                    {
-                        result = number;
-                    }
-                    else
-                    {
-                        char operation = char.Parse(input);
-                        Operator op = GetOperator(operation.ToString());
-
-                        if (op != null)
-                        {
-                            Console.WriteLine("Enter the next number:");
-                            double num2;
-                            bool validNumberInput = double.TryParse(Console.ReadLine(), out num2);
-                            if (!validNumberInput)
-                            {
-                                Console.WriteLine("Invalid number input. Please try again.");
-                                validInput = false;
-                                break;
-                            }
-                            result = op.Calculate(result, num2);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid operator.");
-                            validInput = false;
-                            break;
-                        }
-                    }
-                }
-            }
-
+            double result = CalculateResult();
             Console.WriteLine($"Result: {result}");
-
+ //It is good practice to always convert string variables into uppercase or lowercase before comparing them with user input.
             Console.WriteLine("Do you want to perform another calculation? (yes/no)");
             string response = Console.ReadLine();
-            repeat = (response.ToLower() == "yes");
+            repeat = (response.ToLower() == "yes"); 
         }
     }
 
-    static Operator GetOperator(string operation)
+    private double CalculateResult()
+    {
+        double result = 0;
+
+        while (true)
+        {
+            string input = inputHandler.GetUserInput();
+
+            if (input == "=")
+            {
+                break;
+            }
+
+            if (inputHandler.TryParseNumber(input, out double number))
+            {
+                result = number;
+            }
+            else if (inputHandler.IsValidOperator(input))
+            {
+                char operation = input[0];
+                Console.WriteLine("Enter the next number:");
+                double num2;
+                if (!inputHandler.TryParseNumber(Console.ReadLine(), out num2))
+                {
+                    Console.WriteLine("Invalid number input. Please try again.");
+                    continue;
+                }
+                result = calculatorService.PerformOperation(result, num2, operation);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a number, operator (+, -, *, /), or = to calculate:");
+            }
+        }
+
+        return result;
+    }
+}
+//Validates and gets user input.
+class InputHandler
+{
+    public string GetUserInput()
+    {
+        Console.WriteLine("Enter a number, operator (+, -, *, /), or = to calculate:");
+        return Console.ReadLine();
+    }
+
+    public bool TryParseNumber(string input, out double number)
+    {
+        return double.TryParse(input, out number);
+    }
+
+    public bool IsValidOperator(string input)
+    {
+        return input == "+" || input == "-" || input == "*" || input == "/";
+    }
+}
+// Calculator service can add more operations without modifiying existing code.
+class CalculatorService
+{
+    public double PerformOperation(double num1, double num2, char operation)
+    {
+        Operator op = GetOperator(operation);
+        return op.Calculate(num1, num2);
+    }
+
+    private Operator GetOperator(char operation)
     {
         switch (operation)
         {
-            case "+":
+            case '+':
                 return new Add();
-            case "-":
+            case '-':
                 return new Subtract();
-            case "*":
+            case '*':
                 return new Multiply();
-            case "/":
+            case '/':
                 return new Divide();
             default:
-                return null;
+                throw new ArgumentException("Invalid operation");
         }
     }
 }
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Calculator calculator = new Calculator();
+        calculator.Start();
+    }
+}
 //Lennox Macadangdang BSIT 2-1
+//The Changes made to this code were to fix its readability and fix the pattern
+//As the previous version of the code did not follow the SOLID principles
+//Also the previous code mix and matched creating a spaghetti code pattern which made it hard to read
+//I made seperate classes for functionality and logic which helps in future modifications and code readability
+//Also I followed the lower or uper case practice in our powerpoint
