@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Text; 
 
 abstract class Calculator
 {
-    protected double Num1;
-    protected double Num2;
-    protected List<string> Inputs = new List<string>();
+    protected double num1;
+    protected double num2;
+    protected List<string> inputs = new List<string>();
 
     public abstract void Solve();
 
@@ -20,6 +21,8 @@ abstract class Calculator
         int inputNumber = 1;
         int operatorNumber = 1;
 
+        StringBuilder expressionBuilder = new StringBuilder(); 
+
         while (true)
         {
             if (isFirstInput)
@@ -29,7 +32,7 @@ abstract class Calculator
 
                 if (input == "=")
                 {
-                    if (Inputs.Count < 2)
+                    if (inputs.Count < 2)
                     {
                         Console.WriteLine("Invalid input! Please enter at least one operator and one number before '='.");
                         continue;
@@ -45,7 +48,7 @@ abstract class Calculator
                     continue;
                 }
 
-                Inputs.Add(input);
+                inputs.Add(input);
                 result = number;
                 isFirstInput = false;
                 inputNumber++;
@@ -57,7 +60,7 @@ abstract class Calculator
 
                 if (op == "=")
                 {
-                    if (Inputs.Count < 3 || Inputs.Count % 2 != 1)
+                    if (inputs.Count < 3 || inputs.Count % 2 != 1)
                     {
                         Console.WriteLine("Invalid input! Please enter a number after every operator.");
                         continue;
@@ -103,50 +106,26 @@ abstract class Calculator
                         break;
                 }
 
-                Inputs.Add(op);
-                Inputs.Add(input);
+                inputs.Add(op);
+                inputs.Add(input);
                 inputNumber++;
                 operatorNumber++;
             }
 
-            if (Inputs.Count > 0)
-            {
-                Console.WriteLine($"\nCurrent expression: {string.Join(" ", Inputs)}\n");
-            }
+            expressionBuilder.Clear();
+            expressionBuilder.Append("Current expression: ");
+            expressionBuilder.Append(string.Join(" ", inputs));
+            Console.WriteLine(expressionBuilder.ToString());
         }
     }
 
     public void ClearInputs()
     {
-        Inputs.Clear();
+        inputs.Clear();
     }
 }
 
-class Addition : Calculator
-{
-    public override void Solve()
-    {
-        AskUser();
-    }
-}
-
-class Subtraction : Calculator
-{
-    public override void Solve()
-    {
-        AskUser();
-    }
-}
-
-class Multiplication : Calculator
-{
-    public override void Solve()
-    {
-        AskUser();
-    }
-}
-
-class Division : Calculator
+class BasicCalculator : Calculator
 {
     public override void Solve()
     {
@@ -158,7 +137,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Calculator calculator = new Addition(); 
+        Calculator calculator = new BasicCalculator();
 
         while (true)
         {
