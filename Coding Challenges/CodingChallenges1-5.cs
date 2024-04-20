@@ -84,8 +84,10 @@ namespace CodingChallenges
         {
             string text = GetMessage();
             char[] delimiters = new char[] { ' ', '\r', '\n' };
-            int counter = text.Split(separator: delimiters, options: StringSplitOptions.RemoveEmptyEntries).Length;
+            int counter = text.Split(separator: delimiters, options: StringSplitOptions.RemoveEmptyEntries).Length;//word counter
             Console.WriteLine($"Words : {counter}");
+            text = text.ToUpper(); //Uppercase
+            Console.WriteLine(text);
         }
     }
 
