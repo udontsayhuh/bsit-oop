@@ -84,7 +84,12 @@ namespace Coding_Challenges
             double productOfSums = sumOfInt * sumOfDouble;
 
             // Display the product of two sums.
-            Console.WriteLine($"Product of Sums: {productOfSums}");
+            Console.WriteLine($"Product of Sums: {productOfSums}\n");
+
+            // The following statement is used when the user decides to run the "MainProgram.cs" file, which can execute all coding challenges.
+            Console.Write("Press any key to go back to main...");
+            Console.ReadKey();  // read the key that the user's input (similar to getch).
+            Console.Clear();    // Clear the console screen.
 
             /* OTHER SOLUTION TO SHOW THE PRODUCT OF TWO SUMS WITHOUT USING VARIABLES.
              * First, method call to GetUserInputForInt method then return the result value(int) as an argument.
