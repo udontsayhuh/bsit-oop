@@ -332,4 +332,93 @@ public class MultiplicationTable
         }
     }
 }
+//codechallengefive
+using System;
+using System.Collections;
+
+public class Car
+{
+    public string Model { get; private set; }
+    public string Make { get; private set; }
+    public int Year { get; private set; }
+
+    public Car(string model, string make, int year)
+    {
+        Model = model;
+        Make = make;
+        Year = year;
+    }
+
+    public override string ToString()
+    {
+        return $"{Year} {Make} {Model}";
+    }
+}
+
+public class Mslayer : Car
+{
+    public int CarCapacity { get; private set; }
+
+    public Mslayer(string model, string make, int year, int carCapacity) : base(model, make, year)
+    {
+        CarCapacity = carCapacity;
+    }
+}
+
+public class Another : Car
+{
+    public int CarCapacity { get; private set; }
+
+    public Another(string model, string make, int year, int carCapacity) : base(model, make, year)
+    {
+        CarCapacity = carCapacity;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ArrayList carList = new ArrayList();
+
+        // Add cars to the ArrayList
+        carList.Add(new Car("Toyota Corolla", "Toyota", 2023));
+        carList.Add(new Mslayer("Lamborghini Aventador", "Aventador S", 2017, 100));
+        carList.Add(new Another("Porsche 911", "Porsche", 2023, 100));
+        carList.Add(new Car("Honda Civic", "Honda", 2019));
+        carList.Add(new Car("Ford Mustang", "Ford", 2018));
+
+        // Display unsorted list of cars
+        Console.WriteLine("Unsorted List of Cars:");
+        DisplayCarList(carList);
+
+        // Sort the ArrayList based on car years using the custom comparer
+        carList.Sort(new CarComparer());
+
+        // Display sorted list of cars
+        Console.WriteLine("\nSorted List of Cars:");
+        DisplayCarList(carList);
+    }
+
+    // Helper method to display list of cars
+    static void DisplayCarList(ArrayList cars)
+    {
+        foreach (Car car in cars)
+        {
+            Console.WriteLine($"{car.Model}, Make: {car.Make}, Year: {car.Year}");
+            Console.WriteLine(); // Add a blank line for separation
+        }
+    }
+}
+
+// Custom comparer class to sort cars by year
+public class CarComparer : IComparer
+{
+    public int Compare(object x, object y)
+    {
+        Car car1 = (Car)x;
+        Car car2 = (Car)y;
+        return car1.Year.CompareTo(car2.Year);
+    }
+}
 
