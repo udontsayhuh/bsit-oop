@@ -5,7 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>CalculatorApp.Program</StartupObject>
+    <StartupObject>codingChallenges.Program</StartupObject>
   </PropertyGroup>
 
 </Project>
