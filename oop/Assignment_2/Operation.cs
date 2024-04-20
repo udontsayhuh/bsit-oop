@@ -68,8 +68,8 @@ namespace oop.Assignment_2
                 try
                 {
                     Console.Write("Enter Operation:[+] Addition [-] Subtraction [*] Multiplication [/] Division, PRINT RESULT[=]: ");
-                    op = char.Parse(Console.ReadLine());
-                    if (op == '=')
+                    operation = char.Parse(Console.ReadLine());
+                    if (operation == '=')
                     {
                         if (myList.Count > 0)
                         {

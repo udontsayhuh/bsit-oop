@@ -29,7 +29,7 @@ namespace oop.Assignment_2
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("Do you want to Continue Using Calculator? [Y or y] Yes, [N or n] No: ");
                     Console.ResetColor();
-                    choice = Convert.ToChar(Console.ReadLine());
+                    choice = char.Parse(Console.ReadLine());
 
                     if(choice == 'Y' || choice == 'y')
                     {
