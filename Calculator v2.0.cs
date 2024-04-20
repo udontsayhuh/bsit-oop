@@ -63,7 +63,8 @@ namespace Calculator
             };
 
             while (true)
-            {
+            {    
+                Console.WriteLine("INSTRUCTIONS: Enter a valid operator (+, -, *, /), then PRESS '=' to calculate. \n");
                 Console.WriteLine("WELCOME TO CALCULATOR APP!\n");
 
                 List<double> numbers = new List<double>(); // Store entered numbers
@@ -72,7 +73,7 @@ namespace Calculator
                 // Get multiple numerical values or an operator until equal sign encountered
                 while (true)
                 {
-                    Console.WriteLine("Enter a numerical value (or '=' to calculate, or an operator for multi-step calculation):");
+                    Console.WriteLine("Enter a value: ");
                     string input = Console.ReadLine();
 
                     if (double.TryParse(input, out double num))
@@ -87,7 +88,7 @@ namespace Calculator
                     {
                         if (selectedOperator != null) // Disallow multiple operators without numbers
                         {
-                            Console.WriteLine("Invalid input! Please enter a number after the previous operator.");
+                            Console.WriteLine("Invalid input! Press '=' to calculate.");
                             continue;
                         }
                         selectedOperator = input;
