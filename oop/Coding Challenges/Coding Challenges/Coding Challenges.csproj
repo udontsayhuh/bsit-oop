@@ -6,6 +6,7 @@
     <RootNamespace>Coding_Challenges</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>Coding_Challenges.MainProgram</StartupObject>
   </PropertyGroup>
 
 </Project>
