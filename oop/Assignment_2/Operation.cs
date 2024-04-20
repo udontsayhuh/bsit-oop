@@ -90,7 +90,7 @@ namespace oop.Assignment_2
                             case '+':
                                 // Input second number
                                 Console.Write("Enter number: ");
-                                Num2 = Convert.ToDouble(Console.ReadLine());
+                                Num2 = double.Parse(Console.ReadLine());
 
                                 myList.Add(add(Num1, Num2));
                                 Num1 = sum;
@@ -99,7 +99,7 @@ namespace oop.Assignment_2
                             case '-':
                                 // Input second number
                                 Console.Write("Enter number: ");
-                                Num2 = Convert.ToDouble(Console.ReadLine());
+                                Num2 = double.Parse(Console.ReadLine());
 
                                 myList.Add(sub(Num1, Num2));
                                 Num1 = diff;
@@ -108,7 +108,7 @@ namespace oop.Assignment_2
                             case '*':
                                 // Input second number
                                 Console.Write("Enter number: ");
-                                Num2 = Convert.ToDouble(Console.ReadLine());
+                                Num2 = double.Parse(Console.ReadLine());
 
                                 myList.Add(mul(Num1, Num2));
                                 Num1 = prod;
@@ -117,7 +117,7 @@ namespace oop.Assignment_2
                             case '/':
                                 // Input second number
                                 Console.Write("Enter number: ");
-                                Num2 = Convert.ToDouble(Console.ReadLine());
+                                Num2 = double.Parse(Console.ReadLine());
 
                                 myList.Add(div(Num1, Num2));
                                 Num1 = quo;
