@@ -85,7 +85,7 @@ namespace oop.Assignment_2
                     }
                     else
                     {
-                        switch (op)
+                        switch (operation)
                         {
                             case '+':
                                 // Input second number
@@ -122,7 +122,6 @@ namespace oop.Assignment_2
                                 myList.Add(div(Num1, Num2));
                                 Num1 = quo;
                                 y = false;
-
                                 break;
                             default:
                                 throw new Exception(); // throw exception
