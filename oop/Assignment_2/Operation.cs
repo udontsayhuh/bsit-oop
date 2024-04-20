@@ -46,7 +46,7 @@ namespace oop.Assignment_2
                     if (i <= 0)
                     {
                         Console.Write("Enter number: ");
-                        Num1 = Convert.ToDouble(Console.ReadLine());
+                        Num1 = double.Parse(Console.ReadLine());
                     }
                     // Ask if you want to continue using Calculator
                         
