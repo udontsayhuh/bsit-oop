@@ -1,0 +1,14 @@
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\bin\Debug\net8.0\Calculator.cs.exe
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\bin\Debug\net8.0\Calculator.cs.deps.json
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\bin\Debug\net8.0\Calculator.cs.runtimeconfig.json
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\bin\Debug\net8.0\Calculator.cs.dll
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\bin\Debug\net8.0\Calculator.cs.pdb
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\Calculator.cs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\Calculator.cs.AssemblyInfoInputs.cache
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\Calculator.cs.AssemblyInfo.cs
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\Calculator.cs.csproj.CoreCompileInputs.cache
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\Calculator.cs.dll
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\refint\Calculator.cs.dll
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\Calculator.cs.pdb
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\Calculator.cs.genruntimeconfig.cache
+C:\Users\Samantha Sarsoza\source\repos\calculator.cs\Calculator.cs\obj\Debug\net8.0\ref\Calculator.cs.dll
