@@ -115,7 +115,7 @@ namespace CalculatorApp
         }
     }
 }
-//codechallengetwo
+//CODE CHALLENGE NUMBER 2
 
 using System;
 using System.Text.RegularExpressions;
@@ -150,7 +150,7 @@ public class WordCounter
         return str.ToUpper();
     }
 }
-//codechallengethree
+// CODE CHALLENGE NUMBER 3
 
 using System;
 
@@ -258,7 +258,7 @@ namespace CalculatorApp
         }
     }
 }
-//codechallengefour
+//CODE CHALLENGE NUMBER FOUR
 using System;
 
 public class MultiplicationTable
@@ -332,7 +332,7 @@ public class MultiplicationTable
         }
     }
 }
-//codechallengefive
+//CODE CHALLENGE NUMBER FIVE
 using System;
 using System.Collections;
 
