@@ -32,6 +32,7 @@ namespace Coding_Challenges
                     // Choices
                     Console.WriteLine("  (1) Sum of Two Integers/Doubles and Product of Two Sums");
                     Console.WriteLine("  (2) Count Number of Words");
+                    Console.WriteLine("  (3) Basic Arithmetic Calculator");
                     Console.WriteLine("  (6) Exit");
                     Console.WriteLine(new string('─', 80));
 
@@ -48,6 +49,9 @@ namespace Coding_Challenges
                         case 2: DisplayTitlePage("\t\t\t(2) Count Number of Words");    // Method call to DisplayTitlePage with an argument of string value.
                                 CountNumberOfWords.Main(args);  // Perform the entry point in CountNumberOfWords class which can be found in the "CountNumberOfWords.cs" file.
                                 break;  // Exit the switch statement.
+                        case 3: DisplayTitlePage("\t\t(2) Basic Arithmethic Calculator");    // Method call to DisplayTitlePage with an argument of string value.
+                                BasicArithmeticCalculator.Main(args);  // Perform the entry point in BasicArithmeticCalculator class which can be found in the "BasicArithmeticCalculator.cs" file.
+                                break;  // Exit the switch statement.
                         case 6: Console.WriteLine("End of program!");
                                 Environment.Exit(0);    // Exit the program.
                                 break;
@@ -56,7 +60,7 @@ namespace Coding_Challenges
                                 break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Console.Clear();
                     Console.WriteLine("\nInvalid input! Please enter an integer only!");
