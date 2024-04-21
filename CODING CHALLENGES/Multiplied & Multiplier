@@ -1,0 +1,27 @@
+using System;
+
+class Program 
+
+{
+    static void Main(string[] args) 
+    {
+        // Ask the user to input number to be multiplied
+        Console.WriteLine("Enter a number that needs to be multipled: ");
+        int num = Convert.ToInt32(Console.ReadLine());
+
+        // Ask for the second number to be a multiplier
+        Console.WriteLine("Enter a second number to be a multiplier");
+        int multiplier = Convert.ToInt32(Console.ReadLine());
+
+
+        Console.WriteLine($"Multiplication Table for {num} to {multiplier}: ");
+
+        // For loop: as long as i is less than or equal to the multiplier it increments by 1
+        for (int i = 1; i <= multiplier; i++) 
+        {
+            Console.WriteLine($"{num} * {i} = {num * i}"); // calculate the product 
+        }
+        Console.ReadLine();
+    }
+        
+}
