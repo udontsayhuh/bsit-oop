@@ -1,0 +1,67 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        do
+        {
+            Console.WriteLine("Arithmetic Operation");
+
+            // User select an arithmetic function
+            Console.WriteLine("Enter arithmetic option (e.g., +, -, *, /): ");
+            string option = Console.ReadLine();
+
+            // Enter first number
+            Console.WriteLine("Enter first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+
+            // Enter second number
+            Console.WriteLine("Enter second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            double result = 0;
+
+            switch (option)
+            {
+                case "+": // Addition
+                    result = num1 + num2;
+                    Console.WriteLine($"Your result: {num1} + {num2} = " + result);
+                    break;
+
+                case "-": // Subtraction
+                    result = num1 - num2;
+                    Console.WriteLine($"Your result: {num1} - {num2} = " + result);
+                    break;
+
+                case "*": // Multiply
+                    result = num1 * num2;
+                    Console.WriteLine($"Your result: {num1} * {num2} = " + result);
+                    break;
+
+                case "/": // Divide
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                        Console.WriteLine($"Your result: {num1} / {num2} = " + result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("You cannot divide by zero!");
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("INVALID OPTION");
+                    break;
+            }
+            
+            // Ask user if want to continue
+            Console.WriteLine("Would you like to continue? [Y] / [N]: ");
+        } while (Console.ReadLine().ToUpper() == "Y");
+
+        Console.WriteLine("Exiting...");
+        Console.ReadKey();
+    }
+}
+
