@@ -20,7 +20,7 @@ namespace CrystalynDanga
 
             for (int i = 0; i <= multiplier; i++) 
             {
-                result = i * multiplier;
+                result = number * i;
                 Console.WriteLine($"{number} * {i} = {result}");
                 result = 0;
             }
