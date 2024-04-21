@@ -7,8 +7,10 @@ class Program
         double num1, num2, result;
         char choice, answer;
 
+        // A do-while loop in case user wants to do another calculation
         do
         {
+            // Loop to ensure a valid arithmetic operation is selected
             while (true)
             {
                 Console.WriteLine("-----------------------------------------------");
@@ -20,12 +22,14 @@ class Program
                 Console.Write("Enter your choice: ");
                 choice = Convert.ToChar(Console.ReadLine());
 
+                // Check if the choice is valid
                 if (choice != '+' && choice != '-' && choice != '*' && choice != '/')
                     Console.WriteLine("Invalid operation. Please try again.");
                 else
                     break;
             }
 
+            // Loop to ensure valid numeric input for numbers
             while (true)
             {
                 try
@@ -43,6 +47,7 @@ class Program
                 }
             }
 
+            // Perform the selected arithmetic operation and displays result
             switch (choice)
             {
                 case '+':
@@ -73,10 +78,11 @@ class Program
                     break;
             }
 
+            // Ask the user if they want to perform another calculation
             Console.Write("\nDo you want to perform another calculation? \nPress Y if Yes. Press any key if No: ");
             answer = Char.ToUpper(Convert.ToChar(Console.ReadLine()));
 
-        } while (answer == 'Y');
+        } while (answer == 'Y'); // Continue the loop if the user chooses 'Y'
 
         Console.WriteLine("-----------------------------------------------");
         Console.WriteLine("\t\t\t\tEnd of Program.");

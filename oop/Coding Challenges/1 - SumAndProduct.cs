@@ -11,14 +11,14 @@ class Program
         Console.Write("Enter the first integer number: ");
         while (!int.TryParse(Console.ReadLine(), out num1))
         {
-            Console.WriteLine("Invalid input. Please enter a valid integer.");
+            Console.WriteLine("Invalid input. Please enter a valid integer.\n");
             Console.Write("Enter the first integer number: ");
         }
 
         Console.Write("Enter the second integer number: ");
         while (!int.TryParse(Console.ReadLine(), out num2))
         {
-            Console.WriteLine("Invalid input. Please enter a valid integer.");
+            Console.WriteLine("Invalid input. Please enter a valid integer.\n");
             Console.Write("Enter the second integer number: ");
         }
 
@@ -26,14 +26,14 @@ class Program
         Console.Write("Enter the first double number: ");
         while (!double.TryParse(Console.ReadLine(), out num3))
         {
-            Console.WriteLine("Invalid input. Please enter a valid double.");
+            Console.WriteLine("Invalid input. Please enter a valid double.\n");
             Console.Write("Enter the first double number: ");
         }
 
         Console.Write("Enter the second double number: ");
         while (!double.TryParse(Console.ReadLine(), out num4))
         {
-            Console.WriteLine("Invalid input. Please enter a valid double.");
+            Console.WriteLine("Invalid input. Please enter a valid double.\n");
             Console.Write("Enter the second double number: ");
         }
 
