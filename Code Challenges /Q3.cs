@@ -9,7 +9,7 @@ class Program {
 		
 	  static void SubMenu() {
             
-			// INPUT
+			// INPUT 
 			
 			Console.WriteLine("Choose an operator: ");
 			Console.WriteLine("1) Addition\n2) Subtraction\n3) Multiplication\n4) Division");
