@@ -24,7 +24,7 @@ class Program
 
                 // Check if the choice is valid
                 if (choice != '+' && choice != '-' && choice != '*' && choice != '/')
-                    Console.WriteLine("Invalid operation. Please try again.");
+                    Console.WriteLine("\nInvalid operation. Please try again.");
                 else
                     break;
             }

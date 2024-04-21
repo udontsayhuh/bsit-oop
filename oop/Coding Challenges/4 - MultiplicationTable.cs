@@ -22,9 +22,9 @@ class Program
             Console.Write("Enter the multiplier: "); // Prompt the user to enter the multiplier
 
             // Validate and parse the input for num2
-            if (!int.TryParse(Console.ReadLine(), out num2) || num2 < 0)
+            if (!int.TryParse(Console.ReadLine(), out num2) || num2 <= 0)
             {
-                Console.WriteLine("\nInvalid multiplier. \nMust be a positive integer.");
+                Console.WriteLine("\nInvalid multiplier. \nMust be positive and not zero.");
                 continue;
             }
 
