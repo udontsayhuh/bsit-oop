@@ -4,13 +4,11 @@ using System.Collections.Generic;
 
 namespace Calculator
 {
-    // Interface for basic calculator operations 
     public interface IOperation
     {
         double Perform(double num1, double num2);
     }
 
-    // Concrete class for addition operation
     public class Addition : IOperation
     {
         public double Perform(double num1, double num2)
@@ -19,7 +17,6 @@ namespace Calculator
         }
     }
 
-    // Concrete class for subtraction operation
     public class Subtraction : IOperation
     {
         public double Perform(double num1, double num2)
@@ -28,7 +25,6 @@ namespace Calculator
         }
     }
 
-    // Concrete class for multiplication operation
     public class Multiplication : IOperation
     {
         public double Perform(double num1, double num2)
@@ -37,7 +33,6 @@ namespace Calculator
         }
     }
 
-    // Concrete class for division operation
     public class Division : IOperation
     {
         public double Perform(double num1, double num2)
@@ -105,7 +100,7 @@ namespace Calculator
                     continue;
                 }
 
-                // Perform calculation based on number of entries and operator (if applicable)
+                // Perform calculation based on number of entries and operator (if applicable haha kung kaya, kailangan pa ba neto syempre oo hindi yan gagana kung hindi :v)
                 double result = numbers[0];
                 if (selectedOperator != null)
                 {
@@ -116,10 +111,10 @@ namespace Calculator
                 }
                 else
                 {
-                    // Handle basic arithmetic for multiple numbers without an operator (can be modified for specific needs)
+                    // Handle basic arithmetic for multiple numbers without an operator (yeah pwedeng wala toh pwede ring i-modify xd)
                     for (int i = 1; i < numbers.Count; i++)
                     {
-                        result += numbers[i]; // Simple addition for demonstration (replace with desired operation)
+                        result += numbers[i]; 
                     }
                 }
 
@@ -134,6 +129,10 @@ namespace Calculator
                     Console.WriteLine("\nBye bye! Come back anytime!");
                     break;
                 }
+                else
+                {
+                    Console.Clear(); //Clear the whole screen to make room for the next calculation
+                }
 
                 numbers.Clear(); // Clear the list for next iteration
                 selectedOperator = null; // Reset operator for next calculation
@@ -145,3 +144,5 @@ namespace Calculator
 //ASSIGNMENT#02 executed by ABABA, JULIA E. --> BSIT 2-1, 03-25-2024
 //ASSIGNMENT#03 MODIFIED patch version 2.0.0 --> 04-08-10 - 04-10-2024
 //ASSIGNMENT#04 MODIFIED patch version 2.1.0 --> 04-17-2024
+
+//to someone who's visiting my branch literally pls don't expect anything wala kang makikita rito haha inayos ko lang mostly xd
