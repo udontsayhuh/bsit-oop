@@ -1,0 +1,48 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Ask user to enter a string
+        Console.WriteLine("Enter a string:");
+        string userInput = Console.ReadLine().ToUpper(); // convert to UPPERCASE
+
+        //Call the CountWords method passing the user input and store the result in the wordCount variable
+        int wordCount = CountWords(userInput);
+
+        // Display
+        Console.WriteLine($"Number of words: {wordCount}");
+        Console.WriteLine($"{userInput}");
+
+        Console.ReadKey();
+    }
+
+    static int CountWords(string userInput)
+    {
+        int wordCount = 0;
+        bool inWord = false;
+
+        // Loop through each character in the user input
+        for (int i = 0; i < userInput.Length; i++)
+        {
+            char character = userInput[i];
+
+            // Check if the current character is not a space and we're not already in a word
+            if (character != ' ' && !inWord)
+            {
+                // Set inWord to true and increment wordCount since we encountered the start of a new word
+                inWord = true;
+                wordCount++;
+            }
+            // Check if the current character is a space
+            else if (character == ' ')
+            {
+                // Set inWord to false since we're no longer in a word
+                inWord = false;
+            }
+        }
+
+        return wordCount; 
+    }
+}
