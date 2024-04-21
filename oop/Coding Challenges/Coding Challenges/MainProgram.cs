@@ -5,6 +5,7 @@ Section: 2-1
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace Coding_Challenges
 
                     // Choices
                     Console.WriteLine("  (1) Sum of Two Integers/Doubles and Product of Two Sums");
+                    Console.WriteLine("  (2) Count Number of Words");
                     Console.WriteLine("  (6) Exit");
                     Console.WriteLine(new string('─', 80));
 
@@ -43,9 +45,12 @@ namespace Coding_Challenges
                         case 1: DisplayTitlePage("\t\t(1) Sum of Two Integers/Doubles and Product of Two Sums");   // Method call to DisplayTitlePage with an argument of string value.
                                 SumAndProduct.Main(args);   // Perform the entry point in SumAndProduct class which can be found in the "SumAndProduct.cs" file.
                                 break;  // Exit the switch statement.
+                        case 2: DisplayTitlePage("\t\t\t(2) Count Number of Words");    // Method call to DisplayTitlePage with an argument of string value.
+                                CountNumberOfWords.Main(args);  // Perform the entry point in CountNumberOfWords class which can be found in the "CountNumberOfWords.cs" file.
+                                break;  // Exit the switch statement.
                         case 6: Console.WriteLine("End of program!");
                                 Environment.Exit(0);    // Exit the program.
-                                break;  
+                                break;
                         default:Console.Clear();
                                 Console.WriteLine("\nInvalid choice!");
                                 break;
