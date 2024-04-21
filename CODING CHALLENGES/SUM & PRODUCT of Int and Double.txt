@@ -1,0 +1,61 @@
+using System;
+
+namespace Code_Challenges
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // User input for Integers
+
+            Console.WriteLine("Enter the first Integer: ");
+            int firstInt = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the second Integer: ");
+            int secondInt = Convert.ToInt32(Console.ReadLine());
+
+            // User input for Doubles
+
+            Console.WriteLine("Enter the first double: ");
+            double firstDouble = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Enter the second double: ");
+            double secondDouble = Convert.ToDouble(Console.ReadLine());
+
+            // Displays for the SUMS and PRODUCT
+
+            // SUM OF INTEGERS
+            int sumOfInteger = AddIntegers(firstInt, secondInt);
+            Console.WriteLine("Sum of Integers: " + sumOfInteger);
+
+            // SUM OF DOUBLES
+            double sumOfDouble = AddDoubles(firstDouble, secondDouble);
+            Console.WriteLine("Sum of Doubles: " + sumOfDouble);
+
+            // PRODUCT OF INTEGER AND DOUBLE
+            double product = ComputeProduct(sumOfInteger, sumOfDouble);
+            Console.WriteLine("Product of Sums: " + product);
+
+            // Keep console open
+            Console.ReadLine();
+        }
+
+            // Method to add Integers
+        static int AddIntegers(int firstInt, int secondInt)
+        {
+            return firstInt + secondInt;
+        }
+
+            // Method to add Doubles
+        static double AddDoubles(double firstDouble, double secondDouble)
+        {
+            return firstDouble + secondDouble;
+        }
+
+           // Method to multiply Integers and Doubles
+        static double ComputeProduct(int firstProduct, double secondProduct)
+        {
+            return firstProduct * secondProduct;
+        }
+    }
+}
