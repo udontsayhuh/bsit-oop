@@ -1,0 +1,204 @@
+/*Ma. Alex P. Halili
+//coding challenges
+
+//number 1
+//using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Accept inputs from the user
+        Console.WriteLine("Enter two integers:");
+        int input1 = Convert.ToInt32(Console.ReadLine());
+        int input2 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter two doubles:");
+        double double1 = Convert.ToDouble(Console.ReadLine());
+        double double2 = Convert.ToDouble(Console.ReadLine());
+
+        // Compute the sum of two integers and two doubles separately
+        int intSum = Sum(input1, input2);
+        double doubleSum = Sum(double1, double2);
+
+        
+        Console.WriteLine($"Sum of integers: {intSum}");
+        Console.WriteLine($"Sum of doubles: {doubleSum}");
+
+        // Compute the product of the sums
+        double product = intSum * doubleSum;
+
+        // Show the result of the product
+        Console.WriteLine($"Product of the sums: {product}");
+    }
+
+    // Method to compute the sum of two integers
+    static int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    // Method to compute the sum of two doubles
+    static double Sum(double a, double b)
+    {
+        return a + b;
+    }
+}
+//number 2 Count words
+//using System;
+public class CountWords
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the string");
+        string word1 = Console.ReadLine();
+       
+
+
+        Console.WriteLine($"Word in uppercase: {word1.ToUpper()}");
+
+        int wordCount = 0;
+        foreach (char character in word1)
+        {
+            if (char.IsWhiteSpace(character))
+            {
+                wordCount++;
+            }
+        }
+        wordCount++;
+
+        Console.WriteLine($"Number of words: {wordCount}");
+
+    }
+}
+/* number 3
+/*using System;
+
+class Math
+{
+    static void Main(string[] args)
+    {
+        bool continueProgram = true;
+
+        while (continueProgram)
+        {
+            Console.WriteLine("Select an arithmetic operation:");
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+
+            Console.Write("Enter your choice (1-4): ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter the first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter the second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            double result = 0;
+
+            switch (choice)
+            {
+                case 1:
+                    result = num1 + num2;
+                    Console.WriteLine($"Result: {result}");
+                    break;
+                case 2:
+                    result = num1 - num2;
+                    Console.WriteLine($"Result: {result}");
+                    break;
+                case 3:
+                    result = num1 * num2;
+                    Console.WriteLine($"Result: {result}");
+                    break;
+                case 4:
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                        Console.WriteLine($"Result: {result}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero.");
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    break;
+            }
+
+            Console.Write("Do you want to perform another action? (yes/no): ");
+            string response = Console.ReadLine().ToLower();
+
+            if (response != "yes")
+            {
+                continueProgram = false;
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
+/*number 4
+/*using System;
+
+class Multiplier
+{
+    static void Main(string[] args)
+    {
+        // Input the number to be multiplied
+        Console.Write("Enter the number to be multiplied: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        // Input the multiplier
+        Console.Write("Enter the multiplier: ");
+        int multiplier = Convert.ToInt32(Console.ReadLine());
+
+        // Print the multiplication table
+        Console.WriteLine($"Multiplication table for {number}:");
+
+        for (int i = 1; i <= multiplier; i++)
+        {
+            int result = number * i;
+            Console.WriteLine($"{number} x {i} = {result}");
+        }
+    }
+}
+
+/*number 5
+/*using System;
+using System.Collections.Generic;
+
+class ArrayList
+{
+    static void Main(string[] args)
+    {
+        // Create a list of cars
+        List<string> cars = new List<string> { "Twice", "Bini", "Blackpink", "Mamamoo", "Itzy" };
+
+        // Display the original list
+        Console.WriteLine("Original list of Girl group:");
+        PrintList(cars);
+
+        // Sort the list
+        cars.Sort();
+
+        // Display the sorted list
+        Console.WriteLine("\nSorted list of Girl Group:");
+        PrintList(cars);
+    }
+
+    // Method to print the elements of a list
+    static void PrintList(List<string> list)
+    {
+        foreach (string item in list)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
+
+
+
