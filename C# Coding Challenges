@@ -1,7 +1,7 @@
 // SOLANO, CEDRIC MARK G.
 // BSIT 2-2
 
-/*Write a C# program that contains method that accepts inputs from the user - that will compute the sum of two integers and two doubles separately, and after showing the result of the two sums, compute for the product of the sums - the result must be a double data type.
+// Write a C# program that contains method that accepts inputs from the user - that will compute the sum of two integers and two doubles separately, and after showing the result of the two sums, compute for the product of the sums - the result must be a double data type.
 
 using System;
 
@@ -74,7 +74,7 @@ class Program
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-/*Write a C# program that accepts a string and will count the number of words in the provided string and print the string in uppercase as a result.
+// Write a C# program that accepts a string and will count the number of words in the provided string and print the string in uppercase as a result.
 
 using System;
 
@@ -120,6 +120,6 @@ class Program
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-/*Write a C# program that can perform basic arithmetic functions. (Addition, Subtraction, Multiplication, and Division). The user must be allowed to select which arithmetic function
+// Write a C# program that can perform basic arithmetic functions. (Addition, Subtraction, Multiplication, and Division). The user must be allowed to select which arithmetic function
 he/she wants to use, and then they will be prompted to enter only two numbers after selecting the arithmetic function. Print the result afterwards, and then after printing ask the user if he/she wants toperform another action or not. If yes, repeat the program, if not terminate the program.
 
