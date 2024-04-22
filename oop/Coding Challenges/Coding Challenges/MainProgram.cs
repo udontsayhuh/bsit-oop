@@ -34,6 +34,7 @@ namespace Coding_Challenges
                     Console.WriteLine("  (2) Count Number of Words");
                     Console.WriteLine("  (3) Basic Arithmetic Calculator");
                     Console.WriteLine("  (4) Multiplication Table");
+                    Console.WriteLine("  (5) Sorting a List of Cars");
                     Console.WriteLine("  (6) Exit");
                     Console.WriteLine(new string('─', 80));
 
@@ -55,6 +56,9 @@ namespace Coding_Challenges
                                 break;  // Exit the switch statement.
                         case 4: DisplayTitlePage("\t\t\t(4) Multiplication Table");    // Method call to DisplayTitlePage with an argument of string value.
                                 MultiplicationTable.Main(args);  // Perform the entry point in MultiplicationTable class which can be found in the "MultiplicationTable.cs" file.
+                                break;  // Exit the switch statement.
+                        case 5: DisplayTitlePage("\t\t\t(5) Sorting a List of Cars");    // Method call to DisplayTitlePage with an argument of string value.
+                                SortingCarList.Main(args);  // Perform the entry point in SortingCarList class which can be found in the "SortingCarList.cs" file.
                                 break;  // Exit the switch statement.
                         case 6: Console.WriteLine("End of program!");
                                 Environment.Exit(0);    // Exit the program.
