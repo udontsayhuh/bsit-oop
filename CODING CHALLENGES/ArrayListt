@@ -1,0 +1,38 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // declaring 5 arrays 0-4
+        string[] cars = new string[5];
+
+        cars[0] = "Subaru";
+        cars[1] = "Ford";
+        cars[2] = "Toyota";
+        cars[3] = "Mitsubishi";
+        cars[4] = "Ferrari";
+        
+        // Displaying the original ArrayList
+        Console.WriteLine("List of Cars:");
+        DisplayArray(cars);
+
+        // Sort the ArrayList
+        Array.Sort(cars);
+
+        // Displaying the Sorted ArrayList
+        Console.WriteLine("\nSorted list of Cars:");
+        DisplayArray(cars);
+
+        Console.ReadLine(); 
+    }
+
+    static void DisplayArray(string[] cars)
+    {
+        // For loop: it will loop as long as i is less than the car.length and iterate by 1
+        for (int i = 0; i < cars.Length; i++)
+        {
+            Console.WriteLine(cars[i]);
+        }
+    }  
+}
