@@ -58,7 +58,7 @@ public class UserInterface
             try
             {
                 num1 = PerformOperation(num1, num2, operation);
-                
+
             }
             catch (ArgumentException ex)
             {
