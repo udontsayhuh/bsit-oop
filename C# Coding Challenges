@@ -74,3 +74,52 @@ class Program
         Console.WriteLine($"Product of the sums: {productOfSums}");
     }
 }
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Write a C# program that accepts a string and will count the number of words in the provided string and print the string in uppercase as a result.
+
+using System;
+
+class Program
+{
+    public static void Main()
+    {
+        while (true)
+        {
+            // Ask the user to enter a string (word/s)
+            Console.WriteLine("Enter a string: ");
+            // Read the user's input
+            string input = Console.ReadLine();
+
+            // Count the number of words in the input string
+            int wordCount = CountWords(input);
+            string uppercaseString = input.ToUpper(); // Convert the input string to uppercase
+
+            // Display the result
+            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine($"Number of Words: {wordCount}");
+            Console.WriteLine($"Uppercase String: {uppercaseString}");
+            Console.WriteLine("----------------------------------------------------------");
+
+            // Ask the user if they want to continue
+            Console.WriteLine("Do you want to enter another string? (Y/N)");
+            string response = Console.ReadLine().Trim().ToUpper();
+
+            if (response != "Y")
+            {
+                break;
+            }
+        }
+    }
+
+    public static int CountWords(string input)
+    {
+        // Split the input string by whitespace characters
+        string[] words = input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+        return words.Length; // Return the number of words
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
