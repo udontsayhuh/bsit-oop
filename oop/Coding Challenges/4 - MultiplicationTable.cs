@@ -16,7 +16,7 @@ class Program
             // Validate and parse the input for num1
             if (!double.TryParse(Console.ReadLine(), out num1))
             {
-                Console.WriteLine("\nInvalid input. \nPlease enter a valid integer.");
+                Console.WriteLine("\nInvalid input. \nPlease enter a valid number.");
                 continue;
             }
 
