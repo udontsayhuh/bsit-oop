@@ -1,0 +1,45 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt user to enter two integers
+        Console.WriteLine("Enter first integer:");
+        int int1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter second integer:");
+        int int2 = Convert.ToInt32(Console.ReadLine());
+
+        // Prompt user to enter two doubles
+        Console.WriteLine("Enter first double:");
+        double double1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Enter second double:");
+        double double2 = Convert.ToDouble(Console.ReadLine());
+
+        // Calculate sum of integers
+        int intSum = Sum(int1, int2);
+        Console.WriteLine($"Sum of integers: {intSum}");
+
+        // Calculate sum of doubles
+        double doubleSum = Sum(double1, double2);
+        Console.WriteLine($"Sum of doubles: {doubleSum}");
+
+        // Calculate product of sums
+        double product = intSum * doubleSum;
+        Console.WriteLine($"Product of sums: {product}");
+    }
+
+    // Method to compute sum of two integers
+    static int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    // Method to compute sum of two doubles
+    static double Sum(double a, double b)
+    {
+        return a + b;
+    }
+}
