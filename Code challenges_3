@@ -4,34 +4,48 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Prompt user to select an arithmetic operation
-        Console.WriteLine("Select an arithmetic operation:");
-        Console.WriteLine("1. Addition");
-        Console.WriteLine("2. Subtraction");
-        Console.WriteLine("3. Multiplication");
-        Console.WriteLine("4. Division");
+        bool repeat = true;
 
-        // Read user's choice
-        int choice = Convert.ToInt32(Console.ReadLine());
-
-        // Perform selected arithmetic operation
-        switch (choice)
+        while (repeat)
         {
-            case 1:
-                Addition();
-                break;
-            case 2:
-                Subtraction();
-                break;
-            case 3:
-                Multiplication();
-                break;
-            case 4:
-                Division();
-                break;
-            default:
-                Console.WriteLine("Invalid choice.");
-                break;
+            // Prompt user to select an arithmetic operation
+            Console.WriteLine("Select an arithmetic operation:");
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+
+            // Read user's choice
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            // Perform selected arithmetic operation
+            switch (choice)
+            {
+                case 1:
+                    Addition();
+                    break;
+                case 2:
+                    Subtraction();
+                    break;
+                case 3:
+                    Multiplication();
+                    break;
+                case 4:
+                    Division();
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    break;
+            }
+
+            // Ask if user wants to perform another action
+            Console.WriteLine("Do you want to perform another action? (yes/no)");
+            string continueChoice = Console.ReadLine();
+
+            if (continueChoice.ToLower() != "yes")
+            {
+                repeat = false;
+            }
         }
     }
 
@@ -65,7 +79,7 @@ class Program
         Console.WriteLine($"Result: {result}");
     }
 
-    //  perform division
+    // perform division
     static void Division()
     {
         Console.WriteLine("Enter two numbers to divide:");
@@ -82,3 +96,4 @@ class Program
         }
     }
 }
+
