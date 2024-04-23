@@ -1,0 +1,27 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt user to enter a string
+        Console.WriteLine("Enter a string:");
+        string inputString = Console.ReadLine();
+
+        // Count the number of words
+        int wordCount = CountWords(inputString);
+        Console.WriteLine($"Number of words: {wordCount}");
+
+        // Print the string in uppercase
+        string uppercaseString = inputString.ToUpper();
+        Console.WriteLine($"Uppercase string: {uppercaseString}");
+    }
+
+    // count the number of words in a string
+    static int CountWords(string str)
+    {
+        // Split the string by whitespace and count the elements
+        string[] words = str.Split(new char[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        return words.Length;
+    }
+}
