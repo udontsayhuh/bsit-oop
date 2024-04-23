@@ -4,7 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        int num1, num2;
+        double num1;
+        int num2;
 
         // Loop to ensure valid input
         while (true)
@@ -13,7 +14,7 @@ class Program
             Console.Write("Enter a number: "); // Prompt the user to enter a number
 
             // Validate and parse the input for num1
-            if (!int.TryParse(Console.ReadLine(), out num1))
+            if (!double.TryParse(Console.ReadLine(), out num1))
             {
                 Console.WriteLine("\nInvalid input. \nPlease enter a valid integer.");
                 continue;
