@@ -63,18 +63,96 @@ class CodeChallenges3
 {
     public static void Calculator()
     {
-        Console.WriteLine("=========================");
-        Console.WriteLine("    Code Challenge # 3   ");
-        Console.WriteLine("=========================");
+        string confirm;
 
-        Console.WriteLine("\nThis is a test");
-        Console.Write("\nClick 'Enter' to move to the next challenge:");
-        Console.ReadLine();
+        do
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=========================");
+            Console.WriteLine("    Code Challenge # 3   ");
+            Console.WriteLine("=========================");
 
-        Console.Clear();
-        CodeChallenges4.Multiplier();
+            Console.WriteLine("\n————————————————————————————");
+            Console.WriteLine("|   Choose an operation:    |");
+            Console.WriteLine("|   >> Addition (+)         |");
+            Console.WriteLine("|   >> Subtraction (-)      |");
+            Console.WriteLine("|   >> Multiplication (*)   |");
+            Console.WriteLine("|   >> Division (/)         |");
+            Console.WriteLine("————————————————————————————");
+
+            Console.Write("\nEnter the symbol of your choice: ");
+            string choice = Console.ReadLine(); // Get user's choice for the operation
+
+            Console.Write("\n  >> Enter the first integer: ");//first number
+            int num1;
+            while (!int.TryParse(Console.ReadLine(),out num1))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("= WARNING: Invalid input for integer! Try again =");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("\n  >> Enter the first integer: ");
+            }
+
+            Console.Write("  >> Enter the second integer: ");//second number
+            int num2;
+            while (!int.TryParse(Console.ReadLine(),out num2))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("= WARNING: Invalid input for integer! Try again =");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("\n  >> Enter the first integer: ");
+            }
+            
+            int result;
+
+            switch (choice)
+            {
+                case "+":
+                    result = num1 + num2;
+                    Console.WriteLine("\n    >> Addition: " + num1 + " + " + num2 + " = " + result + " <<");
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    Console.WriteLine("\n    >> Subtraction: " + num1 + " - " + num2 + " = " + result + " <<");
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    Console.WriteLine("\n    >> Multiplication: " + num1 + " * " + num2 + " = " + result + " <<");
+                    break;
+                case "/":
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                        Console.WriteLine("\n    >> Division: " + num1 + " / " + num2 + " = " + result + " <<");
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("= WARNING: Cannot divide by zero! =\n");
+                        Console.Clear();
+                        continue;
+                    }
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("= WARNING: Invalid choice! Try again =\n");
+                    Console.Clear();
+                    continue;
+            }
+            Console.Write("\nDo you want to calculate again? (y/n): ");
+            confirm = Console.ReadLine().ToUpper();
+            Console.Clear();
+        }
+        while (confirm == "Y" );
+
+        if (confirm == "N")
+        {
+            Console.Write("\nClick 'Enter' to move to the next challenge");
+            Console.ReadLine();
+            Console.Clear();
+            CodeChallenges4.Multiplier();
+        }
     }
-    
 }
 
 //Code challenge# 4
