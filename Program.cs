@@ -1,44 +1,112 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
-//A program that will compute the sum of 2 integers and 2 doubles and then multiply their results
-class SumProduct
+//Implementing Abstraction
+abstract class Car
 {
-    public static void Main(string[] args)
-    {   
-        //To declare the variable for the sum of two integer numbers
-        int resultInt;
+    private string Model;
+    private string Make;
+    private int Year;
+    //Implementing Encapsulation that changed it from public into private set
+    private string model;
+    private string make;
+    private int year;
 
-        Console.WriteLine("Enter the first integer: "); //integer 1
-        int num1 = Convert.ToInt32(Console.ReadLine());
+    public Car(string model, string make, int year)
+    {
+        Model = model;
+        Make = make;
+        Year = year;
+        this.model = model;
+        this.make = make;
+        this.year = year;
+    }
 
-        Console.WriteLine("Enter the second integer: "); //integer 2
-        int num2 = Convert.ToInt32(Console.ReadLine());
+    public string GetModel()
+    public string Model
+    {
+        return Model;
+        get { return model; }
+        set { model = value; }
+    }
+    public string GetMake()
 
-        //To add two integers and displays the sum
-        resultInt = num1 + num2;
-        Console.WriteLine("\nTHE SUM OF TWO INTEGERS IS: " + resultInt);
+    public string Make
+    {
+        return Make;
+        get { return make; }
+        set { make = value; }
+    }
 
-        //To declare the variable for the sum of two double numbers
-        double resultDouble;
+    public int GetYear()
+    public int Year
+    {
+        return Year;
+        get { return year; }
+        set { year = value; }
+    }
 
-        Console.WriteLine("----------------------------------");
-        Console.WriteLine("Enter the first double: "); //double 1 
-        double num1D = Convert.ToDouble(Console.ReadLine());
+    //display car details using abstraction
+    //Adding abstract method to display the details of a car
+    public abstract void DisplayDetails();
 
-        Console.WriteLine("\nEnter the second double: "); //double 2
-        double num2D = Convert.ToDouble(Console.ReadLine());
+    public void Drive()
+    {
+        Console.WriteLine("The car is now running.");
+        Console.WriteLine("\nThe car is now running.");
+    }
 
-        //To add two doubles and displays the sum
-        resultDouble = num1D + num2D;
-        Console.WriteLine("\nTHE SUM OF TWO DOUBLES IS: " + resultDouble);
+    public void Stop()
+    {
+        Console.WriteLine("The car has stopped.");
+        Console.WriteLine("The car has stopped.\n");
+    }
+}
 
-        //To declare a variable on getting the product of two sums
-        double product;
+class SUVCar : Car
+//Implementing Inheritance from Car Class
+class RacingCar : Car
+{
+    private int Price;
+    private string modelName;
+    private int racingCarNumber;
 
-        //To get the product of two sums and display it in double data type
-        product = resultInt * resultDouble;
-        Console.WriteLine("----------------------------------");
-        Console.WriteLine("THE PRODUCT OF TWO SUMS IS: " + product);
+    public SUVCar(string model, string make, int year, int price) : base(model, make, year)
+    //Constructor
+    public RacingCar(string model, string make, int year, string modelName, int racingCarNumber)
+        : base(model, make, year)
+    {
+        Price = price;
+        this.modelName = modelName;
+        this.racingCarNumber = racingCarNumber;
+    }
 
+    public override void DisplayDetails() 
+    { 
+        Console.WriteLine($"Model: {GetModel()}, Make: {GetMake()}, Year: {GetYear()}, Price: {Price}");
+    public override void DisplayDetails()
+    {
+        Console.WriteLine($"Model: {Model}, \nMake: {Make}, \nYear: {Year}, \nModel Name: {modelName}, \nRacing Car Number: {racingCarNumber}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    class Program
+    {
+        SUVCar newCar = new SUVCar("Mitsubishi", "Xpander", 2024, 1068000);
+        newCar.DisplayDetails();
+        static void Main(string[] args)
+        {   //Implementing Polymorphism
+            RacingCar newCar = new RacingCar("Toyota", "Corolla", 2023, "Toyota Supra GT4", 22);
+            newCar.DisplayDetails();
+
+            newCar.Drive();
+            newCar.Stop();
+        }
+
+        newCar.Drive();
+        newCar.Stop();
     }
 }
