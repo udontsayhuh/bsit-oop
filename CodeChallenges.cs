@@ -43,6 +43,7 @@ class CodeChallenges2
         Console.WriteLine($"\n>> The string '{upperCase}' has {strCount} characters");
         
         Console.Write("\nClick 'Enter' to move to the next challenge");
+        Console.ReadLine();
         Console.Clear();
         CodeChallenges3.Calculator();
     }
@@ -55,7 +56,7 @@ class CodeChallenges2
 // Subtraction, Multiplication, and Division). The user must be allowed to select which
 // arithmetic function he/she wants to use, and then they will be prompted to enter only two numbers after
 // selecting the arithmetic function. Print the result afterwards, and then after printing
-// ask the user if he/she wants toperform another action or not. If yes, repeat the
+// ask the user if he/she wants to perform another action or not. If yes, repeat the
 // program, if not terminate the program.
 
 class CodeChallenges3
@@ -95,7 +96,7 @@ class CodeChallenges4
         Console.ReadLine();
 
         Console.Clear();
-        CodeChallenges2.Counter();
+        CodeChallenges5.List();
     }
     
 }
