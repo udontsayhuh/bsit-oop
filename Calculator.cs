@@ -11,7 +11,6 @@ class Calculator
             double result = 0;
 
             Console.WriteLine("Enter an expression (e.g., 3 + 5 * 2 / 2 =):");
-
             string input = Console.ReadLine();
             string[] tokens = input.Split(' ');
 
@@ -20,7 +19,7 @@ class Calculator
             {
                 try
                 {
-                    result = double.Parse(tokens[0]); // Change: Parsing the first token
+                    result = double.Parse(tokens[0]); 
                     validInput = true;
                 }
                 catch (FormatException)
@@ -35,7 +34,16 @@ class Calculator
             {
                 switch (tokens[i])
                 {
-                    case "/": // Change: Added handling for division by zero
+                    case "+": // Added case for addition
+                        result += double.Parse(tokens[i + 1]);
+                        break;
+                    case "-": // Added case for subtraction
+                        result -= double.Parse(tokens[i + 1]);
+                        break;
+                    case "*": // Added case for multiplication
+                        result *= double.Parse(tokens[i + 1]);
+                        break;
+                    case "/": // Added case for division
                         double divisor;
                         bool parsed = double.TryParse(tokens[i + 1], out divisor);
                         if (!parsed || divisor == 0)
@@ -43,11 +51,14 @@ class Calculator
                             Console.WriteLine("Invalid input. Please enter a valid non-zero divisor:");
                             input = Console.ReadLine();
                             tokens = input.Split(' ');
-                            i = 0; // Change: Reset the loop to reparse the input
+                            i = 0; 
                             result = double.Parse(tokens[0]);
-                            continue; // Change: Skip the calculation
+                            continue;
                         }
                         result /= divisor;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid operator."); // Added default case for invalid operator
                         break;
                 }
             }
