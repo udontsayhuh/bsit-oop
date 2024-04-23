@@ -1,0 +1,15 @@
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\bin\Debug\net8.0\Coding Challenges.exe
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\bin\Debug\net8.0\Coding Challenges.deps.json
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\bin\Debug\net8.0\Coding Challenges.runtimeconfig.json
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\bin\Debug\net8.0\Coding Challenges.dll
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\bin\Debug\net8.0\Coding Challenges.pdb
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\Coding Challenges.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\Coding Challenges.AssemblyInfoInputs.cache
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\Coding Challenges.AssemblyInfo.cs
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\Coding Challenges.csproj.CoreCompileInputs.cache
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\Coding Challenges.sourcelink.json
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\Coding Challenges.dll
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\refint\Coding Challenges.dll
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\Coding Challenges.pdb
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\Coding Challenges.genruntimeconfig.cache
+C:\Users\Darben\source\repos\bsit-oop\Coding Challenges\obj\Debug\net8.0\ref\Coding Challenges.dll
