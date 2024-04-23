@@ -121,9 +121,3 @@ namespace MyFirstCalculator
         }
     }
 }
-
-// All the data and behavior related to the calculator are encapsulated within the Calculator class.
-// that contains the methods to perform calculations and interacts with the user.
-
-// Used abstraction which abstract away the implementation details of the calculator operations,
-//allowing users to interact with it through a simple interface.
