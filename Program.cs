@@ -1,80 +1,44 @@
 ﻿using System;
 
-//Implementing Abstraction
-abstract class Car
+//A program that will compute the sum of 2 integers and 2 doubles and then multiply their results
+class SumProduct
 {
-    //Implementing Encapsulation that changed it from public into private set
-    private string model;
-    private string make;
-    private int year;
+    public static void Main(string[] args)
+    {   
+        //To declare the variable for the sum of two integer numbers
+        int resultInt;
 
-    public Car(string model, string make, int year)
-    {
-        this.model = model;
-        this.make = make;
-        this.year = year;
-    }
+        Console.WriteLine("Enter the first integer: "); //integer 1
+        int num1 = Convert.ToInt32(Console.ReadLine());
 
-    public string Model
-    {
-        get { return model; }
-        set { model = value; }
-    }
+        Console.WriteLine("Enter the second integer: "); //integer 2
+        int num2 = Convert.ToInt32(Console.ReadLine());
 
-    public string Make
-    {
-        get { return make; }
-        set { make = value; }
-    }
+        //To add two integers and displays the sum
+        resultInt = num1 + num2;
+        Console.WriteLine("\nTHE SUM OF TWO INTEGERS IS: " + resultInt);
 
-    public int Year
-    {
-        get { return year; }
-        set { year = value; }
-    }
+        //To declare the variable for the sum of two double numbers
+        double resultDouble;
 
-    //Adding abstract method to display the details of a car
-    public abstract void DisplayDetails();
+        Console.WriteLine("----------------------------------");
+        Console.WriteLine("Enter the first double: "); //double 1 
+        double num1D = Convert.ToDouble(Console.ReadLine());
 
-    public void Drive()
-    {
-        Console.WriteLine("\nThe car is now running.");
-    }
+        Console.WriteLine("\nEnter the second double: "); //double 2
+        double num2D = Convert.ToDouble(Console.ReadLine());
 
-    public void Stop()
-    {
-        Console.WriteLine("The car has stopped.\n");
-    }
-}
-//Implementing Inheritance from Car Class
-class RacingCar : Car
-{
-    private string modelName;
-    private int racingCarNumber;
+        //To add two doubles and displays the sum
+        resultDouble = num1D + num2D;
+        Console.WriteLine("\nTHE SUM OF TWO DOUBLES IS: " + resultDouble);
 
-    //Constructor
-    public RacingCar(string model, string make, int year, string modelName, int racingCarNumber)
-        : base(model, make, year)
-    {
-        this.modelName = modelName;
-        this.racingCarNumber = racingCarNumber;
-    }
+        //To declare a variable on getting the product of two sums
+        double product;
 
-    public override void DisplayDetails()
-    {
-        Console.WriteLine($"Model: {Model}, \nMake: {Make}, \nYear: {Year}, \nModel Name: {modelName}, \nRacing Car Number: {racingCarNumber}");
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {   //Implementing Polymorphism
-            RacingCar newCar = new RacingCar("Toyota", "Corolla", 2023, "Toyota Supra GT4", 22);
-            newCar.DisplayDetails();
-
-            newCar.Drive();
-            newCar.Stop();
-        }
+        //To get the product of two sums and display it in double data type
+        product = resultInt * resultDouble;
+        Console.WriteLine("----------------------------------");
+        Console.WriteLine("THE PRODUCT OF TWO SUMS IS: " + product);
 
     }
 }
