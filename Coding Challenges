@@ -1,0 +1,26 @@
+//Write a C# program that demonstrates a list that contains 5 cars and display a sorted listed after. (Using ArrayList are LinkedList is allowed).
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<string> cars = new List<string>() { "Toyota", "Honda", "Ford", "Chevrolet", "Tesla" };
+
+        Console.WriteLine("Original List:");
+        foreach (string car in cars)
+        {
+            Console.WriteLine(car);
+        }
+
+        cars.Sort();
+
+        Console.WriteLine("\nSorted List:");
+        foreach (string car in cars)
+        {
+            Console.WriteLine(car);
+        }
+    }
+}
