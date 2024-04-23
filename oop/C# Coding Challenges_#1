@@ -1,1 +1,50 @@
+using System;
+
+// Calculator class for addition and multiplication
+class Calculator
+{
+    // Method to add two numbers
+    public double Add(double firstNumber, double secondNumber)
+    {
+        return firstNumber + secondNumber; // Returns the sum of two numbers
+    }
+
+    // Method to multiply two numbers
+    public double Multiply(double firstNumber, double secondNumber)
+    {
+        return firstNumber * secondNumber; // Returns the product of two numbers
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt for user input
+        Console.WriteLine("Enter two numbers:");
+
+        // Read the first number from user input and convert it to double
+        double firstNumber = Convert.ToDouble(Console.ReadLine());
+
+        // Read the second number from user input and convert it to double
+        double secondNumber = Convert.ToDouble(Console.ReadLine());
+
+        // Create an instance of the Calculator class
+        Calculator calculator = new Calculator();
+
+        // Calculate the sum of the two numbers using the Add method
+        double sum = calculator.Add(firstNumber, secondNumber);
+
+        // Display the sum of the numbers
+        Console.WriteLine("Sum of the numbers: " + sum);
+
+        // Calculate the product of the two numbers using the Multiply method
+        double product = calculator.Multiply(firstNumber, secondNumber);
+
+        // Display the product of the numbers
+        Console.WriteLine("Product of the numbers: " + product);
+    }
+}
+
+
 
