@@ -127,3 +127,124 @@ class Program
 }
 
 */
+
+// #3
+
+/*
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool tryAgain = true;
+        while (tryAgain)
+        {
+            Console.Clear();
+            Console.WriteLine("Select an operation:");
+            Console.WriteLine("1. ADD");
+            Console.WriteLine("2. SUBTRACT");
+            Console.WriteLine("3. MULTIPLY");
+            Console.WriteLine("4. DIVIDE");
+
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 4)
+            {
+                Console.WriteLine("Invalid CHOICE! Choose between 1 to 4 ONLY!");
+                ClearScreen();
+                Console.Clear();
+                Console.WriteLine("Select an operation:");
+                Console.WriteLine("1. ADD");
+                Console.WriteLine("2. SUBTRACT");
+                Console.WriteLine("3. MULTIPLY");
+                Console.WriteLine("4. DIVIDE");
+            }
+
+            double num1, num2;
+            while (true)
+            {
+                Console.Write("Enter the first number: ");
+                if (double.TryParse(Console.ReadLine(), out num1))
+                {
+                    ClearScreen();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid INPUT! Numbers only!");
+                    ClearScreen();
+                }
+            }
+
+            while (true)
+            {
+                Console.Write("Enter the second number: ");
+                if (double.TryParse(Console.ReadLine(), out num2))
+                {
+                    ClearScreen();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid INPUT! Numbers only!");
+                    ClearScreen();
+                }
+            }
+
+            double result = 0;
+
+            switch (choice)
+            {
+                case 1:
+                    result = num1 + num2;
+                    Console.WriteLine($"the sum of {num1} and {num2} is: {result}");
+                    break;
+                case 2:
+                    result = num1 - num2;
+                    Console.WriteLine($"the difference of {num1} and {num2} is: {result}");
+                    break;
+                case 3:
+                    result = num1 * num2;
+                    Console.WriteLine($"the product of {num1} and {num2} is: {result}");
+                    break;
+                case 4:
+                    if (num2 == 0)
+                    {
+                        Console.WriteLine("Cannot divide by zero. Please enter a non-zero second number.");
+                        break;
+                    }
+                    result = num1 / num2;
+                    Console.WriteLine($"the quotient of {num1} and {num2} is: {result}");
+                    break;
+            }
+
+            string response;
+            while (true)
+            {
+                Console.Write("Do you want to try again? (yes/no): ");
+                response = Console.ReadLine().ToLower();
+                if (response == "yes" || response == "no")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid INPUT! yes or no ONLY!.");
+                    ClearScreen();
+                }
+            }
+
+            tryAgain = (response == "yes");
+        }
+    }
+
+    static void ClearScreen()
+    {
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
+        Console.Clear();
+    }
+}
+
+*/
