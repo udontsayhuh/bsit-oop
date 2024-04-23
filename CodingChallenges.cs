@@ -339,3 +339,51 @@ class Program
 }
 
 */
+
+// # 5
+
+/*
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<string> cars = new List<string>();
+
+        Console.WriteLine("Enter 5 cars:");
+
+        for (int i = 0; i < 5; i++)
+        {
+            string input;
+            do
+            {
+                Console.Write($"Car {i + 1}: ");
+                input = Console.ReadLine().Trim();
+                Console.Clear();
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Invalid INPUT! Input cannot be EMPTY or be SPACES!");
+                    Console.WriteLine("Press Enter to continue...");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+            } while (string.IsNullOrWhiteSpace(input));
+
+            cars.Add(input);
+        }
+
+        cars.Sort();
+
+        Console.WriteLine("\nCars in alphabetical order:");
+        foreach (var car in cars)
+        {
+            Console.WriteLine(car);
+        }
+    }
+}
+
+*/
