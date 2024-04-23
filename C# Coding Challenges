@@ -1,6 +1,8 @@
 // SOLANO, CEDRIC MARK G.
 // BSIT 2-2
-
+// CODING CHALLENGES
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#1
 // Write a C# program that contains method that accepts inputs from the user - that will compute the sum of two integers and two doubles separately, and after showing the result of the two sums, compute for the product of the sums - the result must be a double data type.
 
 using System;
@@ -73,7 +75,7 @@ class Program
 }
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+#2
 // Write a C# program that accepts a string and will count the number of words in the provided string and print the string in uppercase as a result.
 
 using System;
@@ -119,7 +121,215 @@ class Program
 }
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#3
+// Write a C# program that can perform basic arithmetic functions. (Addition, Subtraction, Multiplication, and Division). The user must be allowed to select which arithmetic functionhe/she wants to use, and then they will 
+be prompted to enter only two numbers after selecting the arithmetic function. Print the result afterwards, and then after printing ask the user if he/she wants toperform another action or not. If yes, repeat the program, if not terminate the program.
 
-// Write a C# program that can perform basic arithmetic functions. (Addition, Subtraction, Multiplication, and Division). The user must be allowed to select which arithmetic function
-he/she wants to use, and then they will be prompted to enter only two numbers after selecting the arithmetic function. Print the result afterwards, and then after printing ask the user if he/she wants toperform another action or not. If yes, repeat the program, if not terminate the program.
+using System;
 
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Variable to control program flow
+        bool continueProgram = true;
+
+        // Main loop to allow multiple calculations
+        while (continueProgram)
+        {
+            // Display header
+            Console.WriteLine("=============================================");
+            Console.WriteLine("       PERFORM BASIC ARITHMETIC FUNCTIONS!    ");
+            Console.WriteLine("=============================================");
+
+            // Display menu for arithmetic operations
+            Console.WriteLine("Select an arithmetic operation:");
+            Console.WriteLine("A. Addition (+)");
+            Console.WriteLine("B. Subtraction (-)");
+            Console.WriteLine("C. Multiplication (*)");
+            Console.WriteLine("D. Division (/)");
+            Console.WriteLine("=============================================");
+            Console.Write("Enter your choice (A-D):  ");
+            
+            // Read user's choice for operation
+            string choiceStr = Console.ReadLine().ToUpper();
+            char choice = choiceStr.Length > 0 ? choiceStr[0] : ' ';
+
+            double result = 0;
+
+            // Perform the selected operation
+            switch (choice)
+            {
+                case 'A': // Addition
+                    result = PerformOperation('+');
+                    break;
+                case 'B': // Subtraction
+                    result = PerformOperation('-');
+                    break;
+                case 'C': // Multiplication
+                    result = PerformOperation('*');
+                    break;
+                case 'D': // Division
+                    result = PerformOperation('/');
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please enter a valid option (A-D).");
+                    continue;
+            }
+
+            // Display the result
+            Console.WriteLine("=============================================");
+            Console.WriteLine($"RESULT: {result}");
+            Console.WriteLine("=============================================");
+
+            // Ask if user wants to continue
+            Console.Write("Do you want to perform another calculation? (yes/no): ");
+            string response = Console.ReadLine().ToLower();
+            if (response != "yes")
+            {
+                continueProgram = false;
+            }
+        }
+    }
+
+    // Method to perform the arithmetic operation
+    static double PerformOperation(char operation)
+    {
+        // Prompt user to enter numbers
+        Console.WriteLine("=============================================");
+        Console.Write("Enter the first number: ");
+        double num1;
+        while (!double.TryParse(Console.ReadLine(), out num1))
+        {
+            Console.WriteLine("Invalid input for number. Please enter a valid number.");
+        }
+
+        Console.Write("Enter the second number: ");
+        double num2;
+        while (!double.TryParse(Console.ReadLine(), out num2))
+        {
+            Console.WriteLine("Invalid input for number. Please enter a valid number.");
+        }
+
+        double result = 0;
+
+        // Perform the selected arithmetic operation
+        switch (operation)
+        {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 == 0)
+                {
+                    Console.WriteLine("Cannot divide by zero.");
+                    result = double.NaN;
+                }
+                else
+                {
+                    result = num1 / num2;
+                }
+                break;
+        }
+
+        return result;
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#4
+// Write a C# program that takes two numbers as input: the first number will be the number to be multiplied and the second number will be the multiplier, and prints its multiplication table up to the given second number (the multiplier).
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt the user to enter the number to be multiplied
+        Console.WriteLine("====================================================");
+        Console.Write("Enter the number to be multiplied: ");
+        int number;
+        // Validate user input for the number to be multiplied
+        while (!int.TryParse(Console.ReadLine(), out number))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+        }
+
+        // Prompt the user to enter the multiplier
+        Console.Write("Enter the multiplier: ");
+        int multiplier;
+        // Validate user input for the multiplier
+        while (!int.TryParse(Console.ReadLine(), out multiplier))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+        }
+
+        // Display the multiplication table header
+        Console.WriteLine("====================================================");
+        Console.WriteLine($"        MULTIPLICATION TABLE FOR {number} UP TO {multiplier}:");
+
+        // Generate and display the multiplication table
+        for (int i = 1; i <= multiplier; i++)
+        {
+            int result = number * i;
+            Console.WriteLine($"{number} x {i} = {result}");
+            Console.WriteLine("====================================================");
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#5
+Write a C# program that demonstrates a list that contains 5 cars and display a sorted listed after. (Using ArrayList are LinkedList is allowed).
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create a list to store cars
+        List<string> cars = new List<string>();
+
+        // Prompt the user to enter 5 different car names
+        Console.WriteLine("====================================================");
+        Console.WriteLine("             ENTER 5 DIFFERENT CAR                  ");
+        Console.WriteLine("====================================================");
+        for (int i = 0; i < 5; i++)
+        {
+            // Prompt user to enter each car name
+            Console.Write($"Car {i + 1}: ");
+            string carName = Console.ReadLine();
+            cars.Add(carName); // Add the car name to the list
+        }
+
+        // Display the unsorted list of cars
+        Console.WriteLine("====================================================");
+        Console.WriteLine("List of cars (unsorted):");
+        DisplayList(cars);
+        Console.WriteLine("====================================================");
+        // Sort the list of cars
+        cars.Sort();
+
+        // Display the sorted list of cars
+        Console.WriteLine("List of cars (sorted):");
+        DisplayList(cars);
+        Console.WriteLine("====================================================");
+    }
+
+    // Method to display the elements of a list
+    static void DisplayList(List<string> list)
+    {
+        foreach (var item in list)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
