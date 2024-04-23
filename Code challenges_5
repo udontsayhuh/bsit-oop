@@ -1,0 +1,38 @@
+using System;
+using System.Collections;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create a list to store cars
+        ArrayList carsList = new ArrayList();
+
+        // Add cars to the list
+        carsList.Add("Toyota");
+        carsList.Add("Honda");
+        carsList.Add("BMW");
+        carsList.Add("Ford");
+        carsList.Add("Chevrolet");
+
+        // Display the unsorted list
+        Console.WriteLine("Unsorted list of cars:");
+        DisplayList(carsList);
+
+        // Sort the list
+        carsList.Sort();
+
+        // Display the sorted list
+        Console.WriteLine("\nSorted list of cars:");
+        DisplayList(carsList);
+    }
+
+    // display elements of a list
+    static void DisplayList(ArrayList list)
+    {
+        foreach (var item in list)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
