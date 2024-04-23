@@ -1,5 +1,7 @@
 // #1
 
+/*
+
 using System;
 
 class Program
@@ -79,3 +81,49 @@ class Program
     }
 
 }
+
+*/
+
+
+// 2
+
+/*
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter a string: ");
+        string userInput = Console.ReadLine();
+
+        int wordCount = CountWords(userInput);
+
+        Console.WriteLine($"Word count: {wordCount}");
+        Console.WriteLine($"All caps output: {userInput.ToUpper()}");
+    }
+
+    static int CountWords(string userInput)
+    {
+        int count = 0;
+        bool isWord = false;
+
+        foreach (char c in userInput)
+        {
+            if (char.IsWhiteSpace(c))
+            {
+                isWord = false;
+            }
+            else if (!isWord)
+            {
+                count++;
+                isWord = true;
+            }
+        }
+
+        return count;
+    }
+}
+
+*/
