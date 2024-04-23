@@ -169,10 +169,24 @@ class CodeChallenges4
         Console.WriteLine("    Code Challenge # 4   ");
         Console.WriteLine("=========================");
 
-        Console.WriteLine("\nThis is a test");
-        Console.Write("\nClick 'Enter' to move to the next challenge:");
-        Console.ReadLine();
+        int num,num1;
+        Console.Write("\nEnter the first number (Number to be calculated): ");
+        num = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter the second number (The Multiplier): ");
+        num1 = Convert.ToInt32(Console.ReadLine());
+    
+        Console.WriteLine("\n >> Multiplcation Table << \n");
+        for(int i = num; i <= num; i++)
+        {
+            for (int j = 1; j <= num1; j++)
+            {
+                int value = i * j;
+                Console.Write("\t{0} * {1} = {2}\n", i, j, value);
+            }
+        }
 
+        Console.Write("\nClick 'Enter' to move to the next challenge");
+        Console.ReadLine();
         Console.Clear();
         CodeChallenges5.List();
     }
@@ -192,7 +206,7 @@ class CodeChallenges5
         Console.WriteLine("=========================");
 
         Console.WriteLine("\nThis is a test");
-        Console.Write("\nClick 'Enter' to move to the next challenge:");
+        Console.Write("\nClick 'Enter' to move to the next challenge");
         Console.ReadLine();
     }
     
