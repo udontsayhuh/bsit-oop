@@ -248,3 +248,94 @@ class Program
 }
 
 */
+
+// #4
+
+/*
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool tryAgain = true;
+        while (tryAgain)
+        {
+            Console.Clear();
+            Console.WriteLine("Multiplication Table Generator");
+            Console.WriteLine("------------------------------");
+
+            double numberToMultiply;
+            int multiplier;
+            while (true)
+            {
+                Console.Write("Enter the number to be multiplied: ");
+                if (double.TryParse(Console.ReadLine(), out numberToMultiply))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid INPUT! NUMBER only!");
+                    Console.WriteLine("Press Enter to continue...");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Console.WriteLine("Multiplication Table Generator");
+                    Console.WriteLine("------------------------------");
+                }
+            }
+
+            while (true)
+            {
+                Console.Write("Enter the multiplier (the number up to which the table will be printed): ");
+                if (int.TryParse(Console.ReadLine(), out multiplier))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid INPUT! NUMBER only!");
+                    Console.WriteLine("Press Enter to continue...");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Console.WriteLine("Multiplication Table Generator");
+                    Console.WriteLine("------------------------------");
+                }
+            }
+
+            Console.Clear();
+            Console.WriteLine($"Multiplication Table for {numberToMultiply} up to {multiplier}:");
+            Console.WriteLine("----------------------------------------------");
+
+            int increment = (multiplier > 0) ? 1 : -1;
+            for (int i = 1; i <= Math.Abs(multiplier); i++)
+            {
+                int currentMultiplier = i * increment;
+                double result = numberToMultiply * currentMultiplier;
+                Console.WriteLine($"{numberToMultiply} * {currentMultiplier} = {result}");
+            }
+
+            string response;
+            while (true)
+            {
+                Console.Write("Do you want to try again? (yes/no): ");
+                response = Console.ReadLine().ToLower();
+                if (response == "yes" || response == "no")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input! yes or no ONLY!");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+            }
+
+            tryAgain = (response == "yes");
+        }
+    }
+}
+
+*/
