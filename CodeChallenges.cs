@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 
 //Code challenge# 1
 // Write a C# program that contains method that accepts inputs from the user - that will
@@ -14,10 +15,27 @@ class CodeChallenges1
         Console.WriteLine("    Code Challenge # 1   ");
         Console.WriteLine("=========================");
 
-        Console.WriteLine("\nThis is a test");
+        Console.Write("\n> Enter two integers separated with space: ");
+        string[] intStrs = Console.ReadLine().Split();
+        int num1 = int.Parse(intStrs[0]);
+        int num2 = int.Parse(intStrs[1]);
+
+        Console.Write("> Enter two doubles separated with space: ");
+        string[] doubStrs = Console.ReadLine().Split();
+        double a = double.Parse(doubStrs[0]);
+        double b = double.Parse(doubStrs[1]);
+
+        int intSum = num1 + num2;
+        Console.WriteLine($"\n  >> Sum of Integers: {intSum}");
+
+        double doubSum = a + b;
+        Console.WriteLine($"  >> Sum of Doubles: {doubSum}");
+
+        double multi = intSum * doubSum;
+        Console.WriteLine($"  >> Product of the Integers and Doubles: {multi}");
+
         Console.Write("\nClick 'Enter' to move to the next challenge");
         Console.ReadLine();
-
         Console.Clear();
         CodeChallenges2.Counter();
     }
@@ -47,7 +65,6 @@ class CodeChallenges2
         Console.Clear();
         CodeChallenges3.Calculator();
     }
-    
 }
 
 
@@ -188,9 +205,8 @@ class CodeChallenges4
         Console.Write("\nClick 'Enter' to move to the next challenge");
         Console.ReadLine();
         Console.Clear();
-        CodeChallenges5.List();
+        CodeChallenges5.Cars();
     }
-    
 }
 
 //Code challenge# 5
@@ -199,15 +215,34 @@ class CodeChallenges4
 
 class CodeChallenges5
 {
-    public static void List()
+    public static void Cars()
     {
         Console.WriteLine("=========================");
         Console.WriteLine("    Code Challenge # 5   ");
         Console.WriteLine("=========================");
 
-        Console.WriteLine("\nThis is a test");
-        Console.Write("\nClick 'Enter' to move to the next challenge");
-        Console.ReadLine();
+        ArrayList carList = new ArrayList();
+        carList.Add("Mitsubishi");
+        carList.Add("Toyota");
+        carList.Add("Tesla");
+        carList.Add("Audi");
+        carList.Add("Miata");
+
+        Console.WriteLine("\nArrayList before sort:");
+        PrintArrayList(carList);
+
+        carList.Sort();
+        Console.WriteLine("\nArrayList after sort:");
+        PrintArrayList(carList);
+
+        Console.Write("\nThats the end! thank you!");
     }
-    
+
+    private static void PrintArrayList(ArrayList list)
+    {
+        foreach (var item in list)
+        {
+            Console.WriteLine(">> " + item);
+        }
+    }
 }
