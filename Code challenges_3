@@ -1,0 +1,84 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt user to select an arithmetic operation
+        Console.WriteLine("Select an arithmetic operation:");
+        Console.WriteLine("1. Addition");
+        Console.WriteLine("2. Subtraction");
+        Console.WriteLine("3. Multiplication");
+        Console.WriteLine("4. Division");
+
+        // Read user's choice
+        int choice = Convert.ToInt32(Console.ReadLine());
+
+        // Perform selected arithmetic operation
+        switch (choice)
+        {
+            case 1:
+                Addition();
+                break;
+            case 2:
+                Subtraction();
+                break;
+            case 3:
+                Multiplication();
+                break;
+            case 4:
+                Division();
+                break;
+            default:
+                Console.WriteLine("Invalid choice.");
+                break;
+        }
+    }
+
+    // perform addition
+    static void Addition()
+    {
+        Console.WriteLine("Enter two numbers to add:");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+        double num2 = Convert.ToDouble(Console.ReadLine());
+        double result = num1 + num2;
+        Console.WriteLine($"Result: {result}");
+    }
+
+    // perform subtraction
+    static void Subtraction()
+    {
+        Console.WriteLine("Enter two numbers to subtract:");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+        double num2 = Convert.ToDouble(Console.ReadLine());
+        double result = num1 - num2;
+        Console.WriteLine($"Result: {result}");
+    }
+
+    // perform multiplication
+    static void Multiplication()
+    {
+        Console.WriteLine("Enter two numbers to multiply:");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+        double num2 = Convert.ToDouble(Console.ReadLine());
+        double result = num1 * num2;
+        Console.WriteLine($"Result: {result}");
+    }
+
+    //  perform division
+    static void Division()
+    {
+        Console.WriteLine("Enter two numbers to divide:");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+        double num2 = Convert.ToDouble(Console.ReadLine());
+        if (num2 != 0)
+        {
+            double result = num1 / num2;
+            Console.WriteLine($"Result: {result}");
+        }
+        else
+        {
+            Console.WriteLine("Cannot divide by zero.");
+        }
+    }
+}
