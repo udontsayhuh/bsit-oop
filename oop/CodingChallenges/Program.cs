@@ -18,13 +18,15 @@ namespace oop.CodingChallenges
             //CodingChallenge2 wordCount = new CodingChallenge2();
             //wordCount.CountWord();
             // Coding Challenge 3
-            CodingChallenge3 calc = new CodingChallenge3();
-            calc.CalculatorResult();
+            //CodingChallenge3 c3 = new CodingChallenge3();
+            //calc.CalculatorResult();
             // Coding Challenge 4
             // CodingChallenge4 c4 = new CodingChallenge4();
             // c4.MultiplicationTableResult();
 
             // Coding Challenge 5
+            CodingChallenge5 c5 = new CodingChallenge5();
+            c5.Vehicle();
 
         }
     }
