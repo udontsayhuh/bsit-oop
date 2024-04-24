@@ -1,0 +1,29 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt the user and get inputs
+        Console.WriteLine("Enter two integers:");
+        int int1 = int.Parse(Console.ReadLine());
+        int int2 = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter two doubles:");
+        double double1 = double.Parse(Console.ReadLine());
+        double double2 = double.Parse(Console.ReadLine());
+
+        // Compute the sums
+        int intSum = int1 + int2;
+        double doubleSum = double1 + double2;
+
+        // Compute the product of the sums
+        double product = intSum * doubleSum;
+
+        // Display the results
+        Console.WriteLine("Sum of integers: " + intSum);
+        Console.WriteLine("Sum of doubles: " + doubleSum);
+        Console.WriteLine("Product of the sums: " + product);
+    }
+}
+
