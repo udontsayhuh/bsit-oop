@@ -11,18 +11,21 @@ namespace oop.CodingChallenges
         static void Main(string[] args)
         {
             // Coding Challenge 1
-            //Sums cc = new Sums();
-            //cc.SumResult();
+            // Sums sums = new Sums();
+            // sums.SumResult();
 
             // Coding Challenge 2
 
             // Coding Challenge 3
-            //CodingChallenge3 calc = new CodingChallenge3();
-            //calc.CalculatorResult();
+            CodingChallenge3 calc = new CodingChallenge3();
+            calc.CalculatorResult();
 
             // Coding Challenge 4
-            CodingChallenge4 c4 = new CodingChallenge4();
-            c4.MultiplicationTableResult();
+            // CodingChallenge4 c4 = new CodingChallenge4();
+            // c4.MultiplicationTableResult();
+
+            // Coding Challenge 5
+
         }
     }
 }

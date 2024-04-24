@@ -15,7 +15,6 @@ namespace oop.CodingChallenges
         public double dnum1 { get; set; }
         public double dnum2 { get; set; }
         
-
         public void SumIntegers()
         {
             Console.Write("\nEnter your first integer: ");
@@ -30,5 +29,6 @@ namespace oop.CodingChallenges
             Console.Write("Enter your second double (ex: 12.98): ");
             dnum2 = double.Parse(Console.ReadLine());
         }
+
     }
 }
