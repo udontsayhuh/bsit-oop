@@ -3,9 +3,9 @@
 
 namespace CodingChallenges
 {
-    class SumOfIntegerDouble
+    
+    class SumOfIntegerDouble     // for coding challenges # 1
     {
-
         public int Add(int x, int y)
         {
             return x + y;
@@ -17,7 +17,7 @@ namespace CodingChallenges
         }
 
     }
-    class StringCounter
+    class StringCounter        // for coding challenges # 2
     {
         public int WordCounter(string str)
         {
@@ -33,7 +33,7 @@ namespace CodingChallenges
         }
     }
 
-    class ArithmeticMethods
+    class ArithmeticMethods        // for coding challenges # 3
     {
         // Method for addition 
         public double Add(double x, double y)
@@ -63,7 +63,7 @@ namespace CodingChallenges
             return x / y;
         }
     }
-    class MultiplicationTable
+    class MultiplicationTable    // for coding challenges # 4
     {
         public void CreateTable(int x, int y) // x is multiplier, y is multiplied
         {
@@ -75,7 +75,7 @@ namespace CodingChallenges
         }
     }
 
-    class DisplaySortedList
+    class DisplaySortedList        // for coding challenges # 5
     {
         public void displayCars()
         {
@@ -324,13 +324,8 @@ namespace CodingChallenges
                         break;
                 }
             }
-
-            }
         }
-    
-
-
-
+    }
 }
 
 
