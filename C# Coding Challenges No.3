@@ -1,0 +1,47 @@
+using System;
+
+namespace Arithmethic
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                Console.WriteLine("Select an arithmetic function: \n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division");
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Enter two numbers:");
+                double num1 = Convert.ToDouble(Console.ReadLine());
+                double num2 = Convert.ToDouble(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Result: " + (num1 + num2));
+                        break;
+                    case 2:
+                        Console.WriteLine("Result: " + (num1 - num2));
+                        break;
+                    case 3:
+                        Console.WriteLine("Result: " + (num1 * num2));
+                        break;
+                    case 4:
+                        if (num2 == 0)
+                            Console.WriteLine("Error: Division by zero is not allowed.");
+                        else
+                            Console.WriteLine("Result: " + (num1 / num2));
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection.");
+                        break;
+                }
+
+                Console.WriteLine("Do you want to perform another action? (yes/no)");
+                string repeat = Console.ReadLine().ToLower();
+                if (repeat != "yes")
+                    break;
+            }
+        }
+    }
+}
