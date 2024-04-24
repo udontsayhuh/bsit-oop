@@ -8,8 +8,22 @@ namespace CodingChallenges
 {
     class Sum
     {
-        public void InputNumbers(string[] args)
+
+        // a method that will display the header
+        public void Header()
         {
+            Console.Clear(); // will clear the console window
+
+            Console.WriteLine("-------------------------------------------------------------");
+            Console.WriteLine(" Sum of Integers and Doubles");
+            Console.WriteLine("-------------------------------------------------------------\n");
+        }
+
+        
+        public void InputNumbers()
+        {
+            Header();
+            
             while (true)
             {
                 try
