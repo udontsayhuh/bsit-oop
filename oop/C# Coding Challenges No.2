@@ -1,0 +1,19 @@
+using System;
+
+namespace wordc
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a string:");
+            string input = Console.ReadLine();
+
+            string[] words = input.Split(' ');
+            int wordCount = words.Length;
+
+            Console.WriteLine("Number of words in the string: " + wordCount);
+            Console.WriteLine("The string in uppercase: " + input.ToUpper());
+        }
+    }
+}
