@@ -1,0 +1,21 @@
+using System;
+using System.Linq;
+ class Program4
+{         
+  static void Main (string[] args)    
+  {
+        
+    Console.WriteLine("Enter a number to be multiplied:");
+        int num1 = int.Parse( Console.ReadLine());
+    
+    Console.WriteLine("Enter a number to be a multiplier:");
+        int multiplier = int.Parse( Console.ReadLine());
+            
+        for (int i = 0; i <= multiplier; i++)
+{
+    Console.WriteLine($"{num1} x {i} = {num1*i}");
+}
+	    
+  } 
+}
+
