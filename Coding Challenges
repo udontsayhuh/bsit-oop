@@ -50,3 +50,40 @@ class Program
     }
 }
 
+
+CC #2
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt the user to input a string
+        Console.WriteLine("Please enter a string:"); // Prompt the user to input a string
+        string input = Console.ReadLine(); // Store the user's input in a variable
+
+        // Count the number of words in the string
+        int wordCount = CountWords(input); // Call the CountWords method to count the number of words in the input string
+
+        // Print the number of words
+        Console.WriteLine("Number of words in the string: " + wordCount); // Display the number of words in the string to the user
+
+        // Convert the string to uppercase
+        string uppercaseString = input.ToUpper(); // Convert the input string to uppercase
+
+        // Print the string in uppercase
+        Console.WriteLine("Uppercase string: " + uppercaseString); // Display the uppercase string to the user
+    }
+
+    // Method to count the number of words in a string
+    static int CountWords(string str)
+    {
+        // Split the string into words based on whitespace characters
+        string[] words = str.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        
+        // Return the number of words in the string
+        return words.Length; // Return the length of the array, which represents the number of words
+    }
+}
+
