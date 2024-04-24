@@ -1,0 +1,251 @@
+#Coding Challenge1
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Get inputs from the user
+        Console.WriteLine("Enter first integer:");
+        int int1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter second integer:");
+        int int2 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter first double:");
+        double double1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Enter second double:");
+        double double2 = Convert.ToDouble(Console.ReadLine());
+
+        // Compute sum of integers and doubles separately
+        int intSum = Sum(int1, int2);
+        double doubleSum = Sum(double1, double2);
+
+        // Display the sums
+        Console.WriteLine($"Sum of integers: {intSum}");
+        Console.WriteLine($"Sum of doubles: {doubleSum}");
+
+        // Compute product of the sums
+        double product = intSum * doubleSum;
+
+        // Display the product
+        Console.WriteLine($"Product of the sums: {product}");
+    }
+
+    // Method to compute sum of two integers
+    static int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    // Method to compute sum of two doubles
+    static double Sum(double a, double b)
+    {
+        return a + b;
+    }
+}
+
+
+#Coding Challenge2
+
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Get input from the user
+        Console.WriteLine("Enter a string:");
+        string input = Console.ReadLine();
+
+        // Count number of words
+        int wordCount = CountWords(input);
+
+        // Convert the string to uppercase
+        string upperCaseString = input.ToUpper();
+
+        // Display the original string in uppercase and the word count
+        Console.WriteLine($"Original string in uppercase: {upperCaseString}");
+        Console.WriteLine($"Number of words: {wordCount}");
+    }
+
+    // Method to count number of words in a string
+    static int CountWords(string str)
+    {
+        // Split the string by spaces
+        string[] words = str.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        
+        // Return the number of words
+        return words.Length;
+    }
+}
+
+#Coding Challenge3
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool continueProgram = true;
+
+        while (continueProgram)
+        {
+            Console.WriteLine("Select an arithmetic operation:");
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+
+            // Get user's choice
+            Console.Write("Enter your choice (1-4): ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            // Get two numbers from user
+            Console.Write("Enter first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            double result = 0;
+
+            // Perform arithmetic operation based on choice
+            switch (choice)
+            {
+                case 1: // Addition
+                    result = Add(num1, num2);
+                    break;
+                case 2: // Subtraction
+                    result = Subtract(num1, num2);
+                    break;
+                case 3: // Multiplication
+                    result = Multiply(num1, num2);
+                    break;
+                case 4: // Division
+                    if (num2 != 0)
+                    {
+                        result = Divide(num1, num2);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: Division by zero.");
+                        continue;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    continue;
+            }
+
+            // Print result
+            Console.WriteLine($"Result: {result}");
+
+            // Ask user if they want to continue
+            Console.Write("Do you want to perform another action? (yes/no): ");
+            string continueChoice = Console.ReadLine().ToLower();
+
+            if (continueChoice != "yes")
+            {
+                continueProgram = false;
+            }
+        }
+
+        Console.WriteLine("Program terminated.");
+    }
+
+    // Method to perform addition
+    static double Add(double a, double b)
+    {
+        return a + b;
+    }
+
+    // Method to perform subtraction
+    static double Subtract(double a, double b)
+    {
+        return a - b;
+    }
+
+    // Method to perform multiplication
+    static double Multiply(double a, double b)
+    {
+        return a * b;
+    }
+
+    // Method to perform division
+    static double Divide(double a, double b)
+    {
+        return a / b;
+    }
+}
+
+#Coding Challenge4
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the number to be multiplied: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Enter the multiplier: ");
+        int multiplier = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine($"Multiplication table for {number} up to {multiplier}:");
+        
+        for (int i = 1; i <= multiplier; i++)
+        {
+            int result = number * i;
+            Console.WriteLine($"{number} x {i} = {result}");
+        }
+    }
+}
+
+#Coding Challenge5
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create a List to store cars
+        List<string> cars = new List<string>();
+
+        // Add 5 cars to the list
+        cars.Add("Toyota");
+        cars.Add("Honda");
+        cars.Add("Ford");
+        cars.Add("BMW");
+        cars.Add("Chevrolet");
+
+        Console.WriteLine("List of cars:");
+
+        // Display the original list of cars
+        DisplayCars(cars);
+
+        // Sort the list
+        cars.Sort();
+
+        Console.WriteLine("\nSorted list of cars:");
+
+        // Display the sorted list of cars
+        DisplayCars(cars);
+    }
+
+    // Method to display the list of cars
+    static void DisplayCars(List<string> cars)
+    {
+        foreach (var car in cars)
+        {
+            Console.WriteLine(car);
+        }
+    }
+}
