@@ -4,7 +4,7 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine("Adding an Integer");//Adding a two integer
+        Console.WriteLine("Adding Integers");
         
         Console.WriteLine("Enter the first integer:");
         int num1 = Convert.ToInt32(Console.ReadLine());
@@ -16,7 +16,7 @@ class Program
         
         Console.WriteLine("The sum of " + num1 + " + " + num2 + " is: " + sumInt);
         
-        Console.WriteLine("\nAdding a Double");//Adding a two double number
+        Console.WriteLine("\nAdding Doubles");
         
         Console.WriteLine("Enter the first double:");
         double num3 = Convert.ToDouble(Console.ReadLine());
@@ -28,7 +28,7 @@ class Program
 
         Console.WriteLine("The sum of " + num3 + " + " + num4 + " is: " + sumDouble);
         
-        double product = sumInt * sumDouble;
-        Console.WriteLine("\nThe product of " + sumInt + " + " + sumDouble + " is: " + product);//Product of the sum of the double and integer
+        double product = (double)sumInt * sumDouble; // Cast sumInt to double before multiplication
+        Console.WriteLine("\nThe product of " + sumInt + " + " + sumDouble + " is: " + product);
     }
 }
