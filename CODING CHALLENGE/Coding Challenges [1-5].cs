@@ -154,47 +154,58 @@ class Program
 
     static void Calculator()
     {
-        Console.Clear();
-        Console.WriteLine("BASIC CALCULATOR \n");
-        Console.WriteLine("1. Addition");
-        Console.WriteLine("2. Subtraction");
-        Console.WriteLine("3. Multiplication");
-        Console.WriteLine("4. Division");
-        Console.Write("\nPlease choose an arithmetic operation (1-4): ");
-        int operation = int.Parse(Console.ReadLine());
+		do
+		{
+			Console.Clear();
+			Console.WriteLine("BASIC CALCULATOR \n");
+			Console.WriteLine("1. Addition");
+			Console.WriteLine("2. Subtraction");
+			Console.WriteLine("3. Multiplication");
+			Console.WriteLine("4. Division");
+			Console.Write("\nPlease choose an arithmetic operation (1-4): ");
+			int operation = int.Parse(Console.ReadLine());
 
-        Console.Write("Enter first number: ");
-        double num1 = double.Parse(Console.ReadLine());
-        Console.Write("Enter second number: ");
-        double num2 = double.Parse(Console.ReadLine());
+			Console.Write("Enter first number: ");
+			double num1 = double.Parse(Console.ReadLine());
+			Console.Write("Enter second number: ");
+			double num2 = double.Parse(Console.ReadLine());
 
-        double result = 0;
-        switch (operation)
-        {
-            case 1:
-                result = num1 + num2;
-                break;
-            case 2:
-                result = num1 - num2;
-                break;
-            case 3:
-                result = num1 * num2;
-                break;
-            case 4:
-                result = num1 / num2;
-                break;
-            default:
-                Console.WriteLine("Is that even an operation?!");
-                return;
-        }
+			double result = 0;
+			switch (operation)
+			{
+				case 1:
+					result = num1 + num2;
+					break;
+				case 2:
+					result = num1 - num2;
+					break;
+				case 3:
+					result = num1 * num2;
+					break;
+				case 4:
+					if (num2 != 0)
+						result = num1 / num2;
+					else
+					{
+						Console.WriteLine("CANNOT divide by zero!");
+						return;
+					}
+					break;
+				default:
+					Console.WriteLine("Is that even an operation?! Try again!");
+					return;
+			}
 
-        Console.WriteLine($"Result: {result}");
+			Console.WriteLine($"Result: {result}");
 
-        Console.Write("Any other calculations? (Y/N): ");
-        string choice = Console.ReadLine().ToUpper();
-        if (choice != "Y")
-            return;
-    }
+			Console.Write("\nAny other calculations? (Y/N): ");
+			string choice = Console.ReadLine().ToUpper();
+			if (choice != "Y")
+				break; // Exit loop if not 'Y'!
+			
+		} while (true); //Loop until you no longer want to perform another calcu by pressing 'N'.
+	}
+
 
     /*------------------------------ITEM NUMBER 4------------------------------*/
 
