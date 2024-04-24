@@ -1,0 +1,183 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int choice;
+        do
+        {
+            DisplayMenu();
+            choice = GetUserChoice(1, 6);
+            switch (choice)
+            {
+                case 1:
+                    ComputeSumAndProduct();
+                    break;
+                case 2:
+                    CountWordsAndConvertToUpper();
+                    break;
+                case 3:
+                    BasicArithmeticOperations();
+                    break;
+                case 4:
+                    MultiplicationTable();
+                    break;
+                case 5:
+                    SortCars();
+                    break;
+                case 6:
+                    Console.WriteLine("Exiting...");
+                    break;
+            }
+        } while (choice != 6);
+    }
+
+    static void DisplayMenu()
+    {
+        Console.WriteLine("\nMenu:");
+        Console.WriteLine("1. Compute Sum and Product");
+        Console.WriteLine("2. Count Words and Convert to Uppercase");
+        Console.WriteLine("3. Basic Arithmetic Operations");
+        Console.WriteLine("4. Multiplication Table");
+        Console.WriteLine("5. Sort Cars");
+        Console.WriteLine("6. Exit");
+    }
+
+    static int GetUserChoice(int min, int max)
+    {
+        int choice;
+        bool isValidChoice;
+        do
+        {
+            Console.Write("Enter your choice: ");
+            isValidChoice = int.TryParse(Console.ReadLine(), out choice);
+            if (!isValidChoice || choice < min || choice > max)
+            {
+                Console.WriteLine($"Please enter a number between {min} and {max}.");
+                isValidChoice = false;
+            }
+        } while (!isValidChoice);
+        return choice;
+    }
+
+    static void ComputeSumAndProduct()
+    {
+        Console.WriteLine("\nCompute Sum and Product:");
+        int int1 = GetIntegerInput("Enter first integer: ");
+        int int2 = GetIntegerInput("Enter second integer: ");
+        double double1 = GetDoubleInput("Enter first double: ");
+        double double2 = GetDoubleInput("Enter second double: ");
+
+        int sumIntegers = int1 + int2;
+        double sumDoubles = double1 + double2;
+
+        Console.WriteLine($"Sum of integers: {sumIntegers}");
+        Console.WriteLine($"Sum of doubles: {sumDoubles}");
+
+        double product = sumIntegers * sumDoubles;
+        Console.WriteLine($"Product of sums: {product}");
+    }
+
+    static void CountWordsAndConvertToUpper()
+    {
+        Console.WriteLine("\nCount Words and Convert to Uppercase:");
+        Console.Write("Enter a string: ");
+        string input = Console.ReadLine();
+
+        int wordCount = input.Split(new char[] { ' ', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries).Length;
+        Console.WriteLine($"Number of words: {wordCount}");
+
+        string upperCaseString = input.ToUpper();
+        Console.WriteLine($"Uppercase string: {upperCaseString}");
+    }
+
+    static void BasicArithmeticOperations()
+    {
+        Console.WriteLine("\nBasic Arithmetic Operations:");
+        Console.WriteLine("Choose an operation:");
+        Console.WriteLine("1. Addition");
+        Console.WriteLine("2. Subtraction");
+        Console.WriteLine("3. Multiplication");
+        Console.WriteLine("4. Division");
+        int operationChoice = GetUserChoice(1, 4);
+
+        double num1 = GetDoubleInput("Enter first number: ");
+        double num2 = GetDoubleInput("Enter second number: ");
+        double result = 0;
+
+        switch (operationChoice)
+        {
+            case 1:
+                result = num1 + num2;
+                break;
+            case 2:
+                result = num1 - num2;
+                break;
+            case 3:
+                result = num1 * num2;
+                break;
+            case 4:
+                if (num2 != 0)
+                    result = num1 / num2;
+                else
+                    Console.WriteLine("Cannot divide by zero.");
+                break;
+        }
+
+        Console.WriteLine($"Result: {result}");
+    }
+
+    static void MultiplicationTable()
+    {
+        Console.WriteLine("\nMultiplication Table:");
+        int number = GetIntegerInput("Enter the number to be multiplied: ");
+        int multiplier = GetIntegerInput("Enter the multiplier: ");
+
+        Console.WriteLine($"Multiplication table for {number} up to {multiplier}:");
+        for (int i = 1; i <= multiplier; i++)
+        {
+            Console.WriteLine($"{number} x {i} = {number * i}");
+        }
+    }
+
+    static void SortCars()
+    {
+        List<string> cars = new List<string> { "Toyota", "Honda", "BMW", "Ford", "Chevrolet" };
+        cars.Sort();
+        Console.WriteLine("\nSorted list of cars:");
+        foreach (var car in cars)
+        {
+            Console.WriteLine(car);
+        }
+    }
+
+    static int GetIntegerInput(string message)
+    {
+        int value;
+        bool isValidInput;
+        do
+        {
+            Console.Write(message);
+            isValidInput = int.TryParse(Console.ReadLine(), out value);
+            if (!isValidInput)
+                Console.WriteLine("Invalid input. Please enter an integer.");
+        } while (!isValidInput);
+        return value;
+    }
+
+    static double GetDoubleInput(string message)
+    {
+        double value;
+        bool isValidInput;
+        do
+        {
+            Console.Write(message);
+            isValidInput = double.TryParse(Console.ReadLine(), out value);
+            if (!isValidInput)
+                Console.WriteLine("Invalid input. Please enter a number.");
+        } while (!isValidInput);
+        return value;
+    }
+}
