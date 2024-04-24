@@ -1,0 +1,84 @@
+using System;
+class Program3
+{
+	static void Main(string[] args)
+	{
+		
+		
+		choice:
+			Console.WriteLine("Enter operator(+,-,*,/) :");
+			string choice = Console.ReadLine();
+
+
+			if (choice != "+" && choice != "-" && choice != "*" && choice != "/")
+			{
+				Console.WriteLine("Invalid input.");
+				goto choice;
+			}
+
+			Console.WriteLine("Enter a number:");
+			float FirstNumber = float.Parse(Console.ReadLine());
+
+
+
+			Console.WriteLine("Enter another number:");
+			float SecondNumber = float.Parse(Console.ReadLine());
+
+
+
+			// switch case for the operators
+			switch (choice)
+			{
+				case "+":
+					FirstNumber = FirstNumber + SecondNumber;
+					
+					break;
+				case "-":
+					FirstNumber = FirstNumber - SecondNumber;
+				
+					break;
+				case "*":
+					FirstNumber = FirstNumber * SecondNumber;
+					
+					break;
+				case "/":
+					FirstNumber = FirstNumber / SecondNumber;
+					
+					break;
+				default:
+					Console.WriteLine("Invalid input.");
+					goto choice;
+			}
+
+
+
+			Console.WriteLine($"The answer is: {FirstNumber}");
+
+
+
+		// Another goto to perform mini loop
+		yesNo:
+			Console.WriteLine("\nDo you want to try again?(Y/N): ");
+			string yesNo = Console.ReadLine();
+
+			//Checks if the user wanted to try again
+			if (yesNo != "N" && yesNo != "n" && yesNo != "y" && yesNo != "Y")
+			{
+				Console.WriteLine("Invalid input, Please try again...");
+				goto yesNo;
+			}
+			
+			else if (yesNo== "Y"|| yesNo == "y")
+            {
+                goto choice;
+            }
+			else if (yesNo == "N" || yesNo == "n")
+			{
+				Console.WriteLine("Thanks for using my program!");
+				Environment.Exit(0);
+			}
+
+		
+
+	}
+}
