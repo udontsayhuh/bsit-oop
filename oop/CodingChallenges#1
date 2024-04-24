@@ -1,1 +1,60 @@
+using System;
+
+class Calculator
+{
+    public int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    public double Sum(double a, double b)
+
+    {
+        return a + b;
+    }
+
+    public double Product(int sum1, double sum2)
+        
+    { 
+        return sum1* sum2; 
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var calculator = new Calculator();
+
+        var int1 = ReadInteger("Enter the first integer: ");
+        var int2 = ReadInteger("Enter the second integer: ");
+
+        var double1 = ReadDouble("Enter the first double: ");
+        var double2 = ReadDouble("Enter the second double: ");
+
+        PrintResult("Sum of integers: ", calculator.Sum(int1, int2));
+        PrintResult("Sum of doubles: ", calculator.Sum(double1, double2));
+        PrintResult("Product of the sums: ", calculator.Product(calculator.Sum(int1, int2), calculator.Sum(double1, double2)));
+    }
+
+    static int ReadInteger(string prompt)
+    {
+        Console.Write(prompt);
+        return Convert.ToInt32(Console.ReadLine());
+    }
+
+    static double ReadDouble(string prompt)
+    {
+        Console.Write(prompt);
+        return Convert.ToDouble(Console.ReadLine());
+    }
+
+    static void PrintResult(string message, double result)
+    {
+        Console.WriteLine($"{message}{result}");
+    }
+}
+
+// Licay, Mark loyd M. BSIT 2-1
+//To reduce redundancy and improve readability, I used "var" keyword for variable declaration.
 
