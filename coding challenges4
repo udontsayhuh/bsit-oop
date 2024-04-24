@@ -1,0 +1,23 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Prompt the user to enter the base number
+        Console.Write("Enter the base number: ");
+        int baseNumber = int.Parse(Console.ReadLine());
+
+        // Prompt the user to enter the multiplier
+        Console.Write("Enter the multiplier: ");
+        int multiplier = int.Parse(Console.ReadLine());
+
+        // Print the multiplication table of the base number up to the multiplier
+        Console.WriteLine($"\nMultiplication table of {baseNumber} up to {multiplier}:");
+        for (int i = 1; i <= multiplier; i++)
+        {
+            int product = baseNumber * i;
+            Console.WriteLine($"{baseNumber} x {i} = {product}");
+        }
+    }
+}
