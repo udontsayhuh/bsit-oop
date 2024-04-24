@@ -1,0 +1,22 @@
+using System;
+using System.Linq;
+ class Program2
+{         
+  static void Main (string[] args)    
+  {
+        
+    Console.WriteLine("Enter a string:");
+        string input = Console.ReadLine();
+        
+        
+	    int countingWords = input.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Length;
+        
+        Console.WriteLine($"The number of words in the input string is: {countingWords}");
+	    
+		
+		
+		Console.WriteLine($"You inputted {input=input.ToUpper()}");
+	    
+  } 
+}
+
