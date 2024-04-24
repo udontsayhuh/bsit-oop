@@ -1,0 +1,18 @@
+using System;
+
+public class MultiplicationTable
+{
+    public static void Main()
+    {
+        Console.WriteLine("Enter the number to be multiplied:");
+        int multiplier = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter the number to multiply up to:");
+        int maxMultiply = Convert.ToInt32(Console.ReadLine());
+
+        for (int i = 1; i <= maxMultiply; i++)
+        {
+            Console.WriteLine($"{multiplier} * {i} = {multiplier * i}");
+        }
+    }
+}
