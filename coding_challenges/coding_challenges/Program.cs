@@ -1,17 +1,11 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
+
 
 namespace CodingChallenges
 {
     class SumOfIntegerDouble
     {
 
-        //static void int ConvertToDouble()
-        //{
-
-       // }
         public int Add(int x, int y)
         {
             return x + y;
