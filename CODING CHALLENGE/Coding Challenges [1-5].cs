@@ -139,7 +139,7 @@ class Program
     static void WordCounter()
     {
         Console.Clear();
-        Console.WriteLine("Word Counter");
+        Console.WriteLine("WORD COUNTER!\n");
         Console.Write("Enter your sentence here: \n");
         string input = Console.ReadLine();
 
@@ -187,7 +187,7 @@ class Program
                         result = num1 / num2;
                     else
                     {
-                        Console.WriteLine("CANNOT divide by zero.");
+                        Console.WriteLine("CANNOT divide by zero!");
                         return;
                     }
                     break;
