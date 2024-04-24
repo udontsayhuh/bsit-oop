@@ -32,6 +32,8 @@ namespace CodingChallenges
                 switch (option)
                 {
                     case "1":
+                        Sum sum = new Sum();
+                        sum.InputNumbers();
                         TryAgain();
                         break;
                     case "2":
@@ -66,7 +68,7 @@ namespace CodingChallenges
         {
             while (true)
             {
-                Console.Write("\nReturn to main menu? (yes/no): ");
+                Console.Write("\nReturn to main menu? ('yes' to continue/'no' to exit): ");
                 string choice = Console.ReadLine().ToLower();
 
                 if (choice == "yes")
