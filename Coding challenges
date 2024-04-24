@@ -1,0 +1,152 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.WriteLine("Please Select a program to run:");
+            Console.WriteLine("1. Compute the sums and product");
+            Console.WriteLine("2. Count the words and print into uppercase");
+            Console.WriteLine("3. Basic arithmetic functions");
+            Console.WriteLine("4. Multiplication tables");
+            Console.WriteLine("5. Sort a list of cars");
+            Console.WriteLine("6. Exit");
+
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    ComputeSumsAndProduct();
+                    break;
+                case 2:
+                    CountWordsAndPrintUppercase();
+                    break;
+                case 3:
+                    BasicArithmeticFunctions();
+                    break;
+                case 4:
+                    MultiplicationTable();
+                    break;
+                case 5:
+                    SortListOfCars();
+                    break;
+                case 6:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    break;
+            }
+        }
+    }
+
+    static void ComputeSumsAndProduct()
+    {
+        int int1, int2;
+        double double1, double2;
+
+        Console.WriteLine("Please Enter two integers:");
+        int1 = Convert.ToInt32(Console.ReadLine());
+        int2 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Please Enter two doubles:");
+        double1 = Convert.ToDouble(Console.ReadLine());
+        double2 = Convert.ToDouble(Console.ReadLine());
+
+        int sumIntegers = int1 + int2;
+        double sumDoubles = double1 + double2;
+
+        Console.WriteLine($"Sum of integers: {sumIntegers}");
+        Console.WriteLine($"Sum of doubles: {sumDoubles.ToString("0.0")}"); 
+
+        double product = sumIntegers * sumDoubles;
+        Console.WriteLine($"Product of the sums: {product.ToString("0.0")}"); 
+    }
+
+    static void CountWordsAndPrintUppercase()
+    {
+        Console.WriteLine("Please Enter a string:");
+        string input = Console.ReadLine();
+
+        int wordCount = input.Split(new char[] { ' ', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries).Length;
+
+        Console.WriteLine($"Number of words: {wordCount}");
+        Console.WriteLine($"Uppercase string: {input.ToUpper()}");
+    }
+
+    static void BasicArithmeticFunctions()
+    {
+        while (true)
+        {
+            Console.WriteLine("Please Select an basic arithmetic function:");
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+            Console.WriteLine("5. Back to Select a program to run");
+
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            if (choice == 5)
+                break;
+
+            Console.WriteLine("Please Enter two numbers:");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine($"Result: {num1 + num2}");
+                    break;
+                case 2:
+                    Console.WriteLine($"Result: {num1 - num2}");
+                    break;
+                case 3:
+                    Console.WriteLine($"Result: {num1 * num2}");
+                    break;
+                case 4:
+                    if (num2 != 0)
+                        Console.WriteLine($"Result: {num1 / num2}");
+                    else
+                        Console.WriteLine("Cannot divide by zero.");
+                    break;
+                default:
+                    Console.WriteLine("Choice invalid.");
+                    break;
+            }
+        }
+    }
+
+    static void MultiplicationTable()
+    {
+        Console.WriteLine("Please Enter the number to be multiplied:");
+        int number = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter the number of multiplier:");
+        int multiplier = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine($"Multiplication table for {number}:");
+
+        for (int i = 1; i <= multiplier; i++)
+        {
+            Console.WriteLine($"{number} x {i} = {number * i}");
+        }
+    }
+
+    static void SortListOfCars()
+    {
+        List<string> cars = new List<string> { "Toyota", "Honda", "Chevrolet", "Ford Mustang", "BMW X5" };
+
+        cars.Sort();
+
+        Console.WriteLine("Sorted list of cars:");
+        foreach (string car in cars)
+        {
+            Console.WriteLine(car);
+        }
+    }
+}
