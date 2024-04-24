@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+
+public class CarListSorter
+{
+    public static void Main()
+    {
+        List<string> cars = new List<string>() { "Toyota", "Honda", "Ford", "BMW", "Tesla" };
+
+        cars.Sort();
+
+        Console.WriteLine("Sorted list of cars:");
+        foreach (var car in cars)
+        {
+            Console.WriteLine(car);
+        }
+    }
+}
