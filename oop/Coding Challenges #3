@@ -1,0 +1,51 @@
+using System;
+
+public class ArithmeticCalculator
+{
+    public static void Main()
+    {
+        bool continueCalculating = true;
+        while (continueCalculating)
+        {
+            Console.WriteLine("Choose an operation (Addition, Subtraction, Multiplication, Division):");
+            string operation = Console.ReadLine();
+
+            Console.WriteLine("Enter the first number:");
+            double number1 = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Enter the second number:");
+            double number2 = Convert.ToDouble(Console.ReadLine());
+
+            double result = 0;
+
+            switch (operation.ToLower())
+            {
+                case "addition":
+                    result = number1 + number2;
+                    break;
+                case "subtraction":
+                    result = number1 - number2;
+                    break;
+                case "multiplication":
+                    result = number1 * number2;
+                    break;
+                case "division":
+                    if (number2 != 0)
+                        result = number1 / number2;
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero.");
+                        continue;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid operation.");
+                    continue;
+            }
+
+            Console.WriteLine($"The result is: {result}");
+            Console.WriteLine("Do you want to perform another operation? (yes/no)");
+            continueCalculating = Console.ReadLine().ToLower() == "yes";
+        }
+    }
+}
