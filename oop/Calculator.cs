@@ -1,16 +1,10 @@
-﻿/*
-Calculator 3rd Version
-Updates:
-    - Calculate() method was optimized by changing the logic for calculation
-    - DisplayResult() method was modified as well.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 
 // Implementation of abstraction
-// Methods below are declared as abstract as they will be overriden by the subclass Calculator
-public abstract class Operations {
+// For me, putting all the methods in an abstract class help me identify the methods used inside the program
+abstract class Operations {
     public abstract void DisplayOperations();
     public abstract void GetUserInput();
     public abstract void Calculate(List<double> numbers, List<char> operators);   
@@ -21,7 +15,7 @@ public abstract class Operations {
     public abstract void ThankYou();
 }
 
-public class Calculator : Operations {
+class Calculator : Operations {
     // Lists declared as private to encapsulate them within the Calculator class
     // They are not directly accessible within other classes
     private List<double> numbers = new List<double>();  // Create a list for numbers
@@ -77,7 +71,7 @@ public class Calculator : Operations {
             }
         }
 
-        // Get user inputs until '=' is entered
+        // Get subsequent inputs until '=' is entered
         char op;
         while (true)
         {
@@ -117,7 +111,6 @@ public class Calculator : Operations {
     }
 
     // Method for calculations
-    // The logic for calculation is optimized
     public override void Calculate(List<double> numbers, List<char> operators)
     {
         // Perform calculations based on the provided inputs
@@ -219,8 +212,8 @@ public class Calculator : Operations {
     }
 }
 
-public class CalculatorApp {
-    static void Main(string[] args) {
+class CalculatorApp {
+    public static void Main(string[] args) {
         while(true) {
             Calculator calculator = new Calculator();
             calculator.DisplayOperations();
