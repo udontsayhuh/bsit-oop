@@ -28,7 +28,7 @@ class CodingChallenges
 
         //Calculations & Results
         sumInt = inputInt_1 + inputInt_2;
-        Console.WriteLine("\n\n Interge Sum     : " + sumInt);
+        Console.WriteLine("\n\n Integer Sum     : " + sumInt);
         convertedSum = Convert.ToDouble(sumInt);
 
         sumDouble = inputDouble_1 + inputDouble_2;
