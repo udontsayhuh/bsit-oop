@@ -194,7 +194,8 @@ class CodingChallenges
 
         //Intro
         Console.WriteLine("\n     CHALLENGE V");
-
+        
+        //User Input
         Console.WriteLine("\n\n Enter 5 Cars");       
         ArrayList Cars = new ArrayList();
 
@@ -204,7 +205,8 @@ class CodingChallenges
             string inputCars = Console.ReadLine();
             Cars.Add(inputCars);
         }
-
+        
+        //Results
         Console.WriteLine("\n\n Cars:");
         PrintList(Cars);
 
@@ -223,7 +225,8 @@ class CodingChallenges
         Console.WriteLine("\n     All Challenges Finished");
         Console.WriteLine("           ~THE END~       ");
     }
-
+    
+    //Array Storage
     static void PrintList(ArrayList array)
     {
         foreach (var input in array)
