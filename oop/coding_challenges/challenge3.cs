@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace oop.coding_challenges
 {
-    internal class challenge3
+    internal class Challenge3
     {
         public double num, num2, result;
         public bool use_again, retry = true, retryOperation = true;

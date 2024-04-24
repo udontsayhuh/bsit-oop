@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace oop.coding_challenges
 {
-    internal class Challenge2
+    internal class Challenge5
     {
-        public string words;
-
-        public void WordCount()
-        {
-
-        }
     }
 }

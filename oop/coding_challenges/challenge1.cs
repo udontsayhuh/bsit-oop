@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace oop.coding_challenges
 {
-    internal class challenge1
+    internal class Challenge1
     {
         public int intnum, intnum2, intsum;
         public double doublenum, doublenum2, doublesum;
