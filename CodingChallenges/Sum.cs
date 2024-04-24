@@ -1,33 +1,31 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Coding_Challenges
+namespace CodingChallenges
 {
     class Sum
     {
-        double number1;
-        double number2;
-        int intSum;
-        double doubleSum;
-
-        public void UserInputNumbers()
+        public void InputNumbers(string[] args)
         {
             while (true)
             {
                 try
                 {
-                    Console.Write("Enter first number: ");
-                    number1 = Convert.ToDouble(Console.ReadLine());
-
+                    Console.Write("Enter two integers: ");
+                    int intFirstNum = Convert.ToInt32(Console.ReadLine());
+                    int intSecondNum = Convert.ToInt32(Console.ReadLine());
+                    
+                    // ask for double numbers
                     while (true)
                     {
                         try
                         {
-                            Console.WriteLine("Enter second number: ");
-                            number2 = Convert.ToDouble(Console.ReadLine());
+                            Console.WriteLine("Enter two decimal numbers: ");
+                            double doubleFirstNum = Convert.ToDouble(Console.ReadLine());
+                            double doubleSecondNum = Convert.ToDouble(Console.ReadLine());
                             
                             break;
                         }
@@ -37,6 +35,7 @@ namespace Coding_Challenges
                         }
 
                     }
+                    
                     break;
                 }
                 catch (FormatException)
@@ -45,30 +44,36 @@ namespace Coding_Challenges
                 }
                 
             }
+            
+            // calculate the sum of each data type
+            int sumOfIntegers = Sum(intFirstNum, intSecondNum);
+            double sumOfDoubles = Sum(doubleFirstNum, doubleSecondNum);
+            
+            // prints the Sums
+            Console.WriteLine("The sum of two integer: ", sumOfIntegers);
+            Console.WriteLine("The sum of two decimals: ", sumOfDoubles);
+            
+            // get the product of two sums
+            double product = Product(sumOfIntegers, sumOfDoubles);
+            // prints the product 
+            Console.WriteLine($"The product of {sumOfIntegers} and {sumOfDoubles} is ", product);
         }
 
-
-        // method to calculate the sum of integer numbers
-        public void CalculateSum(int num1, int num2)
+        // method to calculate the sum of two integers
+        public int Sum(int num1, int num2)
         {
-            intSum = num1 + num2;
-
-            Console.WriteLine("\nSum of two integers: ", sum);
+            return num1 + num2;
         }
-
-        // method to calculate the sum of double numbers
-        public void Calculate Sum(double num1, double num2)
+        
+        // method to calculate the sum of two doubles 
+        public double Sum(double num1, double num2);
         {
-            double sum = num1 + num2;
-
-            Console.WriteLine("\nSum of two double: ", sum);
+            return num1 + num2;
         }
-
-        public void CalculateProduct()
+        
+        public double Product(int sum1, double sum2)
         {
-            double product = intSum * doubleSum;
-
-            Console.WriteLine("\nProduct of the sums: ", product);
+            return sum1 * sum2;
         }
 
     }
