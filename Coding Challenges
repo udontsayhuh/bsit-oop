@@ -1,0 +1,335 @@
+//Coding Challenges
+// number 1
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int int1, int2;
+        double double1, double2;
+
+        while (true)
+        {
+            Console.Write("Enter the first integer: ");
+            if (int.TryParse(Console.ReadLine(), out int1))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT! Must be a number.");
+            }
+        }
+
+        while (true)
+        {
+            Console.Write("Enter the second integer: ");
+            if (int.TryParse(Console.ReadLine(), out int2))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT! Must be a number.");
+            }
+        }
+
+        while (true)
+        {
+            Console.Write("Enter the first double: ");
+            if (double.TryParse(Console.ReadLine(), out double1))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT! Must be a number.");
+            }
+        }
+
+        while (true)
+        {
+            Console.Write("Enter the second double: ");
+            if (double.TryParse(Console.ReadLine(), out double2))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT! Must be a number.");
+            }
+        }
+
+        int intSum = Sum(int1, int2);
+        Console.WriteLine();
+
+        Console.WriteLine("RESULT:");
+        Console.WriteLine($"Sum of integers: {intSum}");
+
+        double doubleSum = Sum(double1, double2);
+        Console.WriteLine($"Sum of doubles: {doubleSum}");
+
+        double product = intSum * doubleSum;
+        Console.WriteLine($"Product of the sums: {product}");
+    }
+
+    //formula
+    static int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    static double Sum(double a, double b)
+    {
+        return a + b;
+    }
+}
+
+
+//number 2
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter a string: ");
+        string inputString = Console.ReadLine();
+
+        int wordCount = CountWords(inputString);
+        Console.WriteLine($"Number of words: {wordCount}");
+
+        string upperCaseString = inputString.ToUpper();
+        Console.WriteLine($"Uppercase string: {upperCaseString}");
+    }
+
+    static int CountWords(string str)
+    {
+        string[] words = str.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        return words.Length;
+    }
+}
+
+
+//number 3
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool continueProgram = true;
+
+        while (continueProgram)
+        {
+            Console.Clear();
+
+            Console.WriteLine("Select an arithmetic operation:");
+            Console.WriteLine("a. Addition");
+            Console.WriteLine("b. Subtraction");
+            Console.WriteLine("c. Multiplication");
+            Console.WriteLine("d. Division");
+
+            char choice;
+            while (true)
+            {
+                Console.Write("Enter your choice (a, b, c, d): ");
+                choice = Console.ReadLine().ToLower()[0];
+
+                if (choice == 'a' || choice == 'b' || choice == 'c' || choice == 'd')
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("INVALID CHOICE! Select from the choices above only.");
+                }
+            }
+
+            Console.Clear();
+
+            double num1, num2;
+
+            while (true)
+            {
+                Console.Write("Enter the first integer: ");
+                if (double.TryParse(Console.ReadLine(), out num1))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("INVALID INPUT! Must be an integer.");
+                }
+            }
+
+            while (true)
+            {
+                Console.Write("Enter the second integer: ");
+                if (double.TryParse(Console.ReadLine(), out num2))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("INVALID INPUT! Must be an integer.");
+                }
+            }
+
+            Console.WriteLine();
+
+            double result = 0;
+
+            switch (choice)
+            {
+                case 'a':
+                    result = Add(num1, num2);
+                    Console.WriteLine($"Result: {result}");
+                    break;
+                case 'b':
+                    result = Subtract(num1, num2);
+                    Console.WriteLine($"Result: {result}");
+                    break;
+                case 'c':
+                    result = Multiply(num1, num2);
+                    Console.WriteLine($"Result: {result}");
+                    break;
+                case 'd':
+                    if (num2 != 0)
+                    {
+                        result = Divide(num1, num2);
+                        Console.WriteLine($"Result: {result}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cannot divide by zero.");
+                    }
+                    break;
+            }
+
+            while (true)
+            {
+                Console.Write("\nDo you want to perform another action? (yes/no): ");
+                string continueChoice = Console.ReadLine().ToLower();
+
+                if (continueChoice == "yes" || continueChoice == "no")
+                {
+                    continueProgram = continueChoice == "yes";
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("INVALID INPUT! Must be yes or no only.");
+                }
+            }
+
+            Console.Clear();
+        }
+    }
+
+    static double Add(double a, double b)
+    {
+        return a + b;
+    }
+
+    static double Subtract(double a, double b)
+    {
+        return a - b;
+    }
+
+    static double Multiply(double a, double b)
+    {
+        return a * b;
+    }
+
+    static double Divide(double a, double b)
+    {
+        return a / b;
+    }
+}
+
+
+//number 4
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int number, multiplier;
+
+        while (true)
+        {
+            Console.Write("Enter the number to be multiplied: ");
+            if (int.TryParse(Console.ReadLine(), out number))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT! Must be an integer.");
+            }
+        }
+
+        while (true)
+        {
+            Console.Write("Enter the multiplier: ");
+            if (int.TryParse(Console.ReadLine(), out multiplier))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT! Must be an integer.");
+            }
+        }
+
+        Console.WriteLine("\nMultiplication table:");
+
+        for (int i = 1; i <= multiplier; i++)
+        {
+            int result = number * i;
+            Console.WriteLine($"{number} x {i} = {result}");
+        }
+    }
+}
+
+
+//number 5
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<string> cars = new List<string>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            Console.Write($"Enter car {i + 1}: ");
+            cars.Add(Console.ReadLine());
+        }
+
+        Console.WriteLine("\nOriginal list of cars:");
+        DisplayList(cars);
+
+        Console.WriteLine("\nSorted list of cars:");
+        cars.Sort();
+        DisplayList(cars);
+    }
+
+    static void DisplayList(List<string> list)
+    {
+        foreach (var item in list)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
