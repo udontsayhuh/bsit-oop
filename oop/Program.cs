@@ -47,7 +47,7 @@ abstract class Car {
 
 /*
     The 'Convertible Car' subclass below is a concrete subclass.
-    This subclass implements inheritance and polymorphism.
+    This subclass implements inheritance and polymorphism. 
 */
 class ConvertibleCar : Car {
     private bool isRoofOpen;
