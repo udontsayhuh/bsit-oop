@@ -15,11 +15,11 @@ namespace oop.CodingChallenges
             // sums.SumResult();
 
             // Coding Challenge 2
-
+            //CodingChallenge2 wordCount = new CodingChallenge2();
+            //wordCount.CountWord();
             // Coding Challenge 3
             CodingChallenge3 calc = new CodingChallenge3();
             calc.CalculatorResult();
-
             // Coding Challenge 4
             // CodingChallenge4 c4 = new CodingChallenge4();
             // c4.MultiplicationTableResult();
