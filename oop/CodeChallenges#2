@@ -1,1 +1,22 @@
+using System;
 
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter a string: ");
+        string input = Console.ReadLine();
+
+        int wordCount = CountWords(input);
+
+        Console.WriteLine($"Number of word/s: {wordCount}");
+        Console.WriteLine($"Uppercase string: {input.ToUpper()}");
+    }
+
+    static int CountWords(string text)
+    {
+        return text.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Length;
+    }
+}
+
+//Licay, Mark loyd M. BSIT 2-1
