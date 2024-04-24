@@ -5,7 +5,7 @@ class Program
     static void Main()
     {
         // Accept input string from the user
-        Console.WriteLine("Enter a string:");
+        Console.Write("Enter a string: ");
         string inputString = Console.ReadLine();
 
         // Count the number of words in the string
