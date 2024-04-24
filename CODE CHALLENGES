@@ -1,3 +1,5 @@
+// QUESTION 1
+
 using System;
 
 class Program
@@ -27,3 +29,167 @@ class Program
     }
 }
 
+// QUESTION 2
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter a string:");
+        string input = Console.ReadLine();
+
+        // Count the number of words
+        int wordCount = CountWords(input);
+
+        // Uppercase
+        string upperCaseString = input.ToUpper();
+        Console.WriteLine("Converted into Uppercase string: " + upperCaseString);
+
+        // Number of words
+        Console.WriteLine("Number of words: " + wordCount);
+    }
+
+    static int CountWords(string str)
+    {
+        int wordCount = 0;
+        bool inWord = false;
+
+        foreach (char c in str)
+        {
+            if (char.IsWhiteSpace(c))
+            {
+                inWord = false;
+            }
+            else if (!inWord)
+            {
+                wordCount++;
+                inWord = true;
+            }
+        }
+
+        return wordCount;
+    }
+}
+
+
+// QUESTION 3
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool continueProgram = true;
+
+        while (continueProgram)
+        {
+            Console.WriteLine("Choose an arithmetic operation:");
+            Console.WriteLine("1. Addition (+)");
+            Console.WriteLine("2. Subtraction (-)");
+            Console.WriteLine("3. Multiplication (*)");
+            Console.WriteLine("4. Division (/)");
+
+            Console.Write("Enter your choice (1-4): ");
+            int choice = int.Parse(Console.ReadLine());
+
+            Console.Write("First number: ");
+            double num1 = double.Parse(Console.ReadLine());
+
+            Console.Write("Second number: ");
+            double num2 = double.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Result: " + (num1 + num2));
+                    break;
+                case 2:
+                    Console.WriteLine("Result: " + (num1 - num2));
+                    break;
+                case 3:
+                    Console.WriteLine("Result: " + (num1 * num2));
+                    break;
+                case 4:
+                    if (num2 != 0)
+                    {
+                        Console.WriteLine("Result: " + (num1 / num2));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: Division by zero!");
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice!");
+                    break;
+            }
+
+            Console.Write("Do you want to perform another operation? (yes/no): ");
+            string continueChoice = Console.ReadLine().ToLower();
+
+            if (continueChoice != "yes")
+            {
+                continueProgram = false;
+            }
+        }
+    }
+}
+
+// QUESTION 4
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the number to be multiplied: ");
+        int number = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the multiplier: ");
+        int multiplier = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"Multiplication table for {number} up to {multiplier}:");
+        for (int i = 1; i <= multiplier; i++)
+        {
+            Console.WriteLine($"{number} x {i} = {number * i}");
+        }
+    }
+}
+
+// QUESTION 5
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<string> cars = new List<string>();
+
+        cars.Add("Toyota");
+        cars.Add("Honda");
+        cars.Add("Ford");
+        cars.Add("Ferrari");
+        cars.Add("Hyundai");
+    
+    
+        Console.WriteLine("Before sorting:");
+        foreach (string car in cars)
+        {
+            Console.WriteLine(car);
+        }
+
+        cars.Sort();
+
+        Console.WriteLine("\nSorted:");
+        foreach (string car in cars)
+        {
+            Console.WriteLine(car);
+        }
+    }
+}
