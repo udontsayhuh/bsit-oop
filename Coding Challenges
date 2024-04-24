@@ -87,3 +87,132 @@ class Program
     }
 }
 
+
+CC #3
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool continueProgram = true; // Flag to control whether to continue the program or not
+
+        // Loop until the user chooses to stop
+        while (continueProgram)
+        {
+            // Prompt the user to select an arithmetic operation
+            Console.WriteLine("Select an arithmetic operation:");
+            Console.WriteLine("1. Addition (+)");
+            Console.WriteLine("2. Subtraction (-)");
+            Console.WriteLine("3. Multiplication (*)");
+            Console.WriteLine("4. Division (/)");
+
+            // Read the user's choice for arithmetic operation
+            Console.Write("Enter your choice (1-4): ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            // Perform the selected arithmetic operation based on the user's choice
+            switch (choice)
+            {
+                case 1: // Addition
+                    PerformAddition();
+                    break;
+                case 2: // Subtraction
+                    PerformSubtraction();
+                    break;
+                case 3: // Multiplication
+                    PerformMultiplication();
+                    break;
+                case 4: // Division
+                    PerformDivision();
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please enter a number between 1 and 4.");
+                    break;
+            }
+
+            // Ask the user if they want to perform another action or exit the program
+            Console.Write("Do you want to perform another action? (yes/no): ");
+            string response = Console.ReadLine();
+
+            // Check the user's response to decide whether to continue the program or exit
+            if (response.ToLower() != "yes")
+            {
+                continueProgram = false; // Set the flag to false to exit the loop
+            }
+        }
+    }
+
+    // Method to perform addition of two numbers
+    static void PerformAddition()
+    {
+        // Prompt the user to enter two numbers to add
+        Console.Write("Enter the first number: ");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Enter the second number: ");
+        double num2 = Convert.ToDouble(Console.ReadLine());
+
+        // Calculate the sum of the two numbers and print the result
+        double result = num1 + num2;
+        Console.WriteLine("Result: " + result);
+    }
+
+    // Method to perform subtraction of two numbers
+    static void PerformSubtraction()
+    {
+        // Prompt the user to enter two numbers to subtract
+        Console.Write("Enter the first number: ");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Enter the second number: ");
+        double num2 = Convert.ToDouble(Console.ReadLine());
+
+        // Calculate the difference of the two numbers and print the result
+        double result = num1 - num2;
+        Console.WriteLine("Result: " + result);
+    }
+
+    // Method to perform multiplication of two numbers
+    static void PerformMultiplication()
+    {
+        // Prompt the user to enter two numbers to multiply
+        Console.Write("Enter the first number: ");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Enter the second number: ");
+        double num2 = Convert.ToDouble(Console.ReadLine());
+
+        // Calculate the product of the two numbers and print the result
+        double result = num1 * num2;
+        Console.WriteLine("Result: " + result);
+    }
+
+    // Method to perform division of two numbers
+    static void PerformDivision()
+    {
+        // Prompt the user to enter two numbers to divide
+        Console.Write("Enter the first number: ");
+        double num1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Enter the second number: ");
+        double num2 = Convert.ToDouble(Console.ReadLine());
+
+        // Check if the divisor is not zero, then calculate the quotient and print the result
+        if (num2 != 0)
+        {
+            double result = num1 / num2;
+            Console.WriteLine("Result: " + result);
+        }
+        else
+        {
+            // Inform the user about division by zero error
+            Console.WriteLine("Error: Division by zero is not allowed.");
+        }
+    }
+}
+
+
+CC #4
+
