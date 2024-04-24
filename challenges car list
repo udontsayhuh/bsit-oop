@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<string> cars = new List<string> { "Toyota", "Honda", "Ford", "Chevrolet", "BMW" };
+
+        Console.WriteLine("Original list of cars:");
+        PrintList(cars);
+
+        cars.Sort();
+
+        Console.WriteLine("\nSorted list of cars:");
+        PrintList(cars);
+
+        Console.ReadLine();
+    }
+
+    static void PrintList(List<string> list)
+    {
+        foreach (var item in list)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
