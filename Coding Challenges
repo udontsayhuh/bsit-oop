@@ -1,0 +1,52 @@
+CC #1
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt the user to input two integers
+        Console.WriteLine("Please enter the first integer:"); // Prompt the user to enter the first integer
+        int int1 = Convert.ToInt32(Console.ReadLine()); // Read the input from the user as a string and convert it to an integer
+
+        Console.WriteLine("Please enter the second integer:"); // Prompt the user to enter the second integer
+        int int2 = Convert.ToInt32(Console.ReadLine()); // Read the input from the user as a string and convert it to an integer
+
+        // Prompt the user to input two doubles
+        Console.WriteLine("Please enter the first double:"); // Prompt the user to enter the first double
+        double double1 = Convert.ToDouble(Console.ReadLine()); // Read the input from the user as a string and convert it to a double
+
+        Console.WriteLine("Please enter the second double:"); // Prompt the user to enter the second double
+        double double2 = Convert.ToDouble(Console.ReadLine()); // Read the input from the user as a string and convert it to a double
+
+        // Compute the sum of the two integers
+        int intSum = Sum(int1, int2); // Call the Sum method to compute the sum of the two integers
+
+        // Compute the sum of the two doubles
+        double doubleSum = Sum(double1, double2); // Call the Sum method to compute the sum of the two doubles
+
+        // Print the sums
+        Console.WriteLine("The sum of the two integers is: " + intSum); // Display the sum of the integers
+        Console.WriteLine("The sum of the two doubles is: " + doubleSum); // Display the sum of the doubles
+
+        // Compute the product of the sums
+        double product = intSum * doubleSum; // Calculate the product of the sums
+
+        // Print the product
+        Console.WriteLine("The product of the sums is: " + product); // Display the product of the sums
+    }
+
+    // Method to compute the sum of two integers
+    static int Sum(int a, int b)
+    {
+        return a + b; // Return the sum of the two integers
+    }
+
+    // Method to compute the sum of two doubles
+    static double Sum(double a, double b)
+    {
+        return a + b; // Return the sum of the two doubles
+    }
+}
+
