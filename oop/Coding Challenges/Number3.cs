@@ -11,14 +11,15 @@ class Program
     {
         while (true)
         {
+            //choices
             Console.WriteLine("\n1. Addition");
             Console.WriteLine("2. Subtraction");
             Console.WriteLine("3. Multiplication");
             Console.WriteLine("4. Division");
-
+            //takes user choice
             Console.Write("Select an arithmetic operation: ");
             string userChoice = Console.ReadLine();
-
+            //checks if choice is valid
             if (userChoice != "1" && userChoice != "2" && userChoice != "3" && userChoice != "4")
             {
                 Console.WriteLine("Invalid choice. Please enter 1, 2, 3, or 4.");
@@ -26,7 +27,7 @@ class Program
             }
 
             double firstNumber;
-            while (true)
+            while (true)//will keep asking for first number until valid
             {
                 Console.Write("\nFirst number: ");
                 if (!double.TryParse(Console.ReadLine(), out firstNumber))
@@ -36,7 +37,7 @@ class Program
                 }
                 break;
             }
-
+            //will keep asking for second number until valid
             double secondNumber;
             while (true)
             {
@@ -51,22 +52,22 @@ class Program
 
             double result = 0;
             char operatr;
-
+            //executes the operation based on user choice
             switch (userChoice)
             {
-                case "1":
+                case "1"://addition
                     operatr = '+';
                     result = firstNumber + secondNumber;
                     break;
-                case "2":
+                case "2"://subtraction
                     operatr = '-';
                     result = firstNumber - secondNumber;
                     break;
-                case "3":
+                case "3"://multiplication
                     operatr = '*';
                     result = firstNumber * secondNumber;
                     break;
-                case "4":
+                case "4"://division
                     operatr = '/';
                     if (secondNumber != 0)
                     {
@@ -82,10 +83,11 @@ class Program
                     Console.WriteLine("Invalid operation.");
                     continue;
             }
+            //displays result
             Console.WriteLine($"\n{firstNumber} {operatr} {secondNumber} = {result}\n");
-
+            //asks if user wants to perform another calculation
             string anotherCalculation;
-            while (true)
+            while (true)//will keep asking user for choice until valid
             {
                 Console.Write("Do you want to perform another calculation (y/n)? ");
                 anotherCalculation = Console.ReadLine().ToLower();
@@ -98,7 +100,7 @@ class Program
                     Console.WriteLine("Invalid input. Please enter 'y' or 'n'.\n");
                 }
             }
-            if (anotherCalculation == "n")
+            if (anotherCalculation == "n")//if user inputs n, the program will exit
             {
                 Console.WriteLine("\nExiting the program...");
                 break;

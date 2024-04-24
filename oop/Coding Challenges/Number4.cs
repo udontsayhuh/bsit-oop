@@ -9,7 +9,7 @@ class Program
     static void Main(string[] args)
     {
         int multiplicand, multiplicator;
-        while (true)
+        while (true)//will keep asking for the number to be multiplied until input is valid
         {
             Console.Write("Multiplicand: ");
             if (!int.TryParse(Console.ReadLine(), out multiplicand))
@@ -19,7 +19,7 @@ class Program
             }
             break;
         }
-        while (true)
+        while (true)//will keep asking for the multiplicator until input is valid
         {
             Console.Write("Multiplicator: ");
             if (!int.TryParse(Console.ReadLine(), out multiplicator))
@@ -29,8 +29,9 @@ class Program
             }
             break;
         }
+        //displays the output
         Console.WriteLine("\nMultiplication table:");
-        for (int i = 1; i <= multiplicator; i++)
+        for (int i = 1; i <= multiplicator; i++)//iterates from 1 to user input for multiplicand
         {
             Console.WriteLine("{0} x {1} = {2}", multiplicand, i, multiplicand * i);
         }
