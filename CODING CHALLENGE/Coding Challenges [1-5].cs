@@ -139,7 +139,7 @@ class Program
     static void WordCounter()
     {
         Console.Clear();
-        Console.WriteLine("Word Counter");
+        Console.WriteLine("WORD COUNTER \n");
         Console.Write("Enter your sentence here: \n");
         string input = Console.ReadLine();
 
