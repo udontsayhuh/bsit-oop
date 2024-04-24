@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Create a List to store the cars
+        List<string> cars = new List<string>();
+
+        // Add cars to the list
+        cars.Add("Toyota");
+        cars.Add("Honda");
+        cars.Add("Ford");
+        cars.Add("Chevrolet");
+        cars.Add("BMW");
+
+        // Display the original list of cars
+        Console.WriteLine("Original list of cars:");
+        DisplayList(cars);
+
+        // Sort the list of cars
+        cars.Sort();
+
+        // Display the sorted list of cars
+        Console.WriteLine("\nSorted list of cars:");
+        DisplayList(cars);
+    }
+
+    // Method to display the elements of a list
+    static void DisplayList(List<string> list)
+    {
+        foreach (var item in list)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
+
