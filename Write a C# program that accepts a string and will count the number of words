@@ -1,0 +1,16 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter a string: ");
+        string input = Console.ReadLine();
+
+        string upperCaseString = input.ToUpper();
+        string[] words = input.Split(' ');
+
+        Console.WriteLine("The string in uppercase is: " + upperCaseString);
+        Console.WriteLine("The number of words in the string is: " + words.Length);
+    }
+}
