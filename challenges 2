@@ -1,0 +1,23 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter a string:");
+        string input = Console.ReadLine();
+
+        int wordCount = CountWords(input);
+        Console.WriteLine($"Number of words: {wordCount}");
+        Console.WriteLine($"Uppercase string: {input.ToUpper()}");
+
+        Console.ReadLine();
+    }
+
+    static int CountWords(string input)
+    {
+        // Split the input string by whitespace and count the elements
+        string[] words = input.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        return words.Length;
+    }
+}
