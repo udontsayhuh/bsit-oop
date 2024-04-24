@@ -1,0 +1,37 @@
+using System;
+
+ class Program
+
+{         
+
+  static void Main (string[] args)    
+  {
+        
+    Console.WriteLine("Enter first number :");
+    int firstNumber = int.Parse( Console.ReadLine());
+	
+    Console.WriteLine("Enter second number: ");
+
+    int secondNumber = int.Parse( Console.ReadLine());  
+	
+	Console.WriteLine("Enter third number: ");
+	double thirdNumber = double.Parse(Console.ReadLine());
+
+    Console.WriteLine("Enter fourth number: ");
+	double fourthNumber = double.Parse(Console.ReadLine());
+    
+	int sumOfInteger= firstNumber+secondNumber;
+	double sumOfDouble = thirdNumber+fourthNumber;
+	
+	Console.WriteLine($"The sum of integer number is: {sumOfInteger} ");
+	Console.WriteLine($"The sum of integer number is: {sumOfDouble} ");
+	
+	double productOfTwo = sumOfInteger*sumOfDouble;
+    Console.WriteLine($"The product of integer and double is: {productOfTwo} ");
+	
+	
+	
+  } 
+
+}
+
