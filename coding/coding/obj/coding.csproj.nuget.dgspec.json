@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Samantha Sarsoza\\source\\repos\\coding\\coding\\coding.csproj": {}
+    "C:\\Users\\Samantha Sarsoza\\source\\repos\\udontsayhuh\\bsit-oop\\coding\\coding\\coding.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Samantha Sarsoza\\source\\repos\\coding\\coding\\coding.csproj": {
+    "C:\\Users\\Samantha Sarsoza\\source\\repos\\udontsayhuh\\bsit-oop\\coding\\coding\\coding.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Samantha Sarsoza\\source\\repos\\coding\\coding\\coding.csproj",
+        "projectUniqueName": "C:\\Users\\Samantha Sarsoza\\source\\repos\\udontsayhuh\\bsit-oop\\coding\\coding\\coding.csproj",
         "projectName": "coding",
-        "projectPath": "C:\\Users\\Samantha Sarsoza\\source\\repos\\coding\\coding\\coding.csproj",
+        "projectPath": "C:\\Users\\Samantha Sarsoza\\source\\repos\\udontsayhuh\\bsit-oop\\coding\\coding\\coding.csproj",
         "packagesPath": "C:\\Users\\Samantha Sarsoza\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Samantha Sarsoza\\source\\repos\\coding\\coding\\obj\\",
+        "outputPath": "C:\\Users\\Samantha Sarsoza\\Source\\Repos\\udontsayhuh\\bsit-oop\\coding\\coding\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Samantha Sarsoza\\AppData\\Roaming\\NuGet\\NuGet.Config",
