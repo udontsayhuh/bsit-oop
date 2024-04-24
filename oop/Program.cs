@@ -112,7 +112,7 @@ class ConvertibleCar : Car {
 
 
 class Program {
-    static void Main(string[] args) {
+    public static void Main(string[] args) {
         /*Since the 'Car' class is declared as abstract to implement the principle of abstraction,
         it is not possible to create an instance or object of this class. You can only
         create an instance or object of a concrete class like the 'ConvertibleCar' class.
@@ -123,6 +123,3 @@ class Program {
         newCar.Stop();
     }
 }
-
-
-
