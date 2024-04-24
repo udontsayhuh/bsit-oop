@@ -16,6 +16,8 @@ namespace oop.coding_challenges
             words = Console.ReadLine();
             string[] count = words.Split(new char[] { ' ', '.', ',', ';', ':', '!', '?', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
             Console.WriteLine(count.Length);
+
+            Console.WriteLine(" ");
         }
     }
 }

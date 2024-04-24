@@ -25,6 +25,8 @@ namespace oop.coding_challenges
             {
                 Console.WriteLine(brand);
             }
+
+            Console.WriteLine(" ");
         } 
     }
 }

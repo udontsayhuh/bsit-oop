@@ -19,6 +19,7 @@ namespace oop.coding_challenges
             num = double.Parse(Console.ReadLine());
             Console.Write("Enter the second number: ");
             num2 = double.Parse(Console.ReadLine());
+            Console.WriteLine(" ");
         }
         public void Compute()
         {
@@ -37,24 +38,28 @@ namespace oop.coding_challenges
                             Input();
                             result = num + num2;
                             Console.WriteLine($"The sum of {num} and {num2} is {result}");
+                            Console.WriteLine(" ");
                             break;
 
                         case '-':
                             Input();
                             result = num - num2;
                             Console.WriteLine($"The difference of {num} and {num2} is {result}");
+                            Console.WriteLine(" ");
                             break;
 
                         case '*':
                             Input();
                             result = num * num2;
                             Console.WriteLine($"The product of {num} and {num2} is {result}");
+                            Console.WriteLine(" ");
                             break;
 
                         case '/':
                             Input();
                             result = num / num2;
                             Console.WriteLine($"The quotient of {num} and {num2} is {result}");
+                            Console.WriteLine(" ");
                             break;
 
                         default:
@@ -67,6 +72,8 @@ namespace oop.coding_challenges
                 {
                     Console.WriteLine("Do you wish to calculate again?");
                     response = Console.ReadLine();
+                    Console.WriteLine(" ");
+
                     if (response == "Yes" || response == "yes")
                     {
                         use_again = true;
@@ -74,7 +81,7 @@ namespace oop.coding_challenges
                     }
                     else if (response == "No" || response == "no")
                     {
-                        Environment.Exit(0);
+                        break;
                     }
                     else
                     {

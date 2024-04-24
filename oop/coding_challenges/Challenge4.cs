@@ -22,6 +22,8 @@ namespace oop.coding_challenges
                 product = basenum * i;
                 Console.WriteLine($"{basenum} x {i} = {product}");
             }
+
+            Console.WriteLine(" ");
         }
     }
 }

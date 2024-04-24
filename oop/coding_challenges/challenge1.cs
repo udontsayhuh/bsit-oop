@@ -32,6 +32,8 @@ namespace oop.coding_challenges
 
             product = intsum * doublesum;
             Console.WriteLine($"The product of {intsum} and {doublesum} is {product}");
+
+            Console.WriteLine(" ");
         }
     }
 }
