@@ -1,4 +1,4 @@
-using System; 
+using System;
 using System.Collections.Generic;
 
 namespace CalculatorApp
@@ -38,12 +38,12 @@ namespace CalculatorApp
     // User Interface for calculator operations
     public class UserInterface
     {
-        private Calculator calculator;
+        private readonly Calculator _calculator;
 
         // Constructor
         public UserInterface()
         {
-            calculator = new Calculator();
+            _calculator = new Calculator();
         }
 
         // Method to display the menu
@@ -119,16 +119,16 @@ namespace CalculatorApp
                     switch (currentOperator)
                     {
                         case '+':
-                            result = calculator.Add(result, operand);
+                            result = _calculator.Add(result, operand);
                             break;
                         case '-':
-                            result = calculator.Subtract(result, operand);
+                            result = _calculator.Subtract(result, operand);
                             break;
                         case '*':
-                            result = calculator.Multiply(result, operand);
+                            result = _calculator.Multiply(result, operand);
                             break;
                         case '/':
-                            result = calculator.Divide(result, operand);
+                            result = _calculator.Divide(result, operand);
                             break;
                         default:
                             throw new InvalidOperationException("Invalid operator.");
