@@ -16,7 +16,7 @@ class Program
         carList.Add("Mercedes");
 
         // Display the unsorted list
-        Console.WriteLine("Unsorted Car List:");
+        Console.WriteLine("Original Car List:");
         PrintList(carList);
 
         // Sort the list
