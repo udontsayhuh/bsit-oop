@@ -1,0 +1,36 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter two integers:");
+        int num1 = Convert.ToInt32(Console.ReadLine());
+        int num2 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter two doubles:");
+        double double1 = Convert.ToDouble(Console.ReadLine());
+        double double2 = Convert.ToDouble(Console.ReadLine());
+
+        int sumIntegers = Sum(num1, num2);
+        double sumDoubles = Sum(double1, double2);
+
+        Console.WriteLine($"Sum of integers: {sumIntegers}");
+        Console.WriteLine($"Sum of doubles: {sumDoubles}");
+
+        double product = sumIntegers * sumDoubles;
+        Console.WriteLine($"Product of the sums: {product}");
+
+        Console.ReadLine();
+    }
+
+    static int Sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    static double Sum(double a, double b)
+    {
+        return a + b;
+    }
+}
