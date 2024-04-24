@@ -8,11 +8,14 @@ namespace oop.coding_challenges
 {
     internal class Challenge2
     {
-        public string words;
+        private string words;
 
         public void WordCount()
         {
-
+            Console.Write("Enter a words/sentence: ");
+            words = Console.ReadLine();
+            string[] count = words.Split(new char[] { ' ', '.', ',', ';', ':', '!', '?', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+            Console.WriteLine(count.Length);
         }
     }
 }

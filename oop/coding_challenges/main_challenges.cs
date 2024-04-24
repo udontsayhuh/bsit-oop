@@ -15,6 +15,8 @@ namespace oop.coding_challenges
             //challenge1.Result();
 
             //Challenge2
+            Challenge2 challenge2 = new Challenge2();
+            challenge2.WordCount();
 
             
             //Challenge3
@@ -22,8 +24,8 @@ namespace oop.coding_challenges
             //challenge3.Compute();
             
             //Challenge4
-            Challenge4 challenge4 = new Challenge4();
-            challenge4.Multiplication();
+            //Challenge4 challenge4 = new Challenge4();
+            //challenge4.Multiplication();
             
             //Challenge5
         }
