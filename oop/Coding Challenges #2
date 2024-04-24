@@ -1,0 +1,16 @@
+using System;
+
+public class WordCounterAndUppercaser
+{
+    public static void Main()
+    {
+        Console.WriteLine("Enter a string:");
+        string inputString = Console.ReadLine();
+
+        int wordCount = inputString.Split(new char[] { ' ', '.', '?' }, StringSplitOptions.RemoveEmptyEntries).Length;
+        string uppercaseString = inputString.ToUpper();
+
+        Console.WriteLine($"The number of words is: {wordCount}");
+        Console.WriteLine($"The uppercase string is: {uppercaseString}");
+    }
+}
