@@ -1,0 +1,325 @@
+// Miyuki Mharie C. Parocha
+// BSIT 2-2
+
+using System.Collections;
+
+class Code1 // Code challenge # 1
+{
+    public void run()
+    {
+        int num1, num2;
+        double num3, num4, result;
+        
+        Console.WriteLine("\n=====================================================");
+        Console.BackgroundColor = ConsoleColor.Cyan;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.WriteLine("                  CODE CHALLENGE # 1                 "); // Header
+        Console.WriteLine("                    SUM AND PRODUCT                  ");
+        Console.ResetColor();
+        Console.WriteLine("=====================================================");
+        
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("\nEnter whole number only.");
+        Console.ResetColor();
+
+        Console.Write("\nEnter 1st number: ");
+        num1 = Convert.ToInt32(Console.ReadLine());
+        
+        Console.Write("Enter 2nd number: ");
+        num2 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine($"\n{num1} + {num2} = {num1+num2}\n");
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Enter decimal number only.");
+        Console.ResetColor();
+
+        Console.Write("\nEnter 1st number: ");
+        num3 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Enter 2nd number: ");
+        num4 = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine($"\n{num3} + {num4} = {num3+num4}\n");
+        result = (num1+num2)*(num3+num4);
+        
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine("\nThe product of 2 calculated results is:\n");
+        Console.ResetColor();
+        Console.Write($"{num1+num2} x {num3+num4} = ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(result);
+
+        Console.ResetColor();
+    }
+}
+
+class Code2 // Code challenge # 2
+{
+    public void run()
+    {
+        string sentence;
+
+        Console.WriteLine("\n=====================================================");
+        Console.BackgroundColor = ConsoleColor.Green;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.WriteLine("                  CODE CHALLENGE # 2                 "); // Header
+        Console.WriteLine("                     WORD COUNTER                    ");
+        Console.ResetColor();
+        Console.WriteLine("=====================================================");
+
+        Console.Write("\nWrite a sentence: ");
+        sentence = Console.ReadLine();
+
+        int words = sentence.Split(new char[] { ' ', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries).Length;
+        Console.Write($"\nYour sentence have ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write($"{words} ");
+        Console.ResetColor();
+        Console.WriteLine("words.");
+        Console.WriteLine("\nYour sentence in Uppercase format:\n");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("\t" + sentence.ToUpper());
+        Console.ResetColor();
+    }
+}
+
+class Code3 // Code challenge # 3
+{
+    public void run()
+    {
+        Console.Clear();
+
+        Console.WriteLine("\n=====================================================");
+        Console.BackgroundColor = ConsoleColor.Blue;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.WriteLine("                  CODE CHALLENGE # 3                 "); // Header
+        Console.WriteLine("                     CALCULATOR                      ");
+        Console.ResetColor();
+        Console.WriteLine("=====================================================");
+
+        double num1, num2;
+        string choice; // string choice was used to have the user decide whether exit the program or do another calculation
+        string operation = "";
+        bool isExit = false; // used to perform the loop for exit or redo
+
+        while (!isExit) // using while loop to add exit or redo option for the user
+        {
+
+            while (operation != "+" && operation != "-" && operation != "*" && operation != "/")
+            {
+                Console.Write("\nEnter Operation (+, -, *, /): ");
+                operation = Console.ReadLine();
+
+                if (operation != "+" && operation != "-" && operation != "*" && operation != "/")
+                {
+                    Console.WriteLine("Invalid Operation!");
+                    Console.WriteLine("\n");
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            Console.Write("\nEnter 1st number: ");
+
+            if (!double.TryParse(Console.ReadLine(), out num1)) // identify if the user inputed the right format, (numeric format)
+            {
+                Console.Write("\nInvalid Input! Terminating system... \nPress any key to exit...");
+                Console.ReadKey();
+                return; // if not in a numeric format, the system will terminate.
+            }
+
+             Console.Write("Enter 2nd number: ");
+            while (!double.TryParse(Console.ReadLine(), out num2)) // ensure that the user types a numerical value
+            {
+                Console.WriteLine("Invalid Input! Please enter a valid number.\n");
+                Console.Write("Enter 2nd number: ");
+            }
+
+            switch (operation) // using switch to implement conditional statement. Comparing "operation" 
+            {
+                case "+": // in case that the operation is equals to +
+                    Console.WriteLine($"\nThe calculated result is:\n\n\t{num1} + {num2} = {num1 + num2}"); // calling the object method, passing the parameters (num1, num2)
+                    break; // break the case statement
+                case "-": // in case that the operation is equals to -
+                    Console.WriteLine($"\nThe calculated result is:\n\n\t{num1} - {num2} = {num1 - num2}"); // calling the object method, passing the parameters (num1, num2)
+                    break; // break the case statement
+                case "*": // in case that the operation is equals to *
+                    Console.WriteLine($"\nThe calculated result is:\n\n\t{num1} * {num2} = {num1 * num2}"); // calling the object method, passing the parameters (num1, num2)
+                    break; // break the case statement
+                case "/": // in case that the operation is equals to /
+                    Console.WriteLine($"\nThe calculated result is:\n\n\t{num1} / {num2} = {num1 / num2}"); // calling the object method, passing the parameters (num1, num2)
+                    break; // break the case statement
+                default: // this is the else statement, in case the operation is different
+                    Console.WriteLine("Invalid Operation!");
+                    break; // break the case statement
+            }
+
+            Console.Write("\n\nPress 'Y' if you want to try again, otherwise any key to exit: ");
+            choice = Console.ReadLine();
+
+            if (choice != "Y" && choice != "y")
+            {
+                isExit = true; // if the user type any key beside Y or y, then the boolean isExit will be true, hence breaking the while loop
+
+            }
+            else
+            {
+                operation = "";
+            }
+        }
+    }
+}
+
+class Code4 // Code challenge # 4
+{
+    public void run()
+    {
+        double num1, num2;
+
+        Console.WriteLine("\n=====================================================");
+        Console.BackgroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.WriteLine("                  CODE CHALLENGE # 4                 "); // Header
+        Console.WriteLine("                 MULTIPLICATION TABLE                ");
+        Console.ResetColor();
+        Console.WriteLine("=====================================================");
+
+        Console.Write("\nEnter multiplicand: ");
+        num1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Enter multiplier: ");
+        num2 = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("");
+
+        for(int i = 0 ; i < num2+1; i++) {
+
+            Console.WriteLine($"{num1} x {i} = {num1 * i}");
+        }
+    }
+}
+
+
+class Code5 // Code challenge # 5
+{
+    public void run()
+    {
+        ArrayList cars = new ArrayList();
+
+        Console.WriteLine("\n=====================================================");
+        Console.BackgroundColor = ConsoleColor.Magenta;
+        Console.ForegroundColor = ConsoleColor.Black;
+        Console.WriteLine("                  CODE CHALLENGE # 5                 "); // Header
+        Console.WriteLine("                     LIST OF CARS                    ");
+        Console.ResetColor();
+        Console.WriteLine("=====================================================\n");
+
+        for(int i = 1 ; i < 5+1 ; i++)
+        {
+            Console.Write($"Enter Car # {i}: ");
+            cars.Add(Console.ReadLine());
+        }
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("\nUnsorted List of Cars:\n");
+        Console.ResetColor();
+
+        foreach (var car in cars)
+        {
+            Console.WriteLine(car);
+        }
+
+        cars.Sort();
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\nSorted List of Cars:\n");
+        Console.ResetColor();
+
+        foreach (var car in cars)
+        {
+            Console.WriteLine(car);
+        }
+    }
+}
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int option;
+        string choice = "";
+        bool isExit = false;
+
+        Code1 a = new Code1();
+        Code2 b = new Code2();
+        Code3 c = new Code3();
+        Code4 d = new Code4();
+        Code5 e = new Code5();
+
+        while(!isExit) 
+        {
+            Console.Clear();
+
+            Console.WriteLine("\n=====================================================");
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("                   CODE CHALLENGES                   "); // Header
+            Console.ResetColor();
+            Console.WriteLine("|===================================================|");
+            Console.WriteLine("|                                                   |");
+            Console.WriteLine("|              1. Code Challenge # 1                |");
+            Console.WriteLine("|              2. Code Challenge # 2                |");
+            Console.WriteLine("|              3. Code Challenge # 3                |");
+            Console.WriteLine("|              4. Code Challenge # 4                |");
+            Console.WriteLine("|              5. Code Challenge # 5                |");
+            Console.WriteLine("|                                                   |");
+            Console.WriteLine("=====================================================");
+
+            Console.Write("\nWhat code challenge do you want to open? ");
+            while (!int.TryParse(Console.ReadLine(), out option)) // ensure that the user types a numerical value
+            {
+                Console.WriteLine("Invalid Input! Please enter a valid number.\n");
+                Console.Write("\nWhat code challenge do you want to open? ");
+            }
+
+            Console.Clear();
+
+            switch(option)
+            {
+                case 1: 
+                a.run();
+                break;
+                case 2:
+                b.run();
+                break;
+                case 3:
+                c.run();
+                break;
+                case 4:
+                d.run();
+                break;
+                case 5:
+                e.run();
+                break;
+                default:
+                Console.WriteLine("Invalid Option!");
+                break;
+            }
+
+            Console.Write("\n\nType Y to try another code challenge or press any other key to exit: ");
+            choice = Console.ReadLine();
+
+            if (choice != "Y" && choice != "y")
+            {
+                isExit = true; // if the user type any key beside Y or y, then the boolean isExit will be true, hence breaking the while loop 
+            }
+            else
+            {
+                choice = "";
+            }
+        }
+    }
+}
