@@ -48,7 +48,6 @@ namespace oop.CodingChallenges
             Console.WriteLine("Coding Challenges #3");
             do
             {
-
                 while (operationValidation)
                 {
                     Console.Write("\nEnter Operation:[+] Addition [-] Subtraction [*] Multiplication [/] Division: ");
@@ -59,18 +58,22 @@ namespace oop.CodingChallenges
                         case '+':
                             UserInput();
                             Console.WriteLine($"{num1} + {num2} = {Add(num1, num2)}");
+                            operationValidation = false;
                             break;
                         case '-':
                             UserInput();
                             Console.WriteLine($"{num1} - {num2} = {Sub(num1, num2)}");
+                            operationValidation = false;
                             break;
                         case '*':
                             UserInput();
                             Console.WriteLine($"{num1} * {num2} = {Mul(num1, num2)}");
+                            operationValidation = false;
                             break;
                         case '/':
                             UserInput();
                             Console.WriteLine($"{num1} / {num2} = {Div(num1, num2)}");
+                            operationValidation = false;
                             break;
                         default:
                             Console.WriteLine("Invalid Operation");
@@ -81,6 +84,7 @@ namespace oop.CodingChallenges
                 {
                     Console.Write("\nDo you want to continue? Press y if YES or else n for NO: ");
                     choice = char.Parse(Console.ReadLine());
+                    Console.WriteLine(" ");
 
                     if (choice == 'y' || choice == 'Y')
                     {
@@ -90,7 +94,7 @@ namespace oop.CodingChallenges
                     else if (choice == 'n' || choice == 'N')
                     {
                         continuee = false;
-                        Environment.Exit(0);
+                        break;
                     }
                     else
                     {

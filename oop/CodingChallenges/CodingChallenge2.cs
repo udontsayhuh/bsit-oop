@@ -13,10 +13,11 @@ namespace oop.CodingChallenges
     {
         public void CountWord() 
         {
-            Console.Write("Enter number of words you want to enter: ");
+            Console.WriteLine("Word Counter");
+            Console.Write("Enter a sentence or random words: ");
             string text = Console.ReadLine();
             string[] words = text.Split(new char[] { ' ', '.', ',', ';', ':', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
-            Console.WriteLine(words.Length);
+            Console.WriteLine($"Total number of words: {words.Length}\n");
         }
     }
 }

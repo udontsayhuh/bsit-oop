@@ -21,13 +21,13 @@ namespace oop.CodingChallenges
         public void SumResult()
         {
             double prodOfSums;
-            Console.WriteLine("Coding Challenges #1");
+            Console.WriteLine("\nCoding Challenges #1");
             SumIntegers();
             SumDouble();
             prodOfSums = ISum(inum1, inum2) * DSum(dnum1, dnum2);
             Console.WriteLine($"\nSum of Integers: {ISum(inum1, inum2)}");
             Console.WriteLine($"Sum of Double: {DSum(dnum1, dnum2)}");
-            Console.WriteLine($"Product of Sums: {prodOfSums}");
+            Console.WriteLine($"Product of Sums: {prodOfSums}\n");
         }
     }
 }

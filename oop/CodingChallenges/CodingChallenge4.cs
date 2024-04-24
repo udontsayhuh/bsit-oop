@@ -10,19 +10,20 @@ namespace oop.CodingChallenges
     {
         public void MultiplicationTableResult()
         {
-            Console.WriteLine("Coding Challenge #4");
+            Console.WriteLine("\nCoding Challenge #4");
             Console.Write("\nEnter the base number: ");
             int baseNumber = int.Parse(Console.ReadLine());
 
             Console.Write("Enter the multiplier: ");
             int multiplier = int.Parse(Console.ReadLine());
 
-            Console.WriteLine($"Multiplication table for {baseNumber} up to {multiplier}:");
+            Console.WriteLine($"\nMultiplication table for {baseNumber} up to {multiplier}:");
             for (int i = 1; i <= multiplier; i++)
             {
                 int result = baseNumber * i;
                 Console.WriteLine($"{baseNumber} x {i} = {result}");
             }
+            Console.WriteLine(" ");
         }
         
     }

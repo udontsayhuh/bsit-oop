@@ -9,19 +9,43 @@ namespace oop.CodingChallenges
 {
     internal class CodingChallenge5
     {
+        
         public void Vehicle()
         {
-            ArrayList vehicle = new ArrayList();
-            vehicle.Add("Toyota");
-            vehicle.Add("Volvo");
-            vehicle.Add("Ford");
-            vehicle.Add("Honda");
-            vehicle.Add("Mitsubishi");
-            Console.Write($"The Cars are: ");
-            foreach (var i in vehicle)
+            ArrayList cars = new ArrayList();
+            cars.Add("Toyota");
+            cars.Add("Volvo");
+            cars.Add("Ford");
+            cars.Add("Honda");
+            cars.Add("Mitsubishi");
+            Console.Write($"\nThe Cars are: ");
+            foreach (var i in cars)
             {
-                Console.Write(i + " ");
+                if (i == cars[4])
+                {
+                    Console.Write(i + " ");
+                }
+                else
+                {
+                    Console.Write(i + ", ");
+                }
             }
+            cars.Sort();
+
+            Console.Write("\nSorted by Names: ");
+            foreach (var x in cars)
+            {
+                if (x == cars[4])
+                {
+                    Console.Write(x + " \n");
+                }
+                else
+                {
+                    Console.Write(x + ", ");
+                }
+
+            }
+
         }
         
     }
