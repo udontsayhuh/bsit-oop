@@ -1,0 +1,27 @@
+using System;
+
+public class SumAndProduct
+{
+    public static void Main()
+    {
+        Console.WriteLine("Enter the first integer:");
+        int firstInteger = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter the second integer:");
+        int secondInteger = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter the first double:");
+        double firstDouble = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Enter the second double:");
+        double secondDouble = Convert.ToDouble(Console.ReadLine());
+
+        int sumOfIntegers = firstInteger + secondInteger;
+        double sumOfDoubles = firstDouble + secondDouble;
+        double productOfSums = sumOfIntegers * sumOfDoubles;
+
+        Console.WriteLine($"The sum of the integers is: {sumOfIntegers}");
+        Console.WriteLine($"The sum of the doubles is: {sumOfDoubles}");
+        Console.WriteLine($"The product of the sums is: {productOfSums}");
+    }
+}
