@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace oop.CodingChallenges
 {
-    internal class Calculator
+    internal class CodingChallenge3
     {
         private double num1, num2;
         private char operation, choice;

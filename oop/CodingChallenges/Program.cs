@@ -17,9 +17,12 @@ namespace oop.CodingChallenges
             // Coding Challenge 2
 
             // Coding Challenge 3
-            Calculator calc = new Calculator();
-            calc.CalculatorResult();
+            //CodingChallenge3 calc = new CodingChallenge3();
+            //calc.CalculatorResult();
+
             // Coding Challenge 4
+            CodingChallenge4 c4 = new CodingChallenge4();
+            c4.MultiplicationTableResult();
         }
     }
 }
