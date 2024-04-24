@@ -1,0 +1,81 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Variable to control the loop
+        bool continueLoop = true;
+
+        // Loop to keep asking the user if they want to perform another action
+        while (continueLoop)
+        {
+            // Prompt the user to select an arithmetic function
+            Console.WriteLine("Select an arithmetic function:");
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+            Console.Write("Enter your choice (1-4): ");
+            int choice = int.Parse(Console.ReadLine());
+
+            // Prompt the user to enter two numbers
+            Console.Write("Enter the first number: ");
+            double num1 = double.Parse(Console.ReadLine());
+            Console.Write("Enter the second number: ");
+            double num2 = double.Parse(Console.ReadLine());
+
+            // Perform the selected arithmetic operation
+            double result = 0; // Initialize the result variable
+            switch (choice)
+            {
+                case 1:
+                    // Addition
+                    result = num1 + num2;
+                    Console.WriteLine($"The result of addition is: {result}");
+                    break;
+
+                case 2:
+                    // Subtraction
+                    result = num1 - num2;
+                    Console.WriteLine($"The result of subtraction is: {result}");
+                    break;
+
+                case 3:
+                    // Multiplication
+                    result = num1 * num2;
+                    Console.WriteLine($"The result of multiplication is: {result}");
+                    break;
+
+                case 4:
+                    // Division
+                    if (num2 != 0)
+                    {
+                        result = num1 / num2;
+                        Console.WriteLine($"The result of division is: {result}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: Division by zero is not allowed.");
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid choice. Please select a number from 1 to 4.");
+                    break;
+            }
+
+            // Ask the user if they want to perform another action
+            Console.Write("Do you want to perform another action? (yes/no): ");
+            string userResponse = Console.ReadLine().Trim().ToLower();
+
+            // Check if the user wants to continue
+            if (userResponse != "yes")
+            {
+                continueLoop = false;
+            }
+        }
+
+        Console.WriteLine("Program terminated. Thank you for using the program!");
+    }
+}
