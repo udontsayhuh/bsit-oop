@@ -179,3 +179,65 @@ class Program
         }
     }
 }
+
+
+// Challenge No.4
+// Write a C# program that takes two numbers as input: the first number will be the number to be multiplied and the second number will be the multiplier, and prints its multiplication table up to the given second number (the multiplier)
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the number to be Multiplied: ");
+        int num1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Enter the Multiplier: ");
+        int num2 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine($"Multiplication table for {num1} up to {num2}:");
+        for (int i = 1; i <= num2; i++)
+        {
+            int result = num1 * i;
+            Console.WriteLine($"{num1} x {i} = {result}");
+        }
+    }
+}
+
+
+// Challenge No.5
+// Write a C# program that demonstrates a list that contains 5 cars and display a sorted listed after. (Using ArrayList are LinkedList is allowed)
+
+using System;
+using System.Collections;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ArrayList cars = new ArrayList();
+
+        cars.Add("Land Rover");
+        cars.Add("Mercedes-Benz");
+        cars.Add("Bugatti");
+        cars.Add("Tesla");
+        cars.Add("Maybach");
+
+        Console.WriteLine("List of cars (unsorted):");
+        DisplayList(cars);
+
+        cars.Sort();
+
+        Console.WriteLine("\nList of cars (sorted):");
+        DisplayList(cars);
+    }
+
+    static void DisplayList(ArrayList list)
+    {
+        foreach (var item in list)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
