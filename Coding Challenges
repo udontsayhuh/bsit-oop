@@ -1,5 +1,6 @@
 CC #1
 
+
 using System;
 
 class Program
@@ -53,6 +54,7 @@ class Program
 
 CC #2
 
+
 using System;
 
 class Program
@@ -89,6 +91,7 @@ class Program
 
 
 CC #3
+
 
 using System;
 
@@ -215,4 +218,73 @@ class Program
 
 
 CC #4
+
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt the user to enter the number to be multiplied
+        Console.WriteLine("Enter the number to be multiplied:");
+
+        // Read the first number from the user, which will be the number to be multiplied
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        // Prompt the user to enter the multiplier
+        Console.WriteLine("Enter the multiplier:");
+
+        // Read the second number from the user, which will be the multiplier
+        int multiplier = Convert.ToInt32(Console.ReadLine());
+
+        // Iterate from 1 up to the value of the multiplier
+        for (int i = 1; i <= multiplier; i++)
+        {
+            // Calculate the product of the number and the current value of the iterator
+            int result = number * i;
+
+            // Print the multiplication table entry in the format: number x multiplier = result
+            Console.WriteLine(number + " x " + i + " = " + result);
+        }
+    }
+}
+
+
+CC #5
+
+
+using System;
+using System.Collections;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create an ArrayList to hold the names of various car brands.
+
+        ArrayList carBrands = new ArrayList();
+
+        // Add five different car brands to the list for demonstration purposes.
+
+        carBrands.Add("Mercedes-Benz");
+        carBrands.Add("Audi");
+        carBrands.Add("Porsche");
+        carBrands.Add("Ferrari");
+        carBrands.Add("Lamborghini");
+
+        // Sort the list of car brands alphabetically.
+
+        carBrands.Sort();
+
+        // Display the sorted list of car brands to the user.
+
+        Console.WriteLine("Here is the sorted list of car brands:");
+        foreach (var brand in carBrands)
+        {
+            Console.WriteLine(brand);
+        }
+    }
+}
+
 
