@@ -2,40 +2,33 @@ using System;
 
 namespace My_Colorful_Calculator
 {
-    // Absclass representing a calculator
-    abstract class Calculator
+    // Interface of my calculator
+    interface ICalculator
     {
-        protected float result;
-
-        // Abs method to calculate operation between two numbers
-        public abstract float Calculate(float num1, float num2, string operation);
+        float Calculate(float num1, float num2, string operation);
     }
 
     // Calculations of basic arithmetic operations
-    class BasicCalculator : Calculator // Inheritance: BasicCalculator inherits from Calculator
+    class BasicCalculator : ICalculator
     {
-        // Method to calculate operation between two numbers
-        public override float Calculate(float num1, float num2, string operation)
+        public float Calculate(float num1, float num2, string operation)
         {
             switch (operation)
             {
                 case "+":
-                    result = num1 + num2;
-                    break;
+                    return num1 + num2;
                 case "-":
-                    result = num1 - num2;
-                    break;
+                    return num1 - num2;
                 case "*":
-                    result = num1 * num2;
-                    break;
+                    return num1 * num2;
                 case "/":
                     if (num2 != 0)
-                        result = num1 / num2;
+                        return num1 / num2;
                     else
                         throw new DivideByZeroException("Error: Division by zero!");
-                    break;
+                default:
+                    throw new ArgumentException("Invalid operation!");
             }
-            return result;
         }
     }
 
@@ -56,22 +49,22 @@ namespace My_Colorful_Calculator
                 // Start of calculation process
                 Console.WriteLine("START CALCULATING:");
 
-                // Input the first number
+                // Input first number
                 float num1 = GetValidNumber("Enter a number: ");
 
                 // Input the operator or '=' to calculate
                 string currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
 
-                BasicCalculator calculator = new BasicCalculator(); // Abstraction: Calculations are abstracted behind Calculator interface
+                ICalculator calculator = new BasicCalculator(); // Dependency Inversion: Depend on abstraction, not concrete implementation
 
                 // Loop to input numbers and operators until '=' is entered
                 while (currentOperator != "=")
                 {
-                    // Input the next number
+                    // Input next number
                     float num2 = GetValidNumber("Enter a number: ");
 
                     // Calculate based on current operator
-                    num1 = calculator.Calculate(num1, num2, currentOperator); // Polymorphism: The actual method called depends on the object type
+                    num1 = calculator.Calculate(num1, num2, currentOperator); // Liskov Substitution: BasicCalculator implements ICalculator interface
 
                     // Input the next operator or '=' to calculate
                     currentOperator = GetValidOperator("Enter the operator (+, -, *, /) or '=' to calculate: ");
@@ -137,10 +130,3 @@ namespace My_Colorful_Calculator
         }
     }
 }
-
-// Inheritance and Polymorphism: the changes applied were the abstract class which inherits it to the basic class (a concrete class which is the BasicCalculator)
-// Encasulation: the variables are only called when needed
-// Abstraction: the calculation process
-// Code organization were added too to enhanced readability of the code like: (GetValidNumber and GetValidOperator) to make sure that the user inputs are valid
-// In my original code, I only applied the abstraction and encapsulation because it does not require all the input to be valid and sequentially loops
-// But now, I added the principles of OOP to modify my original code to meet the requirements of the new laboratory assignment
