@@ -1,0 +1,135 @@
+// #1
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int a = int.Parse(Console.ReadLine());
+        int b = int.Parse(Console.ReadLine());
+        double c = double.Parse(Console.ReadLine());
+        double d = double.Parse(Console.ReadLine());
+
+        int sumIntegers = a + b;
+        double sumDoubles = c + d;
+        double product = sumIntegers * sumDoubles;
+
+        Console.WriteLine($"Sum of integers: {sumIntegers}");
+        Console.WriteLine($"Sum of doubles: {sumDoubles}");
+        Console.WriteLine($"Product of the sums: {product}");
+    }
+}
+
+// #2
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter a string:");
+        string input = Console.ReadLine();
+
+        int wordCount = CountWords(input);
+        Console.WriteLine($"Number of words: {wordCount}");
+
+        string uppercaseString = input.ToUpper();
+        Console.WriteLine($"Uppercase string: {uppercaseString}");
+    }
+
+    static int CountWords(string input)
+    {
+        string[] words = input.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        return words.Length;
+    }
+}
+
+// #3
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool continueProgram = true;
+        while (continueProgram)
+        {
+            Console.WriteLine("Select an arithmetic operation:\n1. Addition\n2. Subtraction\n3. Multiplication\n4. Division");
+            Console.Write("Enter your choice (1-4): ");
+            int choice = int.Parse(Console.ReadLine());
+            Console.Write("Enter the first number: ");
+            double num1 = double.Parse(Console.ReadLine());
+            Console.Write("Enter the second number: ");
+            double num2 = double.Parse(Console.ReadLine());
+            double result = choice switch
+            {
+                1 => num1 + num2,
+                2 => num1 - num2,
+                3 => num1 * num2,
+                4 => num2 != 0 ? num1 / num2 : throw new InvalidOperationException("Cannot divide by zero."),
+                _ => throw new InvalidOperationException("Invalid choice."),
+            };
+            Console.WriteLine($"Result: {result}");
+            Console.Write("Do you want to perform another action? (yes/no): ");
+            continueProgram = Console.ReadLine().ToLower() == "yes";
+        }
+    }
+}
+
+// #4
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the number to be multiplied: ");
+        int number = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the multiplier: ");
+        int multiplier = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"Multiplication table for {number} up to {multiplier}:");
+
+        for (int i = 1; i <= multiplier; i++)
+        {
+            int result = number * i;
+            Console.WriteLine($"{number} x {i} = {result}");
+        }
+    }
+}
+
+#5
+using System;
+using System.Collections;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ArrayList cars = new ArrayList();
+
+        // Add cars to the ArrayList
+        cars.Add("Toyota");
+        cars.Add("Honda");
+        cars.Add("BMW");
+        cars.Add("Ford");
+        cars.Add("Mercedes");
+
+        Console.WriteLine("Unsorted list of cars:");
+        PrintList(cars);
+
+        cars.Sort();
+
+        Console.WriteLine("\nSorted list of cars:");
+        PrintList(cars);
+    }
+
+    static void PrintList(ArrayList list)
+    {
+        foreach (var item in list)
+        {
+            Console.WriteLine(item);
+        }
+    }
+}
