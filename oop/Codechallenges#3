@@ -1,1 +1,78 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool continueProgram = true;
+
+        while (continueProgram)
+        {
+            Console.WriteLine("Select an arithmetic operation:");
+            Console.WriteLine("+. Addition");
+            Console.WriteLine("-. Subtraction");
+            Console.WriteLine("*. Multiplication");
+            Console.WriteLine("/. Division");
+
+            Console.Write("Enter your choice (+, -, *, /): ");
+            string choiceInput = Console.ReadLine();
+
+            if (!IsValidChoice(choiceInput))
+            {
+                Console.WriteLine("Invalid choice! Please enter one of the symbols (+, -, *, /).");
+                continue;
+            }
+
+            Console.Write("Enter the first number: ");
+            double num1;
+
+            if (!double.TryParse(Console.ReadLine(), out num1))
+            {
+                Console.WriteLine("Invalid input! Please enter a valid number.");
+                continue;
+            }
+
+            Console.Write("Enter the second number: ");
+            double num2;
+
+            if (!double.TryParse(Console.ReadLine(), out num2))
+            {
+                Console.WriteLine("Invalid input! Please enter a valid number.");
+                continue;
+            }
+
+            switch (choiceInput)
+            {
+                case "+":
+                    Console.WriteLine($"Result: {num1} + {num2} = {num1 + num2}");
+                    break;
+                case "-":
+                    Console.WriteLine($"Result: {num1} - {num2} = {num1 - num2}");
+                    break;
+                case "*":
+                    Console.WriteLine($"Result: {num1} * {num2} = {num1 * num2}");
+                    break;
+                case "/":
+                    if (num2 != 0)
+                        Console.WriteLine($"Result: {num1} / {num2} = {num1 / num2}");
+                    else
+                        Console.WriteLine("Cannot divide by zero!");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice!");
+                    break;
+            }
+
+            Console.Write("Do you want to perform another action? (yes/no): ");
+            string answer = Console.ReadLine().ToLower();
+
+            continueProgram = (answer == "yes");
+        }
+    }
+
+    static bool IsValidChoice(string choice)
+    {
+        return choice == "+" || choice == "-" || choice == "*" || choice == "/";
+    }
+}
 
