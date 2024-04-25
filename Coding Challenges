@@ -1,6 +1,240 @@
-# C# Coding Challenges
+// C# Coding Challenges
 
-# Write a C# program that contains method that accepts inputs from the user - that will
-compute the sum of two integers and two doubles separately, and after showing the
-result of the two sums, compute for the product of the sums - the result must be a
-double data type.
+// Write a C# program that contains method that accepts inputs from the user - that will
+// compute the sum of two integers and two doubles separately, and after showing the
+// result of the two sums, compute for the product of the sums - the result must be a
+// double data type.
+
+using System;
+
+namespace SumAndProductCalculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("| SUM AND PRODUCT CALCULATOR |");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("| Please enter two integers and two doubles. |");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            // Read input for integers
+            Console.Write("\nPlease Enter the first integer: ");
+            int int1 = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Please Enter the second integer: ");
+            int int2 = Convert.ToInt32(Console.ReadLine());
+
+            // Read input for doubles
+            Console.Write("Please Enter the first double: ");
+            double double1 = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Please Enter the second double: ");
+            double double2 = Convert.ToDouble(Console.ReadLine());
+
+            // Calculate sums
+            int intSum = int1 + int2;
+            double doubleSum = double1 + double2;
+
+            // Display the results
+            Console.WriteLine($"\nSum of integers: {intSum}");
+            Console.WriteLine($"Sum of doubles: {doubleSum}");
+
+            // Compute the product of the sums
+            double product = intSum * doubleSum;
+
+            Console.WriteLine($"Product of the sums: {product:F2}"); // Display with 2 decimal places
+        }
+    }
+}
+
+// Write a C# program that accepts a string and will count the number of words in the
+// provided string and print the string in uppercase as a result.
+
+using System;
+
+namespace WordCountAndUppercase
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("| Welcome to the Word Counter and Uppercase Converter!|");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.Write("\nPlease Enter a string: ");
+            string inputString = Console.ReadLine();
+
+            // Count the number of words
+            int wordCount = CountWords(inputString);
+            Console.WriteLine($"\nNumber of words in the string: {wordCount}");
+
+            // Convert the string to uppercase
+            string uppercaseString = inputString.ToUpper();
+            Console.WriteLine($"Uppercase version of the string: {uppercaseString}");
+        }
+
+        // Method to count words in a string
+        static int CountWords(string str)
+        {
+            string[] words = str.Split(new char[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            return words.Length;
+        }
+    }
+
+// Write a C# program that can perform basic arithmetic functions. (Addition,
+// Subtraction, Multiplication, and Division). The user must be allowed to select which
+// arithmetic function
+
+// he/she wants to use, and then they will be prompted to enter only two numbers after
+// selecting the arithmetic function. Print the result afterwards, and then after printing
+// ask the user if he/she wants toperform another action or not. If yes, repeat the
+// program, if not terminate the program.
+
+using System;
+
+namespace ArithmeticCalculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool repeat = true;
+
+            while (repeat)
+            {
+                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Console.WriteLine("|Please Select an arithmetic function:            |");
+                Console.WriteLine("|1. Addition                                      |");
+                Console.WriteLine("|2. Subtraction                                   |");
+                Console.WriteLine("|3. Multiplication                                |");
+                Console.WriteLine("|4. Division                                      |");
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Console.Write("\nPlease Enter your choice (1-4): ");
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                double num1, num2;
+
+                Console.Write("\nPlease Enter the first number: ");
+                num1 = Convert.ToDouble(Console.ReadLine());
+
+                Console.Write("Please Enter the second number: ");
+                num2 = Convert.ToDouble(Console.ReadLine());
+
+                double result = 0;
+
+                switch (choice)
+                {
+                    case 1:
+                        result = num1 + num2;
+                        break;
+                    case 2:
+                        result = num1 - num2;
+                        break;
+                    case 3:
+                        result = num1 * num2;
+                        break;
+                    case 4:
+                        if (num2!= 0)
+                        {
+                            result = num1 / num2;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error: Division by zero is not allowed.");
+                            continue;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        continue;
+                }
+
+                Console.WriteLine($"Result: {result}");
+
+                Console.Write("Do you want to perform another action? (y/n): ");
+                char response = Convert.ToChar(Console.ReadLine());
+
+                if (response == 'n' || response == 'N')
+                {
+                    repeat = false;
+                }
+            }
+        }
+    }
+}
+
+// Write a C# program that takes two numbers as input: the first
+// number will be the number to be multiplied and the second
+// number will be the multiplier, and prints its multiplication table up
+// to the given second number (the multiplier).
+
+using System;
+
+namespace MultiplicationTable
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("~~~~~~~~~~~~~~~");
+            Console.WriteLine("| MULTIPLY IT | ");
+            Console.WriteLine("~~~~~~~~~~~~~~~");
+            Console.Write("\nPlease Enter the number to be multiplied: ");
+            int baseNumber = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Please Enter the multiplier: ");
+            int multiplier = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"\nMultiplication table for {baseNumber}:");
+
+            for (int i = 1; i <= multiplier; i++)
+            {
+                int result = baseNumber * i;
+                Console.WriteLine($"{baseNumber} x {i} = {result}");
+            }
+        }
+    }
+}
+
+// Write a C# program that demonstrates a list that contains 5 cars
+// and display a sorted listed after. (Using ArrayList are LinkedList is
+// allowed).
+
+using System;
+using System.Collections;
+
+namespace CarListDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("  CARS LIST ");
+            Console.WriteLine("Mazda 3\nChevrolet Cruze\nVolkswagen Jetta\nMercedes-Benz C-Class\nBMW 3 Series");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~");
+            // Create an ArrayList to store cars
+            ArrayList carList = new ArrayList();
+
+            // Add five cars to the list
+            carList.Add("Mazda 3");
+            carList.Add("Chevrolet Cruze");
+            carList.Add("Volkswagen Jetta");
+            carList.Add("Mercedes-Benz C-Class");
+            carList.Add("BMW 3 Series");
+
+            // Sort the list
+            carList.Sort();
+
+            // Display the sorted list of cars
+            Console.WriteLine("\nSorted List of Cars:");
+            foreach (var car in carList)
+            {
+                Console.WriteLine(car);
+            }
+        }
+    }
+}
