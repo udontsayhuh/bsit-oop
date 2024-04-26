@@ -6,110 +6,99 @@ namespace MyCalculator
     {
         public void RunCalculator()
         {
-            string value = "Y"; // initializing the value with Y 
+            string response;
             do
             {
-                float result = 0;
-                float temp = 0;
-                char lastOperation = '+';
-                bool firstInput = true;
+                Calculate(); 
 
-                Console.Clear();
-
-                while (true)
+                Console.Write("\nDo you want to perform another calculation again? (Y/N): ");
+                response = Console.ReadLine().Trim().ToUpper();
+                while (response != "Y" && response != "N")
                 {
-                    Console.Write("\nEnter a number: ");
-                    string input = Console.ReadLine();
+                    Console.WriteLine("INVALID INPUT! Please enter 'Y' or 'N'.");
+                    Console.Write("Do you want to perform another calculation again? (Y/N): ");
+                    response = Console.ReadLine().Trim().ToUpper();
+                }
+            }
+            while (response == "Y");
+        }
 
-                    if (input == "=")
+        private void Calculate()
+        {
+            float result = 0;
+            float temp = 0;
+            char lastOperation = '+';
+            bool firstInput = true;
+
+            Console.Clear(); 
+
+            while (true)
+            {
+                Console.Write("\nEnter first number: ");
+                string input = Console.ReadLine();
+
+                if (float.TryParse(input, out float num))
+                {
+                    if (lastOperation == '/')
                     {
-                        if (!firstInput)
+                        if (num == 0)
                         {
-                            result = CalculateResult(result, temp, lastOperation);
-                            Console.WriteLine($"Result: {result}");
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("INVALID INPUT! PLEASE ENTER A VALID EXPRESSION.");
+                            Console.WriteLine("CANNOT DIVIDE BY ZERO. PLEASE ENTER A VALID NUMBER.");
                             continue;
-                        }
-                    }
-
-                    if (float.TryParse(input, out float num))
-                    {
-                        if (lastOperation == '/')
-                        {
-                            if (num == 0)
-                            {
-                                Console.WriteLine("CANNOT DIVIDE BY ZERO. PLEASE ENTER A VALID NUMBER.");
-                                continue;
-                            }
-                            else
-                            {
-                                temp = num;
-                            }
-                        }
-                        else if (firstInput)
-                        {
-                            result = num;
-                            firstInput = false;
                         }
                         else
                         {
                             temp = num;
                         }
                     }
+                    else if (firstInput)
+                    {
+                        result = num;
+                        firstInput = false;
+                    }
                     else
                     {
-                        Console.WriteLine("INVALID INPUT! MUST BE A NUMERICAL VALUE.");
-                        continue;
+                        temp = num;
                     }
+                }
+                else
+                {
+                    Console.WriteLine("INVALID INPUT! Must be a numerical value.");
+                    continue;
+                }
 
-                    while (true)
+                while (true)
+                {
+                    Console.Write("Enter an operator (+, -, *, /) or (=) to calculate: ");
+                    input = Console.ReadLine();
+
+                    if (IsOperationSymbol(input))
                     {
-                        Console.Write("Enter an operator (+, -, *, /) or (=) to calculate: ");
+                        lastOperation = input[0];
+
+                        Console.Write("Enter the second number: ");
                         input = Console.ReadLine();
 
-                        if (input == "=")
+                        if (float.TryParse(input, out float secondNum))
                         {
-                            result = CalculateResult(result, temp, lastOperation);
+
+                            result = CalculateResult(result, secondNum, lastOperation);
                             Console.WriteLine($"Result: {result}");
 
-                            Console.Write("\nDo you want to do another calculation again? (y/n): ");
-                            value = Console.ReadLine().ToUpper();
-
-                            if (value == "N")
-                            {
-                                Console.WriteLine("\n-------------------------------------");
-                                Console.WriteLine("   BYE T-T EXITING THE CALCULATOR ...");
-                                Console.WriteLine("-------------------------------------");
-                                return;
-                            }
-                            else if (value != "Y")
-                            {
-                                Console.WriteLine("INVALID INPUT! PLEASE ENTER 'Y' OR 'N'.");
-                                continue;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        else if (IsOperationSymbol(input))
-                        {
-                            lastOperation = input[0];
-                            break;
+                            return; 
                         }
                         else
                         {
-                            Console.WriteLine("INVALID INPUT! MUST BE AN OPERATION SYMBOL OR =.");
+                            Console.WriteLine("INVALID INPUT! Must be a numerical value.");
+                            continue;
                         }
                     }
-                    Console.Clear(); 
+                    else
+                    {
+                        Console.WriteLine("INVALID INPUT! Must be an operation symbol or '='.");
+                    }
                 }
             }
-            while (value == "Y");
         }
 
         private bool IsOperationSymbol(string symbol)
@@ -149,6 +138,10 @@ namespace MyCalculator
         {
             Calculator calculator = new Calculator();
             calculator.RunCalculator();
+
+            Console.WriteLine("\n-------------------------------------");
+            Console.WriteLine("   BYE T-T EXITING THE CALCULATOR ...");
+            Console.WriteLine("-------------------------------------");
         }
     }
 }
