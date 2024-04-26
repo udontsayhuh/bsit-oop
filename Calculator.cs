@@ -9,7 +9,7 @@ namespace MyCalculator
             string response;
             do
             {
-                Calculate(); 
+                Calculate();
 
                 Console.Write("\nDo you want to perform another calculation again? (Y/N): ");
                 response = Console.ReadLine().Trim().ToUpper();
@@ -30,41 +30,33 @@ namespace MyCalculator
             char lastOperation = '+';
             bool firstInput = true;
 
-            Console.Clear(); 
+            Console.Clear();
 
             while (true)
             {
-                Console.Write("\nEnter first number: ");
+                Console.Write("\nEnter a number: ");
                 string input = Console.ReadLine();
 
-                if (float.TryParse(input, out float num))
-                {
-                    if (lastOperation == '/')
-                    {
-                        if (num == 0)
-                        {
-                            Console.WriteLine("CANNOT DIVIDE BY ZERO. PLEASE ENTER A VALID NUMBER.");
-                            continue;
-                        }
-                        else
-                        {
-                            temp = num;
-                        }
-                    }
-                    else if (firstInput)
-                    {
-                        result = num;
-                        firstInput = false;
-                    }
-                    else
-                    {
-                        temp = num;
-                    }
-                }
-                else
+                if (!float.TryParse(input, out float num))
                 {
                     Console.WriteLine("INVALID INPUT! Must be a numerical value.");
                     continue;
+                }
+
+                if (lastOperation == '/' && num == 0)
+                {
+                    Console.WriteLine("CANNOT DIVIDE BY ZERO. PLEASE ENTER A VALID NUMBER.");
+                    continue;
+                }
+
+                if (firstInput)
+                {
+                    result = num;
+                    firstInput = false;
+                }
+                else
+                {
+                    temp = num;
                 }
 
                 while (true)
@@ -76,22 +68,18 @@ namespace MyCalculator
                     {
                         lastOperation = input[0];
 
-                        Console.Write("Enter the second number: ");
+                        Console.Write("Enter the next number: ");
                         input = Console.ReadLine();
 
-                        if (float.TryParse(input, out float secondNum))
-                        {
-
-                            result = CalculateResult(result, secondNum, lastOperation);
-                            Console.WriteLine($"Result: {result}");
-
-                            return; 
-                        }
-                        else
+                        if (!float.TryParse(input, out float secondNum))
                         {
                             Console.WriteLine("INVALID INPUT! Must be a numerical value.");
                             continue;
                         }
+
+                        result = CalculateResult(result, secondNum, lastOperation);
+                        Console.WriteLine($"Result: {result}");
+                        return;
                     }
                     else
                     {
@@ -120,11 +108,6 @@ namespace MyCalculator
                     result *= temp;
                     break;
                 case '/':
-                    if (temp == 0)
-                    {
-                        Console.WriteLine("CANNOT DIVIDE BY ZERO. PLEASE ENTER A VALID NUMBER.");
-                        return result;
-                    }
                     result /= temp;
                     break;
             }
