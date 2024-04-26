@@ -6,72 +6,56 @@ class Calculator
     {
         while (true)
         {
-            Console.WriteLine("===============================");
-            Console.WriteLine("= Welcome to Simple Calculator ");
-            Console.WriteLine("= 1. Addition                  ");
-            Console.WriteLine("= 2. Subtraction               ");
-            Console.WriteLine("= 3. Multiplication            ");
-            Console.WriteLine("= 4. Division                  ");
-            Console.WriteLine("= 5. Exit                      ");
-            Console.WriteLine("= Choose an option:            ");
-            Console.WriteLine("===============================");
+            Console.WriteLine("================================");
+            Console.WriteLine("= Welcome to Simple Calculator =");
+            Console.WriteLine("================================");
 
-            int choice;
-            if (!int.TryParse(Console.ReadLine(), out choice))
+            Console.WriteLine("===============================================");
+            Console.WriteLine("= Enter an expression (use '=' to calculate): =");
+            Console.WriteLine("= Example: 1+2+3+4+5= (Operators:+,-,*,/)     =");
+            Console.WriteLine("===============================================");
+            string input = Console.ReadLine();
+            
+            if (string.IsNullOrWhiteSpace(input))
             {
-                Console.WriteLine("Invalid input. Please enter a number.");
+                Console.WriteLine("===================================================");
+                Console.WriteLine("= Invalid input. Please enter a valid expression. =");
+                Console.WriteLine("===================================================");
                 continue;
             }
 
-            if (choice == 5)
-            {
-                Console.WriteLine("Exiting the calculator.");
-                break;
-            }
+            input = input.Replace(" ", ""); // Remove spaces for simplicity
 
-            Console.WriteLine("Enter first number: ");
-            double num1;
-            if (!double.TryParse(Console.ReadLine(), out num1))
+            // Check if the input ends with '='
+            if (input.EndsWith("="))
             {
-                Console.WriteLine("Invalid input. Please enter a number.");
-                continue;
+                input = input.TrimEnd('='); // Remove '='
+                double result = Calculate(input);
+                Console.WriteLine("=================");
+                Console.WriteLine("Result: " + result);
+                Console.WriteLine("=================");
             }
+            else
+            {
+                Console.WriteLine("==============================================");
+                Console.WriteLine("= Expression must end with '=' to calculate. =");
+                Console.WriteLine("==============================================");
+            }
+        }
+    }
 
-            Console.WriteLine("Enter second number: ");
-            double num2;
-            if (!double.TryParse(Console.ReadLine(), out num2))
-            {
-                Console.WriteLine("Invalid input. Please enter a number.");
-                continue;
-            }
-
-            double result = 0;
-            switch (choice)
-            {
-                case 1:
-                    result = num1 + num2;
-                    break;
-                case 2:
-                    result = num1 - num2;
-                    break;
-                case 3:
-                    result = num1 * num2;
-                    break;
-                case 4:
-                    if (num2 == 0)
-                    {
-                        Console.WriteLine("Cannot divide by zero.");
-                        continue;
-                    }
-                    result = num1 / num2;
-                    break;
-                default:
-                    Console.WriteLine("Invalid option. Please choose a number from 1 to 5.");
-                    continue;
-            }
-            Console.WriteLine("==========");
-            Console.WriteLine("Result: " + result);
-            Console.WriteLine("==========");
+    static double Calculate(string expression)
+    {
+        try
+        {
+            return Convert.ToDouble(new System.Data.DataTable().Compute(expression, ""));
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("===================================================================");
+            Console.WriteLine("= Invalid expression. Please enter a valid arithmetic expression. =");
+            Console.WriteLine("===================================================================");
+            return double.NaN;
         }
     }
 }
