@@ -1,8 +1,8 @@
 namespace Hotel_Management_System
 {
-    public partial class Form1 : Form
+    public partial class StartupForm : Form
     {
-        public Form1()
+        public StartupForm()
         {
             InitializeComponent();
         }
