@@ -29,35 +29,29 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupForm));
-            btn_Register = new Button();
             btn_Login = new Button();
             btnClose = new PictureBox();
             btnMinimize = new PictureBox();
             lblCompanyName = new Label();
             lblDeveloper = new Label();
+            username = new TextBox();
+            password = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)btnClose).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnMinimize).BeginInit();
             SuspendLayout();
             // 
-            // btn_Register
-            // 
-            btn_Register.ForeColor = Color.FromArgb(124, 117, 123);
-            btn_Register.Location = new Point(240, 322);
-            btn_Register.Name = "btn_Register";
-            btn_Register.Size = new Size(94, 29);
-            btn_Register.TabIndex = 0;
-            btn_Register.Text = "Register";
-            btn_Register.UseVisualStyleBackColor = true;
-            // 
             // btn_Login
             // 
-            btn_Login.ForeColor = Color.FromArgb(124, 117, 123);
-            btn_Login.Location = new Point(574, 322);
+            btn_Login.ForeColor = Color.Black;
+            btn_Login.Location = new Point(431, 312);
             btn_Login.Name = "btn_Login";
             btn_Login.Size = new Size(94, 29);
             btn_Login.TabIndex = 0;
             btn_Login.Text = "Login";
             btn_Login.UseVisualStyleBackColor = true;
+            btn_Login.Click += btn_Login_Click;
             // 
             // btnClose
             // 
@@ -83,14 +77,14 @@
             // 
             // lblCompanyName
             // 
-            lblCompanyName.Dock = DockStyle.Fill;
+            lblCompanyName.Dock = DockStyle.Top;
             lblCompanyName.Font = new Font("Times New Roman", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCompanyName.Location = new Point(0, 0);
             lblCompanyName.Name = "lblCompanyName";
-            lblCompanyName.Size = new Size(942, 501);
+            lblCompanyName.Size = new Size(942, 101);
             lblCompanyName.TabIndex = 3;
             lblCompanyName.Text = "Company Name";
-            lblCompanyName.TextAlign = ContentAlignment.MiddleCenter;
+            lblCompanyName.TextAlign = ContentAlignment.TopCenter;
             // 
             // lblDeveloper
             // 
@@ -103,17 +97,55 @@
             lblDeveloper.Text = "Hotel Management System Developed by :  ILPST Solutions";
             lblDeveloper.TextAlign = ContentAlignment.TopCenter;
             // 
+            // username
+            // 
+            username.Location = new Point(381, 192);
+            username.Name = "username";
+            username.Size = new Size(196, 27);
+            username.TabIndex = 5;
+            // 
+            // password
+            // 
+            password.Location = new Point(381, 264);
+            password.Name = "password";
+            password.PasswordChar = '*';
+            password.Size = new Size(196, 27);
+            password.TabIndex = 5;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Times New Roman", 9F);
+            label1.Location = new Point(381, 172);
+            label1.Name = "label1";
+            label1.Size = new Size(69, 17);
+            label1.TabIndex = 6;
+            label1.Text = "Username";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Times New Roman", 9F);
+            label2.Location = new Point(381, 244);
+            label2.Name = "label2";
+            label2.Size = new Size(66, 17);
+            label2.TabIndex = 6;
+            label2.Text = "Password";
+            // 
             // StartupForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(234, 234, 234);
             ClientSize = new Size(942, 501);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(password);
+            Controls.Add(username);
             Controls.Add(lblDeveloper);
             Controls.Add(btnMinimize);
             Controls.Add(btnClose);
             Controls.Add(btn_Login);
-            Controls.Add(btn_Register);
             Controls.Add(lblCompanyName);
             FormBorderStyle = FormBorderStyle.None;
             Name = "StartupForm";
@@ -126,12 +158,14 @@
         }
 
         #endregion
-
-        private Button btn_Register;
         private Button btn_Login;
         private PictureBox btnClose;
         private PictureBox btnMinimize;
         private Label lblCompanyName;
         private Label lblDeveloper;
+        private TextBox username;
+        private TextBox password;
+        private Label label1;
+        private Label label2;
     }
 }
