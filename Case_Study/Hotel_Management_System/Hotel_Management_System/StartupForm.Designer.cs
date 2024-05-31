@@ -84,17 +84,17 @@
             lblCompanyName.Size = new Size(942, 101);
             lblCompanyName.TabIndex = 3;
             lblCompanyName.Text = "Company Name";
-            lblCompanyName.TextAlign = ContentAlignment.TopCenter;
+            lblCompanyName.TextAlign = ContentAlignment.BottomCenter;
             // 
             // lblDeveloper
             // 
             lblDeveloper.AutoSize = true;
-            lblDeveloper.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDeveloper.Font = new Font("Times New Roman", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDeveloper.Location = new Point(12, 470);
             lblDeveloper.Name = "lblDeveloper";
-            lblDeveloper.Size = new Size(486, 22);
+            lblDeveloper.Size = new Size(578, 20);
             lblDeveloper.TabIndex = 4;
-            lblDeveloper.Text = "Hotel Management System Developed by :  ILPST Solutions";
+            lblDeveloper.Text = "Hotel Management System Developed by : AssistMyTask Powered By: ILPST";
             lblDeveloper.TextAlign = ContentAlignment.TopCenter;
             // 
             // username
