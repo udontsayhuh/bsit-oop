@@ -29,7 +29,7 @@ namespace Hotel_Management_System
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void Verification(string password, string username)
+        private bool Verification(string? password, string? username)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
@@ -43,43 +43,49 @@ namespace Hotel_Management_System
                         if (reader.HasRows)
                         {
                             LoggedInID = (Int64)reader.GetValue(0);
+                            reader.Close();
+                            username= "";
+                            password= "";
+                            connection.Close();
+                            return true;
                         }
                         else
                         {
-                            username = "";
+                            username= "";
                             password= "";
                             MessageBox.Show("Invalid Credentials", "Please Try Again.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            reader.Close();
+                            connection.Close();
+                            return false;
                         }
-                        reader.Close();
+                        
                     }
                 }
-                connection.Close();
+                
             }
         }
 
         private void btn_Login_Click(object sender, EventArgs e)
         {
-            try
+            if (Verification(password.Text, username.Text) == true)
             {
-                Verification(password.Text, username.Text);
                 Hide();
                 var HMSUI = new HMSUI();
                 HMSUI.FormClosed += new FormClosedEventHandler(child_FormClosed);
                 HMSUI.Show();
             }
-            catch (Exception)
+            else
             {
                 username.Text = "";
                 password.Text = "";
-                MessageBox.Show("Invalid Credentials", "Please Try Again.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
         
         void child_FormClosed(object? sender, FormClosedEventArgs e)
         {
             password.Text = "";
             username.Text = "";
+            Show();
         }
     }
 }

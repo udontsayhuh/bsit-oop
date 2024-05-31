@@ -48,7 +48,7 @@
             btn_Login.Location = new Point(431, 312);
             btn_Login.Name = "btn_Login";
             btn_Login.Size = new Size(94, 29);
-            btn_Login.TabIndex = 0;
+            btn_Login.TabIndex = 3;
             btn_Login.Text = "Login";
             btn_Login.UseVisualStyleBackColor = true;
             btn_Login.Click += btn_Login_Click;
@@ -102,7 +102,7 @@
             username.Location = new Point(381, 192);
             username.Name = "username";
             username.Size = new Size(196, 27);
-            username.TabIndex = 5;
+            username.TabIndex = 0;
             // 
             // password
             // 
@@ -110,7 +110,7 @@
             password.Name = "password";
             password.PasswordChar = '*';
             password.Size = new Size(196, 27);
-            password.TabIndex = 5;
+            password.TabIndex = 1;
             // 
             // label1
             // 
