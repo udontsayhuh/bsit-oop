@@ -23,17 +23,10 @@ namespace Hotel_Management_System
             NameLog = StartupForm.NameLog;
             LoggedInID = StartupForm.LoggedInID;
             InitializeComponent();
-            PopulateRoomsInformation();
-            UpdateRoomTypeAvailability();
-            UpdateRoomNumberAvailability();
-            pnlBook.Visible = false;
-            pnlGuestinfo.Visible = false;
-            pnlInvoiceSummary.Visible = false;
-            pnlReports.Visible = false;
-            pnlRoomInfo.Visible = false;
-            lblLoggedIn.Text = NameLog;
+            InitializeUI();
             
         }
+        
 
         #region ButtonAndPanelInteraction
 
@@ -99,6 +92,19 @@ namespace Hotel_Management_System
 
         #endregion
 
+        #region DataCenter
+        public void InitializeUI()
+        {
+            PopulateRoomsInformation();
+            UpdateRoomTypeAvailability();
+            UpdateRoomNumberAvailability();
+            pnlBook.Visible = false;
+            pnlGuestinfo.Visible = false;
+            pnlInvoiceSummary.Visible = false;
+            pnlReports.Visible = false;
+            pnlRoomInfo.Visible = false;
+            lblLoggedIn.Text = NameLog;
+        }
         public void PopulateRoomsInformation()
         {
             using(SqliteConnection connection = new SqliteConnection(connectionString))
@@ -204,5 +210,7 @@ namespace Hotel_Management_System
                 }
             }
         }
+
+        #endregion
     }
 }
