@@ -53,12 +53,30 @@
             label20 = new Label();
             label7 = new Label();
             pnlBook = new Panel();
+            label36 = new Label();
+            lblAvail1 = new Label();
+            lblAvail2 = new Label();
+            lblAvail3 = new Label();
+            lblAvail4 = new Label();
+            lblAvail5 = new Label();
+            lblAvail6 = new Label();
+            tabRoomTypes = new TabControl();
+            singleRoom = new TabPage();
+            label37 = new Label();
+            cmbSingleRoomNumber = new ComboBox();
+            standardDoubleRoom = new TabPage();
+            standardTwinRoom = new TabPage();
+            deluxeDoubleRoom = new TabPage();
+            studioRoom = new TabPage();
+            presidentialSuite = new TabPage();
+            btnNewBook = new Button();
             label31 = new Label();
             label14 = new Label();
             label15 = new Label();
             label16 = new Label();
             label6 = new Label();
             pnlRoomInfo = new Panel();
+            db_RoomInformation = new DataGridView();
             label26 = new Label();
             label30 = new Label();
             label12 = new Label();
@@ -81,13 +99,31 @@
             label33 = new Label();
             label34 = new Label();
             label35 = new Label();
+            label38 = new Label();
+            cmbStandardDoubleRoomNumber = new ComboBox();
+            cmbStandardTwinRoomNumber = new ComboBox();
+            cmbDeluxeDoubleRoomNumber = new ComboBox();
+            cmbStudioRoomNumber = new ComboBox();
+            cmbPresidentialSuiteNumber = new ComboBox();
+            label39 = new Label();
+            label40 = new Label();
+            label41 = new Label();
+            label42 = new Label();
             ((System.ComponentModel.ISupportInitialize)btnMinimize).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnClose).BeginInit();
             pnlAttendant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlGuestinfo.SuspendLayout();
             pnlBook.SuspendLayout();
+            tabRoomTypes.SuspendLayout();
+            singleRoom.SuspendLayout();
+            standardDoubleRoom.SuspendLayout();
+            standardTwinRoom.SuspendLayout();
+            deluxeDoubleRoom.SuspendLayout();
+            studioRoom.SuspendLayout();
+            presidentialSuite.SuspendLayout();
             pnlRoomInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)db_RoomInformation).BeginInit();
             pnlInvoiceSummary.SuspendLayout();
             pnlReports.SuspendLayout();
             SuspendLayout();
@@ -340,8 +376,18 @@
             // 
             // pnlBook
             // 
+            pnlBook.AccessibleRole = AccessibleRole.None;
             pnlBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlBook.BackColor = Color.FromArgb(207, 192, 175);
+            pnlBook.Controls.Add(label36);
+            pnlBook.Controls.Add(lblAvail1);
+            pnlBook.Controls.Add(lblAvail2);
+            pnlBook.Controls.Add(lblAvail3);
+            pnlBook.Controls.Add(lblAvail4);
+            pnlBook.Controls.Add(lblAvail5);
+            pnlBook.Controls.Add(lblAvail6);
+            pnlBook.Controls.Add(tabRoomTypes);
+            pnlBook.Controls.Add(btnNewBook);
             pnlBook.Controls.Add(label31);
             pnlBook.Controls.Add(label14);
             pnlBook.Controls.Add(label15);
@@ -351,6 +397,181 @@
             pnlBook.Name = "pnlBook";
             pnlBook.Size = new Size(1546, 727);
             pnlBook.TabIndex = 103;
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new Point(3, 94);
+            label36.Name = "label36";
+            label36.Size = new Size(124, 20);
+            label36.TabIndex = 24;
+            label36.Text = "Available Rooms:";
+            // 
+            // lblAvail1
+            // 
+            lblAvail1.AutoSize = true;
+            lblAvail1.Location = new Point(184, 94);
+            lblAvail1.Name = "lblAvail1";
+            lblAvail1.Size = new Size(17, 20);
+            lblAvail1.TabIndex = 24;
+            lblAvail1.Text = "0";
+            // 
+            // lblAvail2
+            // 
+            lblAvail2.AutoSize = true;
+            lblAvail2.Location = new Point(309, 94);
+            lblAvail2.Name = "lblAvail2";
+            lblAvail2.Size = new Size(17, 20);
+            lblAvail2.TabIndex = 24;
+            lblAvail2.Text = "0";
+            // 
+            // lblAvail3
+            // 
+            lblAvail3.AutoSize = true;
+            lblAvail3.Location = new Point(469, 94);
+            lblAvail3.Name = "lblAvail3";
+            lblAvail3.Size = new Size(17, 20);
+            lblAvail3.TabIndex = 24;
+            lblAvail3.Text = "0";
+            // 
+            // lblAvail4
+            // 
+            lblAvail4.AutoSize = true;
+            lblAvail4.Location = new Point(620, 94);
+            lblAvail4.Name = "lblAvail4";
+            lblAvail4.Size = new Size(17, 20);
+            lblAvail4.TabIndex = 24;
+            lblAvail4.Text = "0";
+            // 
+            // lblAvail5
+            // 
+            lblAvail5.AutoSize = true;
+            lblAvail5.Location = new Point(750, 94);
+            lblAvail5.Name = "lblAvail5";
+            lblAvail5.Size = new Size(17, 20);
+            lblAvail5.TabIndex = 24;
+            lblAvail5.Text = "0";
+            // 
+            // lblAvail6
+            // 
+            lblAvail6.AutoSize = true;
+            lblAvail6.Location = new Point(855, 94);
+            lblAvail6.Name = "lblAvail6";
+            lblAvail6.Size = new Size(17, 20);
+            lblAvail6.TabIndex = 24;
+            lblAvail6.Text = "0";
+            // 
+            // tabRoomTypes
+            // 
+            tabRoomTypes.Controls.Add(singleRoom);
+            tabRoomTypes.Controls.Add(standardDoubleRoom);
+            tabRoomTypes.Controls.Add(standardTwinRoom);
+            tabRoomTypes.Controls.Add(deluxeDoubleRoom);
+            tabRoomTypes.Controls.Add(studioRoom);
+            tabRoomTypes.Controls.Add(presidentialSuite);
+            tabRoomTypes.Location = new Point(137, 117);
+            tabRoomTypes.Name = "tabRoomTypes";
+            tabRoomTypes.SelectedIndex = 0;
+            tabRoomTypes.Size = new Size(810, 75);
+            tabRoomTypes.TabIndex = 23;
+            // 
+            // singleRoom
+            // 
+            singleRoom.BackgroundImageLayout = ImageLayout.None;
+            singleRoom.Controls.Add(label37);
+            singleRoom.Controls.Add(cmbSingleRoomNumber);
+            singleRoom.Location = new Point(4, 29);
+            singleRoom.Name = "singleRoom";
+            singleRoom.Padding = new Padding(3);
+            singleRoom.Size = new Size(802, 42);
+            singleRoom.TabIndex = 0;
+            singleRoom.Text = "Single Room";
+            singleRoom.UseVisualStyleBackColor = true;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(7, 9);
+            label37.Name = "label37";
+            label37.Size = new Size(107, 20);
+            label37.TabIndex = 24;
+            label37.Text = "Room Number";
+            // 
+            // cmbSingleRoomNumber
+            // 
+            cmbSingleRoomNumber.FormattingEnabled = true;
+            cmbSingleRoomNumber.Location = new Point(120, 6);
+            cmbSingleRoomNumber.Name = "cmbSingleRoomNumber";
+            cmbSingleRoomNumber.Size = new Size(151, 28);
+            cmbSingleRoomNumber.TabIndex = 0;
+            // 
+            // standardDoubleRoom
+            // 
+            standardDoubleRoom.Controls.Add(label38);
+            standardDoubleRoom.Controls.Add(cmbStandardDoubleRoomNumber);
+            standardDoubleRoom.Location = new Point(4, 29);
+            standardDoubleRoom.Name = "standardDoubleRoom";
+            standardDoubleRoom.Padding = new Padding(3);
+            standardDoubleRoom.Size = new Size(802, 42);
+            standardDoubleRoom.TabIndex = 1;
+            standardDoubleRoom.Text = "Standard Double Room";
+            standardDoubleRoom.UseVisualStyleBackColor = true;
+            // 
+            // standardTwinRoom
+            // 
+            standardTwinRoom.Controls.Add(label39);
+            standardTwinRoom.Controls.Add(cmbStandardTwinRoomNumber);
+            standardTwinRoom.Location = new Point(4, 29);
+            standardTwinRoom.Name = "standardTwinRoom";
+            standardTwinRoom.Padding = new Padding(3);
+            standardTwinRoom.Size = new Size(802, 42);
+            standardTwinRoom.TabIndex = 2;
+            standardTwinRoom.Text = "Standard Twin Room";
+            standardTwinRoom.UseVisualStyleBackColor = true;
+            // 
+            // deluxeDoubleRoom
+            // 
+            deluxeDoubleRoom.Controls.Add(label40);
+            deluxeDoubleRoom.Controls.Add(cmbDeluxeDoubleRoomNumber);
+            deluxeDoubleRoom.Location = new Point(4, 29);
+            deluxeDoubleRoom.Name = "deluxeDoubleRoom";
+            deluxeDoubleRoom.Padding = new Padding(3);
+            deluxeDoubleRoom.Size = new Size(802, 42);
+            deluxeDoubleRoom.TabIndex = 3;
+            deluxeDoubleRoom.Text = "Deluxe Double Room";
+            deluxeDoubleRoom.UseVisualStyleBackColor = true;
+            // 
+            // studioRoom
+            // 
+            studioRoom.Controls.Add(label41);
+            studioRoom.Controls.Add(cmbStudioRoomNumber);
+            studioRoom.Location = new Point(4, 29);
+            studioRoom.Name = "studioRoom";
+            studioRoom.Padding = new Padding(3);
+            studioRoom.Size = new Size(802, 42);
+            studioRoom.TabIndex = 4;
+            studioRoom.Text = "Studio Room";
+            studioRoom.UseVisualStyleBackColor = true;
+            // 
+            // presidentialSuite
+            // 
+            presidentialSuite.Controls.Add(label42);
+            presidentialSuite.Controls.Add(cmbPresidentialSuiteNumber);
+            presidentialSuite.Location = new Point(4, 29);
+            presidentialSuite.Name = "presidentialSuite";
+            presidentialSuite.Size = new Size(802, 42);
+            presidentialSuite.TabIndex = 5;
+            presidentialSuite.Text = "Presidential Suite";
+            presidentialSuite.UseVisualStyleBackColor = true;
+            // 
+            // btnNewBook
+            // 
+            btnNewBook.Location = new Point(1438, 685);
+            btnNewBook.Name = "btnNewBook";
+            btnNewBook.Size = new Size(94, 29);
+            btnNewBook.TabIndex = 22;
+            btnNewBook.Text = "Book";
+            btnNewBook.UseVisualStyleBackColor = true;
             // 
             // label31
             // 
@@ -405,6 +626,7 @@
             // 
             pnlRoomInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlRoomInfo.BackColor = Color.FromArgb(207, 192, 175);
+            pnlRoomInfo.Controls.Add(db_RoomInformation);
             pnlRoomInfo.Controls.Add(label26);
             pnlRoomInfo.Controls.Add(label30);
             pnlRoomInfo.Controls.Add(label12);
@@ -414,6 +636,24 @@
             pnlRoomInfo.Name = "pnlRoomInfo";
             pnlRoomInfo.Size = new Size(1546, 727);
             pnlRoomInfo.TabIndex = 104;
+            // 
+            // db_RoomInformation
+            // 
+            db_RoomInformation.AllowUserToAddRows = false;
+            db_RoomInformation.AllowUserToDeleteRows = false;
+            db_RoomInformation.AllowUserToResizeColumns = false;
+            db_RoomInformation.AllowUserToResizeRows = false;
+            db_RoomInformation.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            db_RoomInformation.ColumnHeadersHeight = 29;
+            db_RoomInformation.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            db_RoomInformation.Location = new Point(44, 133);
+            db_RoomInformation.Name = "db_RoomInformation";
+            db_RoomInformation.ReadOnly = true;
+            db_RoomInformation.RowHeadersWidth = 51;
+            db_RoomInformation.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            db_RoomInformation.ShowEditingIcon = false;
+            db_RoomInformation.Size = new Size(1442, 546);
+            db_RoomInformation.TabIndex = 0;
             // 
             // label26
             // 
@@ -641,6 +881,91 @@
             label35.TabIndex = 107;
             label35.Text = "Guest Info Panel";
             // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Location = new Point(7, 9);
+            label38.Name = "label38";
+            label38.Size = new Size(107, 20);
+            label38.TabIndex = 26;
+            label38.Text = "Room Number";
+            // 
+            // cmbStandardDoubleRoomNumber
+            // 
+            cmbStandardDoubleRoomNumber.FormattingEnabled = true;
+            cmbStandardDoubleRoomNumber.Location = new Point(120, 6);
+            cmbStandardDoubleRoomNumber.Name = "cmbStandardDoubleRoomNumber";
+            cmbStandardDoubleRoomNumber.Size = new Size(151, 28);
+            cmbStandardDoubleRoomNumber.TabIndex = 25;
+            // 
+            // cmbStandardTwinRoomNumber
+            // 
+            cmbStandardTwinRoomNumber.FormattingEnabled = true;
+            cmbStandardTwinRoomNumber.Location = new Point(120, 6);
+            cmbStandardTwinRoomNumber.Name = "cmbStandardTwinRoomNumber";
+            cmbStandardTwinRoomNumber.Size = new Size(151, 28);
+            cmbStandardTwinRoomNumber.TabIndex = 26;
+            // 
+            // cmbDeluxeDoubleRoomNumber
+            // 
+            cmbDeluxeDoubleRoomNumber.FormattingEnabled = true;
+            cmbDeluxeDoubleRoomNumber.Location = new Point(120, 6);
+            cmbDeluxeDoubleRoomNumber.Name = "cmbDeluxeDoubleRoomNumber";
+            cmbDeluxeDoubleRoomNumber.Size = new Size(151, 28);
+            cmbDeluxeDoubleRoomNumber.TabIndex = 26;
+            // 
+            // cmbStudioRoomNumber
+            // 
+            cmbStudioRoomNumber.FormattingEnabled = true;
+            cmbStudioRoomNumber.Location = new Point(120, 6);
+            cmbStudioRoomNumber.Name = "cmbStudioRoomNumber";
+            cmbStudioRoomNumber.Size = new Size(151, 28);
+            cmbStudioRoomNumber.TabIndex = 26;
+            // 
+            // cmbPresidentialSuiteNumber
+            // 
+            cmbPresidentialSuiteNumber.FormattingEnabled = true;
+            cmbPresidentialSuiteNumber.Location = new Point(120, 6);
+            cmbPresidentialSuiteNumber.Name = "cmbPresidentialSuiteNumber";
+            cmbPresidentialSuiteNumber.Size = new Size(151, 28);
+            cmbPresidentialSuiteNumber.TabIndex = 26;
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Location = new Point(7, 9);
+            label39.Name = "label39";
+            label39.Size = new Size(107, 20);
+            label39.TabIndex = 27;
+            label39.Text = "Room Number";
+            // 
+            // label40
+            // 
+            label40.AutoSize = true;
+            label40.Location = new Point(7, 9);
+            label40.Name = "label40";
+            label40.Size = new Size(107, 20);
+            label40.TabIndex = 27;
+            label40.Text = "Room Number";
+            // 
+            // label41
+            // 
+            label41.AutoSize = true;
+            label41.Location = new Point(7, 9);
+            label41.Name = "label41";
+            label41.Size = new Size(107, 20);
+            label41.TabIndex = 27;
+            label41.Text = "Room Number";
+            // 
+            // label42
+            // 
+            label42.AutoSize = true;
+            label42.Location = new Point(7, 9);
+            label42.Name = "label42";
+            label42.Size = new Size(107, 20);
+            label42.TabIndex = 27;
+            label42.Text = "Room Number";
+            // 
             // HMSUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -656,16 +981,16 @@
             Controls.Add(btmGuestInfo);
             Controls.Add(btnMinimize);
             Controls.Add(btnClose);
-            Controls.Add(pnlReports);
-            Controls.Add(pnlInvoiceSummary);
-            Controls.Add(pnlRoomInfo);
             Controls.Add(pnlBook);
             Controls.Add(pnlGuestinfo);
-            Controls.Add(label25);
-            Controls.Add(label32);
+            Controls.Add(pnlReports);
             Controls.Add(label33);
-            Controls.Add(label34);
             Controls.Add(label35);
+            Controls.Add(label32);
+            Controls.Add(label34);
+            Controls.Add(label25);
+            Controls.Add(pnlInvoiceSummary);
+            Controls.Add(pnlRoomInfo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "HMSUI";
             StartPosition = FormStartPosition.CenterScreen;
@@ -680,8 +1005,22 @@
             pnlGuestinfo.PerformLayout();
             pnlBook.ResumeLayout(false);
             pnlBook.PerformLayout();
+            tabRoomTypes.ResumeLayout(false);
+            singleRoom.ResumeLayout(false);
+            singleRoom.PerformLayout();
+            standardDoubleRoom.ResumeLayout(false);
+            standardDoubleRoom.PerformLayout();
+            standardTwinRoom.ResumeLayout(false);
+            standardTwinRoom.PerformLayout();
+            deluxeDoubleRoom.ResumeLayout(false);
+            deluxeDoubleRoom.PerformLayout();
+            studioRoom.ResumeLayout(false);
+            studioRoom.PerformLayout();
+            presidentialSuite.ResumeLayout(false);
+            presidentialSuite.PerformLayout();
             pnlRoomInfo.ResumeLayout(false);
             pnlRoomInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)db_RoomInformation).EndInit();
             pnlInvoiceSummary.ResumeLayout(false);
             pnlInvoiceSummary.PerformLayout();
             pnlReports.ResumeLayout(false);
@@ -744,5 +1083,34 @@
         private Label label33;
         private Label label34;
         private Label label35;
+        private TableLayoutPanel tblRooms;
+        private DataGridView db_RoomInformation;
+        private Button btnNewBook;
+        private TabControl tabRoomTypes;
+        private TabPage singleRoom;
+        private TabPage standardDoubleRoom;
+        private TabPage standardTwinRoom;
+        private TabPage deluxeDoubleRoom;
+        private TabPage studioRoom;
+        private TabPage presidentialSuite;
+        private Label label36;
+        private Label lblAvail1;
+        private Label lblAvail2;
+        private Label lblAvail3;
+        private Label lblAvail4;
+        private Label lblAvail5;
+        private Label lblAvail6;
+        private ComboBox cmbSingleRoomNumber;
+        private Label label37;
+        private Label label38;
+        private ComboBox cmbStandardDoubleRoomNumber;
+        private Label label39;
+        private ComboBox cmbStandardTwinRoomNumber;
+        private Label label40;
+        private ComboBox cmbDeluxeDoubleRoomNumber;
+        private Label label41;
+        private ComboBox cmbStudioRoomNumber;
+        private Label label42;
+        private ComboBox cmbPresidentialSuiteNumber;
     }
 }
