@@ -8,6 +8,7 @@ namespace Hotel_Management_System
     public partial class StartupForm : Form
     {
         public static Int64 LoggedInID;
+        public static string NameLog;
         private string connectionString = "Data Source = HMSCS.db;";
         public StartupForm()
         {
@@ -33,7 +34,7 @@ namespace Hotel_Management_System
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-                string query = "Select employeeID, username, password from r_Attendant where username = '" + username + "' and password = '" + password + "'";
+                string query = "Select employeeID, firstName, lastName, username, password from r_Attendant where username = '" + username + "' and password = '" + password + "'";
                 connection.Open();
                 using (SqliteCommand command = new SqliteCommand(query, connection))
                 {
@@ -43,8 +44,9 @@ namespace Hotel_Management_System
                         if (reader.HasRows)
                         {
                             LoggedInID = (Int64)reader.GetValue(0);
+                            NameLog = reader.GetString(1)+" "+ reader.GetString(2);
                             reader.Close();
-                            username= "";
+                            username = "";
                             password= "";
                             connection.Close();
                             return true;
@@ -72,6 +74,7 @@ namespace Hotel_Management_System
                 Hide();
                 var HMSUI = new HMSUI();
                 HMSUI.FormClosed += new FormClosedEventHandler(child_FormClosed);
+                NameLog = "";
                 HMSUI.Show();
             }
             else

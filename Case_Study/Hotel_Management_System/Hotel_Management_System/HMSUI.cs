@@ -12,14 +12,20 @@ namespace Hotel_Management_System
 {
     public partial class HMSUI : Form
     {
+        public static Int64 LoggedInID;
+        public static string NameLog;
         public HMSUI()
         {
+            NameLog = StartupForm.NameLog;
+            LoggedInID = StartupForm.LoggedInID;
             InitializeComponent();
+            lblLoggedIn.Text = NameLog;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             StartupForm.LoggedInID = 0;
+            lblLoggedIn.Text = "";
             this.Close();
         }
 
@@ -27,5 +33,6 @@ namespace Hotel_Management_System
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
     }
 }
