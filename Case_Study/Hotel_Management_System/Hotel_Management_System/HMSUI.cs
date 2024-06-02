@@ -389,8 +389,11 @@ namespace Hotel_Management_System
             }
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-                string query = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
-                string query2 = "insert into t_BookingTransaction (ReceiptNumber, TransactionID, GuestID, TransactionDate, RoomCost, VAT, TotalCost, ModePayment) values ('" + ReceiptNumber + "', '" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" + DateTime.Now.ToString() + "', '" + Int32.Parse(roomCost.Text) + "', '" + Int32.Parse(tax.Text) + "', '" + Int32.Parse(totalPrice.Text) + "', 'cash')";
+                string query = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" 
+                    + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                string query2 = "insert into t_BookingTransaction (ReceiptNumber, TransactionID, GuestID, TransactionDate, RoomCost, VAT, TotalCost, ModePayment) " +
+                    "values ('" + ReceiptNumber + "', '" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" + DateTime.Now.ToString() + "', '" 
+                    + Int32.Parse(roomCost.Text) + "', '" + Int32.Parse(tax.Text) + "', '" + Int32.Parse(totalPrice.Text) + "', 'cash')";
                 string query3 = "insert into t_RoomStatus (RoomStatusID, TransactionID, Status, RoomID, ScheduledCheckIn, ScheduledCheckout)" +
                     "values ('"+RoomStatusID+"','"+ Int32.Parse(transactionID.Text) + "','Occupied','"+RoomID+"','"+dateCheckIn.Value.ToString()+"','"+dateCheckOut.Value.ToString() + "')";
                 string query4 = "update t_RoomAvailability set Status = 'Occupied' where RoomID ='"+RoomID+"'";
