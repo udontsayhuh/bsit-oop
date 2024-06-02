@@ -42,8 +42,17 @@ namespace Hotel_Management_System
 
         }
 
+        private void HMSUI_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
 
-        #region ButtonAndPanelInteraction
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
+        }
+
+        #region UIMainButtonAndPanelInteraction
 
         private void Toggle_Panel(Panel panel)
         {
@@ -65,8 +74,6 @@ namespace Hotel_Management_System
                 panel.Visible = true;
             }
         }
-
-
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -386,7 +393,7 @@ namespace Hotel_Management_System
 
         #endregion
 
-
+        #region BookingTransaction
         private void btnNewBook_Click(object sender, EventArgs e)
         {
             if (totalPrice.Text == "" || emailAddress.Text == "" || phoneNumber.Text == "" || firstName.Text == "" || lastName.Text == "" || middleName.Text == "")
@@ -588,21 +595,15 @@ namespace Hotel_Management_System
             }
         }
 
-        private void HMSUI_Load(object sender, EventArgs e)
-        {
-            timer1.Start();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
-        }
+        
 
         private void dateCheckIn_ValueChanged(object sender, EventArgs e)
         {
             dateCheckOut.MinDate = dateCheckIn.Value;
         }
+        #endregion
 
+        #region AddPersonComplexityPanel
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
             if (personPanel.Visible == false)
@@ -705,5 +706,7 @@ namespace Hotel_Management_System
         {
             addPersonInfo4.Visible = false;
         }
+        #endregion
+
     }
 }
