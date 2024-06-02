@@ -60,6 +60,8 @@
             label20 = new Label();
             label7 = new Label();
             pnlBook = new Panel();
+            label37 = new Label();
+            cmbRoomNumber = new ComboBox();
             dateCheckOut = new DateTimePicker();
             roomInclusion = new Label();
             label44 = new Label();
@@ -70,6 +72,8 @@
             label61 = new Label();
             phoneNumber = new TextBox();
             totalPrice = new TextBox();
+            subTotal = new TextBox();
+            tax = new TextBox();
             roomCost = new TextBox();
             guestID = new TextBox();
             bookingID = new TextBox();
@@ -77,8 +81,10 @@
             lastName = new TextBox();
             middleName = new TextBox();
             firstName = new TextBox();
+            label52 = new Label();
             emailAddress = new TextBox();
             label73 = new Label();
+            label51 = new Label();
             label71 = new Label();
             label72 = new Label();
             label70 = new Label();
@@ -97,23 +103,12 @@
             lblAvail6 = new Label();
             tabRoomTypes = new TabControl();
             singleRoom = new TabPage();
-            label37 = new Label();
-            cmbSingleRoomNumber = new ComboBox();
             standardDoubleRoom = new TabPage();
-            label38 = new Label();
-            cmbStandardDoubleRoomNumber = new ComboBox();
             standardTwinRoom = new TabPage();
-            label39 = new Label();
-            cmbStandardTwinRoomNumber = new ComboBox();
             deluxeDoubleRoom = new TabPage();
-            label40 = new Label();
-            cmbDeluxeDoubleRoomNumber = new ComboBox();
             studioRoom = new TabPage();
-            label41 = new Label();
-            cmbStudioRoomNumber = new ComboBox();
             presidentialSuite = new TabPage();
-            label42 = new Label();
-            cmbPresidentialSuiteNumber = new ComboBox();
+            Init = new TabPage();
             btnNewBook = new Button();
             label31 = new Label();
             label14 = new Label();
@@ -155,12 +150,6 @@
             spnlCustomerInfo.SuspendLayout();
             pnlBook.SuspendLayout();
             tabRoomTypes.SuspendLayout();
-            singleRoom.SuspendLayout();
-            standardDoubleRoom.SuspendLayout();
-            standardTwinRoom.SuspendLayout();
-            deluxeDoubleRoom.SuspendLayout();
-            studioRoom.SuspendLayout();
-            presidentialSuite.SuspendLayout();
             pnlRoomInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)db_RoomInformation).BeginInit();
             pnlInvoiceSummary.SuspendLayout();
@@ -493,6 +482,8 @@
             pnlBook.AccessibleRole = AccessibleRole.None;
             pnlBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlBook.BackColor = Color.FromArgb(207, 192, 175);
+            pnlBook.Controls.Add(label37);
+            pnlBook.Controls.Add(cmbRoomNumber);
             pnlBook.Controls.Add(dateCheckOut);
             pnlBook.Controls.Add(roomInclusion);
             pnlBook.Controls.Add(label44);
@@ -503,6 +494,8 @@
             pnlBook.Controls.Add(label61);
             pnlBook.Controls.Add(phoneNumber);
             pnlBook.Controls.Add(totalPrice);
+            pnlBook.Controls.Add(subTotal);
+            pnlBook.Controls.Add(tax);
             pnlBook.Controls.Add(roomCost);
             pnlBook.Controls.Add(guestID);
             pnlBook.Controls.Add(bookingID);
@@ -510,8 +503,10 @@
             pnlBook.Controls.Add(lastName);
             pnlBook.Controls.Add(middleName);
             pnlBook.Controls.Add(firstName);
+            pnlBook.Controls.Add(label52);
             pnlBook.Controls.Add(emailAddress);
             pnlBook.Controls.Add(label73);
+            pnlBook.Controls.Add(label51);
             pnlBook.Controls.Add(label71);
             pnlBook.Controls.Add(label72);
             pnlBook.Controls.Add(label70);
@@ -540,6 +535,25 @@
             pnlBook.Size = new Size(1546, 727);
             pnlBook.TabIndex = 103;
             // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.BackColor = Color.FromArgb(224, 224, 224);
+            label37.Location = new Point(150, 157);
+            label37.Name = "label37";
+            label37.Size = new Size(107, 20);
+            label37.TabIndex = 24;
+            label37.Text = "Room Number";
+            // 
+            // cmbRoomNumber
+            // 
+            cmbRoomNumber.Enabled = false;
+            cmbRoomNumber.FormattingEnabled = true;
+            cmbRoomNumber.Location = new Point(263, 153);
+            cmbRoomNumber.Name = "cmbRoomNumber";
+            cmbRoomNumber.Size = new Size(151, 28);
+            cmbRoomNumber.TabIndex = 0;
+            // 
             // dateCheckOut
             // 
             dateCheckOut.CustomFormat = "MM/dd/yyyy hh:mm:ss";
@@ -548,7 +562,7 @@
             dateCheckOut.Name = "dateCheckOut";
             dateCheckOut.Size = new Size(250, 27);
             dateCheckOut.TabIndex = 25;
-            dateCheckOut.Leave += dateCheckOut_Leave;
+            dateCheckOut.ValueChanged += dateCheckOut_ValueChanged;
             // 
             // roomInclusion
             // 
@@ -624,15 +638,33 @@
             // 
             // totalPrice
             // 
-            totalPrice.Location = new Point(1280, 627);
+            totalPrice.Location = new Point(1280, 631);
             totalPrice.Name = "totalPrice";
             totalPrice.ReadOnly = true;
             totalPrice.Size = new Size(228, 27);
             totalPrice.TabIndex = 25;
             // 
+            // subTotal
+            // 
+            subTotal.Location = new Point(1280, 555);
+            subTotal.Name = "subTotal";
+            subTotal.ReadOnly = true;
+            subTotal.Size = new Size(228, 27);
+            subTotal.TabIndex = 25;
+            subTotal.TextChanged += subTotal_TextChanged;
+            // 
+            // tax
+            // 
+            tax.Location = new Point(1280, 401);
+            tax.Name = "tax";
+            tax.ReadOnly = true;
+            tax.Size = new Size(228, 27);
+            tax.TabIndex = 25;
+            tax.TextChanged += tax_TextChanged;
+            // 
             // roomCost
             // 
-            roomCost.Location = new Point(1280, 551);
+            roomCost.Location = new Point(1280, 479);
             roomCost.Name = "roomCost";
             roomCost.ReadOnly = true;
             roomCost.Size = new Size(228, 27);
@@ -683,6 +715,15 @@
             firstName.Size = new Size(228, 27);
             firstName.TabIndex = 25;
             // 
+            // label52
+            // 
+            label52.AutoSize = true;
+            label52.Location = new Point(1280, 608);
+            label52.Name = "label52";
+            label52.Size = new Size(78, 20);
+            label52.TabIndex = 24;
+            label52.Text = "Total Price";
+            // 
             // emailAddress
             // 
             emailAddress.Location = new Point(236, 236);
@@ -694,11 +735,20 @@
             // label73
             // 
             label73.AutoSize = true;
-            label73.Location = new Point(1280, 604);
+            label73.Location = new Point(1280, 532);
             label73.Name = "label73";
-            label73.Size = new Size(81, 20);
+            label73.Size = new Size(71, 20);
             label73.TabIndex = 24;
-            label73.Text = "Total Price:";
+            label73.Text = "Sub Total";
+            // 
+            // label51
+            // 
+            label51.AutoSize = true;
+            label51.Location = new Point(1280, 378);
+            label51.Name = "label51";
+            label51.Size = new Size(57, 20);
+            label51.TabIndex = 24;
+            label51.Text = "7% Tax:";
             // 
             // label71
             // 
@@ -712,7 +762,7 @@
             // label72
             // 
             label72.AutoSize = true;
-            label72.Location = new Point(1280, 528);
+            label72.Location = new Point(1280, 456);
             label72.Name = "label72";
             label72.Size = new Size(88, 20);
             label72.TabIndex = 24;
@@ -852,9 +902,10 @@
             tabRoomTypes.Controls.Add(deluxeDoubleRoom);
             tabRoomTypes.Controls.Add(studioRoom);
             tabRoomTypes.Controls.Add(presidentialSuite);
+            tabRoomTypes.Controls.Add(Init);
             tabRoomTypes.Location = new Point(137, 117);
             tabRoomTypes.Name = "tabRoomTypes";
-            tabRoomTypes.SelectedIndex = 0;
+            tabRoomTypes.SelectedIndex = 6;
             tabRoomTypes.Size = new Size(1074, 75);
             tabRoomTypes.TabIndex = 23;
             tabRoomTypes.SelectedIndexChanged += tabRoomTypes_SelectedIndexChanged;
@@ -862,8 +913,6 @@
             // singleRoom
             // 
             singleRoom.BackgroundImageLayout = ImageLayout.None;
-            singleRoom.Controls.Add(label37);
-            singleRoom.Controls.Add(cmbSingleRoomNumber);
             singleRoom.Location = new Point(4, 29);
             singleRoom.Name = "singleRoom";
             singleRoom.Padding = new Padding(3);
@@ -872,27 +921,8 @@
             singleRoom.Text = "Single Room";
             singleRoom.UseVisualStyleBackColor = true;
             // 
-            // label37
-            // 
-            label37.AutoSize = true;
-            label37.Location = new Point(7, 9);
-            label37.Name = "label37";
-            label37.Size = new Size(107, 20);
-            label37.TabIndex = 24;
-            label37.Text = "Room Number";
-            // 
-            // cmbSingleRoomNumber
-            // 
-            cmbSingleRoomNumber.FormattingEnabled = true;
-            cmbSingleRoomNumber.Location = new Point(120, 6);
-            cmbSingleRoomNumber.Name = "cmbSingleRoomNumber";
-            cmbSingleRoomNumber.Size = new Size(151, 28);
-            cmbSingleRoomNumber.TabIndex = 0;
-            // 
             // standardDoubleRoom
             // 
-            standardDoubleRoom.Controls.Add(label38);
-            standardDoubleRoom.Controls.Add(cmbStandardDoubleRoomNumber);
             standardDoubleRoom.Location = new Point(4, 29);
             standardDoubleRoom.Name = "standardDoubleRoom";
             standardDoubleRoom.Padding = new Padding(3);
@@ -901,27 +931,8 @@
             standardDoubleRoom.Text = "Standard Double Room";
             standardDoubleRoom.UseVisualStyleBackColor = true;
             // 
-            // label38
-            // 
-            label38.AutoSize = true;
-            label38.Location = new Point(7, 9);
-            label38.Name = "label38";
-            label38.Size = new Size(107, 20);
-            label38.TabIndex = 26;
-            label38.Text = "Room Number";
-            // 
-            // cmbStandardDoubleRoomNumber
-            // 
-            cmbStandardDoubleRoomNumber.FormattingEnabled = true;
-            cmbStandardDoubleRoomNumber.Location = new Point(120, 6);
-            cmbStandardDoubleRoomNumber.Name = "cmbStandardDoubleRoomNumber";
-            cmbStandardDoubleRoomNumber.Size = new Size(151, 28);
-            cmbStandardDoubleRoomNumber.TabIndex = 25;
-            // 
             // standardTwinRoom
             // 
-            standardTwinRoom.Controls.Add(label39);
-            standardTwinRoom.Controls.Add(cmbStandardTwinRoomNumber);
             standardTwinRoom.Location = new Point(4, 29);
             standardTwinRoom.Name = "standardTwinRoom";
             standardTwinRoom.Padding = new Padding(3);
@@ -930,27 +941,8 @@
             standardTwinRoom.Text = "Standard Twin Room";
             standardTwinRoom.UseVisualStyleBackColor = true;
             // 
-            // label39
-            // 
-            label39.AutoSize = true;
-            label39.Location = new Point(7, 9);
-            label39.Name = "label39";
-            label39.Size = new Size(107, 20);
-            label39.TabIndex = 27;
-            label39.Text = "Room Number";
-            // 
-            // cmbStandardTwinRoomNumber
-            // 
-            cmbStandardTwinRoomNumber.FormattingEnabled = true;
-            cmbStandardTwinRoomNumber.Location = new Point(120, 6);
-            cmbStandardTwinRoomNumber.Name = "cmbStandardTwinRoomNumber";
-            cmbStandardTwinRoomNumber.Size = new Size(151, 28);
-            cmbStandardTwinRoomNumber.TabIndex = 26;
-            // 
             // deluxeDoubleRoom
             // 
-            deluxeDoubleRoom.Controls.Add(label40);
-            deluxeDoubleRoom.Controls.Add(cmbDeluxeDoubleRoomNumber);
             deluxeDoubleRoom.Location = new Point(4, 29);
             deluxeDoubleRoom.Name = "deluxeDoubleRoom";
             deluxeDoubleRoom.Padding = new Padding(3);
@@ -959,27 +951,8 @@
             deluxeDoubleRoom.Text = "Deluxe Double Room";
             deluxeDoubleRoom.UseVisualStyleBackColor = true;
             // 
-            // label40
-            // 
-            label40.AutoSize = true;
-            label40.Location = new Point(7, 9);
-            label40.Name = "label40";
-            label40.Size = new Size(107, 20);
-            label40.TabIndex = 27;
-            label40.Text = "Room Number";
-            // 
-            // cmbDeluxeDoubleRoomNumber
-            // 
-            cmbDeluxeDoubleRoomNumber.FormattingEnabled = true;
-            cmbDeluxeDoubleRoomNumber.Location = new Point(120, 6);
-            cmbDeluxeDoubleRoomNumber.Name = "cmbDeluxeDoubleRoomNumber";
-            cmbDeluxeDoubleRoomNumber.Size = new Size(151, 28);
-            cmbDeluxeDoubleRoomNumber.TabIndex = 26;
-            // 
             // studioRoom
             // 
-            studioRoom.Controls.Add(label41);
-            studioRoom.Controls.Add(cmbStudioRoomNumber);
             studioRoom.Location = new Point(4, 29);
             studioRoom.Name = "studioRoom";
             studioRoom.Padding = new Padding(3);
@@ -988,27 +961,8 @@
             studioRoom.Text = "Studio Room";
             studioRoom.UseVisualStyleBackColor = true;
             // 
-            // label41
-            // 
-            label41.AutoSize = true;
-            label41.Location = new Point(7, 9);
-            label41.Name = "label41";
-            label41.Size = new Size(107, 20);
-            label41.TabIndex = 27;
-            label41.Text = "Room Number";
-            // 
-            // cmbStudioRoomNumber
-            // 
-            cmbStudioRoomNumber.FormattingEnabled = true;
-            cmbStudioRoomNumber.Location = new Point(120, 6);
-            cmbStudioRoomNumber.Name = "cmbStudioRoomNumber";
-            cmbStudioRoomNumber.Size = new Size(151, 28);
-            cmbStudioRoomNumber.TabIndex = 26;
-            // 
             // presidentialSuite
             // 
-            presidentialSuite.Controls.Add(label42);
-            presidentialSuite.Controls.Add(cmbPresidentialSuiteNumber);
             presidentialSuite.Location = new Point(4, 29);
             presidentialSuite.Name = "presidentialSuite";
             presidentialSuite.Size = new Size(1066, 42);
@@ -1016,22 +970,13 @@
             presidentialSuite.Text = "Presidential Suite";
             presidentialSuite.UseVisualStyleBackColor = true;
             // 
-            // label42
+            // Init
             // 
-            label42.AutoSize = true;
-            label42.Location = new Point(7, 9);
-            label42.Name = "label42";
-            label42.Size = new Size(107, 20);
-            label42.TabIndex = 27;
-            label42.Text = "Room Number";
-            // 
-            // cmbPresidentialSuiteNumber
-            // 
-            cmbPresidentialSuiteNumber.FormattingEnabled = true;
-            cmbPresidentialSuiteNumber.Location = new Point(120, 6);
-            cmbPresidentialSuiteNumber.Name = "cmbPresidentialSuiteNumber";
-            cmbPresidentialSuiteNumber.Size = new Size(151, 28);
-            cmbPresidentialSuiteNumber.TabIndex = 26;
+            Init.Location = new Point(4, 29);
+            Init.Name = "Init";
+            Init.Size = new Size(1066, 42);
+            Init.TabIndex = 6;
+            Init.Text = "-";
             // 
             // btnNewBook
             // 
@@ -1396,18 +1341,6 @@
             pnlBook.ResumeLayout(false);
             pnlBook.PerformLayout();
             tabRoomTypes.ResumeLayout(false);
-            singleRoom.ResumeLayout(false);
-            singleRoom.PerformLayout();
-            standardDoubleRoom.ResumeLayout(false);
-            standardDoubleRoom.PerformLayout();
-            standardTwinRoom.ResumeLayout(false);
-            standardTwinRoom.PerformLayout();
-            deluxeDoubleRoom.ResumeLayout(false);
-            deluxeDoubleRoom.PerformLayout();
-            studioRoom.ResumeLayout(false);
-            studioRoom.PerformLayout();
-            presidentialSuite.ResumeLayout(false);
-            presidentialSuite.PerformLayout();
             pnlRoomInfo.ResumeLayout(false);
             pnlRoomInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)db_RoomInformation).EndInit();
@@ -1490,18 +1423,8 @@
         private Label lblAvail4;
         private Label lblAvail5;
         private Label lblAvail6;
-        private ComboBox cmbSingleRoomNumber;
+        private ComboBox cmbRoomNumber;
         private Label label37;
-        private Label label38;
-        private ComboBox cmbStandardDoubleRoomNumber;
-        private Label label39;
-        private ComboBox cmbStandardTwinRoomNumber;
-        private Label label40;
-        private ComboBox cmbDeluxeDoubleRoomNumber;
-        private Label label41;
-        private ComboBox cmbStudioRoomNumber;
-        private Label label42;
-        private ComboBox cmbPresidentialSuiteNumber;
         private DateTimePicker dateCheckIn;
         private Label label43;
         private DateTimePicker dateCheckOut;
@@ -1535,7 +1458,12 @@
         private Label label71;
         private TextBox roomCost;
         private Label label72;
-        private TextBox totalPrice;
+        private TextBox subTotal;
         private Label label73;
+        private TextBox tax;
+        private Label label51;
+        private TextBox totalPrice;
+        private Label label52;
+        private TabPage Init;
     }
 }
