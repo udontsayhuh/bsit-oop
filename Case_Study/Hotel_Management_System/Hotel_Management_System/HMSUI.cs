@@ -255,11 +255,16 @@ namespace Hotel_Management_System
             }
         }
         private string tempGuestID = "";
+        private string p2TempGuestID = "";
+        private string p3TempGuestID = "";
+        private string p4TempGuestID = "";
+        private string p5TempGuestID = "";
         public void UpdateTransactionNumber()
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 string query = "select max(TransactionID), max(GuestID), max(BookingID) from t_BookedGuest";
+                string query1 = "select max(GuestID) from r_Guest";
                 connection.Open();
                 using (SqliteCommand command = new SqliteCommand(query, connection))
                 {
@@ -267,9 +272,16 @@ namespace Hotel_Management_System
                     {
                         reader.Read();
                         transactionID.Text = ((Int64)reader.GetValue(0) + 1).ToString();
-                        tempGuestID = guestID.Text = ((Int64)reader.GetValue(1) + 1).ToString();
                         bookingID.Text = ((Int64)reader.GetValue(2) + 1).ToString();
 
+                    }
+                }
+                using (SqliteCommand command = new SqliteCommand(query1, connection))
+                {
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        reader.Read();
+                        tempGuestID = guestID.Text = ((Int64)reader.GetValue(0) + 1).ToString();
                     }
                 }
                 connection.Close();
@@ -595,7 +607,7 @@ namespace Hotel_Management_System
             }
         }
 
-        
+
 
         private void dateCheckIn_ValueChanged(object sender, EventArgs e)
         {
@@ -609,8 +621,8 @@ namespace Hotel_Management_System
             if (personPanel.Visible == false)
             {
                 personPanel.Visible = true;
-                p2GuestID.Text = (Int64.Parse(guestID.Text) + 1).ToString();
-                if(tabRoomTypes.SelectedIndex == 0)
+                p2TempGuestID = p2GuestID.Text = (Int64.Parse(tempGuestID) + 1).ToString();
+                if (tabRoomTypes.SelectedIndex == 0)
                 {
                     addButton.Visible = false;
                 }
@@ -626,7 +638,7 @@ namespace Hotel_Management_System
         {
             if (addPersonInfo2.Visible == true)
             {
-                p3GuestID.Text = (Int64.Parse(p2GuestID.Text) + 1).ToString();
+                p3TempGuestID = p3GuestID.Text = (Int64.Parse(tempGuestID) + 1).ToString();
                 pictureBox3.Visible = true;
                 remove2.Visible = true;
                 addButton.Visible = false;
@@ -636,7 +648,7 @@ namespace Hotel_Management_System
                 }
                 remove1.Visible = false;
                 remove2.Visible = true;
-                
+
             }
             else if (addPersonInfo2.Visible == false)
             {
@@ -652,17 +664,17 @@ namespace Hotel_Management_System
         {
             if (addPersonInfo3.Visible == true)
             {
-                p4GuestID.Text = (Int64.Parse(p3GuestID.Text) + 1).ToString();
+                p4TempGuestID = p4GuestID.Text = (Int64.Parse(tempGuestID) + 1).ToString();
                 pictureBox4.Visible = true;
                 addButton2.Visible = false;
-                if(tabRoomTypes.SelectedIndex == 5)
+                if (tabRoomTypes.SelectedIndex == 5)
                 {
                     addButton3.Visible = true;
                 }
                 remove2.Visible = false;
                 remove3.Visible = true;
             }
-            else if(addPersonInfo3.Visible == false)
+            else if (addPersonInfo3.Visible == false)
             {
                 pictureBox4.Visible = false;
                 remove2.Visible = true;
@@ -676,7 +688,7 @@ namespace Hotel_Management_System
         {
             if (addPersonInfo4.Visible == true)
             {
-                p5GuestID.Text = (Int64.Parse(p4GuestID.Text) + 1).ToString();
+                p5TempGuestID = p5GuestID.Text = (Int64.Parse(tempGuestID) + 1).ToString();
                 pictureBox5.Visible = true;
                 addButton3.Visible = false;
                 remove3.Visible = false;
@@ -727,5 +739,156 @@ namespace Hotel_Management_System
         }
         #endregion
 
+        private void p2EmailAddress_Leave(object sender, EventArgs e)
+        {
+            string check = p2EmailAddress.Text;
+            if (check != "")
+            {
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    string query = "select * from r_Guest where EmailAddress = '" + check + "'";
+                    connection.Open();
+                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    {
+                        using (SqliteDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                p2GuestID.Text = reader.GetValue(0).ToString();
+                                p2FirstName.Text = (string)reader.GetValue(1);
+                                p2MiddleName.Text = (string)reader.GetValue(2);
+                                p2LastName.Text = (string)reader.GetValue(3);
+                                p2PhoneNumber.Text = (string)reader.GetValue(4);
+                                p2EmailAddress.Text = (string)reader.GetValue(5);
+                            }
+
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            else
+            {
+                p2GuestID.Text = p2TempGuestID;
+                p2PhoneNumber.Text = "";
+                p2FirstName.Text = "";
+                p2MiddleName.Text = "";
+                p2LastName.Text = "";
+            }
+        }
+
+        private void p3EmailAddress_Leave(object sender, EventArgs e)
+        {
+            string check = p3EmailAddress.Text;
+            if (check != "")
+            {
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    string query = "select * from r_Guest where EmailAddress = '" + check + "'";
+                    connection.Open();
+                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    {
+                        using (SqliteDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                p3GuestID.Text = reader.GetValue(0).ToString();
+                                p3FirstName.Text = (string)reader.GetValue(1);
+                                p3MiddleName.Text = (string)reader.GetValue(2);
+                                p3LastName.Text = (string)reader.GetValue(3);
+                                p3PhoneNumber.Text = (string)reader.GetValue(4);
+                                p3EmailAddress.Text = (string)reader.GetValue(5);
+                            }
+
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            else
+            {
+                p3GuestID.Text = p3TempGuestID;
+                p3PhoneNumber.Text = "";
+                p3FirstName.Text = "";
+                p3MiddleName.Text = "";
+                p3LastName.Text = "";
+            }
+        }
+
+        private void p4EmailAddress_Leave(object sender, EventArgs e)
+        {
+            string check = p4EmailAddress.Text;
+            if (check != "")
+            {
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    string query = "select * from r_Guest where EmailAddress = '" + check + "'";
+                    connection.Open();
+                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    {
+                        using (SqliteDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                p4GuestID.Text = reader.GetValue(0).ToString();
+                                p4FirstName.Text = (string)reader.GetValue(1);
+                                p4MiddleName.Text = (string)reader.GetValue(2);
+                                p4LastName.Text = (string)reader.GetValue(3);
+                                p4ContactNumber.Text = (string)reader.GetValue(4);
+                                p4EmailAddress.Text = (string)reader.GetValue(5);
+                            }
+
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            else
+            {
+                p4GuestID.Text = p4TempGuestID;
+                p4ContactNumber.Text = "";
+                p4FirstName.Text = "";
+                p4MiddleName.Text = "";
+                p4LastName.Text = "";
+            }
+        }
+
+        private void p5EmailAddress_Leave(object sender, EventArgs e)
+        {
+            string check = p5EmailAddress.Text;
+            if (check != "")
+            {
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    string query = "select * from r_Guest where EmailAddress = '" + check + "'";
+                    connection.Open();
+                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    {
+                        using (SqliteDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                p5GuestID.Text = reader.GetValue(0).ToString();
+                                p5FirstName.Text = (string)reader.GetValue(1);
+                                p5MiddleName.Text = (string)reader.GetValue(2);
+                                p5LastName.Text = (string)reader.GetValue(3);
+                                p5ContactNumber.Text = (string)reader.GetValue(4);
+                                p5EmailAddress.Text = (string)reader.GetValue(5);
+                            }
+
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            else
+            {
+                p5GuestID.Text = p5TempGuestID;
+                p5ContactNumber.Text = "";
+                p5FirstName.Text = "";
+                p5MiddleName.Text = "";
+                p5LastName.Text = "";
+            }
+        }
     }
 }

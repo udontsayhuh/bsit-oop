@@ -1416,6 +1416,7 @@
             p2EmailAddress.Name = "p2EmailAddress";
             p2EmailAddress.Size = new Size(228, 27);
             p2EmailAddress.TabIndex = 126;
+            p2EmailAddress.Leave += p2EmailAddress_Leave;
             // 
             // label5
             // 
@@ -1534,6 +1535,7 @@
             p3EmailAddress.Name = "p3EmailAddress";
             p3EmailAddress.Size = new Size(228, 27);
             p3EmailAddress.TabIndex = 126;
+            p3EmailAddress.Leave += p3EmailAddress_Leave;
             // 
             // label58
             // 
@@ -1652,6 +1654,7 @@
             p5EmailAddress.Name = "p5EmailAddress";
             p5EmailAddress.Size = new Size(228, 27);
             p5EmailAddress.TabIndex = 126;
+            p5EmailAddress.Leave += p5EmailAddress_Leave;
             // 
             // label87
             // 
@@ -1770,6 +1773,7 @@
             p4EmailAddress.Name = "p4EmailAddress";
             p4EmailAddress.Size = new Size(228, 27);
             p4EmailAddress.TabIndex = 126;
+            p4EmailAddress.Leave += p4EmailAddress_Leave;
             // 
             // label75
             // 
@@ -2211,17 +2215,17 @@
             Controls.Add(btnGuestInfo);
             Controls.Add(btnMinimize);
             Controls.Add(btnClose);
-            Controls.Add(label33);
-            Controls.Add(label35);
-            Controls.Add(label32);
-            Controls.Add(label34);
-            Controls.Add(label25);
             Controls.Add(pnlBook);
             Controls.Add(pnlGuestinfo);
             Controls.Add(pnlReports);
             Controls.Add(pnlInvoiceSummary);
             Controls.Add(pnlRoomInfo);
             Controls.Add(pnlAttendant);
+            Controls.Add(label33);
+            Controls.Add(label35);
+            Controls.Add(label32);
+            Controls.Add(label34);
+            Controls.Add(label25);
             FormBorderStyle = FormBorderStyle.None;
             Name = "HMSUI";
             StartPosition = FormStartPosition.CenterScreen;
