@@ -610,6 +610,14 @@ namespace Hotel_Management_System
             {
                 personPanel.Visible = true;
                 p2GuestID.Text = (Int64.Parse(guestID.Text) + 1).ToString();
+                if(tabRoomTypes.SelectedIndex == 0)
+                {
+                    addButton.Visible = false;
+                }
+                else if (tabRoomTypes.SelectedIndex == 1 || tabRoomTypes.SelectedIndex == 2 || tabRoomTypes.SelectedIndex == 3 || tabRoomTypes.SelectedIndex == 4 || tabRoomTypes.SelectedIndex == 5)
+                {
+                    addButton.Visible = true;
+                }
             }
             else personPanel.Visible = false;
         }
@@ -622,9 +630,13 @@ namespace Hotel_Management_System
                 pictureBox3.Visible = true;
                 remove2.Visible = true;
                 addButton.Visible = false;
+                if (tabRoomTypes.SelectedIndex == 4 || tabRoomTypes.SelectedIndex == 5)
+                {
+                    addButton2.Visible = true;
+                }
                 remove1.Visible = false;
                 remove2.Visible = true;
-                addButton2.Visible = true;
+                
             }
             else if (addPersonInfo2.Visible == false)
             {
@@ -643,7 +655,10 @@ namespace Hotel_Management_System
                 p4GuestID.Text = (Int64.Parse(p3GuestID.Text) + 1).ToString();
                 pictureBox4.Visible = true;
                 addButton2.Visible = false;
-                addButton3.Visible = true;
+                if(tabRoomTypes.SelectedIndex == 5)
+                {
+                    addButton3.Visible = true;
+                }
                 remove2.Visible = false;
                 remove3.Visible = true;
             }
@@ -683,7 +698,7 @@ namespace Hotel_Management_System
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            addPersonInfo2.Visible = true;    
+            addPersonInfo2.Visible = true;
         }
 
         private void addButton3_Click(object sender, EventArgs e)
