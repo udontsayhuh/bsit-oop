@@ -175,7 +175,6 @@ namespace Hotel_Management_System
                         lblAvail4.Text = AvailableRooms[0].ToString();
                         lblAvail5.Text = AvailableRooms[5].ToString();
                         lblAvail6.Text = AvailableRooms[1].ToString();
-                        roomCost.Text = RoomPrice[2].ToString();
 
                     }
                     connection.Close();
@@ -184,6 +183,7 @@ namespace Hotel_Management_System
         }
         public void UpdateRoomNumberAvailability()
         {
+            ClearRoomAvailabilityList();
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 string query = "select RoomNumber, RoomID from v_AllRoomInformation " +
@@ -227,8 +227,6 @@ namespace Hotel_Management_System
                                 PresidentialSuiteID.Add(reader.GetInt32(1));
                             }
                         }
-                        cmbRoomNumber.DataSource = SingleRoomNumber;
-
                     }
                     connection.Close();
                 }
@@ -347,13 +345,48 @@ namespace Hotel_Management_System
                 }
             }
         }
+        public void ClearRoomAvailabilityList()
+        {
+            SingleRoomID.Clear();
+            SingleRoomNumber.Clear();
+            StandardDoubleRoomID.Clear();
+            StandardDoubleRoomNumber.Clear();
+            StandardTwinRoomID.Clear();
+            StandardTwinRoomNumber.Clear();
+            DeluxeDoubleRoomID.Clear();
+            DeluxeDoubleRoomNumber.Clear();
+            StudioRoomID.Clear();
+            StudioRoomNumber.Clear();
+            PresidentialSuiteID.Clear();
+            PresidentialSuiteNumber.Clear();
+        }
+        public void BookSuccess()
+        {
+            tabRoomTypes.SelectedIndex = 6;
+            UpdateTransactionNumber();
+            UpdateRoomStatusID();
+            UpdateReceiptNumber();
+            UpdateRoomTypeAvailability();
+            UpdateRoomNumberAvailability();
+            dateCheckIn.MinDate = DateTime.Now;
+            dateCheckOut.MinDate = DateTime.Now;
+            emailAddress.Text = "";
+            firstName.Text = "";
+            middleName.Text = "";
+            lastName.Text = "";
+            phoneNumber.Text = "";
+            tax.Text = "0";
+            subTotal.Text = "0";
+            totalPrice.Text = "0";
+            roomCost.Text = "0";
+        }
 
         #endregion
 
 
         private void btnNewBook_Click(object sender, EventArgs e)
         {
-            if (totalPrice.Text == "" && emailAddress.Text == "" || phoneNumber.Text == "" || firstName.Text == "" || lastName.Text == "" || middleName.Text == "")
+            if (totalPrice.Text == "" || emailAddress.Text == "" || phoneNumber.Text == "" || firstName.Text == "" || lastName.Text == "" || middleName.Text == "")
             {
                 if (totalPrice.Text == "") MessageBox.Show("Please Select a Correct Room Number and Check Out Date", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else MessageBox.Show("Please Complete All Necessary Information", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -429,22 +462,26 @@ namespace Hotel_Management_System
                     connection.Close();
                 }
                 MessageBox.Show("Print Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                BookSuccess();
             }
 
         }
 
         private void tabRoomTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            List <string> clear = new List<string> {""};
             if (tabRoomTypes.SelectedIndex == 6)
             {
                 cmbRoomNumber.Enabled = false;
                 dateCheckIn.Enabled = false;
                 dateCheckOut.Enabled = false;
+                roomCost.Text = "";
+                cmbRoomNumber.DataSource = clear;
+                cmbRoomNumber.SelectedIndex = 0;
             }
 
 
-            if (tabRoomTypes.SelectedIndex == 0)
+            else if (tabRoomTypes.SelectedIndex == 0)
             {
 
                 roomCost.Text = RoomPrice[2].ToString();
