@@ -61,6 +61,59 @@
             label20 = new Label();
             label7 = new Label();
             pnlBook = new Panel();
+            label = new Label();
+            btnAddPerson = new Button();
+            label37 = new Label();
+            cmbRoomNumber = new ComboBox();
+            dateCheckOut = new DateTimePicker();
+            label44 = new Label();
+            dateCheckIn = new DateTimePicker();
+            label43 = new Label();
+            phoneNumber = new TextBox();
+            totalPrice = new TextBox();
+            subTotal = new TextBox();
+            tax = new TextBox();
+            roomCost = new TextBox();
+            guestID = new TextBox();
+            bookingID = new TextBox();
+            transactionID = new TextBox();
+            lastName = new TextBox();
+            middleName = new TextBox();
+            firstName = new TextBox();
+            label52 = new Label();
+            emailAddress = new TextBox();
+            label73 = new Label();
+            label51 = new Label();
+            label71 = new Label();
+            label72 = new Label();
+            label70 = new Label();
+            label50 = new Label();
+            label49 = new Label();
+            label48 = new Label();
+            label47 = new Label();
+            label46 = new Label();
+            label45 = new Label();
+            label36 = new Label();
+            lblAvail1 = new Label();
+            lblAvail2 = new Label();
+            lblAvail3 = new Label();
+            lblAvail4 = new Label();
+            lblAvail5 = new Label();
+            lblAvail6 = new Label();
+            tabRoomTypes = new TabControl();
+            singleRoom = new TabPage();
+            standardDoubleRoom = new TabPage();
+            standardTwinRoom = new TabPage();
+            deluxeDoubleRoom = new TabPage();
+            studioRoom = new TabPage();
+            presidentialSuite = new TabPage();
+            Init = new TabPage();
+            btnNewBook = new Button();
+            label31 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            label16 = new Label();
+            label6 = new Label();
             personPanel = new Panel();
             addButton2 = new Button();
             addButton3 = new Button();
@@ -125,63 +178,10 @@
             label74 = new Label();
             textBox18 = new TextBox();
             label75 = new Label();
-            label = new Label();
-            btnAddPerson = new Button();
-            label37 = new Label();
-            cmbRoomNumber = new ComboBox();
-            dateCheckOut = new DateTimePicker();
             roomInclusion = new Label();
-            label44 = new Label();
             label63 = new Label();
-            dateCheckIn = new DateTimePicker();
             roomInformation = new Label();
-            label43 = new Label();
             label61 = new Label();
-            phoneNumber = new TextBox();
-            totalPrice = new TextBox();
-            subTotal = new TextBox();
-            tax = new TextBox();
-            roomCost = new TextBox();
-            guestID = new TextBox();
-            bookingID = new TextBox();
-            transactionID = new TextBox();
-            lastName = new TextBox();
-            middleName = new TextBox();
-            firstName = new TextBox();
-            label52 = new Label();
-            emailAddress = new TextBox();
-            label73 = new Label();
-            label51 = new Label();
-            label71 = new Label();
-            label72 = new Label();
-            label70 = new Label();
-            label50 = new Label();
-            label49 = new Label();
-            label48 = new Label();
-            label47 = new Label();
-            label46 = new Label();
-            label45 = new Label();
-            label36 = new Label();
-            lblAvail1 = new Label();
-            lblAvail2 = new Label();
-            lblAvail3 = new Label();
-            lblAvail4 = new Label();
-            lblAvail5 = new Label();
-            lblAvail6 = new Label();
-            tabRoomTypes = new TabControl();
-            singleRoom = new TabPage();
-            standardDoubleRoom = new TabPage();
-            standardTwinRoom = new TabPage();
-            deluxeDoubleRoom = new TabPage();
-            studioRoom = new TabPage();
-            presidentialSuite = new TabPage();
-            Init = new TabPage();
-            btnNewBook = new Button();
-            label31 = new Label();
-            label14 = new Label();
-            label15 = new Label();
-            label16 = new Label();
-            label6 = new Label();
             pnlRoomInfo = new Panel();
             db_RoomInformation = new DataGridView();
             label26 = new Label();
@@ -220,6 +220,9 @@
             label80 = new Label();
             textBox24 = new TextBox();
             label81 = new Label();
+            label88 = new Label();
+            label89 = new Label();
+            label90 = new Label();
             ((System.ComponentModel.ISupportInitialize)btnMinimize).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnClose).BeginInit();
             pnlAttendant.SuspendLayout();
@@ -230,6 +233,7 @@
             spnlCustomerInfo.Panel2.SuspendLayout();
             spnlCustomerInfo.SuspendLayout();
             pnlBook.SuspendLayout();
+            tabRoomTypes.SuspendLayout();
             personPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -239,7 +243,6 @@
             addPersonInfo2.SuspendLayout();
             addPersonInfo4.SuspendLayout();
             addPersonInfo3.SuspendLayout();
-            tabRoomTypes.SuspendLayout();
             pnlRoomInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)db_RoomInformation).BeginInit();
             pnlInvoiceSummary.SuspendLayout();
@@ -334,7 +337,7 @@
             // lblLoggedIn
             // 
             lblLoggedIn.AutoSize = true;
-            lblLoggedIn.Location = new Point(150, 27);
+            lblLoggedIn.Location = new Point(125, 45);
             lblLoggedIn.Name = "lblLoggedIn";
             lblLoggedIn.Size = new Size(120, 20);
             lblLoggedIn.TabIndex = 100;
@@ -342,7 +345,7 @@
             // 
             // pnlAttendant
             // 
-            pnlAttendant.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            pnlAttendant.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pnlAttendant.Controls.Add(lblProcessed);
             pnlAttendant.Controls.Add(lblTime);
             pnlAttendant.Controls.Add(lblDate);
@@ -351,7 +354,7 @@
             pnlAttendant.Controls.Add(label2);
             pnlAttendant.Controls.Add(label1);
             pnlAttendant.Controls.Add(lblLoggedIn);
-            pnlAttendant.Location = new Point(1441, 943);
+            pnlAttendant.Location = new Point(1441, 69);
             pnlAttendant.Name = "pnlAttendant";
             pnlAttendant.Size = new Size(467, 125);
             pnlAttendant.TabIndex = 101;
@@ -359,7 +362,7 @@
             // lblProcessed
             // 
             lblProcessed.AutoSize = true;
-            lblProcessed.Location = new Point(150, 47);
+            lblProcessed.Location = new Point(125, 65);
             lblProcessed.Name = "lblProcessed";
             lblProcessed.Size = new Size(118, 20);
             lblProcessed.TabIndex = 100;
@@ -368,7 +371,7 @@
             // lblTime
             // 
             lblTime.AutoSize = true;
-            lblTime.Location = new Point(295, 80);
+            lblTime.Location = new Point(351, 0);
             lblTime.Name = "lblTime";
             lblTime.Size = new Size(90, 20);
             lblTime.TabIndex = 100;
@@ -377,7 +380,7 @@
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(42, 80);
+            lblDate.Location = new Point(131, 0);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(85, 20);
             lblDate.TabIndex = 100;
@@ -386,7 +389,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(255, 80);
+            label4.Location = new Point(311, 0);
             label4.Name = "label4";
             label4.Size = new Size(45, 20);
             label4.TabIndex = 100;
@@ -395,7 +398,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(4, 80);
+            label3.Location = new Point(85, 0);
             label3.Name = "label3";
             label3.Size = new Size(44, 20);
             label3.TabIndex = 100;
@@ -404,7 +407,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(72, 47);
+            label2.Location = new Point(47, 65);
             label2.Name = "label2";
             label2.Size = new Size(82, 20);
             label2.TabIndex = 100;
@@ -413,7 +416,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(72, 27);
+            label1.Location = new Point(47, 45);
             label1.Name = "label1";
             label1.Size = new Size(83, 20);
             label1.TabIndex = 100;
@@ -421,9 +424,9 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(1772, 910);
+            pictureBox1.Location = new Point(1767, 96);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -573,20 +576,18 @@
             pnlBook.AccessibleRole = AccessibleRole.None;
             pnlBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlBook.BackColor = Color.FromArgb(207, 192, 175);
-            pnlBook.Controls.Add(personPanel);
+            pnlBook.Controls.Add(label88);
+            pnlBook.Controls.Add(label89);
             pnlBook.Controls.Add(label);
             pnlBook.Controls.Add(btnAddPerson);
             pnlBook.Controls.Add(label37);
             pnlBook.Controls.Add(cmbRoomNumber);
             pnlBook.Controls.Add(dateCheckOut);
-            pnlBook.Controls.Add(roomInclusion);
             pnlBook.Controls.Add(label44);
-            pnlBook.Controls.Add(label63);
             pnlBook.Controls.Add(dateCheckIn);
-            pnlBook.Controls.Add(roomInformation);
             pnlBook.Controls.Add(label43);
-            pnlBook.Controls.Add(label61);
             pnlBook.Controls.Add(phoneNumber);
+            pnlBook.Controls.Add(label90);
             pnlBook.Controls.Add(totalPrice);
             pnlBook.Controls.Add(subTotal);
             pnlBook.Controls.Add(tax);
@@ -624,10 +625,507 @@
             pnlBook.Controls.Add(label15);
             pnlBook.Controls.Add(label16);
             pnlBook.Controls.Add(label6);
+            pnlBook.Controls.Add(personPanel);
+            pnlBook.Controls.Add(roomInclusion);
+            pnlBook.Controls.Add(label63);
+            pnlBook.Controls.Add(roomInformation);
+            pnlBook.Controls.Add(label61);
             pnlBook.Location = new Point(68, 200);
             pnlBook.Name = "pnlBook";
-            pnlBook.Size = new Size(1546, 727);
+            pnlBook.Size = new Size(1546, 868);
             pnlBook.TabIndex = 103;
+            // 
+            // label
+            // 
+            label.AutoSize = true;
+            label.Location = new Point(70, 285);
+            label.Name = "label";
+            label.Size = new Size(84, 20);
+            label.TabIndex = 113;
+            label.Text = "Add Person";
+            // 
+            // btnAddPerson
+            // 
+            btnAddPerson.BackgroundImage = (Image)resources.GetObject("btnAddPerson.BackgroundImage");
+            btnAddPerson.BackgroundImageLayout = ImageLayout.Stretch;
+            btnAddPerson.Location = new Point(62, 183);
+            btnAddPerson.Name = "btnAddPerson";
+            btnAddPerson.Size = new Size(100, 100);
+            btnAddPerson.TabIndex = 112;
+            btnAddPerson.TabStop = false;
+            btnAddPerson.UseVisualStyleBackColor = true;
+            btnAddPerson.Click += btnAddPerson_Click;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.BackColor = Color.FromArgb(224, 224, 224);
+            label37.Location = new Point(150, 126);
+            label37.Name = "label37";
+            label37.Size = new Size(107, 20);
+            label37.TabIndex = 24;
+            label37.Text = "Room Number";
+            // 
+            // cmbRoomNumber
+            // 
+            cmbRoomNumber.Enabled = false;
+            cmbRoomNumber.FormattingEnabled = true;
+            cmbRoomNumber.Location = new Point(263, 122);
+            cmbRoomNumber.Name = "cmbRoomNumber";
+            cmbRoomNumber.Size = new Size(151, 28);
+            cmbRoomNumber.TabIndex = 0;
+            // 
+            // dateCheckOut
+            // 
+            dateCheckOut.CustomFormat = "MM/dd/yyyy";
+            dateCheckOut.Enabled = false;
+            dateCheckOut.Format = DateTimePickerFormat.Custom;
+            dateCheckOut.Location = new Point(932, 123);
+            dateCheckOut.MinDate = new DateTime(2024, 6, 2, 0, 0, 0, 0);
+            dateCheckOut.Name = "dateCheckOut";
+            dateCheckOut.Size = new Size(250, 27);
+            dateCheckOut.TabIndex = 25;
+            dateCheckOut.Value = new DateTime(2024, 6, 2, 0, 0, 0, 0);
+            dateCheckOut.ValueChanged += dateCheckOut_ValueChanged;
+            // 
+            // label44
+            // 
+            label44.AutoSize = true;
+            label44.BackColor = Color.FromArgb(224, 224, 224);
+            label44.Location = new Point(814, 127);
+            label44.Name = "label44";
+            label44.Size = new Size(112, 20);
+            label44.TabIndex = 24;
+            label44.Text = "Check Out Date";
+            // 
+            // dateCheckIn
+            // 
+            dateCheckIn.CustomFormat = "MM/dd/yyyy";
+            dateCheckIn.Enabled = false;
+            dateCheckIn.Format = DateTimePickerFormat.Custom;
+            dateCheckIn.Location = new Point(541, 123);
+            dateCheckIn.Name = "dateCheckIn";
+            dateCheckIn.Size = new Size(250, 27);
+            dateCheckIn.TabIndex = 25;
+            dateCheckIn.ValueChanged += dateCheckIn_ValueChanged;
+            // 
+            // label43
+            // 
+            label43.AutoSize = true;
+            label43.BackColor = Color.FromArgb(224, 224, 224);
+            label43.Location = new Point(435, 127);
+            label43.Name = "label43";
+            label43.Size = new Size(100, 20);
+            label43.TabIndex = 24;
+            label43.Text = "Check In Date";
+            // 
+            // phoneNumber
+            // 
+            phoneNumber.Location = new Point(514, 204);
+            phoneNumber.Name = "phoneNumber";
+            phoneNumber.Size = new Size(228, 27);
+            phoneNumber.TabIndex = 25;
+            // 
+            // totalPrice
+            // 
+            totalPrice.Location = new Point(1280, 631);
+            totalPrice.Name = "totalPrice";
+            totalPrice.ReadOnly = true;
+            totalPrice.Size = new Size(228, 27);
+            totalPrice.TabIndex = 25;
+            // 
+            // subTotal
+            // 
+            subTotal.Location = new Point(1280, 555);
+            subTotal.Name = "subTotal";
+            subTotal.ReadOnly = true;
+            subTotal.Size = new Size(228, 27);
+            subTotal.TabIndex = 25;
+            subTotal.TextChanged += subTotal_TextChanged;
+            // 
+            // tax
+            // 
+            tax.Location = new Point(1280, 401);
+            tax.Name = "tax";
+            tax.ReadOnly = true;
+            tax.Size = new Size(228, 27);
+            tax.TabIndex = 25;
+            tax.TextChanged += tax_TextChanged;
+            // 
+            // roomCost
+            // 
+            roomCost.Location = new Point(1280, 479);
+            roomCost.Name = "roomCost";
+            roomCost.ReadOnly = true;
+            roomCost.Size = new Size(228, 27);
+            roomCost.TabIndex = 25;
+            // 
+            // guestID
+            // 
+            guestID.Location = new Point(787, 204);
+            guestID.Name = "guestID";
+            guestID.ReadOnly = true;
+            guestID.Size = new Size(228, 27);
+            guestID.TabIndex = 25;
+            // 
+            // bookingID
+            // 
+            bookingID.Location = new Point(1258, 169);
+            bookingID.Name = "bookingID";
+            bookingID.ReadOnly = true;
+            bookingID.Size = new Size(228, 27);
+            bookingID.TabIndex = 25;
+            // 
+            // transactionID
+            // 
+            transactionID.Location = new Point(1258, 100);
+            transactionID.Name = "transactionID";
+            transactionID.ReadOnly = true;
+            transactionID.Size = new Size(228, 27);
+            transactionID.TabIndex = 25;
+            // 
+            // lastName
+            // 
+            lastName.Location = new Point(787, 272);
+            lastName.Name = "lastName";
+            lastName.Size = new Size(228, 27);
+            lastName.TabIndex = 25;
+            // 
+            // middleName
+            // 
+            middleName.Location = new Point(514, 272);
+            middleName.Name = "middleName";
+            middleName.Size = new Size(228, 27);
+            middleName.TabIndex = 25;
+            // 
+            // firstName
+            // 
+            firstName.Location = new Point(236, 272);
+            firstName.Name = "firstName";
+            firstName.Size = new Size(228, 27);
+            firstName.TabIndex = 25;
+            // 
+            // label52
+            // 
+            label52.AutoSize = true;
+            label52.Location = new Point(1280, 608);
+            label52.Name = "label52";
+            label52.Size = new Size(78, 20);
+            label52.TabIndex = 24;
+            label52.Text = "Total Price";
+            // 
+            // emailAddress
+            // 
+            emailAddress.Location = new Point(236, 204);
+            emailAddress.Name = "emailAddress";
+            emailAddress.Size = new Size(228, 27);
+            emailAddress.TabIndex = 25;
+            emailAddress.Leave += emailAddress_Leave;
+            // 
+            // label73
+            // 
+            label73.AutoSize = true;
+            label73.Location = new Point(1280, 532);
+            label73.Name = "label73";
+            label73.Size = new Size(71, 20);
+            label73.TabIndex = 24;
+            label73.Text = "Sub Total";
+            // 
+            // label51
+            // 
+            label51.AutoSize = true;
+            label51.Location = new Point(1280, 378);
+            label51.Name = "label51";
+            label51.Size = new Size(57, 20);
+            label51.TabIndex = 24;
+            label51.Text = "7% Tax:";
+            // 
+            // label71
+            // 
+            label71.AutoSize = true;
+            label71.Location = new Point(1258, 146);
+            label71.Name = "label71";
+            label71.Size = new Size(86, 20);
+            label71.TabIndex = 24;
+            label71.Text = "Booking ID:";
+            // 
+            // label72
+            // 
+            label72.AutoSize = true;
+            label72.Location = new Point(1280, 456);
+            label72.Name = "label72";
+            label72.Size = new Size(88, 20);
+            label72.TabIndex = 24;
+            label72.Text = "Room Price:";
+            // 
+            // label70
+            // 
+            label70.AutoSize = true;
+            label70.Location = new Point(787, 213);
+            label70.Name = "label70";
+            label70.Size = new Size(68, 20);
+            label70.TabIndex = 24;
+            label70.Text = "Guest ID:";
+            // 
+            // label50
+            // 
+            label50.AutoSize = true;
+            label50.Location = new Point(1258, 77);
+            label50.Name = "label50";
+            label50.Size = new Size(145, 20);
+            label50.TabIndex = 24;
+            label50.Text = "Transaction Number:";
+            // 
+            // label49
+            // 
+            label49.AutoSize = true;
+            label49.Location = new Point(787, 249);
+            label49.Name = "label49";
+            label49.Size = new Size(82, 20);
+            label49.TabIndex = 24;
+            label49.Text = "Last Name:";
+            // 
+            // label48
+            // 
+            label48.AutoSize = true;
+            label48.Location = new Point(514, 249);
+            label48.Name = "label48";
+            label48.Size = new Size(103, 20);
+            label48.TabIndex = 24;
+            label48.Text = "Middle Name:";
+            // 
+            // label47
+            // 
+            label47.AutoSize = true;
+            label47.Location = new Point(514, 213);
+            label47.Name = "label47";
+            label47.Size = new Size(121, 20);
+            label47.TabIndex = 24;
+            label47.Text = "Contact Number:";
+            // 
+            // label46
+            // 
+            label46.AutoSize = true;
+            label46.Location = new Point(236, 249);
+            label46.Name = "label46";
+            label46.Size = new Size(83, 20);
+            label46.TabIndex = 24;
+            label46.Text = "First Name:";
+            // 
+            // label45
+            // 
+            label45.AutoSize = true;
+            label45.Location = new Point(236, 213);
+            label45.Name = "label45";
+            label45.Size = new Size(106, 20);
+            label45.TabIndex = 24;
+            label45.Text = "Email Address:";
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new Point(3, 62);
+            label36.Name = "label36";
+            label36.Size = new Size(124, 20);
+            label36.TabIndex = 24;
+            label36.Text = "Available Rooms:";
+            // 
+            // lblAvail1
+            // 
+            lblAvail1.AutoSize = true;
+            lblAvail1.Location = new Point(184, 62);
+            lblAvail1.Name = "lblAvail1";
+            lblAvail1.Size = new Size(17, 20);
+            lblAvail1.TabIndex = 24;
+            lblAvail1.Text = "0";
+            // 
+            // lblAvail2
+            // 
+            lblAvail2.AutoSize = true;
+            lblAvail2.Location = new Point(309, 62);
+            lblAvail2.Name = "lblAvail2";
+            lblAvail2.Size = new Size(17, 20);
+            lblAvail2.TabIndex = 24;
+            lblAvail2.Text = "0";
+            // 
+            // lblAvail3
+            // 
+            lblAvail3.AutoSize = true;
+            lblAvail3.Location = new Point(469, 62);
+            lblAvail3.Name = "lblAvail3";
+            lblAvail3.Size = new Size(17, 20);
+            lblAvail3.TabIndex = 24;
+            lblAvail3.Text = "0";
+            // 
+            // lblAvail4
+            // 
+            lblAvail4.AutoSize = true;
+            lblAvail4.Location = new Point(620, 62);
+            lblAvail4.Name = "lblAvail4";
+            lblAvail4.Size = new Size(17, 20);
+            lblAvail4.TabIndex = 24;
+            lblAvail4.Text = "0";
+            // 
+            // lblAvail5
+            // 
+            lblAvail5.AutoSize = true;
+            lblAvail5.Location = new Point(750, 62);
+            lblAvail5.Name = "lblAvail5";
+            lblAvail5.Size = new Size(17, 20);
+            lblAvail5.TabIndex = 24;
+            lblAvail5.Text = "0";
+            // 
+            // lblAvail6
+            // 
+            lblAvail6.AutoSize = true;
+            lblAvail6.Location = new Point(855, 62);
+            lblAvail6.Name = "lblAvail6";
+            lblAvail6.Size = new Size(17, 20);
+            lblAvail6.TabIndex = 24;
+            lblAvail6.Text = "0";
+            // 
+            // tabRoomTypes
+            // 
+            tabRoomTypes.Controls.Add(singleRoom);
+            tabRoomTypes.Controls.Add(standardDoubleRoom);
+            tabRoomTypes.Controls.Add(standardTwinRoom);
+            tabRoomTypes.Controls.Add(deluxeDoubleRoom);
+            tabRoomTypes.Controls.Add(studioRoom);
+            tabRoomTypes.Controls.Add(presidentialSuite);
+            tabRoomTypes.Controls.Add(Init);
+            tabRoomTypes.Location = new Point(137, 85);
+            tabRoomTypes.Name = "tabRoomTypes";
+            tabRoomTypes.SelectedIndex = 6;
+            tabRoomTypes.Size = new Size(1074, 75);
+            tabRoomTypes.TabIndex = 23;
+            tabRoomTypes.SelectedIndexChanged += tabRoomTypes_SelectedIndexChanged;
+            // 
+            // singleRoom
+            // 
+            singleRoom.BackgroundImageLayout = ImageLayout.None;
+            singleRoom.Location = new Point(4, 29);
+            singleRoom.Name = "singleRoom";
+            singleRoom.Padding = new Padding(3);
+            singleRoom.Size = new Size(1066, 42);
+            singleRoom.TabIndex = 0;
+            singleRoom.Text = "Single Room";
+            singleRoom.UseVisualStyleBackColor = true;
+            // 
+            // standardDoubleRoom
+            // 
+            standardDoubleRoom.Location = new Point(4, 29);
+            standardDoubleRoom.Name = "standardDoubleRoom";
+            standardDoubleRoom.Padding = new Padding(3);
+            standardDoubleRoom.Size = new Size(1066, 42);
+            standardDoubleRoom.TabIndex = 1;
+            standardDoubleRoom.Text = "Standard Double Room";
+            standardDoubleRoom.UseVisualStyleBackColor = true;
+            // 
+            // standardTwinRoom
+            // 
+            standardTwinRoom.Location = new Point(4, 29);
+            standardTwinRoom.Name = "standardTwinRoom";
+            standardTwinRoom.Padding = new Padding(3);
+            standardTwinRoom.Size = new Size(1066, 42);
+            standardTwinRoom.TabIndex = 2;
+            standardTwinRoom.Text = "Standard Twin Room";
+            standardTwinRoom.UseVisualStyleBackColor = true;
+            // 
+            // deluxeDoubleRoom
+            // 
+            deluxeDoubleRoom.Location = new Point(4, 29);
+            deluxeDoubleRoom.Name = "deluxeDoubleRoom";
+            deluxeDoubleRoom.Padding = new Padding(3);
+            deluxeDoubleRoom.Size = new Size(1066, 42);
+            deluxeDoubleRoom.TabIndex = 3;
+            deluxeDoubleRoom.Text = "Deluxe Double Room";
+            deluxeDoubleRoom.UseVisualStyleBackColor = true;
+            // 
+            // studioRoom
+            // 
+            studioRoom.Location = new Point(4, 29);
+            studioRoom.Name = "studioRoom";
+            studioRoom.Padding = new Padding(3);
+            studioRoom.Size = new Size(1066, 42);
+            studioRoom.TabIndex = 4;
+            studioRoom.Text = "Studio Room";
+            studioRoom.UseVisualStyleBackColor = true;
+            // 
+            // presidentialSuite
+            // 
+            presidentialSuite.Location = new Point(4, 29);
+            presidentialSuite.Name = "presidentialSuite";
+            presidentialSuite.Size = new Size(1066, 42);
+            presidentialSuite.TabIndex = 5;
+            presidentialSuite.Text = "Presidential Suite";
+            presidentialSuite.UseVisualStyleBackColor = true;
+            // 
+            // Init
+            // 
+            Init.Location = new Point(4, 29);
+            Init.Name = "Init";
+            Init.Size = new Size(1066, 42);
+            Init.TabIndex = 6;
+            Init.Text = "-";
+            // 
+            // btnNewBook
+            // 
+            btnNewBook.Location = new Point(1438, 685);
+            btnNewBook.Name = "btnNewBook";
+            btnNewBook.Size = new Size(94, 29);
+            btnNewBook.TabIndex = 22;
+            btnNewBook.Text = "Book";
+            btnNewBook.UseVisualStyleBackColor = true;
+            btnNewBook.Click += btnNewBook_Click;
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Font = new Font("Segoe UI", 9F);
+            label31.Location = new Point(514, 16);
+            label31.Name = "label31";
+            label31.Size = new Size(115, 20);
+            label31.TabIndex = 21;
+            label31.Text = "Guest Info Panel";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(19, 16);
+            label14.Name = "label14";
+            label14.Size = new Size(99, 20);
+            label14.TabIndex = 6;
+            label14.Text = "Reports Panel";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 9F);
+            label15.Location = new Point(679, 16);
+            label15.Name = "label15";
+            label15.Size = new Size(122, 20);
+            label15.TabIndex = 5;
+            label15.Text = "Inovice Summary";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 9F);
+            label16.Location = new Point(349, 16);
+            label16.Name = "label16";
+            label16.Size = new Size(131, 20);
+            label16.TabIndex = 4;
+            label16.Text = "Room Information";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(184, 16);
+            label6.Name = "label6";
+            label6.Size = new Size(109, 20);
+            label6.TabIndex = 0;
+            label6.Text = "Booking Panel";
             // 
             // personPanel
             // 
@@ -647,9 +1145,9 @@
             personPanel.Controls.Add(addPersonInfo2);
             personPanel.Controls.Add(addPersonInfo4);
             personPanel.Controls.Add(addPersonInfo3);
-            personPanel.Location = new Point(15, 337);
+            personPanel.Location = new Point(15, 305);
             personPanel.Name = "personPanel";
-            personPanel.Size = new Size(1060, 302);
+            personPanel.Size = new Size(1060, 560);
             personPanel.TabIndex = 128;
             // 
             // addButton2
@@ -1254,533 +1752,41 @@
             label75.TabIndex = 115;
             label75.Text = "Guest ID:";
             // 
-            // label
-            // 
-            label.AutoSize = true;
-            label.Location = new Point(70, 317);
-            label.Name = "label";
-            label.Size = new Size(84, 20);
-            label.TabIndex = 113;
-            label.Text = "Add Person";
-            // 
-            // btnAddPerson
-            // 
-            btnAddPerson.BackgroundImage = (Image)resources.GetObject("btnAddPerson.BackgroundImage");
-            btnAddPerson.BackgroundImageLayout = ImageLayout.Stretch;
-            btnAddPerson.Location = new Point(62, 215);
-            btnAddPerson.Name = "btnAddPerson";
-            btnAddPerson.Size = new Size(100, 100);
-            btnAddPerson.TabIndex = 112;
-            btnAddPerson.TabStop = false;
-            btnAddPerson.UseVisualStyleBackColor = true;
-            btnAddPerson.Click += btnAddPerson_Click;
-            // 
-            // label37
-            // 
-            label37.AutoSize = true;
-            label37.BackColor = Color.FromArgb(224, 224, 224);
-            label37.Location = new Point(150, 157);
-            label37.Name = "label37";
-            label37.Size = new Size(107, 20);
-            label37.TabIndex = 24;
-            label37.Text = "Room Number";
-            // 
-            // cmbRoomNumber
-            // 
-            cmbRoomNumber.Enabled = false;
-            cmbRoomNumber.FormattingEnabled = true;
-            cmbRoomNumber.Location = new Point(263, 153);
-            cmbRoomNumber.Name = "cmbRoomNumber";
-            cmbRoomNumber.Size = new Size(151, 28);
-            cmbRoomNumber.TabIndex = 0;
-            // 
-            // dateCheckOut
-            // 
-            dateCheckOut.CustomFormat = "MM/dd/yyyy";
-            dateCheckOut.Enabled = false;
-            dateCheckOut.Format = DateTimePickerFormat.Custom;
-            dateCheckOut.Location = new Point(932, 154);
-            dateCheckOut.MinDate = new DateTime(2024, 6, 2, 0, 0, 0, 0);
-            dateCheckOut.Name = "dateCheckOut";
-            dateCheckOut.Size = new Size(250, 27);
-            dateCheckOut.TabIndex = 25;
-            dateCheckOut.Value = new DateTime(2024, 6, 2, 0, 0, 0, 0);
-            dateCheckOut.ValueChanged += dateCheckOut_ValueChanged;
-            // 
             // roomInclusion
             // 
             roomInclusion.AutoSize = true;
-            roomInclusion.Location = new Point(278, 555);
+            roomInclusion.Location = new Point(435, 600);
             roomInclusion.Name = "roomInclusion";
             roomInclusion.Size = new Size(470, 60);
             roomInclusion.TabIndex = 26;
             roomInclusion.Text = "Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum,\r\nLorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum,\r\nLorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum.";
             // 
-            // label44
-            // 
-            label44.AutoSize = true;
-            label44.BackColor = Color.FromArgb(224, 224, 224);
-            label44.Location = new Point(814, 158);
-            label44.Name = "label44";
-            label44.Size = new Size(112, 20);
-            label44.TabIndex = 24;
-            label44.Text = "Check Out Date";
-            // 
             // label63
             // 
             label63.AutoSize = true;
-            label63.Location = new Point(236, 519);
+            label63.Location = new Point(393, 564);
             label63.Name = "label63";
             label63.Size = new Size(128, 20);
             label63.TabIndex = 26;
             label63.Text = "Package Inclusion:";
             // 
-            // dateCheckIn
-            // 
-            dateCheckIn.CustomFormat = "MM/dd/yyyy";
-            dateCheckIn.Enabled = false;
-            dateCheckIn.Format = DateTimePickerFormat.Custom;
-            dateCheckIn.Location = new Point(541, 154);
-            dateCheckIn.Name = "dateCheckIn";
-            dateCheckIn.Size = new Size(250, 27);
-            dateCheckIn.TabIndex = 25;
-            dateCheckIn.ValueChanged += dateCheckIn_ValueChanged;
-            // 
             // roomInformation
             // 
             roomInformation.AutoSize = true;
-            roomInformation.Location = new Point(278, 437);
+            roomInformation.Location = new Point(435, 482);
             roomInformation.Name = "roomInformation";
             roomInformation.Size = new Size(525, 40);
             roomInformation.TabIndex = 26;
             roomInformation.Text = "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum\r\nLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum\r\n";
             // 
-            // label43
-            // 
-            label43.AutoSize = true;
-            label43.BackColor = Color.FromArgb(224, 224, 224);
-            label43.Location = new Point(435, 158);
-            label43.Name = "label43";
-            label43.Size = new Size(100, 20);
-            label43.TabIndex = 24;
-            label43.Text = "Check In Date";
-            // 
             // label61
             // 
             label61.AutoSize = true;
-            label61.Location = new Point(236, 401);
+            label61.Location = new Point(393, 446);
             label61.Name = "label61";
             label61.Size = new Size(134, 20);
             label61.TabIndex = 26;
             label61.Text = "Room Information:";
-            // 
-            // phoneNumber
-            // 
-            phoneNumber.Location = new Point(514, 236);
-            phoneNumber.Name = "phoneNumber";
-            phoneNumber.Size = new Size(228, 27);
-            phoneNumber.TabIndex = 25;
-            // 
-            // totalPrice
-            // 
-            totalPrice.Location = new Point(1280, 631);
-            totalPrice.Name = "totalPrice";
-            totalPrice.ReadOnly = true;
-            totalPrice.Size = new Size(228, 27);
-            totalPrice.TabIndex = 25;
-            // 
-            // subTotal
-            // 
-            subTotal.Location = new Point(1280, 555);
-            subTotal.Name = "subTotal";
-            subTotal.ReadOnly = true;
-            subTotal.Size = new Size(228, 27);
-            subTotal.TabIndex = 25;
-            subTotal.TextChanged += subTotal_TextChanged;
-            // 
-            // tax
-            // 
-            tax.Location = new Point(1280, 401);
-            tax.Name = "tax";
-            tax.ReadOnly = true;
-            tax.Size = new Size(228, 27);
-            tax.TabIndex = 25;
-            tax.TextChanged += tax_TextChanged;
-            // 
-            // roomCost
-            // 
-            roomCost.Location = new Point(1280, 479);
-            roomCost.Name = "roomCost";
-            roomCost.ReadOnly = true;
-            roomCost.Size = new Size(228, 27);
-            roomCost.TabIndex = 25;
-            // 
-            // guestID
-            // 
-            guestID.Location = new Point(787, 236);
-            guestID.Name = "guestID";
-            guestID.ReadOnly = true;
-            guestID.Size = new Size(228, 27);
-            guestID.TabIndex = 25;
-            // 
-            // bookingID
-            // 
-            bookingID.Location = new Point(1258, 169);
-            bookingID.Name = "bookingID";
-            bookingID.ReadOnly = true;
-            bookingID.Size = new Size(228, 27);
-            bookingID.TabIndex = 25;
-            // 
-            // transactionID
-            // 
-            transactionID.Location = new Point(1258, 100);
-            transactionID.Name = "transactionID";
-            transactionID.ReadOnly = true;
-            transactionID.Size = new Size(228, 27);
-            transactionID.TabIndex = 25;
-            // 
-            // lastName
-            // 
-            lastName.Location = new Point(787, 304);
-            lastName.Name = "lastName";
-            lastName.Size = new Size(228, 27);
-            lastName.TabIndex = 25;
-            // 
-            // middleName
-            // 
-            middleName.Location = new Point(514, 304);
-            middleName.Name = "middleName";
-            middleName.Size = new Size(228, 27);
-            middleName.TabIndex = 25;
-            // 
-            // firstName
-            // 
-            firstName.Location = new Point(236, 304);
-            firstName.Name = "firstName";
-            firstName.Size = new Size(228, 27);
-            firstName.TabIndex = 25;
-            // 
-            // label52
-            // 
-            label52.AutoSize = true;
-            label52.Location = new Point(1280, 608);
-            label52.Name = "label52";
-            label52.Size = new Size(78, 20);
-            label52.TabIndex = 24;
-            label52.Text = "Total Price";
-            // 
-            // emailAddress
-            // 
-            emailAddress.Location = new Point(236, 236);
-            emailAddress.Name = "emailAddress";
-            emailAddress.Size = new Size(228, 27);
-            emailAddress.TabIndex = 25;
-            emailAddress.Leave += emailAddress_Leave;
-            // 
-            // label73
-            // 
-            label73.AutoSize = true;
-            label73.Location = new Point(1280, 532);
-            label73.Name = "label73";
-            label73.Size = new Size(71, 20);
-            label73.TabIndex = 24;
-            label73.Text = "Sub Total";
-            // 
-            // label51
-            // 
-            label51.AutoSize = true;
-            label51.Location = new Point(1280, 378);
-            label51.Name = "label51";
-            label51.Size = new Size(57, 20);
-            label51.TabIndex = 24;
-            label51.Text = "7% Tax:";
-            // 
-            // label71
-            // 
-            label71.AutoSize = true;
-            label71.Location = new Point(1258, 146);
-            label71.Name = "label71";
-            label71.Size = new Size(86, 20);
-            label71.TabIndex = 24;
-            label71.Text = "Booking ID:";
-            // 
-            // label72
-            // 
-            label72.AutoSize = true;
-            label72.Location = new Point(1280, 456);
-            label72.Name = "label72";
-            label72.Size = new Size(88, 20);
-            label72.TabIndex = 24;
-            label72.Text = "Room Price:";
-            // 
-            // label70
-            // 
-            label70.AutoSize = true;
-            label70.Location = new Point(787, 213);
-            label70.Name = "label70";
-            label70.Size = new Size(68, 20);
-            label70.TabIndex = 24;
-            label70.Text = "Guest ID:";
-            // 
-            // label50
-            // 
-            label50.AutoSize = true;
-            label50.Location = new Point(1258, 77);
-            label50.Name = "label50";
-            label50.Size = new Size(145, 20);
-            label50.TabIndex = 24;
-            label50.Text = "Transaction Number:";
-            // 
-            // label49
-            // 
-            label49.AutoSize = true;
-            label49.Location = new Point(787, 281);
-            label49.Name = "label49";
-            label49.Size = new Size(82, 20);
-            label49.TabIndex = 24;
-            label49.Text = "Last Name:";
-            // 
-            // label48
-            // 
-            label48.AutoSize = true;
-            label48.Location = new Point(514, 281);
-            label48.Name = "label48";
-            label48.Size = new Size(103, 20);
-            label48.TabIndex = 24;
-            label48.Text = "Middle Name:";
-            // 
-            // label47
-            // 
-            label47.AutoSize = true;
-            label47.Location = new Point(514, 213);
-            label47.Name = "label47";
-            label47.Size = new Size(121, 20);
-            label47.TabIndex = 24;
-            label47.Text = "Contact Number:";
-            // 
-            // label46
-            // 
-            label46.AutoSize = true;
-            label46.Location = new Point(236, 281);
-            label46.Name = "label46";
-            label46.Size = new Size(83, 20);
-            label46.TabIndex = 24;
-            label46.Text = "First Name:";
-            // 
-            // label45
-            // 
-            label45.AutoSize = true;
-            label45.Location = new Point(236, 213);
-            label45.Name = "label45";
-            label45.Size = new Size(106, 20);
-            label45.TabIndex = 24;
-            label45.Text = "Email Address:";
-            // 
-            // label36
-            // 
-            label36.AutoSize = true;
-            label36.Location = new Point(3, 94);
-            label36.Name = "label36";
-            label36.Size = new Size(124, 20);
-            label36.TabIndex = 24;
-            label36.Text = "Available Rooms:";
-            // 
-            // lblAvail1
-            // 
-            lblAvail1.AutoSize = true;
-            lblAvail1.Location = new Point(184, 94);
-            lblAvail1.Name = "lblAvail1";
-            lblAvail1.Size = new Size(17, 20);
-            lblAvail1.TabIndex = 24;
-            lblAvail1.Text = "0";
-            // 
-            // lblAvail2
-            // 
-            lblAvail2.AutoSize = true;
-            lblAvail2.Location = new Point(309, 94);
-            lblAvail2.Name = "lblAvail2";
-            lblAvail2.Size = new Size(17, 20);
-            lblAvail2.TabIndex = 24;
-            lblAvail2.Text = "0";
-            // 
-            // lblAvail3
-            // 
-            lblAvail3.AutoSize = true;
-            lblAvail3.Location = new Point(469, 94);
-            lblAvail3.Name = "lblAvail3";
-            lblAvail3.Size = new Size(17, 20);
-            lblAvail3.TabIndex = 24;
-            lblAvail3.Text = "0";
-            // 
-            // lblAvail4
-            // 
-            lblAvail4.AutoSize = true;
-            lblAvail4.Location = new Point(620, 94);
-            lblAvail4.Name = "lblAvail4";
-            lblAvail4.Size = new Size(17, 20);
-            lblAvail4.TabIndex = 24;
-            lblAvail4.Text = "0";
-            // 
-            // lblAvail5
-            // 
-            lblAvail5.AutoSize = true;
-            lblAvail5.Location = new Point(750, 94);
-            lblAvail5.Name = "lblAvail5";
-            lblAvail5.Size = new Size(17, 20);
-            lblAvail5.TabIndex = 24;
-            lblAvail5.Text = "0";
-            // 
-            // lblAvail6
-            // 
-            lblAvail6.AutoSize = true;
-            lblAvail6.Location = new Point(855, 94);
-            lblAvail6.Name = "lblAvail6";
-            lblAvail6.Size = new Size(17, 20);
-            lblAvail6.TabIndex = 24;
-            lblAvail6.Text = "0";
-            // 
-            // tabRoomTypes
-            // 
-            tabRoomTypes.Controls.Add(singleRoom);
-            tabRoomTypes.Controls.Add(standardDoubleRoom);
-            tabRoomTypes.Controls.Add(standardTwinRoom);
-            tabRoomTypes.Controls.Add(deluxeDoubleRoom);
-            tabRoomTypes.Controls.Add(studioRoom);
-            tabRoomTypes.Controls.Add(presidentialSuite);
-            tabRoomTypes.Controls.Add(Init);
-            tabRoomTypes.Location = new Point(137, 117);
-            tabRoomTypes.Name = "tabRoomTypes";
-            tabRoomTypes.SelectedIndex = 6;
-            tabRoomTypes.Size = new Size(1074, 75);
-            tabRoomTypes.TabIndex = 23;
-            tabRoomTypes.SelectedIndexChanged += tabRoomTypes_SelectedIndexChanged;
-            // 
-            // singleRoom
-            // 
-            singleRoom.BackgroundImageLayout = ImageLayout.None;
-            singleRoom.Location = new Point(4, 29);
-            singleRoom.Name = "singleRoom";
-            singleRoom.Padding = new Padding(3);
-            singleRoom.Size = new Size(1066, 42);
-            singleRoom.TabIndex = 0;
-            singleRoom.Text = "Single Room";
-            singleRoom.UseVisualStyleBackColor = true;
-            // 
-            // standardDoubleRoom
-            // 
-            standardDoubleRoom.Location = new Point(4, 29);
-            standardDoubleRoom.Name = "standardDoubleRoom";
-            standardDoubleRoom.Padding = new Padding(3);
-            standardDoubleRoom.Size = new Size(1066, 42);
-            standardDoubleRoom.TabIndex = 1;
-            standardDoubleRoom.Text = "Standard Double Room";
-            standardDoubleRoom.UseVisualStyleBackColor = true;
-            // 
-            // standardTwinRoom
-            // 
-            standardTwinRoom.Location = new Point(4, 29);
-            standardTwinRoom.Name = "standardTwinRoom";
-            standardTwinRoom.Padding = new Padding(3);
-            standardTwinRoom.Size = new Size(1066, 42);
-            standardTwinRoom.TabIndex = 2;
-            standardTwinRoom.Text = "Standard Twin Room";
-            standardTwinRoom.UseVisualStyleBackColor = true;
-            // 
-            // deluxeDoubleRoom
-            // 
-            deluxeDoubleRoom.Location = new Point(4, 29);
-            deluxeDoubleRoom.Name = "deluxeDoubleRoom";
-            deluxeDoubleRoom.Padding = new Padding(3);
-            deluxeDoubleRoom.Size = new Size(1066, 42);
-            deluxeDoubleRoom.TabIndex = 3;
-            deluxeDoubleRoom.Text = "Deluxe Double Room";
-            deluxeDoubleRoom.UseVisualStyleBackColor = true;
-            // 
-            // studioRoom
-            // 
-            studioRoom.Location = new Point(4, 29);
-            studioRoom.Name = "studioRoom";
-            studioRoom.Padding = new Padding(3);
-            studioRoom.Size = new Size(1066, 42);
-            studioRoom.TabIndex = 4;
-            studioRoom.Text = "Studio Room";
-            studioRoom.UseVisualStyleBackColor = true;
-            // 
-            // presidentialSuite
-            // 
-            presidentialSuite.Location = new Point(4, 29);
-            presidentialSuite.Name = "presidentialSuite";
-            presidentialSuite.Size = new Size(1066, 42);
-            presidentialSuite.TabIndex = 5;
-            presidentialSuite.Text = "Presidential Suite";
-            presidentialSuite.UseVisualStyleBackColor = true;
-            // 
-            // Init
-            // 
-            Init.Location = new Point(4, 29);
-            Init.Name = "Init";
-            Init.Size = new Size(1066, 42);
-            Init.TabIndex = 6;
-            Init.Text = "-";
-            // 
-            // btnNewBook
-            // 
-            btnNewBook.Location = new Point(1438, 685);
-            btnNewBook.Name = "btnNewBook";
-            btnNewBook.Size = new Size(94, 29);
-            btnNewBook.TabIndex = 22;
-            btnNewBook.Text = "Book";
-            btnNewBook.UseVisualStyleBackColor = true;
-            btnNewBook.Click += btnNewBook_Click;
-            // 
-            // label31
-            // 
-            label31.AutoSize = true;
-            label31.Font = new Font("Segoe UI", 9F);
-            label31.Location = new Point(514, 16);
-            label31.Name = "label31";
-            label31.Size = new Size(115, 20);
-            label31.TabIndex = 21;
-            label31.Text = "Guest Info Panel";
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new Point(19, 16);
-            label14.Name = "label14";
-            label14.Size = new Size(99, 20);
-            label14.TabIndex = 6;
-            label14.Text = "Reports Panel";
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 9F);
-            label15.Location = new Point(679, 16);
-            label15.Name = "label15";
-            label15.Size = new Size(122, 20);
-            label15.TabIndex = 5;
-            label15.Text = "Inovice Summary";
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 9F);
-            label16.Location = new Point(349, 16);
-            label16.Name = "label16";
-            label16.Size = new Size(131, 20);
-            label16.TabIndex = 4;
-            label16.Text = "Room Information";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(184, 16);
-            label6.Name = "label6";
-            label6.Size = new Size(109, 20);
-            label6.TabIndex = 0;
-            label6.Text = "Booking Panel";
             // 
             // pnlRoomInfo
             // 
@@ -2163,6 +2169,33 @@
             label81.TabIndex = 115;
             label81.Text = "Guest ID:";
             // 
+            // label88
+            // 
+            label88.AutoSize = true;
+            label88.Location = new Point(236, 181);
+            label88.Name = "label88";
+            label88.Size = new Size(106, 20);
+            label88.TabIndex = 128;
+            label88.Text = "Email Address:";
+            // 
+            // label89
+            // 
+            label89.AutoSize = true;
+            label89.Location = new Point(514, 181);
+            label89.Name = "label89";
+            label89.Size = new Size(121, 20);
+            label89.TabIndex = 127;
+            label89.Text = "Contact Number:";
+            // 
+            // label90
+            // 
+            label90.AutoSize = true;
+            label90.Location = new Point(787, 183);
+            label90.Name = "label90";
+            label90.Size = new Size(68, 20);
+            label90.TabIndex = 115;
+            label90.Text = "Guest ID:";
+            // 
             // HMSUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -2178,16 +2211,16 @@
             Controls.Add(btnGuestInfo);
             Controls.Add(btnMinimize);
             Controls.Add(btnClose);
-            Controls.Add(label33);
-            Controls.Add(label35);
-            Controls.Add(label32);
-            Controls.Add(label34);
-            Controls.Add(label25);
             Controls.Add(pnlBook);
             Controls.Add(pnlGuestinfo);
             Controls.Add(pnlReports);
             Controls.Add(pnlInvoiceSummary);
             Controls.Add(pnlRoomInfo);
+            Controls.Add(label33);
+            Controls.Add(label35);
+            Controls.Add(label32);
+            Controls.Add(label34);
+            Controls.Add(label25);
             FormBorderStyle = FormBorderStyle.None;
             Name = "HMSUI";
             StartPosition = FormStartPosition.CenterScreen;
@@ -2208,6 +2241,7 @@
             spnlCustomerInfo.ResumeLayout(false);
             pnlBook.ResumeLayout(false);
             pnlBook.PerformLayout();
+            tabRoomTypes.ResumeLayout(false);
             personPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -2221,7 +2255,6 @@
             addPersonInfo4.PerformLayout();
             addPersonInfo3.ResumeLayout(false);
             addPersonInfo3.PerformLayout();
-            tabRoomTypes.ResumeLayout(false);
             pnlRoomInfo.ResumeLayout(false);
             pnlRoomInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)db_RoomInformation).EndInit();
@@ -2429,5 +2462,8 @@
         private Button remove1;
         private Button remove2;
         private Button remove3;
+        private Label label88;
+        private Label label89;
+        private Label label90;
     }
 }

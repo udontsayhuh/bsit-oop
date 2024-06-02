@@ -627,6 +627,7 @@ namespace Hotel_Management_System
             {
                 pictureBox3.Visible = false;
                 addButton.Visible = true;
+                addButton2.Visible = false;
                 remove1.Visible = true;
                 remove2.Visible = false;
             }
@@ -647,6 +648,7 @@ namespace Hotel_Management_System
                 pictureBox4.Visible = false;
                 remove2.Visible = true;
                 addButton2.Visible = true;
+                addButton3.Visible = false;
                 remove3.Visible = false;
             }
         }
