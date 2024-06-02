@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HMSUI));
             btnMinimize = new PictureBox();
             btnClose = new PictureBox();
-            btmGuestInfo = new Button();
+            btnGuestInfo = new Button();
             btnBook = new Button();
             btnRoomInfo = new Button();
             btnInvoiceSummary = new Button();
@@ -61,6 +61,72 @@
             label20 = new Label();
             label7 = new Label();
             pnlBook = new Panel();
+            personPanel = new Panel();
+            addButton2 = new Button();
+            addButton3 = new Button();
+            remove1 = new Button();
+            remove2 = new Button();
+            remove3 = new Button();
+            remove4 = new Button();
+            addButton = new Button();
+            pictureBox5 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            pictureBox4 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            addPersonInfo1 = new Panel();
+            textBox1 = new TextBox();
+            label42 = new Label();
+            textBox2 = new TextBox();
+            label41 = new Label();
+            textBox3 = new TextBox();
+            label40 = new Label();
+            textBox4 = new TextBox();
+            label39 = new Label();
+            textBox5 = new TextBox();
+            label38 = new Label();
+            textBox6 = new TextBox();
+            label5 = new Label();
+            addPersonInfo2 = new Panel();
+            textBox7 = new TextBox();
+            label53 = new Label();
+            textBox8 = new TextBox();
+            label54 = new Label();
+            textBox9 = new TextBox();
+            label55 = new Label();
+            textBox10 = new TextBox();
+            label56 = new Label();
+            textBox11 = new TextBox();
+            label57 = new Label();
+            textBox12 = new TextBox();
+            label58 = new Label();
+            addPersonInfo4 = new Panel();
+            textBox25 = new TextBox();
+            label82 = new Label();
+            textBox26 = new TextBox();
+            label83 = new Label();
+            textBox27 = new TextBox();
+            label84 = new Label();
+            textBox28 = new TextBox();
+            label85 = new Label();
+            textBox29 = new TextBox();
+            label86 = new Label();
+            textBox30 = new TextBox();
+            label87 = new Label();
+            addPersonInfo3 = new Panel();
+            textBox13 = new TextBox();
+            label59 = new Label();
+            textBox14 = new TextBox();
+            label60 = new Label();
+            textBox15 = new TextBox();
+            label62 = new Label();
+            textBox16 = new TextBox();
+            label64 = new Label();
+            textBox17 = new TextBox();
+            label74 = new Label();
+            textBox18 = new TextBox();
+            label75 = new Label();
+            label = new Label();
+            btnAddPerson = new Button();
             label37 = new Label();
             cmbRoomNumber = new ComboBox();
             dateCheckOut = new DateTimePicker();
@@ -141,6 +207,19 @@
             label34 = new Label();
             label35 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
+            addPersonInfo5 = new Panel();
+            textBox19 = new TextBox();
+            label76 = new Label();
+            textBox20 = new TextBox();
+            label77 = new Label();
+            textBox21 = new TextBox();
+            label78 = new Label();
+            textBox22 = new TextBox();
+            label79 = new Label();
+            textBox23 = new TextBox();
+            label80 = new Label();
+            textBox24 = new TextBox();
+            label81 = new Label();
             ((System.ComponentModel.ISupportInitialize)btnMinimize).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnClose).BeginInit();
             pnlAttendant.SuspendLayout();
@@ -151,11 +230,21 @@
             spnlCustomerInfo.Panel2.SuspendLayout();
             spnlCustomerInfo.SuspendLayout();
             pnlBook.SuspendLayout();
+            personPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            addPersonInfo1.SuspendLayout();
+            addPersonInfo2.SuspendLayout();
+            addPersonInfo4.SuspendLayout();
+            addPersonInfo3.SuspendLayout();
             tabRoomTypes.SuspendLayout();
             pnlRoomInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)db_RoomInformation).BeginInit();
             pnlInvoiceSummary.SuspendLayout();
             pnlReports.SuspendLayout();
+            addPersonInfo5.SuspendLayout();
             SuspendLayout();
             // 
             // btnMinimize
@@ -182,17 +271,17 @@
             btnClose.TabStop = false;
             btnClose.Click += btnClose_Click;
             // 
-            // btmGuestInfo
+            // btnGuestInfo
             // 
-            btmGuestInfo.BackgroundImage = (Image)resources.GetObject("btmGuestInfo.BackgroundImage");
-            btmGuestInfo.BackgroundImageLayout = ImageLayout.Stretch;
-            btmGuestInfo.Location = new Point(582, 79);
-            btmGuestInfo.Name = "btmGuestInfo";
-            btmGuestInfo.Size = new Size(100, 100);
-            btmGuestInfo.TabIndex = 97;
-            btmGuestInfo.TabStop = false;
-            btmGuestInfo.UseVisualStyleBackColor = true;
-            btmGuestInfo.Click += btmGuestInfo_Click;
+            btnGuestInfo.BackgroundImage = (Image)resources.GetObject("btnGuestInfo.BackgroundImage");
+            btnGuestInfo.BackgroundImageLayout = ImageLayout.Stretch;
+            btnGuestInfo.Location = new Point(582, 79);
+            btnGuestInfo.Name = "btnGuestInfo";
+            btnGuestInfo.Size = new Size(100, 100);
+            btnGuestInfo.TabIndex = 97;
+            btnGuestInfo.TabStop = false;
+            btnGuestInfo.UseVisualStyleBackColor = true;
+            btnGuestInfo.Click += btmGuestInfo_Click;
             // 
             // btnBook
             // 
@@ -484,6 +573,9 @@
             pnlBook.AccessibleRole = AccessibleRole.None;
             pnlBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlBook.BackColor = Color.FromArgb(207, 192, 175);
+            pnlBook.Controls.Add(personPanel);
+            pnlBook.Controls.Add(label);
+            pnlBook.Controls.Add(btnAddPerson);
             pnlBook.Controls.Add(label37);
             pnlBook.Controls.Add(cmbRoomNumber);
             pnlBook.Controls.Add(dateCheckOut);
@@ -536,6 +628,652 @@
             pnlBook.Name = "pnlBook";
             pnlBook.Size = new Size(1546, 727);
             pnlBook.TabIndex = 103;
+            // 
+            // personPanel
+            // 
+            personPanel.AutoScroll = true;
+            personPanel.Controls.Add(addButton2);
+            personPanel.Controls.Add(addButton3);
+            personPanel.Controls.Add(remove1);
+            personPanel.Controls.Add(remove2);
+            personPanel.Controls.Add(remove3);
+            personPanel.Controls.Add(remove4);
+            personPanel.Controls.Add(addButton);
+            personPanel.Controls.Add(pictureBox5);
+            personPanel.Controls.Add(pictureBox3);
+            personPanel.Controls.Add(pictureBox4);
+            personPanel.Controls.Add(pictureBox2);
+            personPanel.Controls.Add(addPersonInfo1);
+            personPanel.Controls.Add(addPersonInfo2);
+            personPanel.Controls.Add(addPersonInfo4);
+            personPanel.Controls.Add(addPersonInfo3);
+            personPanel.Location = new Point(15, 337);
+            personPanel.Name = "personPanel";
+            personPanel.Size = new Size(1060, 302);
+            personPanel.TabIndex = 128;
+            // 
+            // addButton2
+            // 
+            addButton2.BackgroundImage = (Image)resources.GetObject("addButton2.BackgroundImage");
+            addButton2.BackgroundImageLayout = ImageLayout.Stretch;
+            addButton2.Location = new Point(590, 339);
+            addButton2.Name = "addButton2";
+            addButton2.Size = new Size(60, 61);
+            addButton2.TabIndex = 112;
+            addButton2.TabStop = false;
+            addButton2.UseVisualStyleBackColor = true;
+            addButton2.Visible = false;
+            addButton2.Click += addButton2_Click;
+            // 
+            // addButton3
+            // 
+            addButton3.BackgroundImage = (Image)resources.GetObject("addButton3.BackgroundImage");
+            addButton3.BackgroundImageLayout = ImageLayout.Stretch;
+            addButton3.Location = new Point(590, 470);
+            addButton3.Name = "addButton3";
+            addButton3.Size = new Size(60, 61);
+            addButton3.TabIndex = 112;
+            addButton3.TabStop = false;
+            addButton3.UseVisualStyleBackColor = true;
+            addButton3.Visible = false;
+            addButton3.Click += addButton3_Click;
+            // 
+            // remove1
+            // 
+            remove1.BackgroundImage = (Image)resources.GetObject("remove1.BackgroundImage");
+            remove1.BackgroundImageLayout = ImageLayout.Stretch;
+            remove1.Location = new Point(36, 54);
+            remove1.Name = "remove1";
+            remove1.Size = new Size(60, 61);
+            remove1.TabIndex = 112;
+            remove1.TabStop = false;
+            remove1.UseVisualStyleBackColor = true;
+            remove1.Click += remove1_Click;
+            // 
+            // remove2
+            // 
+            remove2.BackgroundImage = (Image)resources.GetObject("remove2.BackgroundImage");
+            remove2.BackgroundImageLayout = ImageLayout.Stretch;
+            remove2.Location = new Point(36, 202);
+            remove2.Name = "remove2";
+            remove2.Size = new Size(60, 61);
+            remove2.TabIndex = 112;
+            remove2.TabStop = false;
+            remove2.UseVisualStyleBackColor = true;
+            remove2.Visible = false;
+            remove2.Click += remove2_Click;
+            // 
+            // remove3
+            // 
+            remove3.BackgroundImage = (Image)resources.GetObject("remove3.BackgroundImage");
+            remove3.BackgroundImageLayout = ImageLayout.Stretch;
+            remove3.Location = new Point(36, 349);
+            remove3.Name = "remove3";
+            remove3.Size = new Size(60, 61);
+            remove3.TabIndex = 112;
+            remove3.TabStop = false;
+            remove3.UseVisualStyleBackColor = true;
+            remove3.Visible = false;
+            remove3.Click += remove3_Click;
+            // 
+            // remove4
+            // 
+            remove4.BackgroundImage = (Image)resources.GetObject("remove4.BackgroundImage");
+            remove4.BackgroundImageLayout = ImageLayout.Stretch;
+            remove4.Location = new Point(36, 497);
+            remove4.Name = "remove4";
+            remove4.Size = new Size(60, 61);
+            remove4.TabIndex = 112;
+            remove4.TabStop = false;
+            remove4.UseVisualStyleBackColor = true;
+            remove4.Visible = false;
+            remove4.Click += remove4_Click;
+            // 
+            // addButton
+            // 
+            addButton.BackgroundImage = (Image)resources.GetObject("addButton.BackgroundImage");
+            addButton.BackgroundImageLayout = ImageLayout.Stretch;
+            addButton.Location = new Point(590, 202);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(60, 61);
+            addButton.TabIndex = 112;
+            addButton.TabStop = false;
+            addButton.UseVisualStyleBackColor = true;
+            addButton.Click += addButton_Click;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(103, 470);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(94, 95);
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox5.TabIndex = 128;
+            pictureBox5.TabStop = false;
+            pictureBox5.Visible = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(103, 186);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(94, 95);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 128;
+            pictureBox3.TabStop = false;
+            pictureBox3.Visible = false;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(103, 333);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(94, 95);
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox4.TabIndex = 128;
+            pictureBox4.TabStop = false;
+            pictureBox4.Visible = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(103, 38);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(94, 95);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 128;
+            pictureBox2.TabStop = false;
+            // 
+            // addPersonInfo1
+            // 
+            addPersonInfo1.Controls.Add(textBox1);
+            addPersonInfo1.Controls.Add(label42);
+            addPersonInfo1.Controls.Add(textBox2);
+            addPersonInfo1.Controls.Add(label41);
+            addPersonInfo1.Controls.Add(textBox3);
+            addPersonInfo1.Controls.Add(label40);
+            addPersonInfo1.Controls.Add(textBox4);
+            addPersonInfo1.Controls.Add(label39);
+            addPersonInfo1.Controls.Add(textBox5);
+            addPersonInfo1.Controls.Add(label38);
+            addPersonInfo1.Controls.Add(textBox6);
+            addPersonInfo1.Controls.Add(label5);
+            addPersonInfo1.Location = new Point(214, 11);
+            addPersonInfo1.Name = "addPersonInfo1";
+            addPersonInfo1.Size = new Size(798, 136);
+            addPersonInfo1.TabIndex = 114;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(292, 27);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(228, 27);
+            textBox1.TabIndex = 121;
+            // 
+            // label42
+            // 
+            label42.AutoSize = true;
+            label42.Location = new Point(14, 4);
+            label42.Name = "label42";
+            label42.Size = new Size(106, 20);
+            label42.TabIndex = 120;
+            label42.Text = "Email Address:";
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(565, 27);
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(228, 27);
+            textBox2.TabIndex = 122;
+            // 
+            // label41
+            // 
+            label41.AutoSize = true;
+            label41.Location = new Point(14, 72);
+            label41.Name = "label41";
+            label41.Size = new Size(83, 20);
+            label41.TabIndex = 119;
+            label41.Text = "First Name:";
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(565, 95);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(228, 27);
+            textBox3.TabIndex = 123;
+            // 
+            // label40
+            // 
+            label40.AutoSize = true;
+            label40.Location = new Point(292, 4);
+            label40.Name = "label40";
+            label40.Size = new Size(121, 20);
+            label40.TabIndex = 118;
+            label40.Text = "Contact Number:";
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(292, 95);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(228, 27);
+            textBox4.TabIndex = 124;
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Location = new Point(292, 72);
+            label39.Name = "label39";
+            label39.Size = new Size(103, 20);
+            label39.TabIndex = 117;
+            label39.Text = "Middle Name:";
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(14, 95);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(228, 27);
+            textBox5.TabIndex = 125;
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Location = new Point(565, 72);
+            label38.Name = "label38";
+            label38.Size = new Size(82, 20);
+            label38.TabIndex = 116;
+            label38.Text = "Last Name:";
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(14, 27);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(228, 27);
+            textBox6.TabIndex = 126;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(565, 4);
+            label5.Name = "label5";
+            label5.Size = new Size(68, 20);
+            label5.TabIndex = 115;
+            label5.Text = "Guest ID:";
+            // 
+            // addPersonInfo2
+            // 
+            addPersonInfo2.Controls.Add(textBox7);
+            addPersonInfo2.Controls.Add(label53);
+            addPersonInfo2.Controls.Add(textBox8);
+            addPersonInfo2.Controls.Add(label54);
+            addPersonInfo2.Controls.Add(textBox9);
+            addPersonInfo2.Controls.Add(label55);
+            addPersonInfo2.Controls.Add(textBox10);
+            addPersonInfo2.Controls.Add(label56);
+            addPersonInfo2.Controls.Add(textBox11);
+            addPersonInfo2.Controls.Add(label57);
+            addPersonInfo2.Controls.Add(textBox12);
+            addPersonInfo2.Controls.Add(label58);
+            addPersonInfo2.Location = new Point(214, 159);
+            addPersonInfo2.Name = "addPersonInfo2";
+            addPersonInfo2.Size = new Size(798, 136);
+            addPersonInfo2.TabIndex = 114;
+            addPersonInfo2.Visible = false;
+            addPersonInfo2.VisibleChanged += addPersonInfo2_VisibleChanged;
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(292, 27);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(228, 27);
+            textBox7.TabIndex = 121;
+            // 
+            // label53
+            // 
+            label53.AutoSize = true;
+            label53.Location = new Point(14, 4);
+            label53.Name = "label53";
+            label53.Size = new Size(106, 20);
+            label53.TabIndex = 120;
+            label53.Text = "Email Address:";
+            // 
+            // textBox8
+            // 
+            textBox8.Location = new Point(565, 27);
+            textBox8.Name = "textBox8";
+            textBox8.ReadOnly = true;
+            textBox8.Size = new Size(228, 27);
+            textBox8.TabIndex = 122;
+            // 
+            // label54
+            // 
+            label54.AutoSize = true;
+            label54.Location = new Point(14, 72);
+            label54.Name = "label54";
+            label54.Size = new Size(83, 20);
+            label54.TabIndex = 119;
+            label54.Text = "First Name:";
+            // 
+            // textBox9
+            // 
+            textBox9.Location = new Point(565, 95);
+            textBox9.Name = "textBox9";
+            textBox9.Size = new Size(228, 27);
+            textBox9.TabIndex = 123;
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Location = new Point(292, 4);
+            label55.Name = "label55";
+            label55.Size = new Size(121, 20);
+            label55.TabIndex = 118;
+            label55.Text = "Contact Number:";
+            // 
+            // textBox10
+            // 
+            textBox10.Location = new Point(292, 95);
+            textBox10.Name = "textBox10";
+            textBox10.Size = new Size(228, 27);
+            textBox10.TabIndex = 124;
+            // 
+            // label56
+            // 
+            label56.AutoSize = true;
+            label56.Location = new Point(292, 72);
+            label56.Name = "label56";
+            label56.Size = new Size(103, 20);
+            label56.TabIndex = 117;
+            label56.Text = "Middle Name:";
+            // 
+            // textBox11
+            // 
+            textBox11.Location = new Point(14, 95);
+            textBox11.Name = "textBox11";
+            textBox11.Size = new Size(228, 27);
+            textBox11.TabIndex = 125;
+            // 
+            // label57
+            // 
+            label57.AutoSize = true;
+            label57.Location = new Point(565, 72);
+            label57.Name = "label57";
+            label57.Size = new Size(82, 20);
+            label57.TabIndex = 116;
+            label57.Text = "Last Name:";
+            // 
+            // textBox12
+            // 
+            textBox12.Location = new Point(14, 27);
+            textBox12.Name = "textBox12";
+            textBox12.Size = new Size(228, 27);
+            textBox12.TabIndex = 126;
+            // 
+            // label58
+            // 
+            label58.AutoSize = true;
+            label58.Location = new Point(565, 4);
+            label58.Name = "label58";
+            label58.Size = new Size(68, 20);
+            label58.TabIndex = 115;
+            label58.Text = "Guest ID:";
+            // 
+            // addPersonInfo4
+            // 
+            addPersonInfo4.Controls.Add(textBox25);
+            addPersonInfo4.Controls.Add(label82);
+            addPersonInfo4.Controls.Add(textBox26);
+            addPersonInfo4.Controls.Add(label83);
+            addPersonInfo4.Controls.Add(textBox27);
+            addPersonInfo4.Controls.Add(label84);
+            addPersonInfo4.Controls.Add(textBox28);
+            addPersonInfo4.Controls.Add(label85);
+            addPersonInfo4.Controls.Add(textBox29);
+            addPersonInfo4.Controls.Add(label86);
+            addPersonInfo4.Controls.Add(textBox30);
+            addPersonInfo4.Controls.Add(label87);
+            addPersonInfo4.Location = new Point(214, 436);
+            addPersonInfo4.Name = "addPersonInfo4";
+            addPersonInfo4.Size = new Size(798, 136);
+            addPersonInfo4.TabIndex = 127;
+            addPersonInfo4.Visible = false;
+            addPersonInfo4.VisibleChanged += addPersonInfo4_VisibleChanged;
+            // 
+            // textBox25
+            // 
+            textBox25.Location = new Point(292, 27);
+            textBox25.Name = "textBox25";
+            textBox25.Size = new Size(228, 27);
+            textBox25.TabIndex = 121;
+            // 
+            // label82
+            // 
+            label82.AutoSize = true;
+            label82.Location = new Point(14, 4);
+            label82.Name = "label82";
+            label82.Size = new Size(106, 20);
+            label82.TabIndex = 120;
+            label82.Text = "Email Address:";
+            // 
+            // textBox26
+            // 
+            textBox26.Location = new Point(565, 27);
+            textBox26.Name = "textBox26";
+            textBox26.ReadOnly = true;
+            textBox26.Size = new Size(228, 27);
+            textBox26.TabIndex = 122;
+            // 
+            // label83
+            // 
+            label83.AutoSize = true;
+            label83.Location = new Point(14, 72);
+            label83.Name = "label83";
+            label83.Size = new Size(83, 20);
+            label83.TabIndex = 119;
+            label83.Text = "First Name:";
+            // 
+            // textBox27
+            // 
+            textBox27.Location = new Point(565, 95);
+            textBox27.Name = "textBox27";
+            textBox27.Size = new Size(228, 27);
+            textBox27.TabIndex = 123;
+            // 
+            // label84
+            // 
+            label84.AutoSize = true;
+            label84.Location = new Point(292, 4);
+            label84.Name = "label84";
+            label84.Size = new Size(121, 20);
+            label84.TabIndex = 118;
+            label84.Text = "Contact Number:";
+            // 
+            // textBox28
+            // 
+            textBox28.Location = new Point(292, 95);
+            textBox28.Name = "textBox28";
+            textBox28.Size = new Size(228, 27);
+            textBox28.TabIndex = 124;
+            // 
+            // label85
+            // 
+            label85.AutoSize = true;
+            label85.Location = new Point(292, 72);
+            label85.Name = "label85";
+            label85.Size = new Size(103, 20);
+            label85.TabIndex = 117;
+            label85.Text = "Middle Name:";
+            // 
+            // textBox29
+            // 
+            textBox29.Location = new Point(14, 95);
+            textBox29.Name = "textBox29";
+            textBox29.Size = new Size(228, 27);
+            textBox29.TabIndex = 125;
+            // 
+            // label86
+            // 
+            label86.AutoSize = true;
+            label86.Location = new Point(565, 72);
+            label86.Name = "label86";
+            label86.Size = new Size(82, 20);
+            label86.TabIndex = 116;
+            label86.Text = "Last Name:";
+            // 
+            // textBox30
+            // 
+            textBox30.Location = new Point(14, 27);
+            textBox30.Name = "textBox30";
+            textBox30.Size = new Size(228, 27);
+            textBox30.TabIndex = 126;
+            // 
+            // label87
+            // 
+            label87.AutoSize = true;
+            label87.Location = new Point(565, 4);
+            label87.Name = "label87";
+            label87.Size = new Size(68, 20);
+            label87.TabIndex = 115;
+            label87.Text = "Guest ID:";
+            // 
+            // addPersonInfo3
+            // 
+            addPersonInfo3.Controls.Add(textBox13);
+            addPersonInfo3.Controls.Add(label59);
+            addPersonInfo3.Controls.Add(textBox14);
+            addPersonInfo3.Controls.Add(label60);
+            addPersonInfo3.Controls.Add(textBox15);
+            addPersonInfo3.Controls.Add(label62);
+            addPersonInfo3.Controls.Add(textBox16);
+            addPersonInfo3.Controls.Add(label64);
+            addPersonInfo3.Controls.Add(textBox17);
+            addPersonInfo3.Controls.Add(label74);
+            addPersonInfo3.Controls.Add(textBox18);
+            addPersonInfo3.Controls.Add(label75);
+            addPersonInfo3.Location = new Point(214, 306);
+            addPersonInfo3.Name = "addPersonInfo3";
+            addPersonInfo3.Size = new Size(798, 136);
+            addPersonInfo3.TabIndex = 127;
+            addPersonInfo3.Visible = false;
+            addPersonInfo3.VisibleChanged += addPersonInfo3_VisibleChanged;
+            // 
+            // textBox13
+            // 
+            textBox13.Location = new Point(292, 27);
+            textBox13.Name = "textBox13";
+            textBox13.Size = new Size(228, 27);
+            textBox13.TabIndex = 121;
+            // 
+            // label59
+            // 
+            label59.AutoSize = true;
+            label59.Location = new Point(14, 4);
+            label59.Name = "label59";
+            label59.Size = new Size(106, 20);
+            label59.TabIndex = 120;
+            label59.Text = "Email Address:";
+            // 
+            // textBox14
+            // 
+            textBox14.Location = new Point(565, 27);
+            textBox14.Name = "textBox14";
+            textBox14.ReadOnly = true;
+            textBox14.Size = new Size(228, 27);
+            textBox14.TabIndex = 122;
+            // 
+            // label60
+            // 
+            label60.AutoSize = true;
+            label60.Location = new Point(14, 72);
+            label60.Name = "label60";
+            label60.Size = new Size(83, 20);
+            label60.TabIndex = 119;
+            label60.Text = "First Name:";
+            // 
+            // textBox15
+            // 
+            textBox15.Location = new Point(565, 95);
+            textBox15.Name = "textBox15";
+            textBox15.Size = new Size(228, 27);
+            textBox15.TabIndex = 123;
+            // 
+            // label62
+            // 
+            label62.AutoSize = true;
+            label62.Location = new Point(292, 4);
+            label62.Name = "label62";
+            label62.Size = new Size(121, 20);
+            label62.TabIndex = 118;
+            label62.Text = "Contact Number:";
+            // 
+            // textBox16
+            // 
+            textBox16.Location = new Point(292, 95);
+            textBox16.Name = "textBox16";
+            textBox16.Size = new Size(228, 27);
+            textBox16.TabIndex = 124;
+            // 
+            // label64
+            // 
+            label64.AutoSize = true;
+            label64.Location = new Point(292, 72);
+            label64.Name = "label64";
+            label64.Size = new Size(103, 20);
+            label64.TabIndex = 117;
+            label64.Text = "Middle Name:";
+            // 
+            // textBox17
+            // 
+            textBox17.Location = new Point(14, 95);
+            textBox17.Name = "textBox17";
+            textBox17.Size = new Size(228, 27);
+            textBox17.TabIndex = 125;
+            // 
+            // label74
+            // 
+            label74.AutoSize = true;
+            label74.Location = new Point(565, 72);
+            label74.Name = "label74";
+            label74.Size = new Size(82, 20);
+            label74.TabIndex = 116;
+            label74.Text = "Last Name:";
+            // 
+            // textBox18
+            // 
+            textBox18.Location = new Point(14, 27);
+            textBox18.Name = "textBox18";
+            textBox18.Size = new Size(228, 27);
+            textBox18.TabIndex = 126;
+            // 
+            // label75
+            // 
+            label75.AutoSize = true;
+            label75.Location = new Point(565, 4);
+            label75.Name = "label75";
+            label75.Size = new Size(68, 20);
+            label75.TabIndex = 115;
+            label75.Text = "Guest ID:";
+            // 
+            // label
+            // 
+            label.AutoSize = true;
+            label.Location = new Point(70, 317);
+            label.Name = "label";
+            label.Size = new Size(84, 20);
+            label.TabIndex = 113;
+            label.Text = "Add Person";
+            // 
+            // btnAddPerson
+            // 
+            btnAddPerson.BackgroundImage = (Image)resources.GetObject("btnAddPerson.BackgroundImage");
+            btnAddPerson.BackgroundImageLayout = ImageLayout.Stretch;
+            btnAddPerson.Location = new Point(62, 215);
+            btnAddPerson.Name = "btnAddPerson";
+            btnAddPerson.Size = new Size(100, 100);
+            btnAddPerson.TabIndex = 112;
+            btnAddPerson.TabStop = false;
+            btnAddPerson.UseVisualStyleBackColor = true;
+            btnAddPerson.Click += btnAddPerson_Click;
             // 
             // label37
             // 
@@ -1308,6 +2046,123 @@
             timer1.Enabled = true;
             timer1.Tick += timer1_Tick;
             // 
+            // addPersonInfo5
+            // 
+            addPersonInfo5.Controls.Add(textBox19);
+            addPersonInfo5.Controls.Add(label76);
+            addPersonInfo5.Controls.Add(textBox20);
+            addPersonInfo5.Controls.Add(label77);
+            addPersonInfo5.Controls.Add(textBox21);
+            addPersonInfo5.Controls.Add(label78);
+            addPersonInfo5.Controls.Add(textBox22);
+            addPersonInfo5.Controls.Add(label79);
+            addPersonInfo5.Controls.Add(textBox23);
+            addPersonInfo5.Controls.Add(label80);
+            addPersonInfo5.Controls.Add(textBox24);
+            addPersonInfo5.Controls.Add(label81);
+            addPersonInfo5.Location = new Point(8, 453);
+            addPersonInfo5.Name = "addPersonInfo5";
+            addPersonInfo5.Size = new Size(799, 136);
+            addPersonInfo5.TabIndex = 128;
+            addPersonInfo5.Visible = false;
+            // 
+            // textBox19
+            // 
+            textBox19.Location = new Point(292, 27);
+            textBox19.Name = "textBox19";
+            textBox19.Size = new Size(228, 27);
+            textBox19.TabIndex = 121;
+            // 
+            // label76
+            // 
+            label76.AutoSize = true;
+            label76.Location = new Point(14, 4);
+            label76.Name = "label76";
+            label76.Size = new Size(106, 20);
+            label76.TabIndex = 120;
+            label76.Text = "Email Address:";
+            // 
+            // textBox20
+            // 
+            textBox20.Location = new Point(565, 27);
+            textBox20.Name = "textBox20";
+            textBox20.ReadOnly = true;
+            textBox20.Size = new Size(228, 27);
+            textBox20.TabIndex = 122;
+            // 
+            // label77
+            // 
+            label77.AutoSize = true;
+            label77.Location = new Point(14, 72);
+            label77.Name = "label77";
+            label77.Size = new Size(83, 20);
+            label77.TabIndex = 119;
+            label77.Text = "First Name:";
+            // 
+            // textBox21
+            // 
+            textBox21.Location = new Point(565, 95);
+            textBox21.Name = "textBox21";
+            textBox21.Size = new Size(228, 27);
+            textBox21.TabIndex = 123;
+            // 
+            // label78
+            // 
+            label78.AutoSize = true;
+            label78.Location = new Point(292, 4);
+            label78.Name = "label78";
+            label78.Size = new Size(121, 20);
+            label78.TabIndex = 118;
+            label78.Text = "Contact Number:";
+            // 
+            // textBox22
+            // 
+            textBox22.Location = new Point(292, 95);
+            textBox22.Name = "textBox22";
+            textBox22.Size = new Size(228, 27);
+            textBox22.TabIndex = 124;
+            // 
+            // label79
+            // 
+            label79.AutoSize = true;
+            label79.Location = new Point(292, 72);
+            label79.Name = "label79";
+            label79.Size = new Size(103, 20);
+            label79.TabIndex = 117;
+            label79.Text = "Middle Name:";
+            // 
+            // textBox23
+            // 
+            textBox23.Location = new Point(14, 95);
+            textBox23.Name = "textBox23";
+            textBox23.Size = new Size(228, 27);
+            textBox23.TabIndex = 125;
+            // 
+            // label80
+            // 
+            label80.AutoSize = true;
+            label80.Location = new Point(565, 72);
+            label80.Name = "label80";
+            label80.Size = new Size(82, 20);
+            label80.TabIndex = 116;
+            label80.Text = "Last Name:";
+            // 
+            // textBox24
+            // 
+            textBox24.Location = new Point(14, 27);
+            textBox24.Name = "textBox24";
+            textBox24.Size = new Size(228, 27);
+            textBox24.TabIndex = 126;
+            // 
+            // label81
+            // 
+            label81.AutoSize = true;
+            label81.Location = new Point(565, 4);
+            label81.Name = "label81";
+            label81.Size = new Size(68, 20);
+            label81.TabIndex = 115;
+            label81.Text = "Guest ID:";
+            // 
             // HMSUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1320,7 +2175,7 @@
             Controls.Add(btnInvoiceSummary);
             Controls.Add(btnRoomInfo);
             Controls.Add(btnBook);
-            Controls.Add(btmGuestInfo);
+            Controls.Add(btnGuestInfo);
             Controls.Add(btnMinimize);
             Controls.Add(btnClose);
             Controls.Add(label33);
@@ -1353,6 +2208,19 @@
             spnlCustomerInfo.ResumeLayout(false);
             pnlBook.ResumeLayout(false);
             pnlBook.PerformLayout();
+            personPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            addPersonInfo1.ResumeLayout(false);
+            addPersonInfo1.PerformLayout();
+            addPersonInfo2.ResumeLayout(false);
+            addPersonInfo2.PerformLayout();
+            addPersonInfo4.ResumeLayout(false);
+            addPersonInfo4.PerformLayout();
+            addPersonInfo3.ResumeLayout(false);
+            addPersonInfo3.PerformLayout();
             tabRoomTypes.ResumeLayout(false);
             pnlRoomInfo.ResumeLayout(false);
             pnlRoomInfo.PerformLayout();
@@ -1361,6 +2229,8 @@
             pnlInvoiceSummary.PerformLayout();
             pnlReports.ResumeLayout(false);
             pnlReports.PerformLayout();
+            addPersonInfo5.ResumeLayout(false);
+            addPersonInfo5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1369,7 +2239,7 @@
 
         private PictureBox btnMinimize;
         private PictureBox btnClose;
-        private Button btmGuestInfo;
+        private Button btnGuestInfo;
         private Button btnBook;
         private Button btnRoomInfo;
         private Button btnInvoiceSummary;
@@ -1479,5 +2349,85 @@
         private Label label52;
         private TabPage Init;
         private System.Windows.Forms.Timer timer1;
+        private Button btnAddPerson;
+        private Label label;
+        private Panel personPanel;
+        private VScrollBar vScrollBar1;
+        private TextBox textBox1;
+        private Label label42;
+        private TextBox textBox2;
+        private Label label41;
+        private TextBox textBox3;
+        private Label label40;
+        private TextBox textBox4;
+        private Label label39;
+        private TextBox textBox5;
+        private Label label38;
+        private TextBox textBox6;
+        private Label label5;
+        private Panel addPersonInfo2;
+        private Panel addPersonInfo1;
+        private TextBox textBox7;
+        private Label label53;
+        private TextBox textBox8;
+        private Label label54;
+        private TextBox textBox9;
+        private Label label55;
+        private TextBox textBox10;
+        private Label label56;
+        private TextBox textBox11;
+        private Label label57;
+        private TextBox textBox12;
+        private Label label58;
+        private Panel addPersonInfo3;
+        private TextBox textBox13;
+        private Label label59;
+        private TextBox textBox14;
+        private Label label60;
+        private TextBox textBox15;
+        private Label label62;
+        private TextBox textBox16;
+        private Label label64;
+        private TextBox textBox17;
+        private Label label74;
+        private TextBox textBox18;
+        private Label label75;
+        private Panel addPersonInfo5;
+        private TextBox textBox19;
+        private Label label76;
+        private TextBox textBox20;
+        private Label label77;
+        private TextBox textBox21;
+        private Label label78;
+        private TextBox textBox22;
+        private Label label79;
+        private TextBox textBox23;
+        private Label label80;
+        private TextBox textBox24;
+        private Label label81;
+        private Panel addPersonInfo4;
+        private TextBox textBox25;
+        private Label label82;
+        private TextBox textBox26;
+        private Label label83;
+        private TextBox textBox27;
+        private Label label84;
+        private TextBox textBox28;
+        private Label label85;
+        private TextBox textBox29;
+        private Label label86;
+        private TextBox textBox30;
+        private Label label87;
+        private PictureBox pictureBox5;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox2;
+        private Button addButton;
+        private Button remove4;
+        private Button addButton3;
+        private Button addButton2;
+        private Button remove1;
+        private Button remove2;
+        private Button remove3;
     }
 }

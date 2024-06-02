@@ -126,6 +126,7 @@ namespace Hotel_Management_System
             pnlRoomInfo.Visible = false;
             lblLoggedIn.Text = NameLog;
             PopulateRoomInformations();
+            personPanel.Visible = false;
             roomInformation.Text = description[0];
             roomInclusion.Text = inclusion[0];
 
@@ -181,13 +182,27 @@ namespace Hotel_Management_System
                 }
             }
         }
+        public void ClearRoomAvailabilityList()
+        {
+            SingleRoomID.Clear();
+            SingleRoomNumber.Clear();
+            StandardDoubleRoomID.Clear();
+            StandardDoubleRoomNumber.Clear();
+            StandardTwinRoomID.Clear();
+            StandardTwinRoomNumber.Clear();
+            DeluxeDoubleRoomID.Clear();
+            DeluxeDoubleRoomNumber.Clear();
+            StudioRoomID.Clear();
+            StudioRoomNumber.Clear();
+            PresidentialSuiteID.Clear();
+            PresidentialSuiteNumber.Clear();
+        }
         public void UpdateRoomNumberAvailability()
         {
             ClearRoomAvailabilityList();
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-                string query = "select RoomNumber, RoomID from v_AllRoomInformation " +
-                    "where status = 'Available'";
+                string query = "select RoomNumber, RoomID from v_AllRoomInformation where status = 'Available'";
                 using (SqliteCommand command = new SqliteCommand(query, connection))
                 {
                     connection.Open();
@@ -345,31 +360,18 @@ namespace Hotel_Management_System
                 }
             }
         }
-        public void ClearRoomAvailabilityList()
-        {
-            SingleRoomID.Clear();
-            SingleRoomNumber.Clear();
-            StandardDoubleRoomID.Clear();
-            StandardDoubleRoomNumber.Clear();
-            StandardTwinRoomID.Clear();
-            StandardTwinRoomNumber.Clear();
-            DeluxeDoubleRoomID.Clear();
-            DeluxeDoubleRoomNumber.Clear();
-            StudioRoomID.Clear();
-            StudioRoomNumber.Clear();
-            PresidentialSuiteID.Clear();
-            PresidentialSuiteNumber.Clear();
-        }
+
         public void BookSuccess()
         {
-            tabRoomTypes.SelectedIndex = 6;
+            dateCheckIn.Value = DateTime.Now;
+            dateCheckIn.Value = DateTime.Now;
+
             UpdateTransactionNumber();
             UpdateRoomStatusID();
             UpdateReceiptNumber();
             UpdateRoomTypeAvailability();
             UpdateRoomNumberAvailability();
-            dateCheckIn.MinDate = DateTime.Now;
-            dateCheckOut.MinDate = DateTime.Now;
+
             emailAddress.Text = "";
             firstName.Text = "";
             middleName.Text = "";
@@ -379,6 +381,7 @@ namespace Hotel_Management_System
             subTotal.Text = "0";
             totalPrice.Text = "0";
             roomCost.Text = "0";
+            tabRoomTypes.SelectedIndex = 6;
         }
 
         #endregion
@@ -396,27 +399,27 @@ namespace Hotel_Management_System
             {
                 if (selectedTab == "SingleRoom")
                 {
-                    RoomID = SingleRoomID[cmbRoomNumber.TabIndex];
+                    RoomID = SingleRoomID[cmbRoomNumber.SelectedIndex];
                 }
                 else if (selectedTab == "StandardDoubleRoom")
                 {
-                    RoomID = StandardDoubleRoomID[cmbRoomNumber.TabIndex];
+                    RoomID = StandardDoubleRoomID[cmbRoomNumber.SelectedIndex];
                 }
                 else if (selectedTab == "StandardTwinRoom")
                 {
-                    RoomID = StandardTwinRoomID[cmbRoomNumber.TabIndex];
+                    RoomID = StandardTwinRoomID[cmbRoomNumber.SelectedIndex];
                 }
                 else if (selectedTab == "DeluxeDoubleRoom")
                 {
-                    RoomID = DeluxeDoubleRoomID[cmbRoomNumber.TabIndex];
+                    RoomID = DeluxeDoubleRoomID[cmbRoomNumber.SelectedIndex];
                 }
                 else if (selectedTab == "StudioRoom")
                 {
-                    RoomID = StudioRoomID[cmbRoomNumber.TabIndex];
+                    RoomID = StudioRoomID[cmbRoomNumber.SelectedIndex];
                 }
                 else if (selectedTab == "PresidentialSuite")
                 {
-                    RoomID = PresidentialSuiteID[cmbRoomNumber.TabIndex];
+                    RoomID = PresidentialSuiteID[cmbRoomNumber.SelectedIndex];
                 }
 
                 if (guestID.Text == tempGuestID)
@@ -461,7 +464,7 @@ namespace Hotel_Management_System
                     }
                     connection.Close();
                 }
-                MessageBox.Show("Print Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Room #" + cmbRoomNumber.SelectedValue + " Booked Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
                 BookSuccess();
             }
 
@@ -469,7 +472,7 @@ namespace Hotel_Management_System
 
         private void tabRoomTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List <string> clear = new List<string> {""};
+            List<string> clear = new List<string> { "" };
             if (tabRoomTypes.SelectedIndex == 6)
             {
                 cmbRoomNumber.Enabled = false;
@@ -483,7 +486,6 @@ namespace Hotel_Management_System
 
             else if (tabRoomTypes.SelectedIndex == 0)
             {
-
                 roomCost.Text = RoomPrice[2].ToString();
                 roomInformation.Text = description[0];
                 roomInclusion.Text = inclusion[0];
@@ -492,9 +494,11 @@ namespace Hotel_Management_System
                 cmbRoomNumber.Enabled = true;
                 dateCheckIn.Enabled = true;
                 dateCheckOut.Enabled = true;
+                cmbRoomNumber.SelectedIndex = 0;
             }
             else if (tabRoomTypes.SelectedIndex == 1)
             {
+
                 roomCost.Text = RoomPrice[3].ToString();
                 roomInformation.Text = description[1];
                 roomInclusion.Text = inclusion[1];
@@ -503,10 +507,12 @@ namespace Hotel_Management_System
                 cmbRoomNumber.Enabled = true;
                 dateCheckIn.Enabled = true;
                 dateCheckOut.Enabled = true;
+                cmbRoomNumber.SelectedIndex = 0;
 
             }
             else if (tabRoomTypes.SelectedIndex == 2)
             {
+
                 roomCost.Text = RoomPrice[4].ToString();
                 roomInformation.Text = description[2];
                 roomInclusion.Text = inclusion[2];
@@ -515,6 +521,7 @@ namespace Hotel_Management_System
                 cmbRoomNumber.Enabled = true;
                 dateCheckIn.Enabled = true;
                 dateCheckOut.Enabled = true;
+                cmbRoomNumber.SelectedIndex = 0;
 
             }
             else if (tabRoomTypes.SelectedIndex == 3)
@@ -527,7 +534,7 @@ namespace Hotel_Management_System
                 cmbRoomNumber.Enabled = true;
                 dateCheckIn.Enabled = true;
                 dateCheckOut.Enabled = true;
-
+                cmbRoomNumber.SelectedIndex = 0;
             }
             else if (tabRoomTypes.SelectedIndex == 4)
             {
@@ -539,7 +546,7 @@ namespace Hotel_Management_System
                 cmbRoomNumber.Enabled = true;
                 dateCheckIn.Enabled = true;
                 dateCheckOut.Enabled = true;
-
+                cmbRoomNumber.SelectedIndex = 0;
             }
             else if (tabRoomTypes.SelectedIndex == 5)
             {
@@ -551,7 +558,7 @@ namespace Hotel_Management_System
                 cmbRoomNumber.Enabled = true;
                 dateCheckIn.Enabled = true;
                 dateCheckOut.Enabled = true;
-
+                cmbRoomNumber.SelectedIndex = 0;
             }
         }
 
@@ -594,6 +601,107 @@ namespace Hotel_Management_System
         private void dateCheckIn_ValueChanged(object sender, EventArgs e)
         {
             dateCheckOut.MinDate = dateCheckIn.Value;
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            if (personPanel.Visible == false)
+            {
+                personPanel.Visible = true;
+            }
+            else personPanel.Visible = false;
+        }
+
+        private void addPersonInfo2_VisibleChanged(object sender, EventArgs e)
+        {
+            if (addPersonInfo2.Visible == true)
+            {
+                pictureBox3.Visible = true;
+                remove2.Visible = true;
+                addButton.Visible = false;
+                remove1.Visible = false;
+                remove2.Visible = true;
+                addButton2.Visible = true;
+            }
+            else if (addPersonInfo2.Visible == false)
+            {
+                pictureBox3.Visible = false;
+                addButton.Visible = true;
+                remove1.Visible = true;
+                remove2.Visible = false;
+            }
+        }
+
+        private void addPersonInfo3_VisibleChanged(object sender, EventArgs e)
+        {
+            if (addPersonInfo3.Visible == true)
+            {
+                pictureBox4.Visible = true;
+                addButton2.Visible = false;
+                addButton3.Visible = true;
+                remove2.Visible = false;
+                remove3.Visible = true;
+            }
+            else if(addPersonInfo3.Visible == false)
+            {
+                pictureBox4.Visible = false;
+                remove2.Visible = true;
+                addButton2.Visible = true;
+                remove3.Visible = false;
+            }
+        }
+
+        private void addPersonInfo4_VisibleChanged(object sender, EventArgs e)
+        {
+            if (addPersonInfo4.Visible == true)
+            {
+                pictureBox5.Visible = true;
+                addButton3.Visible = false;
+                remove3.Visible = false;
+                remove4.Visible = true;
+            }
+            else if (addPersonInfo4.Visible == false)
+            {
+                pictureBox5.Visible = false;
+                remove3.Visible = true;
+                addButton3.Visible = true;
+                remove4.Visible = false;
+            }
+        }
+
+        private void addButton2_Click(object sender, EventArgs e)
+        {
+            addPersonInfo3.Visible = true;
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            addPersonInfo2.Visible = true;    
+        }
+
+        private void addButton3_Click(object sender, EventArgs e)
+        {
+            addPersonInfo4.Visible = true;
+        }
+
+        private void remove1_Click(object sender, EventArgs e)
+        {
+            personPanel.Visible = false;
+        }
+
+        private void remove2_Click(object sender, EventArgs e)
+        {
+            addPersonInfo2.Visible = false;
+        }
+
+        private void remove3_Click(object sender, EventArgs e)
+        {
+            addPersonInfo3.Visible = false;
+        }
+
+        private void remove4_Click(object sender, EventArgs e)
+        {
+            addPersonInfo4.Visible = false;
         }
     }
 }
