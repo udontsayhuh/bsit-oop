@@ -13,7 +13,7 @@ namespace Hotel_Management_System
 {
     public partial class HMSUI : Form
     {
-        private string selectedTab ="";
+        private string selectedTab = "";
         private Int64 RoomStatusID;
         public static Int64 LoggedInID;
         public static string NameLog = "";
@@ -116,6 +116,9 @@ namespace Hotel_Management_System
             UpdateRoomTypeAvailability();
             UpdateRoomNumberAvailability();
             UpdateRoomStatusID();
+            dateCheckIn.MinDate = DateTime.Now;
+            dateCheckOut.MinDate = DateTime.Now;
+            lblDate.Text = DateTime.Now.Date.ToString("MM/dd/yyyy dddd");
             pnlBook.Visible = false;
             pnlGuestinfo.Visible = false;
             pnlInvoiceSummary.Visible = false;
@@ -125,7 +128,7 @@ namespace Hotel_Management_System
             PopulateRoomInformations();
             roomInformation.Text = description[0];
             roomInclusion.Text = inclusion[0];
-            
+
         }
         public void PopulateRoomsInformation()
         {
@@ -190,7 +193,7 @@ namespace Hotel_Management_System
                     connection.Open();
                     using (SqliteDataReader reader = command.ExecuteReader())
                     {
-                        
+
                         while (reader.Read())
                         {
                             if (reader.GetInt32(0) >= 1001 && reader.GetInt32(0) <= 1024)
@@ -225,7 +228,7 @@ namespace Hotel_Management_System
                             }
                         }
                         cmbRoomNumber.DataSource = SingleRoomNumber;
-                        
+
                     }
                     connection.Close();
                 }
@@ -254,12 +257,13 @@ namespace Hotel_Management_System
         }
         public void UpdateRoomStatusID()
         {
-            using(SqliteConnection connection = new SqliteConnection(connectionString))
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 string query = "select max(RoomStatusID) from t_RoomStatus";
                 connection.Open();
-                using(SqliteCommand command = new SqliteCommand(query,connection)) {
-                    using(SqliteDataReader reader = command.ExecuteReader())
+                using (SqliteCommand command = new SqliteCommand(query, connection))
+                {
+                    using (SqliteDataReader reader = command.ExecuteReader())
                     {
                         reader.Read();
                         RoomStatusID = Convert.ToInt64(reader.GetValue(0)) + 1;
@@ -349,94 +353,108 @@ namespace Hotel_Management_System
 
         private void btnNewBook_Click(object sender, EventArgs e)
         {
-            if (selectedTab == "SingleRoom")
+            if (totalPrice.Text == "" && emailAddress.Text == "" || phoneNumber.Text == "" || firstName.Text == "" || lastName.Text == "" || middleName.Text == "")
             {
-                RoomID = SingleRoomID[cmbRoomNumber.TabIndex];
+                if (totalPrice.Text == "") MessageBox.Show("Please Select a Correct Room Number and Check Out Date", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else MessageBox.Show("Please Complete All Necessary Information", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(selectedTab == "StandardDoubleRoom")
+
+            else
             {
-                RoomID = StandardDoubleRoomID[cmbRoomNumber.TabIndex];
-            }
-            else if (selectedTab == "StandardTwinRoom")
-            {
-                RoomID = StandardTwinRoomID[cmbRoomNumber.TabIndex];
-            }
-            else if (selectedTab == "DeluxeDoubleRoom")
-            {
-                RoomID = DeluxeDoubleRoomID[cmbRoomNumber.TabIndex];
-            }
-            else if (selectedTab == "StudioRoom")
-            {
-                RoomID = StudioRoomID[cmbRoomNumber.TabIndex];
-            }
-            else if (selectedTab == "PresidentialSuite")
-            {
-                RoomID = PresidentialSuiteID[cmbRoomNumber.TabIndex];
-            }
-            
-            if (guestID.Text == tempGuestID)
-            {
-                using(SqliteConnection connection = new SqliteConnection(connectionString))
+                if (selectedTab == "SingleRoom")
                 {
-                    string query = "insert into r_Guest (GuestID, FirstName, MiddleName, LastName, ContactNumber, EmailAddress, DateAdded) values " +
-                        "('" + Int32.Parse(guestID.Text) + "', '" + firstName.Text + "', '" + middleName.Text + "', '" +lastName.Text +"', '"+phoneNumber.Text+"', '"+emailAddress.Text+"', '"+DateTime.Now.ToString()+"')";
+                    RoomID = SingleRoomID[cmbRoomNumber.TabIndex];
+                }
+                else if (selectedTab == "StandardDoubleRoom")
+                {
+                    RoomID = StandardDoubleRoomID[cmbRoomNumber.TabIndex];
+                }
+                else if (selectedTab == "StandardTwinRoom")
+                {
+                    RoomID = StandardTwinRoomID[cmbRoomNumber.TabIndex];
+                }
+                else if (selectedTab == "DeluxeDoubleRoom")
+                {
+                    RoomID = DeluxeDoubleRoomID[cmbRoomNumber.TabIndex];
+                }
+                else if (selectedTab == "StudioRoom")
+                {
+                    RoomID = StudioRoomID[cmbRoomNumber.TabIndex];
+                }
+                else if (selectedTab == "PresidentialSuite")
+                {
+                    RoomID = PresidentialSuiteID[cmbRoomNumber.TabIndex];
+                }
+
+                if (guestID.Text == tempGuestID)
+                {
+                    using (SqliteConnection connection = new SqliteConnection(connectionString))
+                    {
+                        string query = "insert into r_Guest (GuestID, FirstName, MiddleName, LastName, ContactNumber, EmailAddress, DateAdded) values " +
+                            "('" + Int32.Parse(guestID.Text) + "', '" + firstName.Text + "', '" + middleName.Text + "', '" + lastName.Text + "', '" + phoneNumber.Text + "', '" + emailAddress.Text + "', '" + DateTime.Now.ToString() + "')";
+                        connection.Open();
+                        using (SqliteCommand command = new SqliteCommand(query, connection))
+                        {
+                            command.ExecuteScalar();
+                        }
+                        connection.Close();
+                    }
+                }
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    string query = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '"
+                        + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                    string query2 = "insert into t_BookingTransaction (ReceiptNumber, TransactionID, GuestID, TransactionDate, RoomCost, VAT, TotalCost, ModePayment) " +
+                        "values ('" + ReceiptNumber + "', '" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" + DateTime.Now.ToString() + "', '" + Int32.Parse(roomCost.Text) + "', '" + Int32.Parse(tax.Text) + "', '" + Int32.Parse(totalPrice.Text) + "', 'cash')";
+                    string query3 = "insert into t_RoomStatus (RoomStatusID, TransactionID, Status, RoomID, ScheduledCheckIn, ScheduledCheckout)" +
+                        "values ('" + RoomStatusID + "','" + Int32.Parse(transactionID.Text) + "','Occupied','" + RoomID + "','" + dateCheckIn.Value.ToString() + "','" + dateCheckOut.Value.ToString() + "')";
+                    string query4 = "update t_RoomAvailability set Status = 'Occupied' where RoomID ='" + RoomID + "'";
                     connection.Open();
-                    using(SqliteCommand command = new SqliteCommand(query, connection)) {
-                        command.ExecuteScalar();
+                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    using (SqliteCommand command = new SqliteCommand(query2, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    using (SqliteCommand command = new SqliteCommand(query3, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    using (SqliteCommand command = new SqliteCommand(query4, connection))
+                    {
+                        command.ExecuteNonQuery();
                     }
                     connection.Close();
                 }
+                MessageBox.Show("Print Receipt", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
-            {
-                string query = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" 
-                    + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
-                string query2 = "insert into t_BookingTransaction (ReceiptNumber, TransactionID, GuestID, TransactionDate, RoomCost, VAT, TotalCost, ModePayment) " +
-                    "values ('" + ReceiptNumber + "', '" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" + DateTime.Now.ToString() + "', '" 
-                    + Int32.Parse(roomCost.Text) + "', '" + Int32.Parse(tax.Text) + "', '" + Int32.Parse(totalPrice.Text) + "', 'cash')";
-                string query3 = "insert into t_RoomStatus (RoomStatusID, TransactionID, Status, RoomID, ScheduledCheckIn, ScheduledCheckout)" +
-                    "values ('"+RoomStatusID+"','"+ Int32.Parse(transactionID.Text) + "','Occupied','"+RoomID+"','"+dateCheckIn.Value.ToString()+"','"+dateCheckOut.Value.ToString() + "')";
-                string query4 = "update t_RoomAvailability set Status = 'Occupied' where RoomID ='"+RoomID+"'";
-                connection.Open();
-                using (SqliteCommand command = new SqliteCommand(query, connection))
-                {
-                    command.ExecuteNonQuery();
-                }
-                using (SqliteCommand command = new SqliteCommand(query2, connection))
-                {
-                    command.ExecuteNonQuery();
-                }
-                using (SqliteCommand command = new SqliteCommand(query3, connection))
-                {
-                    command.ExecuteNonQuery();
-                }
-                using (SqliteCommand command = new SqliteCommand(query4, connection))
-                {
-                    command.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
+
         }
 
         private void tabRoomTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            if(tabRoomTypes.SelectedIndex == 6)
+
+            if (tabRoomTypes.SelectedIndex == 6)
             {
                 cmbRoomNumber.Enabled = false;
-
+                dateCheckIn.Enabled = false;
+                dateCheckOut.Enabled = false;
             }
-            
+
 
             if (tabRoomTypes.SelectedIndex == 0)
             {
-                
+
                 roomCost.Text = RoomPrice[2].ToString();
                 roomInformation.Text = description[0];
                 roomInclusion.Text = inclusion[0];
                 cmbRoomNumber.DataSource = SingleRoomNumber;
                 selectedTab = "SingleRoom";
                 cmbRoomNumber.Enabled = true;
+                dateCheckIn.Enabled = true;
+                dateCheckOut.Enabled = true;
             }
             else if (tabRoomTypes.SelectedIndex == 1)
             {
@@ -446,6 +464,8 @@ namespace Hotel_Management_System
                 cmbRoomNumber.DataSource = StandardDoubleRoomNumber;
                 selectedTab = "StandardDoubleRoom";
                 cmbRoomNumber.Enabled = true;
+                dateCheckIn.Enabled = true;
+                dateCheckOut.Enabled = true;
 
             }
             else if (tabRoomTypes.SelectedIndex == 2)
@@ -456,6 +476,8 @@ namespace Hotel_Management_System
                 cmbRoomNumber.DataSource = StandardTwinRoomNumber;
                 selectedTab = "StandardTwinRoom";
                 cmbRoomNumber.Enabled = true;
+                dateCheckIn.Enabled = true;
+                dateCheckOut.Enabled = true;
 
             }
             else if (tabRoomTypes.SelectedIndex == 3)
@@ -466,6 +488,8 @@ namespace Hotel_Management_System
                 cmbRoomNumber.DataSource = DeluxeDoubleRoomNumber;
                 selectedTab = "DeluxeDoubleRoom";
                 cmbRoomNumber.Enabled = true;
+                dateCheckIn.Enabled = true;
+                dateCheckOut.Enabled = true;
 
             }
             else if (tabRoomTypes.SelectedIndex == 4)
@@ -476,6 +500,8 @@ namespace Hotel_Management_System
                 cmbRoomNumber.DataSource = StudioRoomNumber;
                 selectedTab = "StudioRoom";
                 cmbRoomNumber.Enabled = true;
+                dateCheckIn.Enabled = true;
+                dateCheckOut.Enabled = true;
 
             }
             else if (tabRoomTypes.SelectedIndex == 5)
@@ -486,6 +512,8 @@ namespace Hotel_Management_System
                 cmbRoomNumber.DataSource = PresidentialSuiteNumber;
                 selectedTab = "PresidentialSuite";
                 cmbRoomNumber.Enabled = true;
+                dateCheckIn.Enabled = true;
+                dateCheckOut.Enabled = true;
 
             }
         }
@@ -502,16 +530,33 @@ namespace Hotel_Management_System
 
         private void dateCheckOut_ValueChanged(object sender, EventArgs e)
         {
-            DateTime checkin = dateCheckIn.Value;
-            DateTime checkout = dateCheckOut.Value;
+            if (tabRoomTypes.SelectedIndex != 6)
+            {
+                DateTime checkin = dateCheckIn.Value;
+                DateTime checkout = dateCheckOut.Value;
 
-            TimeSpan duration = new TimeSpan(checkout.Ticks - checkin.Ticks);
+                TimeSpan duration = new TimeSpan(checkout.Ticks - checkin.Ticks);
 
-            int days = (int)duration.TotalDays;
-            price = Convert.ToDouble(roomCost.Text);
-            price += price * days;
-            subTotal.Text = price.ToString();
+                int days = (int)duration.TotalDays;
+                price = Convert.ToDouble(roomCost.Text);
+                price += price * days;
+                subTotal.Text = price.ToString();
+            }
+        }
 
+        private void HMSUI_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
+        }
+
+        private void dateCheckIn_ValueChanged(object sender, EventArgs e)
+        {
+            dateCheckOut.MinDate = dateCheckIn.Value;
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HMSUI));
             btnMinimize = new PictureBox();
             btnClose = new PictureBox();
@@ -39,7 +40,7 @@
             lblLoggedIn = new Label();
             pnlAttendant = new Panel();
             lblProcessed = new Label();
-            label5 = new Label();
+            lblTime = new Label();
             lblDate = new Label();
             label4 = new Label();
             label3 = new Label();
@@ -139,6 +140,7 @@
             label33 = new Label();
             label34 = new Label();
             label35 = new Label();
+            timer1 = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)btnMinimize).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnClose).BeginInit();
             pnlAttendant.SuspendLayout();
@@ -243,7 +245,7 @@
             // lblLoggedIn
             // 
             lblLoggedIn.AutoSize = true;
-            lblLoggedIn.Location = new Point(103, 27);
+            lblLoggedIn.Location = new Point(150, 27);
             lblLoggedIn.Name = "lblLoggedIn";
             lblLoggedIn.Size = new Size(120, 20);
             lblLoggedIn.TabIndex = 100;
@@ -253,35 +255,35 @@
             // 
             pnlAttendant.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             pnlAttendant.Controls.Add(lblProcessed);
-            pnlAttendant.Controls.Add(label5);
+            pnlAttendant.Controls.Add(lblTime);
             pnlAttendant.Controls.Add(lblDate);
             pnlAttendant.Controls.Add(label4);
             pnlAttendant.Controls.Add(label3);
             pnlAttendant.Controls.Add(label2);
             pnlAttendant.Controls.Add(label1);
             pnlAttendant.Controls.Add(lblLoggedIn);
-            pnlAttendant.Location = new Point(1506, 943);
+            pnlAttendant.Location = new Point(1441, 943);
             pnlAttendant.Name = "pnlAttendant";
-            pnlAttendant.Size = new Size(402, 125);
+            pnlAttendant.Size = new Size(467, 125);
             pnlAttendant.TabIndex = 101;
             // 
             // lblProcessed
             // 
             lblProcessed.AutoSize = true;
-            lblProcessed.Location = new Point(103, 47);
+            lblProcessed.Location = new Point(150, 47);
             lblProcessed.Name = "lblProcessed";
             lblProcessed.Size = new Size(118, 20);
             lblProcessed.TabIndex = 100;
             lblProcessed.Text = "Processed Count";
             // 
-            // label5
+            // lblTime
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(210, 80);
-            label5.Name = "label5";
-            label5.Size = new Size(90, 20);
-            label5.TabIndex = 100;
-            label5.Text = "00:00:00 AM";
+            lblTime.AutoSize = true;
+            lblTime.Location = new Point(295, 80);
+            lblTime.Name = "lblTime";
+            lblTime.Size = new Size(90, 20);
+            lblTime.TabIndex = 100;
+            lblTime.Text = "00:00:00 AM";
             // 
             // lblDate
             // 
@@ -295,7 +297,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(170, 80);
+            label4.Location = new Point(255, 80);
             label4.Name = "label4";
             label4.Size = new Size(45, 20);
             label4.TabIndex = 100;
@@ -313,7 +315,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(25, 47);
+            label2.Location = new Point(72, 47);
             label2.Name = "label2";
             label2.Size = new Size(82, 20);
             label2.TabIndex = 100;
@@ -322,7 +324,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(25, 27);
+            label1.Location = new Point(72, 27);
             label1.Name = "label1";
             label1.Size = new Size(83, 20);
             label1.TabIndex = 100;
@@ -556,12 +558,15 @@
             // 
             // dateCheckOut
             // 
-            dateCheckOut.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            dateCheckOut.CustomFormat = "MM/dd/yyyy";
+            dateCheckOut.Enabled = false;
             dateCheckOut.Format = DateTimePickerFormat.Custom;
             dateCheckOut.Location = new Point(932, 154);
+            dateCheckOut.MinDate = new DateTime(2024, 6, 2, 0, 0, 0, 0);
             dateCheckOut.Name = "dateCheckOut";
             dateCheckOut.Size = new Size(250, 27);
             dateCheckOut.TabIndex = 25;
+            dateCheckOut.Value = new DateTime(2024, 6, 2, 0, 0, 0, 0);
             dateCheckOut.ValueChanged += dateCheckOut_ValueChanged;
             // 
             // roomInclusion
@@ -594,12 +599,14 @@
             // 
             // dateCheckIn
             // 
-            dateCheckIn.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            dateCheckIn.CustomFormat = "MM/dd/yyyy";
+            dateCheckIn.Enabled = false;
             dateCheckIn.Format = DateTimePickerFormat.Custom;
             dateCheckIn.Location = new Point(541, 154);
             dateCheckIn.Name = "dateCheckIn";
             dateCheckIn.Size = new Size(250, 27);
             dateCheckIn.TabIndex = 25;
+            dateCheckIn.ValueChanged += dateCheckIn_ValueChanged;
             // 
             // roomInformation
             // 
@@ -1296,6 +1303,11 @@
             label35.TabIndex = 107;
             label35.Text = "Guest Info Panel";
             // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Tick += timer1_Tick;
+            // 
             // HMSUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1326,6 +1338,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "HMSUI";
             WindowState = FormWindowState.Maximized;
+            Load += HMSUI_Load;
             ((System.ComponentModel.ISupportInitialize)btnMinimize).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnClose).EndInit();
             pnlAttendant.ResumeLayout(false);
@@ -1367,7 +1380,7 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private Label label5;
+        private Label lblTime;
         private Label lblDate;
         private Label label4;
         private PictureBox pictureBox1;
@@ -1465,5 +1478,6 @@
         private TextBox totalPrice;
         private Label label52;
         private TabPage Init;
+        private System.Windows.Forms.Timer timer1;
     }
 }
