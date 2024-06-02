@@ -13,6 +13,7 @@ namespace Hotel_Management_System
 {
     public partial class HMSUI : Form
     {
+        #region VariablesForSupplyingInformation
         private string selectedTab = "";
         private Int64 RoomStatusID;
         public static Int64 LoggedInID;
@@ -29,9 +30,8 @@ namespace Hotel_Management_System
         List<int> StudioRoomNumber = new List<int> { }, StudioRoomID = new List<int> { };
         List<int> PresidentialSuiteNumber = new List<int> { }, PresidentialSuiteID = new List<int> { };
         public int RoomID = 0;
-
-
         string connectionString = "Data Source=HMSCS.db";
+        #endregion
 
         public HMSUI()
         {
@@ -609,6 +609,7 @@ namespace Hotel_Management_System
             if (personPanel.Visible == false)
             {
                 personPanel.Visible = true;
+                p2GuestID.Text = (Int64.Parse(guestID.Text) + 1).ToString();
             }
             else personPanel.Visible = false;
         }
@@ -617,6 +618,7 @@ namespace Hotel_Management_System
         {
             if (addPersonInfo2.Visible == true)
             {
+                p3GuestID.Text = (Int64.Parse(p2GuestID.Text) + 1).ToString();
                 pictureBox3.Visible = true;
                 remove2.Visible = true;
                 addButton.Visible = false;
@@ -638,6 +640,7 @@ namespace Hotel_Management_System
         {
             if (addPersonInfo3.Visible == true)
             {
+                p4GuestID.Text = (Int64.Parse(p3GuestID.Text) + 1).ToString();
                 pictureBox4.Visible = true;
                 addButton2.Visible = false;
                 addButton3.Visible = true;
@@ -658,6 +661,7 @@ namespace Hotel_Management_System
         {
             if (addPersonInfo4.Visible == true)
             {
+                p5GuestID.Text = (Int64.Parse(p4GuestID.Text) + 1).ToString();
                 pictureBox5.Visible = true;
                 addButton3.Visible = false;
                 remove3.Visible = false;
