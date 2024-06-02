@@ -17,6 +17,8 @@ namespace Hotel_Management_System
         public static string NameLog = "";
         public double price = 0;
         List<float> RoomPrice = new List<float> { };
+        List<string> description = new List<string> { };
+        List<string> inclusion = new List<string> { };
 
 
         string connectionString = "Data Source=HMSCS.db";
@@ -108,6 +110,9 @@ namespace Hotel_Management_System
             pnlReports.Visible = false;
             pnlRoomInfo.Visible = false;
             lblLoggedIn.Text = NameLog;
+            PopulateRoomInformations();
+            roomInformation.Text = description[0];
+            roomInclusion.Text = inclusion[0];
         }
         public void PopulateRoomsInformation()
         {
@@ -275,6 +280,26 @@ namespace Hotel_Management_System
             }
 
         }
+        public void PopulateRoomInformations()
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                string query = "select Description, Inclusion from i_RoomDescription";
+                connection.Open();
+                using (SqliteCommand command = new SqliteCommand(query, connection))
+                {
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            description.Add(reader.GetValue(0).ToString());
+                            inclusion.Add(reader.GetValue(1).ToString());
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+        }
         #endregion
 
 
@@ -303,18 +328,52 @@ namespace Hotel_Management_System
             price = Convert.ToDouble(roomCost.Text);
             price += price * days;
             totalPrice.Text = price.ToString();
-
+            
 
         }
 
         private void tabRoomTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tabRoomTypes.SelectedIndex == 0) roomCost.Text = RoomPrice[2].ToString();
-            else if(tabRoomTypes.SelectedIndex == 1) roomCost.Text = RoomPrice[3].ToString();
-            else if(tabRoomTypes.SelectedIndex == 2) roomCost.Text = RoomPrice[4].ToString();
-            else if(tabRoomTypes.SelectedIndex == 3) roomCost.Text = RoomPrice[0].ToString();
-            else if(tabRoomTypes.SelectedIndex == 4) roomCost.Text = RoomPrice[5].ToString();
-            else if(tabRoomTypes.SelectedIndex == 5) roomCost.Text = RoomPrice[1].ToString();
+            
+            
+                
+
+        if (tabRoomTypes.SelectedIndex == 0)
+            {
+                roomCost.Text = RoomPrice[2].ToString();
+                roomInformation.Text = description[0];
+                roomInclusion.Text = inclusion[0];
+            }
+        else if (tabRoomTypes.SelectedIndex == 1)
+            {
+                roomCost.Text = RoomPrice[3].ToString();
+                roomInformation.Text = description[1];
+                roomInclusion.Text = inclusion[1];
+            }
+        else if (tabRoomTypes.SelectedIndex == 2)
+            {
+                roomCost.Text = RoomPrice[4].ToString();
+                roomInformation.Text = description[2];
+                roomInclusion.Text = inclusion[2];
+            }
+        else if (tabRoomTypes.SelectedIndex == 3)
+            {
+                roomCost.Text = RoomPrice[0].ToString();
+                roomInformation.Text = description[3];
+                roomInclusion.Text = inclusion[3];
+            }
+        else if (tabRoomTypes.SelectedIndex == 4)
+            {
+                roomCost.Text = RoomPrice[5].ToString();
+                roomInformation.Text = description[4];
+                roomInclusion.Text = inclusion[4];
+            }
+        else if (tabRoomTypes.SelectedIndex == 5)
+            {
+                roomCost.Text = RoomPrice[1].ToString();
+                roomInformation.Text = description[5];
+                roomInclusion.Text = inclusion[5];
+            }
         }   
     }
 }

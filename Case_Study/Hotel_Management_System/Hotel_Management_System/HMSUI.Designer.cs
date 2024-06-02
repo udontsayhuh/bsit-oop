@@ -60,9 +60,13 @@
             label20 = new Label();
             label7 = new Label();
             pnlBook = new Panel();
-            label64 = new Label();
+            dateCheckOut = new DateTimePicker();
+            roomInclusion = new Label();
+            label44 = new Label();
             label63 = new Label();
-            label62 = new Label();
+            dateCheckIn = new DateTimePicker();
+            roomInformation = new Label();
+            label43 = new Label();
             label61 = new Label();
             phoneNumber = new TextBox();
             totalPrice = new TextBox();
@@ -93,10 +97,6 @@
             lblAvail6 = new Label();
             tabRoomTypes = new TabControl();
             singleRoom = new TabPage();
-            dateCheckOut = new DateTimePicker();
-            label44 = new Label();
-            dateCheckIn = new DateTimePicker();
-            label43 = new Label();
             label37 = new Label();
             cmbSingleRoomNumber = new ComboBox();
             standardDoubleRoom = new TabPage();
@@ -494,11 +494,11 @@
             pnlBook.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlBook.BackColor = Color.FromArgb(207, 192, 175);
             pnlBook.Controls.Add(dateCheckOut);
-            pnlBook.Controls.Add(label64);
+            pnlBook.Controls.Add(roomInclusion);
             pnlBook.Controls.Add(label44);
             pnlBook.Controls.Add(label63);
             pnlBook.Controls.Add(dateCheckIn);
-            pnlBook.Controls.Add(label62);
+            pnlBook.Controls.Add(roomInformation);
             pnlBook.Controls.Add(label43);
             pnlBook.Controls.Add(label61);
             pnlBook.Controls.Add(phoneNumber);
@@ -540,32 +540,71 @@
             pnlBook.Size = new Size(1546, 727);
             pnlBook.TabIndex = 103;
             // 
-            // label64
+            // dateCheckOut
             // 
-            label64.AutoSize = true;
-            label64.Location = new Point(278, 594);
-            label64.Name = "label64";
-            label64.Size = new Size(470, 60);
-            label64.TabIndex = 26;
-            label64.Text = "Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum,\r\nLorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum,\r\nLorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum.";
+            dateCheckOut.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            dateCheckOut.Format = DateTimePickerFormat.Custom;
+            dateCheckOut.Location = new Point(932, 154);
+            dateCheckOut.Name = "dateCheckOut";
+            dateCheckOut.Size = new Size(250, 27);
+            dateCheckOut.TabIndex = 25;
+            dateCheckOut.Leave += dateCheckOut_Leave;
+            // 
+            // roomInclusion
+            // 
+            roomInclusion.AutoSize = true;
+            roomInclusion.Location = new Point(278, 555);
+            roomInclusion.Name = "roomInclusion";
+            roomInclusion.Size = new Size(470, 60);
+            roomInclusion.TabIndex = 26;
+            roomInclusion.Text = "Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum,\r\nLorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum,\r\nLorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum.";
+            // 
+            // label44
+            // 
+            label44.AutoSize = true;
+            label44.BackColor = Color.FromArgb(224, 224, 224);
+            label44.Location = new Point(814, 158);
+            label44.Name = "label44";
+            label44.Size = new Size(112, 20);
+            label44.TabIndex = 24;
+            label44.Text = "Check Out Date";
             // 
             // label63
             // 
             label63.AutoSize = true;
-            label63.Location = new Point(236, 558);
+            label63.Location = new Point(236, 519);
             label63.Name = "label63";
             label63.Size = new Size(128, 20);
             label63.TabIndex = 26;
             label63.Text = "Package Inclusion:";
             // 
-            // label62
+            // dateCheckIn
             // 
-            label62.AutoSize = true;
-            label62.Location = new Point(278, 437);
-            label62.Name = "label62";
-            label62.Size = new Size(571, 100);
-            label62.TabIndex = 26;
-            label62.Text = resources.GetString("label62.Text");
+            dateCheckIn.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            dateCheckIn.Format = DateTimePickerFormat.Custom;
+            dateCheckIn.Location = new Point(541, 154);
+            dateCheckIn.Name = "dateCheckIn";
+            dateCheckIn.Size = new Size(250, 27);
+            dateCheckIn.TabIndex = 25;
+            // 
+            // roomInformation
+            // 
+            roomInformation.AutoSize = true;
+            roomInformation.Location = new Point(278, 437);
+            roomInformation.Name = "roomInformation";
+            roomInformation.Size = new Size(525, 40);
+            roomInformation.TabIndex = 26;
+            roomInformation.Text = "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum\r\nLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum\r\n";
+            // 
+            // label43
+            // 
+            label43.AutoSize = true;
+            label43.BackColor = Color.FromArgb(224, 224, 224);
+            label43.Location = new Point(435, 158);
+            label43.Name = "label43";
+            label43.Size = new Size(100, 20);
+            label43.TabIndex = 24;
+            label43.Text = "Check In Date";
             // 
             // label61
             // 
@@ -832,45 +871,6 @@
             singleRoom.TabIndex = 0;
             singleRoom.Text = "Single Room";
             singleRoom.UseVisualStyleBackColor = true;
-            // 
-            // dateCheckOut
-            // 
-            dateCheckOut.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-            dateCheckOut.Format = DateTimePickerFormat.Custom;
-            dateCheckOut.Location = new Point(932, 154);
-            dateCheckOut.Name = "dateCheckOut";
-            dateCheckOut.Size = new Size(250, 27);
-            dateCheckOut.TabIndex = 25;
-            dateCheckOut.Leave += dateCheckOut_Leave;
-            // 
-            // label44
-            // 
-            label44.AutoSize = true;
-            label44.BackColor = Color.FromArgb(224, 224, 224);
-            label44.Location = new Point(814, 158);
-            label44.Name = "label44";
-            label44.Size = new Size(112, 20);
-            label44.TabIndex = 24;
-            label44.Text = "Check Out Date";
-            // 
-            // dateCheckIn
-            // 
-            dateCheckIn.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-            dateCheckIn.Format = DateTimePickerFormat.Custom;
-            dateCheckIn.Location = new Point(541, 154);
-            dateCheckIn.Name = "dateCheckIn";
-            dateCheckIn.Size = new Size(250, 27);
-            dateCheckIn.TabIndex = 25;
-            // 
-            // label43
-            // 
-            label43.AutoSize = true;
-            label43.BackColor = Color.FromArgb(224, 224, 224);
-            label43.Location = new Point(435, 158);
-            label43.Name = "label43";
-            label43.Size = new Size(100, 20);
-            label43.TabIndex = 24;
-            label43.Text = "Check In Date";
             // 
             // label37
             // 
@@ -1518,9 +1518,9 @@
         private Label label49;
         private Label label48;
         private Label label47;
-        private Label label64;
+        private Label roomInclusion;
         private Label label63;
-        private Label label62;
+        private Label roomInformation;
         private Label label61;
         private SplitContainer spnlCustomerInfo;
         private ListBox listBox1;
