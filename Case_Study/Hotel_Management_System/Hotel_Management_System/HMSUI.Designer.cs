@@ -49,7 +49,7 @@
             pictureBox1 = new PictureBox();
             pnlGuestinfo = new Panel();
             spnlCustomerInfo = new SplitContainer();
-            listBox1 = new ListBox();
+            customerList = new ListBox();
             label69 = new Label();
             label68 = new Label();
             label67 = new Label();
@@ -223,6 +223,15 @@
             label80 = new Label();
             textBox24 = new TextBox();
             label81 = new Label();
+            giFirstName = new Label();
+            giEmailAddress = new Label();
+            giContactNumber = new Label();
+            giTotalBooked = new Label();
+            giMostBookedRoom = new Label();
+            label96 = new Label();
+            giMiddleName = new Label();
+            label98 = new Label();
+            giLastName = new Label();
             ((System.ComponentModel.ISupportInitialize)btnMinimize).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnClose).BeginInit();
             pnlAttendant.SuspendLayout();
@@ -445,7 +454,7 @@
             pnlGuestinfo.Controls.Add(label7);
             pnlGuestinfo.Location = new Point(57, 160);
             pnlGuestinfo.Name = "pnlGuestinfo";
-            pnlGuestinfo.Size = new Size(1546, 722);
+            pnlGuestinfo.Size = new Size(1574, 892);
             pnlGuestinfo.TabIndex = 102;
             // 
             // spnlCustomerInfo
@@ -455,32 +464,42 @@
             // 
             // spnlCustomerInfo.Panel1
             // 
-            spnlCustomerInfo.Panel1.Controls.Add(listBox1);
+            spnlCustomerInfo.Panel1.Controls.Add(customerList);
             // 
             // spnlCustomerInfo.Panel2
             // 
+            spnlCustomerInfo.Panel2.Controls.Add(giMostBookedRoom);
             spnlCustomerInfo.Panel2.Controls.Add(label69);
+            spnlCustomerInfo.Panel2.Controls.Add(giTotalBooked);
             spnlCustomerInfo.Panel2.Controls.Add(label68);
+            spnlCustomerInfo.Panel2.Controls.Add(giContactNumber);
             spnlCustomerInfo.Panel2.Controls.Add(label67);
+            spnlCustomerInfo.Panel2.Controls.Add(giEmailAddress);
             spnlCustomerInfo.Panel2.Controls.Add(label66);
+            spnlCustomerInfo.Panel2.Controls.Add(giLastName);
+            spnlCustomerInfo.Panel2.Controls.Add(giMiddleName);
+            spnlCustomerInfo.Panel2.Controls.Add(giFirstName);
+            spnlCustomerInfo.Panel2.Controls.Add(label98);
+            spnlCustomerInfo.Panel2.Controls.Add(label96);
             spnlCustomerInfo.Panel2.Controls.Add(label65);
             spnlCustomerInfo.Size = new Size(1464, 606);
             spnlCustomerInfo.SplitterDistance = 317;
             spnlCustomerInfo.TabIndex = 11;
             // 
-            // listBox1
+            // customerList
             // 
-            listBox1.Dock = DockStyle.Fill;
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(0, 0);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(317, 606);
-            listBox1.TabIndex = 0;
+            customerList.Dock = DockStyle.Fill;
+            customerList.FormattingEnabled = true;
+            customerList.Location = new Point(0, 0);
+            customerList.Name = "customerList";
+            customerList.Size = new Size(317, 606);
+            customerList.TabIndex = 0;
+            customerList.SelectedIndexChanged += customerList_SelectedIndexChanged;
             // 
             // label69
             // 
             label69.AutoSize = true;
-            label69.Location = new Point(123, 284);
+            label69.Location = new Point(123, 363);
             label69.Name = "label69";
             label69.Size = new Size(141, 20);
             label69.TabIndex = 0;
@@ -489,7 +508,7 @@
             // label68
             // 
             label68.AutoSize = true;
-            label68.Location = new Point(123, 236);
+            label68.Location = new Point(162, 315);
             label68.Name = "label68";
             label68.Size = new Size(97, 20);
             label68.TabIndex = 0;
@@ -498,7 +517,7 @@
             // label67
             // 
             label67.AutoSize = true;
-            label67.Location = new Point(123, 188);
+            label67.Location = new Point(141, 267);
             label67.Name = "label67";
             label67.Size = new Size(118, 20);
             label67.TabIndex = 0;
@@ -507,7 +526,7 @@
             // label66
             // 
             label66.AutoSize = true;
-            label66.Location = new Point(123, 140);
+            label66.Location = new Point(156, 220);
             label66.Name = "label66";
             label66.Size = new Size(103, 20);
             label66.TabIndex = 0;
@@ -516,11 +535,11 @@
             // label65
             // 
             label65.AutoSize = true;
-            label65.Location = new Point(123, 95);
+            label65.Location = new Point(179, 95);
             label65.Name = "label65";
-            label65.Size = new Size(76, 20);
+            label65.Size = new Size(80, 20);
             label65.TabIndex = 0;
-            label65.Text = "Full Name";
+            label65.Text = "First Name";
             // 
             // label17
             // 
@@ -2206,6 +2225,87 @@
             label81.TabIndex = 115;
             label81.Text = "Guest ID:";
             // 
+            // giFirstName
+            // 
+            giFirstName.AutoSize = true;
+            giFirstName.Location = new Point(276, 95);
+            giFirstName.Name = "giFirstName";
+            giFirstName.Size = new Size(76, 20);
+            giFirstName.TabIndex = 0;
+            giFirstName.Text = "Full Name";
+            // 
+            // giEmailAddress
+            // 
+            giEmailAddress.AutoSize = true;
+            giEmailAddress.Location = new Point(276, 219);
+            giEmailAddress.Name = "giEmailAddress";
+            giEmailAddress.Size = new Size(103, 20);
+            giEmailAddress.TabIndex = 0;
+            giEmailAddress.Text = "Email Address";
+            // 
+            // giContactNumber
+            // 
+            giContactNumber.AutoSize = true;
+            giContactNumber.Location = new Point(276, 267);
+            giContactNumber.Name = "giContactNumber";
+            giContactNumber.Size = new Size(118, 20);
+            giContactNumber.TabIndex = 0;
+            giContactNumber.Text = "Contact Number";
+            // 
+            // giTotalBooked
+            // 
+            giTotalBooked.AutoSize = true;
+            giTotalBooked.Location = new Point(276, 315);
+            giTotalBooked.Name = "giTotalBooked";
+            giTotalBooked.Size = new Size(97, 20);
+            giTotalBooked.TabIndex = 0;
+            giTotalBooked.Text = "Total Booked";
+            // 
+            // giMostBookedRoom
+            // 
+            giMostBookedRoom.AutoSize = true;
+            giMostBookedRoom.Location = new Point(276, 363);
+            giMostBookedRoom.Name = "giMostBookedRoom";
+            giMostBookedRoom.Size = new Size(141, 20);
+            giMostBookedRoom.TabIndex = 0;
+            giMostBookedRoom.Text = "Most Booked Room";
+            // 
+            // label96
+            // 
+            label96.AutoSize = true;
+            label96.Location = new Point(159, 136);
+            label96.Name = "label96";
+            label96.Size = new Size(100, 20);
+            label96.TabIndex = 0;
+            label96.Text = "Middle Name";
+            // 
+            // giMiddleName
+            // 
+            giMiddleName.AutoSize = true;
+            giMiddleName.Location = new Point(276, 136);
+            giMiddleName.Name = "giMiddleName";
+            giMiddleName.Size = new Size(76, 20);
+            giMiddleName.TabIndex = 0;
+            giMiddleName.Text = "Full Name";
+            // 
+            // label98
+            // 
+            label98.AutoSize = true;
+            label98.Location = new Point(180, 179);
+            label98.Name = "label98";
+            label98.Size = new Size(79, 20);
+            label98.TabIndex = 0;
+            label98.Text = "Last Name";
+            // 
+            // giLastName
+            // 
+            giLastName.AutoSize = true;
+            giLastName.Location = new Point(276, 179);
+            giLastName.Name = "giLastName";
+            giLastName.Size = new Size(76, 20);
+            giLastName.TabIndex = 0;
+            giLastName.Text = "Full Name";
+            // 
             // HMSUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -2220,7 +2320,6 @@
             Controls.Add(btnGuestInfo);
             Controls.Add(btnMinimize);
             Controls.Add(btnClose);
-            Controls.Add(pnlBook);
             Controls.Add(pnlGuestinfo);
             Controls.Add(pnlReports);
             Controls.Add(pnlInvoiceSummary);
@@ -2231,6 +2330,7 @@
             Controls.Add(label32);
             Controls.Add(label34);
             Controls.Add(label25);
+            Controls.Add(pnlBook);
             FormBorderStyle = FormBorderStyle.None;
             Name = "HMSUI";
             StartPosition = FormStartPosition.CenterScreen;
@@ -2372,7 +2472,7 @@
         private Label roomInformation;
         private Label label61;
         private SplitContainer spnlCustomerInfo;
-        private ListBox listBox1;
+        private ListBox customerList;
         private Label label65;
         private Label label69;
         private Label label68;
@@ -2475,5 +2575,14 @@
         private Label label88;
         private Label label89;
         private Label label90;
+        private Label giMostBookedRoom;
+        private Label giTotalBooked;
+        private Label giContactNumber;
+        private Label giEmailAddress;
+        private Label giFirstName;
+        private Label giLastName;
+        private Label giMiddleName;
+        private Label label98;
+        private Label label96;
     }
 }

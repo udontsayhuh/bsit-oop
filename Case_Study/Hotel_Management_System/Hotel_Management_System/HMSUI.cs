@@ -21,6 +21,7 @@ namespace Hotel_Management_System
         public static string NameLog = "";
         public double price = 0;
         List<float> RoomPrice = new List<float> { };
+        List<string> FullName = new List<string> { };
         List<string> description = new List<string> { };
         List<string> inclusion = new List<string> { };
         public Int64 ReceiptNumber;
@@ -34,6 +35,7 @@ namespace Hotel_Management_System
         string connectionString = "Data Source=HMSCS.db";
         #endregion
 
+        #region ONFormStart
         public HMSUI()
         {
             NameLog = StartupForm.NameLog;
@@ -42,78 +44,14 @@ namespace Hotel_Management_System
             InitializeUI();
 
         }
-
         private void HMSUI_Load(object sender, EventArgs e)
         {
             timer1.Start();
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
         }
-
-        #region UIMainButtonAndPanelInteraction
-
-        private void Toggle_Panel(Panel panel)
-        {
-            if (panel.Visible == true)
-            {
-                pnlBook.Visible = false;
-                pnlGuestinfo.Visible = false;
-                pnlInvoiceSummary.Visible = false;
-                pnlReports.Visible = false;
-                pnlRoomInfo.Visible = false;
-            }
-            else
-            {
-                pnlBook.Visible = false;
-                pnlGuestinfo.Visible = false;
-                pnlInvoiceSummary.Visible = false;
-                pnlReports.Visible = false;
-                pnlRoomInfo.Visible = false;
-                panel.Visible = true;
-            }
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            StartupForm.LoggedInID = 0;
-            lblLoggedIn.Text = "";
-            this.Close();
-        }
-
-        private void btnMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void btnReports_Click(object sender, EventArgs e)
-        {
-            Toggle_Panel(pnlReports);
-        }
-
-        private void btnBook_Click(object sender, EventArgs e)
-        {
-            Toggle_Panel(pnlBook);
-            UpdateTransactionNumber();
-        }
-
-        private void btnRoomInfo_Click(object sender, EventArgs e)
-        {
-            Toggle_Panel(pnlRoomInfo);
-        }
-
-        private void btmGuestInfo_Click(object sender, EventArgs e)
-        {
-            Toggle_Panel(pnlGuestinfo);
-        }
-
-        private void btnInvoiceSummary_Click(object sender, EventArgs e)
-        {
-            Toggle_Panel(pnlInvoiceSummary);
-        }
-
         #endregion
 
         #region DataCenter
@@ -124,6 +62,7 @@ namespace Hotel_Management_System
             UpdateRoomTypeAvailability();
             UpdateRoomNumberAvailability();
             UpdateRoomStatusID();
+            UpdateCustomerList();
             UpdateRecordID();
             dateCheckIn.MinDate = DateTime.Now;
             dateCheckOut.MinDate = DateTime.Now;
@@ -261,7 +200,35 @@ namespace Hotel_Management_System
         private string p3TempGuestID = "";
         private string p4TempGuestID = "";
         private string p5TempGuestID = "";
+        public void UpdateCustomerList()
+        {
+            FullName.Clear();
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                string query = "select LastName, FirstName, MiddleName from r_Guest";
+                using (SqliteCommand command = new SqliteCommand(query, connection))
+                {
+                    using (SqliteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if ((string)reader.GetValue(2) == "N/A")
+                            {
+                                FullName.Add(reader.GetValue(0) + ", " + reader.GetValue(1));
+                            }
+                            else
+                            {
+                                FullName.Add(reader.GetValue(0) + ", " + reader.GetValue(1) + " " + reader.GetValue(2));
+                            }
 
+                        }
+                        customerList.DataSource = FullName;
+                    }
+                }
+                connection.Close();
+            }
+        }
         public void UpdateRecordID()
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
@@ -557,6 +524,7 @@ namespace Hotel_Management_System
             UpdateReceiptNumber();
             UpdateRoomTypeAvailability();
             UpdateRoomNumberAvailability();
+            UpdateCustomerList();
 
             emailAddress.Text = "";
             firstName.Text = "";
@@ -603,6 +571,71 @@ namespace Hotel_Management_System
         }
         #endregion
 
+        #region UIMainButtonAndPanelInteraction
+
+        private void Toggle_Panel(Panel panel)
+        {
+            if (panel.Visible == true)
+            {
+                pnlBook.Visible = false;
+                pnlGuestinfo.Visible = false;
+                pnlInvoiceSummary.Visible = false;
+                pnlReports.Visible = false;
+                pnlRoomInfo.Visible = false;
+            }
+            else
+            {
+                pnlBook.Visible = false;
+                pnlGuestinfo.Visible = false;
+                pnlInvoiceSummary.Visible = false;
+                pnlReports.Visible = false;
+                pnlRoomInfo.Visible = false;
+                panel.Visible = true;
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            StartupForm.LoggedInID = 0;
+            lblLoggedIn.Text = "";
+            this.Close();
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            Toggle_Panel(pnlReports);
+        }
+
+        private void btnBook_Click(object sender, EventArgs e)
+        {
+            Toggle_Panel(pnlBook);
+            UpdateTransactionNumber();
+        }
+
+        private void btnRoomInfo_Click(object sender, EventArgs e)
+        {
+            Toggle_Panel(pnlRoomInfo);
+        }
+
+        private void btmGuestInfo_Click(object sender, EventArgs e)
+        {
+            Toggle_Panel(pnlGuestinfo);
+        }
+
+        private void btnInvoiceSummary_Click(object sender, EventArgs e)
+        {
+            Toggle_Panel(pnlInvoiceSummary);
+        }
+
+        #endregion
+
+        //fix date constraint on max date stay to apply on Booking Panel UI
+        //  |-- Apply formatting on Textbox fill to have uniformity on insert
         #region BookingTransaction
         private void btnNewBook_Click(object sender, EventArgs e)
         {
@@ -781,7 +814,7 @@ namespace Hotel_Management_System
                     using (SqliteCommand command = new SqliteCommand(query, connection))
                     {
                         command.ExecuteNonQuery();
-                    }                 
+                    }
                     using (SqliteCommand command = new SqliteCommand(query2, connection))
                     {
                         command.ExecuteNonQuery();
@@ -940,7 +973,6 @@ namespace Hotel_Management_System
         {
             dateCheckOut.MinDate = dateCheckIn.Value;
         }
-        #endregion
 
         #region AddPersonComplexityPanel
         private void btnAddPerson_Click(object sender, EventArgs e)
@@ -1083,8 +1115,20 @@ namespace Hotel_Management_System
             addPersonInfo4.Visible = false;
         }
 
-        
+        private void customerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
         #endregion
+
+        #endregion
+
+
+
+
+
 
         //Invoice Summary Panel includes the below information but not limited to:
 
