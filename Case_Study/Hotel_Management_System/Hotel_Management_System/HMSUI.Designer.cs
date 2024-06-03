@@ -1174,7 +1174,7 @@
             personPanel.Controls.Add(addPersonInfo3);
             personPanel.Location = new Point(15, 300);
             personPanel.Name = "personPanel";
-            personPanel.Size = new Size(1060, 577);
+            personPanel.Size = new Size(1237, 577);
             personPanel.TabIndex = 128;
             // 
             // addButton2

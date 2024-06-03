@@ -549,6 +549,38 @@ namespace Hotel_Management_System
             roomCost.Text = "0";
             tabRoomTypes.SelectedIndex = 6;
         }
+        public void ClearP2Info()
+        {
+            p2EmailAddress.Text = "";
+            p2PhoneNumber.Text = "";
+            p2FirstName.Text = "";
+            p2MiddleName.Text = "";
+            p2LastName.Text = "";
+        }
+        public void ClearP3Info()
+        {
+            p3EmailAddress.Text = "";
+            p3PhoneNumber.Text = "";
+            p3FirstName.Text = "";
+            p3MiddleName.Text = "";
+            p3LastName.Text = "";
+        }
+        public void ClearP4Info()
+        {
+            p4EmailAddress.Text = "";
+            p4ContactNumber.Text = "";
+            p4FirstName.Text = "";
+            p4MiddleName.Text = "";
+            p4LastName.Text = "";
+        }
+        public void ClearP5Info()
+        {
+            p5EmailAddress.Text = "";
+            p5ContactNumber.Text = "";
+            p5FirstName.Text = "";
+            p5MiddleName.Text = "";
+            p5LastName.Text = "";
+        }
         #endregion
 
         #region BookingTransaction
@@ -898,7 +930,14 @@ namespace Hotel_Management_System
                     addButton.Visible = true;
                 }
             }
-            else personPanel.Visible = false;
+            else 
+            { 
+                personPanel.Visible = false;
+                ClearP2Info();
+                ClearP3Info();
+                ClearP4Info();
+                ClearP5Info(); 
+            }
         }
 
         private void addPersonInfo2_VisibleChanged(object sender, EventArgs e)
@@ -973,55 +1012,45 @@ namespace Hotel_Management_System
         private void addButton2_Click(object sender, EventArgs e)
         {
             addPersonInfo3.Visible = true;
+            totalPrice.Text = (Int32.Parse(totalPrice.Text) + 200).ToString();
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
             addPersonInfo2.Visible = true;
+            totalPrice.Text = (Int32.Parse(totalPrice.Text) + 200).ToString();
         }
 
         private void addButton3_Click(object sender, EventArgs e)
         {
             addPersonInfo4.Visible = true;
+            totalPrice.Text = (Int32.Parse(totalPrice.Text) + 200).ToString();
         }
 
         private void remove1_Click(object sender, EventArgs e)
         {
-            p2EmailAddress.Text = "";
-            p2PhoneNumber.Text = "";
-            p2FirstName.Text = "";
-            p2MiddleName.Text = "";
-            p2LastName.Text = "";
+            ClearP2Info();
             personPanel.Visible = false;
         }
 
         private void remove2_Click(object sender, EventArgs e)
         {
-            p2EmailAddress.Text = "";
-            p2PhoneNumber.Text = "";
-            p2FirstName.Text = "";
-            p2MiddleName.Text = "";
-            p2LastName.Text = "";
+            ClearP3Info();
+            totalPrice.Text = (Int32.Parse(totalPrice.Text) - 200).ToString();
             addPersonInfo2.Visible = false;
         }
 
         private void remove3_Click(object sender, EventArgs e)
         {
-            p3EmailAddress.Text = "";
-            p3PhoneNumber.Text = "";
-            p3FirstName.Text = "";
-            p3MiddleName.Text = "";
-            p3LastName.Text = "";
+            ClearP4Info();
+            totalPrice.Text = (Int32.Parse(totalPrice.Text) - 200).ToString();
             addPersonInfo3.Visible = false;
         }
 
         private void remove4_Click(object sender, EventArgs e)
         {
-            p4EmailAddress.Text = "";
-            p4ContactNumber.Text = "";
-            p4FirstName.Text = "";
-            p4MiddleName.Text = "";
-            p4LastName.Text = "";
+            ClearP5Info();
+            totalPrice.Text = (Int32.Parse(totalPrice.Text) - 200).ToString();
             addPersonInfo4.Visible = false;
         }
         #endregion
