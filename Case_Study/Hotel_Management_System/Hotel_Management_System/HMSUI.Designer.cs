@@ -1332,6 +1332,7 @@
             addPersonInfo1.Name = "addPersonInfo1";
             addPersonInfo1.Size = new Size(798, 131);
             addPersonInfo1.TabIndex = 114;
+            addPersonInfo1.Visible = false;
             // 
             // p2PhoneNumber
             // 
