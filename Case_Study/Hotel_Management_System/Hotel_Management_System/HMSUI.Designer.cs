@@ -760,6 +760,7 @@
             totalPrice.ReadOnly = true;
             totalPrice.Size = new Size(228, 27);
             totalPrice.TabIndex = 25;
+            totalPrice.Text = "0";
             // 
             // subTotal
             // 
@@ -768,6 +769,7 @@
             subTotal.ReadOnly = true;
             subTotal.Size = new Size(228, 27);
             subTotal.TabIndex = 25;
+            subTotal.Text = "0";
             subTotal.TextChanged += subTotal_TextChanged;
             // 
             // tax
@@ -777,6 +779,7 @@
             tax.ReadOnly = true;
             tax.Size = new Size(228, 27);
             tax.TabIndex = 25;
+            tax.Text = "0";
             tax.TextChanged += tax_TextChanged;
             // 
             // roomCost
@@ -786,6 +789,7 @@
             roomCost.ReadOnly = true;
             roomCost.Size = new Size(228, 27);
             roomCost.TabIndex = 25;
+            roomCost.Text = "0";
             // 
             // guestID
             // 

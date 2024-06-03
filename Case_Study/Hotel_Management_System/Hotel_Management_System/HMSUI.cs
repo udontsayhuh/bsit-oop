@@ -786,6 +786,11 @@ namespace Hotel_Management_System
                 MessageBox.Show("Room #" + cmbRoomNumber.SelectedValue + " Booked Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
                 BookSuccess();
             }
+            ClearP2Info();
+            ClearP3Info();
+            ClearP4Info();
+            ClearP5Info();
+            personPanel.Visible = false;
         }
 
         private void tabRoomTypes_SelectedIndexChanged(object sender, EventArgs e)
