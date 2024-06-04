@@ -1184,6 +1184,13 @@ namespace Hotel_Management_System
         }
         #endregion
 
+        #region ReportsSummary
+
+
+
+
+
+        #endregion
 
 
 
