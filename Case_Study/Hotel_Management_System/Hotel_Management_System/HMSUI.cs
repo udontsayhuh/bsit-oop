@@ -207,6 +207,7 @@ namespace Hotel_Management_System
             {
                 connection.Open();
                 string query = "select LastName, FirstName, MiddleName from r_Guest";
+                string query2 = "";
                 using (SqliteCommand command = new SqliteCommand(query, connection))
                 {
                     using (SqliteDataReader reader = command.ExecuteReader())
@@ -768,49 +769,69 @@ namespace Hotel_Management_System
 
                 using (SqliteConnection connection = new SqliteConnection(connectionString))
                 {
-                    string query = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                    string query = "insert into t_BookedGuest (TransactionID, GuestID, RoomID, BookingID, TransactionDate) values ('" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" + RoomID + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
                     string query2 = "insert into t_BookingTransaction (ReceiptNumber, TransactionID, GuestID, TransactionDate, RoomCost, VAT, TotalCost, ModePayment) values ('" + ReceiptNumber + "', '" + Int32.Parse(transactionID.Text) + "', '" + Int32.Parse(guestID.Text) + "', '" + DateTime.Now.ToString() + "', '" + Int32.Parse(roomCost.Text) + "', '" + Int32.Parse(tax.Text) + "', '" + Int32.Parse(totalPrice.Text) + "', 'cash')";
                     string query3 = "insert into t_RoomStatus (RoomStatusID, TransactionID, Status, RoomID, ScheduledCheckIn, ScheduledCheckout)values ('" + RoomStatusID + "','" + Int32.Parse(transactionID.Text) + "','Occupied','" + RoomID + "','" + dateCheckIn.Value.ToString() + "','" + dateCheckOut.Value.ToString() + "')";
                     string query4 = "update t_RoomAvailability set Status = 'Occupied' where RoomID ='" + RoomID + "'";
+                    string query9 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + recordID + "','" + Int32.Parse(transactionID.Text) + "','" + dateCheckIn.Value.ToString() + "','')";
+                    connection.Open();
+                    
                     if (addPersonInfo1.Visible == true || addPersonInfo2.Visible == true || addPersonInfo3.Visible == true || addPersonInfo4.Visible == true)
                     {
                         if (addPersonInfo1.Visible == true)
                         {
-                            string query5 = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 1) + "', '" + Int32.Parse(p2GuestID.Text) + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
-                            connection.Open();
+                            string query5 = "insert into t_BookedGuest (TransactionID, GuestID, RoomID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 1) + "', '" + Int32.Parse(p2GuestID.Text) + "', '" + RoomID + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                            string query51 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + (recordID + 1)+ "','" + (Int32.Parse(transactionID.Text) + 1) + "','" + dateCheckIn.Value.ToString() + "','Null')";
                             using (SqliteCommand command = new SqliteCommand(query5, connection))
                             {
                                 command.ExecuteNonQuery();
                             }
-                            connection.Close();
+                            using (SqliteCommand command = new SqliteCommand(query51, connection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
                         }
                         if (addPersonInfo2.Visible == true)
                         {
-                            string query6 = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 2) + "', '" + Int32.Parse(p3GuestID.Text) + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                            string query6 = "insert into t_BookedGuest (TransactionID, GuestID, RoomID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 2) + "', '" + Int32.Parse(p3GuestID.Text) + "', '" + RoomID + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                            string query61 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + (recordID + 2) + "','" + (Int32.Parse(transactionID.Text) + 2) + "','" + dateCheckIn.Value.ToString() + "','')";
                             using (SqliteCommand command = new SqliteCommand(query6, connection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                            using (SqliteCommand command = new SqliteCommand(query61, connection))
                             {
                                 command.ExecuteNonQuery();
                             }
                         }
                         if (addPersonInfo3.Visible == true)
                         {
-                            string query7 = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 3) + "', '" + Int32.Parse(p4GuestID.Text) + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                            string query7 = "insert into t_BookedGuest (TransactionID, GuestID, RoomID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 3) + "', '" + Int32.Parse(p4GuestID.Text) + "', '" + RoomID + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                            string query71 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + (recordID + 3) + "','" + (Int32.Parse(transactionID.Text) + 3) + "','" + dateCheckIn.Value.ToString() + "','')";
                             using (SqliteCommand command = new SqliteCommand(query7, connection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                            using (SqliteCommand command = new SqliteCommand(query71, connection))
                             {
                                 command.ExecuteNonQuery();
                             }
                         }
                         if (addPersonInfo4.Visible == true)
                         {
-                            string query8 = "insert into t_BookedGuest (TransactionID, GuestID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 4) + "', '" + Int32.Parse(p5GuestID.Text) + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                            string query8 = "insert into t_BookedGuest (TransactionID, GuestID, RoomID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 4) + "', '" + Int32.Parse(p5GuestID.Text) + "', '" + RoomID + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
+                            string query81 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + (recordID + 4) + "','" + (Int32.Parse(transactionID.Text) + 4) + "','" + dateCheckIn.Value.ToString() + "','')";
                             using (SqliteCommand command = new SqliteCommand(query8, connection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                            using (SqliteCommand command = new SqliteCommand(query81, connection))
                             {
                                 command.ExecuteNonQuery();
                             }
                         }
                     }
-                    string query9 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + recordID + "','" + Int32.Parse(transactionID.Text) + "','" + dateCheckIn.Value.ToString() + "','')";
-                    connection.Open();
+                    
                     using (SqliteCommand command = new SqliteCommand(query, connection))
                     {
                         command.ExecuteNonQuery();
@@ -831,6 +852,7 @@ namespace Hotel_Management_System
                     {
                         command.ExecuteNonQuery();
                     }
+
                     connection.Close();
                 }
                 MessageBox.Show("Room #" + cmbRoomNumber.SelectedValue + " Booked Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
