@@ -31,6 +31,7 @@ namespace Hotel_Management_System
         List<int> StandardTwinRoomNumber = new List<int> { }, StandardTwinRoomID = new List<int> { };
         List<int> StudioRoomNumber = new List<int> { }, StudioRoomID = new List<int> { };
         List<int> PresidentialSuiteNumber = new List<int> { }, PresidentialSuiteID = new List<int> { };
+        List<string> vGuestID = new List<string> { };
         public int RoomID = 0;
         string connectionString = "Data Source=HMSCS.db";
         #endregion
@@ -62,8 +63,8 @@ namespace Hotel_Management_System
             UpdateRoomTypeAvailability();
             UpdateRoomNumberAvailability();
             UpdateRoomStatusID();
-            UpdateCustomerList();
             UpdateRecordID();
+            PopulateRoomInformations();
             dateCheckIn.MinDate = DateTime.Now;
             dateCheckOut.MinDate = DateTime.Now;
             lblDate.Text = DateTime.Now.Date.ToString("MM/dd/yyyy dddd");
@@ -72,8 +73,6 @@ namespace Hotel_Management_System
             pnlInvoiceSummary.Visible = false;
             pnlReports.Visible = false;
             pnlRoomInfo.Visible = false;
-            lblLoggedIn.Text = NameLog;
-            PopulateRoomInformations();
             personPanel.Visible = false;
             roomInformation.Text = description[0];
             roomInclusion.Text = inclusion[0];
@@ -129,21 +128,6 @@ namespace Hotel_Management_System
                     connection.Close();
                 }
             }
-        }
-        public void ClearRoomAvailabilityList()
-        {
-            SingleRoomID.Clear();
-            SingleRoomNumber.Clear();
-            StandardDoubleRoomID.Clear();
-            StandardDoubleRoomNumber.Clear();
-            StandardTwinRoomID.Clear();
-            StandardTwinRoomNumber.Clear();
-            DeluxeDoubleRoomID.Clear();
-            DeluxeDoubleRoomNumber.Clear();
-            StudioRoomID.Clear();
-            StudioRoomNumber.Clear();
-            PresidentialSuiteID.Clear();
-            PresidentialSuiteNumber.Clear();
         }
         public void UpdateRoomNumberAvailability()
         {
@@ -202,12 +186,13 @@ namespace Hotel_Management_System
         private string p5TempGuestID = "";
         public void UpdateCustomerList()
         {
+            customerList.DataSource = null;
             FullName.Clear();
+            vGuestID.Clear();
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
-                string query = "select LastName, FirstName, MiddleName from r_Guest";
-                string query2 = "";
+                string query = "select LastName, FirstName, MiddleName, GuestID from r_Guest";
                 using (SqliteCommand command = new SqliteCommand(query, connection))
                 {
                     using (SqliteDataReader reader = command.ExecuteReader())
@@ -217,10 +202,12 @@ namespace Hotel_Management_System
                             if ((string)reader.GetValue(2) == "N/A")
                             {
                                 FullName.Add(reader.GetValue(0) + ", " + reader.GetValue(1));
+                                vGuestID.Add(reader.GetValue(3).ToString()) ;
                             }
                             else
                             {
                                 FullName.Add(reader.GetValue(0) + ", " + reader.GetValue(1) + " " + reader.GetValue(2));
+                                vGuestID.Add(reader.GetValue(3).ToString());
                             }
 
                         }
@@ -232,6 +219,7 @@ namespace Hotel_Management_System
         }
         public void UpdateRecordID()
         {
+            recordID = 0;
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
@@ -518,14 +506,19 @@ namespace Hotel_Management_System
         public void BookSuccess()
         {
             dateCheckIn.Value = DateTime.Now;
-            dateCheckIn.Value = DateTime.Now;
+            dateCheckOut.Value = DateTime.Now;
+
+            ClearP2Info();
+            ClearP3Info();
+            ClearP4Info();
+            ClearP5Info();
+            UpdateRecordID();
 
             UpdateTransactionNumber();
             UpdateRoomStatusID();
             UpdateReceiptNumber();
             UpdateRoomTypeAvailability();
             UpdateRoomNumberAvailability();
-            UpdateCustomerList();
 
             emailAddress.Text = "";
             firstName.Text = "";
@@ -536,7 +529,29 @@ namespace Hotel_Management_System
             subTotal.Text = "0";
             totalPrice.Text = "0";
             roomCost.Text = "0";
+            addPersonInfo1.Visible = false;
+            addPersonInfo2.Visible = false;
+            addPersonInfo3.Visible = false;
+            addPersonInfo4.Visible = false;
+            personPanel.Visible = false;
             tabRoomTypes.SelectedIndex = 6;
+
+        }
+        #region ClearingSection
+        public void ClearRoomAvailabilityList()
+        {
+            SingleRoomID.Clear();
+            SingleRoomNumber.Clear();
+            StandardDoubleRoomID.Clear();
+            StandardDoubleRoomNumber.Clear();
+            StandardTwinRoomID.Clear();
+            StandardTwinRoomNumber.Clear();
+            DeluxeDoubleRoomID.Clear();
+            DeluxeDoubleRoomNumber.Clear();
+            StudioRoomID.Clear();
+            StudioRoomNumber.Clear();
+            PresidentialSuiteID.Clear();
+            PresidentialSuiteNumber.Clear();
         }
         public void ClearP2Info()
         {
@@ -570,6 +585,8 @@ namespace Hotel_Management_System
             p5MiddleName.Text = "";
             p5LastName.Text = "";
         }
+        #endregion
+
         #endregion
 
         #region UIMainButtonAndPanelInteraction
@@ -625,7 +642,9 @@ namespace Hotel_Management_System
 
         private void btmGuestInfo_Click(object sender, EventArgs e)
         {
+            UpdateCustomerList();
             Toggle_Panel(pnlGuestinfo);
+            
         }
 
         private void btnInvoiceSummary_Click(object sender, EventArgs e)
@@ -658,13 +677,13 @@ namespace Hotel_Management_System
                 check = 1;
             }
 
-            if (totalPrice.Text == "" || emailAddress.Text == "" || phoneNumber.Text == "" || firstName.Text == "" || lastName.Text == "" || middleName.Text == "")
+            if (totalPrice.Text == "0" || emailAddress.Text == "" || phoneNumber.Text == "" || firstName.Text == "" || lastName.Text == "" || middleName.Text == "")
             {
                 check = 1;
             }
             if (check == 1)
             {
-                if (totalPrice.Text == "") MessageBox.Show("Please Select a Correct Room Number and Check Out Date", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (totalPrice.Text == "0") MessageBox.Show("Please Select a Correct Room Number and Check Out Date", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else MessageBox.Show("Please Complete All Necessary Information", "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -857,18 +876,7 @@ namespace Hotel_Management_System
                 }
                 MessageBox.Show("Room #" + cmbRoomNumber.SelectedValue + " Booked Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
                 BookSuccess();
-                ClearP2Info();
-                ClearP3Info();
-                ClearP4Info();
-                ClearP5Info();
-                UpdateRecordID();
-                tax.Text = "0";
-                roomCost.Text = "0";
-                addPersonInfo1.Visible = false;
-                addPersonInfo2.Visible = false;
-                addPersonInfo3.Visible = false;
-                addPersonInfo4.Visible = false;
-                personPanel.Visible = false;
+                
             }
 
         }
@@ -881,7 +889,7 @@ namespace Hotel_Management_System
                 cmbRoomNumber.Enabled = false;
                 dateCheckIn.Enabled = false;
                 dateCheckOut.Enabled = false;
-                roomCost.Text = "";
+                roomCost.Text = "0";
                 cmbRoomNumber.DataSource = clear;
                 cmbRoomNumber.SelectedIndex = 0;
             }
@@ -1137,14 +1145,43 @@ namespace Hotel_Management_System
             addPersonInfo4.Visible = false;
         }
 
-        private void customerList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
 
         #endregion
 
+        #endregion
+
+        #region GuestInfoSection
+        private void customerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (customerList.SelectedIndex != -1)
+            {
+                using (SqliteConnection connection = new SqliteConnection(connectionString))
+                {
+                    string query = "select * from v_GuestBookingSummary where GuestID = '" + vGuestID[customerList.SelectedIndex] + "'";
+                    connection.Open();
+                    using (SqliteCommand command = new SqliteCommand(query, connection))
+                    {
+
+                        using (SqliteDataReader reader = command.ExecuteReader())
+                        {
+                            reader.Read();
+                            giFirstName.Text = reader.GetValue(1).ToString();
+                            giMiddleName.Text = reader.GetValue(2).ToString();
+                            giLastName.Text = reader.GetValue(3).ToString();
+                            giEmailAddress.Text = reader.GetValue(4).ToString();
+                            giContactNumber.Text = reader.GetValue(5).ToString();
+                            giTotalBooked.Text = reader.GetValue(6).ToString();
+                            giMostBookedRoom.Text = reader.GetValue(7).ToString();
+                            reader.Close();
+                        }
+
+                    }
+                    connection.Close();
+                }
+            }
+            
+        }
         #endregion
 
 
