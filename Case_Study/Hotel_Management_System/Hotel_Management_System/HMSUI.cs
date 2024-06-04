@@ -1167,7 +1167,7 @@ namespace Hotel_Management_System
 
                         using (SqliteDataReader reader = command.ExecuteReader())
                         {
-                            reader.Read();//bug no data exist
+                            reader.Read();//bug no data exist //Add more info to Database with dates from march and april
                             giFirstName.Text = reader.GetValue(1).ToString();
                             giMiddleName.Text = reader.GetValue(2).ToString();
                             giLastName.Text = reader.GetValue(3).ToString();
@@ -1194,9 +1194,19 @@ namespace Hotel_Management_System
 
         private void dateStart_ValueChanged(object sender, EventArgs e)
         {
-            if (dateStart.Value.Day.CompareTo(dateStart.Value.AddDays(30)) <= dateNow.MaxDate.Day)
+           TimeSpan difference = DateTime.Now.Date - dateStart.Value;
+            if (difference.TotalDays > 30)
             {
-                dateNow.Value = dateStart.Value.AddDays(30);
+                DateTime startOfMonth = new DateTime(dateStart.Value.Year, dateStart.Value.Month, 01);
+                dateStart.Value = startOfMonth;
+
+                int daysInMonth = DateTime.DaysInMonth(dateStart.Value.Year, dateStart.Value.Month);
+                DateTime endOfMonth = new DateTime(dateStart.Value.Year, dateStart.Value.Month, daysInMonth);
+                dateNow.Value = endOfMonth;
+            }
+            else
+            {
+                dateNow.Value = DateTime.Today;
             }
         }
 
