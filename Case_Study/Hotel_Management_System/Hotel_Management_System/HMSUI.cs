@@ -1198,6 +1198,7 @@ namespace Hotel_Management_System
             if (difference.TotalDays > 30)
             {
                 DateTime startOfMonth = new DateTime(dateStart.Value.Year, dateStart.Value.Month, 01);
+                monthNow.Text = monthNow1.Text = dateStart.Value.ToString("MMMM");
                 dateStart.Value = startOfMonth;
 
                 int daysInMonth = DateTime.DaysInMonth(dateStart.Value.Year, dateStart.Value.Month);
@@ -1207,8 +1208,10 @@ namespace Hotel_Management_System
             else
             {
                 dateNow.Value = DateTime.Today;
+                monthNow.Text = monthNow1.Text = dateStart.Value.Month.ToString();
             }
         }
+
 
         #endregion
 

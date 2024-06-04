@@ -2227,7 +2227,7 @@
             // 
             label93.AutoSize = true;
             label93.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label93.Location = new Point(30, 20);
+            label93.Location = new Point(20, 20);
             label93.Name = "label93";
             label93.Size = new Size(262, 31);
             label93.TabIndex = 0;
@@ -2692,10 +2692,10 @@
             // monthNow
             // 
             monthNow.AutoSize = true;
-            monthNow.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            monthNow.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             monthNow.Location = new Point(74, 79);
             monthNow.Name = "monthNow";
-            monthNow.Size = new Size(51, 28);
+            monthNow.Size = new Size(56, 28);
             monthNow.TabIndex = 1;
             monthNow.Text = "June";
             // 
@@ -2712,7 +2712,7 @@
             // 
             label91.AutoSize = true;
             label91.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label91.Location = new Point(25, 20);
+            label91.Location = new Point(16, 20);
             label91.Name = "label91";
             label91.Size = new Size(293, 31);
             label91.TabIndex = 0;
