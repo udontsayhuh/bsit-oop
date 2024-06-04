@@ -2326,11 +2326,11 @@
             Controls.Add(label32);
             Controls.Add(label34);
             Controls.Add(label25);
-            Controls.Add(pnlGuestinfo);
             Controls.Add(pnlReports);
             Controls.Add(pnlInvoiceSummary);
             Controls.Add(pnlRoomInfo);
             Controls.Add(pnlBook);
+            Controls.Add(pnlGuestinfo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "HMSUI";
             StartPosition = FormStartPosition.CenterScreen;
