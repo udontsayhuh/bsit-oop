@@ -208,11 +208,70 @@
             label11 = new Label();
             label9 = new Label();
             pnlReports = new Panel();
+            dateStart = new DateTimePicker();
+            dateNow = new DateTimePicker();
+            panel2 = new Panel();
+            panel4 = new Panel();
+            label133 = new Label();
+            label93 = new Label();
+            label132 = new Label();
+            label122 = new Label();
+            label131 = new Label();
+            label145 = new Label();
+            label139 = new Label();
+            roSingleRoom = new Label();
+            label144 = new Label();
+            label138 = new Label();
+            label130 = new Label();
+            roStandardDoubleRoom = new Label();
+            label143 = new Label();
+            label137 = new Label();
+            label129 = new Label();
+            label142 = new Label();
+            label136 = new Label();
+            roStandardTwinRoom = new Label();
+            label141 = new Label();
+            label135 = new Label();
+            label140 = new Label();
+            roPresidentSuite = new Label();
+            label134 = new Label();
+            roDeluxeDoubleRoom = new Label();
+            roStudioRoom = new Label();
+            pnlAttendantBookingCount = new Panel();
+            monthNow1 = new Label();
+            label92 = new Label();
+            label113 = new Label();
+            label109 = new Label();
+            label112 = new Label();
+            label110 = new Label();
+            label111 = new Label();
+            msTotalBookedCount = new Label();
+            msMTDLateTimeInCount = new Label();
+            msBookCountToday = new Label();
+            msMTDBookedCount = new Label();
+            msDailyAverageBook = new Label();
+            pnlMTDBookedCount = new Panel();
+            label101 = new Label();
+            label100 = new Label();
+            label99 = new Label();
+            label97 = new Label();
+            label95 = new Label();
+            tbcPresidentSuite = new Label();
+            tbcStudioRoom = new Label();
+            tbcDeluxeDoubleRoom = new Label();
+            tbcStandardTwinRoom = new Label();
+            tbcStandardDoubleRoom = new Label();
+            tbcSingleRoom = new Label();
+            monthNow = new Label();
+            label94 = new Label();
+            label91 = new Label();
             label21 = new Label();
             label22 = new Label();
             label23 = new Label();
             label24 = new Label();
             label8 = new Label();
+            label103 = new Label();
+            label102 = new Label();
             label25 = new Label();
             label32 = new Label();
             label33 = new Label();
@@ -232,61 +291,6 @@
             label80 = new Label();
             textBox24 = new TextBox();
             label81 = new Label();
-            pnlMTDBookedCount = new Panel();
-            panel2 = new Panel();
-            pnlAttendantBookingCount = new Panel();
-            panel4 = new Panel();
-            label91 = new Label();
-            label92 = new Label();
-            label93 = new Label();
-            label94 = new Label();
-            label95 = new Label();
-            label97 = new Label();
-            label99 = new Label();
-            label100 = new Label();
-            label101 = new Label();
-            tbcSingleRoom = new Label();
-            tbcStandardDoubleRoom = new Label();
-            tbcStandardTwinRoom = new Label();
-            tbcDeluxeDoubleRoom = new Label();
-            tbcStudioRoom = new Label();
-            tbcPresidentSuite = new Label();
-            monthNow = new Label();
-            label109 = new Label();
-            label110 = new Label();
-            label111 = new Label();
-            label112 = new Label();
-            label113 = new Label();
-            monthNow1 = new Label();
-            msBookCountToday = new Label();
-            msDailyAverageBook = new Label();
-            msTotalBookedCount = new Label();
-            msMTDBookedCount = new Label();
-            msMTDLateTimeInCount = new Label();
-            label122 = new Label();
-            roSingleRoom = new Label();
-            roStandardDoubleRoom = new Label();
-            roStandardTwinRoom = new Label();
-            roDeluxeDoubleRoom = new Label();
-            roStudioRoom = new Label();
-            roPresidentSuite = new Label();
-            label129 = new Label();
-            label130 = new Label();
-            label131 = new Label();
-            label132 = new Label();
-            label133 = new Label();
-            label134 = new Label();
-            label135 = new Label();
-            label136 = new Label();
-            label137 = new Label();
-            label138 = new Label();
-            label139 = new Label();
-            label140 = new Label();
-            label141 = new Label();
-            label142 = new Label();
-            label143 = new Label();
-            label144 = new Label();
-            label145 = new Label();
             ((System.ComponentModel.ISupportInitialize)btnMinimize).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnClose).BeginInit();
             pnlAttendant.SuspendLayout();
@@ -311,10 +315,10 @@
             ((System.ComponentModel.ISupportInitialize)db_RoomInformation).BeginInit();
             pnlInvoiceSummary.SuspendLayout();
             pnlReports.SuspendLayout();
-            addPersonInfo5.SuspendLayout();
-            pnlMTDBookedCount.SuspendLayout();
-            pnlAttendantBookingCount.SuspendLayout();
             panel4.SuspendLayout();
+            pnlAttendantBookingCount.SuspendLayout();
+            pnlMTDBookedCount.SuspendLayout();
+            addPersonInfo5.SuspendLayout();
             SuspendLayout();
             // 
             // btnMinimize
@@ -2132,6 +2136,8 @@
             // 
             pnlReports.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlReports.BackColor = Color.FromArgb(207, 192, 175);
+            pnlReports.Controls.Add(dateStart);
+            pnlReports.Controls.Add(dateNow);
             pnlReports.Controls.Add(panel2);
             pnlReports.Controls.Add(panel4);
             pnlReports.Controls.Add(pnlAttendantBookingCount);
@@ -2141,11 +2147,576 @@
             pnlReports.Controls.Add(label23);
             pnlReports.Controls.Add(label24);
             pnlReports.Controls.Add(label8);
+            pnlReports.Controls.Add(label103);
+            pnlReports.Controls.Add(label102);
             pnlReports.Location = new Point(57, 160);
             pnlReports.Name = "pnlReports";
             pnlReports.Size = new Size(1574, 892);
             pnlReports.TabIndex = 106;
             pnlReports.Visible = false;
+            // 
+            // dateStart
+            // 
+            dateStart.CustomFormat = "MMMM dd     yyyy";
+            dateStart.Format = DateTimePickerFormat.Custom;
+            dateStart.Location = new Point(94, 72);
+            dateStart.Name = "dateStart";
+            dateStart.Size = new Size(190, 27);
+            dateStart.TabIndex = 16;
+            dateStart.ValueChanged += dateStart_ValueChanged;
+            // 
+            // dateNow
+            // 
+            dateNow.CustomFormat = "MMMM dd     yyyy";
+            dateNow.Enabled = false;
+            dateNow.Format = DateTimePickerFormat.Custom;
+            dateNow.Location = new Point(368, 72);
+            dateNow.Name = "dateNow";
+            dateNow.Size = new Size(205, 27);
+            dateNow.TabIndex = 15;
+            // 
+            // panel2
+            // 
+            panel2.Location = new Point(44, 584);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1485, 269);
+            panel2.TabIndex = 14;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(label133);
+            panel4.Controls.Add(label93);
+            panel4.Controls.Add(label132);
+            panel4.Controls.Add(label122);
+            panel4.Controls.Add(label131);
+            panel4.Controls.Add(label145);
+            panel4.Controls.Add(label139);
+            panel4.Controls.Add(roSingleRoom);
+            panel4.Controls.Add(label144);
+            panel4.Controls.Add(label138);
+            panel4.Controls.Add(label130);
+            panel4.Controls.Add(roStandardDoubleRoom);
+            panel4.Controls.Add(label143);
+            panel4.Controls.Add(label137);
+            panel4.Controls.Add(label129);
+            panel4.Controls.Add(label142);
+            panel4.Controls.Add(label136);
+            panel4.Controls.Add(roStandardTwinRoom);
+            panel4.Controls.Add(label141);
+            panel4.Controls.Add(label135);
+            panel4.Controls.Add(label140);
+            panel4.Controls.Add(roPresidentSuite);
+            panel4.Controls.Add(label134);
+            panel4.Controls.Add(roDeluxeDoubleRoom);
+            panel4.Controls.Add(roStudioRoom);
+            panel4.Location = new Point(1065, 121);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(463, 413);
+            panel4.TabIndex = 14;
+            // 
+            // label133
+            // 
+            label133.AutoSize = true;
+            label133.Location = new Point(62, 303);
+            label133.Name = "label133";
+            label133.Size = new Size(107, 20);
+            label133.TabIndex = 1;
+            label133.Text = "President Suite";
+            // 
+            // label93
+            // 
+            label93.AutoSize = true;
+            label93.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label93.Location = new Point(30, 20);
+            label93.Name = "label93";
+            label93.Size = new Size(262, 31);
+            label93.TabIndex = 0;
+            label93.Text = "Rooms Occupied Today";
+            // 
+            // label132
+            // 
+            label132.AutoSize = true;
+            label132.Location = new Point(62, 259);
+            label132.Name = "label132";
+            label132.Size = new Size(96, 20);
+            label132.TabIndex = 1;
+            label132.Text = "Studio Room";
+            // 
+            // label122
+            // 
+            label122.AutoSize = true;
+            label122.Location = new Point(62, 85);
+            label122.Name = "label122";
+            label122.Size = new Size(94, 20);
+            label122.TabIndex = 1;
+            label122.Text = "Single Room";
+            // 
+            // label131
+            // 
+            label131.AutoSize = true;
+            label131.Location = new Point(62, 214);
+            label131.Name = "label131";
+            label131.Size = new Size(152, 20);
+            label131.TabIndex = 1;
+            label131.Text = "Deluxe Double Room";
+            // 
+            // label145
+            // 
+            label145.AutoSize = true;
+            label145.Location = new Point(319, 85);
+            label145.Name = "label145";
+            label145.Size = new Size(25, 20);
+            label145.TabIndex = 1;
+            label145.Text = "25";
+            // 
+            // label139
+            // 
+            label139.AutoSize = true;
+            label139.Location = new Point(307, 85);
+            label139.Name = "label139";
+            label139.Size = new Size(15, 20);
+            label139.TabIndex = 1;
+            label139.Text = "/";
+            // 
+            // roSingleRoom
+            // 
+            roSingleRoom.AutoSize = true;
+            roSingleRoom.Location = new Point(293, 85);
+            roSingleRoom.Name = "roSingleRoom";
+            roSingleRoom.Size = new Size(17, 20);
+            roSingleRoom.TabIndex = 1;
+            roSingleRoom.Text = "0";
+            // 
+            // label144
+            // 
+            label144.AutoSize = true;
+            label144.Location = new Point(319, 128);
+            label144.Name = "label144";
+            label144.Size = new Size(25, 20);
+            label144.TabIndex = 1;
+            label144.Text = "25";
+            // 
+            // label138
+            // 
+            label138.AutoSize = true;
+            label138.Location = new Point(307, 128);
+            label138.Name = "label138";
+            label138.Size = new Size(15, 20);
+            label138.TabIndex = 1;
+            label138.Text = "/";
+            // 
+            // label130
+            // 
+            label130.AutoSize = true;
+            label130.Location = new Point(62, 171);
+            label130.Name = "label130";
+            label130.Size = new Size(147, 20);
+            label130.TabIndex = 1;
+            label130.Text = "Standard Twin Room";
+            // 
+            // roStandardDoubleRoom
+            // 
+            roStandardDoubleRoom.AutoSize = true;
+            roStandardDoubleRoom.Location = new Point(293, 128);
+            roStandardDoubleRoom.Name = "roStandardDoubleRoom";
+            roStandardDoubleRoom.Size = new Size(17, 20);
+            roStandardDoubleRoom.TabIndex = 1;
+            roStandardDoubleRoom.Text = "0";
+            // 
+            // label143
+            // 
+            label143.AutoSize = true;
+            label143.Location = new Point(319, 171);
+            label143.Name = "label143";
+            label143.Size = new Size(25, 20);
+            label143.TabIndex = 1;
+            label143.Text = "25";
+            // 
+            // label137
+            // 
+            label137.AutoSize = true;
+            label137.Location = new Point(307, 171);
+            label137.Name = "label137";
+            label137.Size = new Size(15, 20);
+            label137.TabIndex = 1;
+            label137.Text = "/";
+            // 
+            // label129
+            // 
+            label129.AutoSize = true;
+            label129.Location = new Point(62, 128);
+            label129.Name = "label129";
+            label129.Size = new Size(166, 20);
+            label129.TabIndex = 1;
+            label129.Text = "Standard Double Room";
+            // 
+            // label142
+            // 
+            label142.AutoSize = true;
+            label142.Location = new Point(319, 303);
+            label142.Name = "label142";
+            label142.Size = new Size(25, 20);
+            label142.TabIndex = 1;
+            label142.Text = "12";
+            // 
+            // label136
+            // 
+            label136.AutoSize = true;
+            label136.Location = new Point(307, 303);
+            label136.Name = "label136";
+            label136.Size = new Size(15, 20);
+            label136.TabIndex = 1;
+            label136.Text = "/";
+            // 
+            // roStandardTwinRoom
+            // 
+            roStandardTwinRoom.AutoSize = true;
+            roStandardTwinRoom.Location = new Point(293, 171);
+            roStandardTwinRoom.Name = "roStandardTwinRoom";
+            roStandardTwinRoom.Size = new Size(17, 20);
+            roStandardTwinRoom.TabIndex = 1;
+            roStandardTwinRoom.Text = "0";
+            // 
+            // label141
+            // 
+            label141.AutoSize = true;
+            label141.Location = new Point(319, 214);
+            label141.Name = "label141";
+            label141.Size = new Size(25, 20);
+            label141.TabIndex = 1;
+            label141.Text = "25";
+            // 
+            // label135
+            // 
+            label135.AutoSize = true;
+            label135.Location = new Point(307, 214);
+            label135.Name = "label135";
+            label135.Size = new Size(15, 20);
+            label135.TabIndex = 1;
+            label135.Text = "/";
+            // 
+            // label140
+            // 
+            label140.AutoSize = true;
+            label140.Location = new Point(319, 260);
+            label140.Name = "label140";
+            label140.Size = new Size(25, 20);
+            label140.TabIndex = 1;
+            label140.Text = "25";
+            // 
+            // roPresidentSuite
+            // 
+            roPresidentSuite.AutoSize = true;
+            roPresidentSuite.Location = new Point(293, 303);
+            roPresidentSuite.Name = "roPresidentSuite";
+            roPresidentSuite.Size = new Size(17, 20);
+            roPresidentSuite.TabIndex = 1;
+            roPresidentSuite.Text = "0";
+            // 
+            // label134
+            // 
+            label134.AutoSize = true;
+            label134.Location = new Point(307, 260);
+            label134.Name = "label134";
+            label134.Size = new Size(15, 20);
+            label134.TabIndex = 1;
+            label134.Text = "/";
+            // 
+            // roDeluxeDoubleRoom
+            // 
+            roDeluxeDoubleRoom.AutoSize = true;
+            roDeluxeDoubleRoom.Location = new Point(293, 214);
+            roDeluxeDoubleRoom.Name = "roDeluxeDoubleRoom";
+            roDeluxeDoubleRoom.Size = new Size(17, 20);
+            roDeluxeDoubleRoom.TabIndex = 1;
+            roDeluxeDoubleRoom.Text = "0";
+            // 
+            // roStudioRoom
+            // 
+            roStudioRoom.AutoSize = true;
+            roStudioRoom.Location = new Point(293, 260);
+            roStudioRoom.Name = "roStudioRoom";
+            roStudioRoom.Size = new Size(17, 20);
+            roStudioRoom.TabIndex = 1;
+            roStudioRoom.Text = "0";
+            // 
+            // pnlAttendantBookingCount
+            // 
+            pnlAttendantBookingCount.Controls.Add(monthNow1);
+            pnlAttendantBookingCount.Controls.Add(label92);
+            pnlAttendantBookingCount.Controls.Add(label113);
+            pnlAttendantBookingCount.Controls.Add(label109);
+            pnlAttendantBookingCount.Controls.Add(label112);
+            pnlAttendantBookingCount.Controls.Add(label110);
+            pnlAttendantBookingCount.Controls.Add(label111);
+            pnlAttendantBookingCount.Controls.Add(msTotalBookedCount);
+            pnlAttendantBookingCount.Controls.Add(msMTDLateTimeInCount);
+            pnlAttendantBookingCount.Controls.Add(msBookCountToday);
+            pnlAttendantBookingCount.Controls.Add(msMTDBookedCount);
+            pnlAttendantBookingCount.Controls.Add(msDailyAverageBook);
+            pnlAttendantBookingCount.Location = new Point(605, 121);
+            pnlAttendantBookingCount.Name = "pnlAttendantBookingCount";
+            pnlAttendantBookingCount.Size = new Size(429, 413);
+            pnlAttendantBookingCount.TabIndex = 14;
+            // 
+            // monthNow1
+            // 
+            monthNow1.AutoSize = true;
+            monthNow1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            monthNow1.Location = new Point(48, 216);
+            monthNow1.Name = "monthNow1";
+            monthNow1.Size = new Size(64, 31);
+            monthNow1.TabIndex = 0;
+            monthNow1.Text = "June";
+            // 
+            // label92
+            // 
+            label92.AutoSize = true;
+            label92.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label92.Location = new Point(15, 20);
+            label92.Name = "label92";
+            label92.Size = new Size(106, 31);
+            label92.TabIndex = 0;
+            label92.Text = "My Stats";
+            // 
+            // label113
+            // 
+            label113.AutoSize = true;
+            label113.Location = new Point(70, 315);
+            label113.Name = "label113";
+            label113.Size = new Size(176, 20);
+            label113.TabIndex = 1;
+            label113.Text = "Total MTD Booked Count";
+            // 
+            // label109
+            // 
+            label109.AutoSize = true;
+            label109.Location = new Point(68, 66);
+            label109.Name = "label109";
+            label109.Size = new Size(140, 20);
+            label109.TabIndex = 1;
+            label109.Text = "Book Count (Today)";
+            // 
+            // label112
+            // 
+            label112.AutoSize = true;
+            label112.Location = new Point(68, 272);
+            label112.Name = "label112";
+            label112.Size = new Size(208, 20);
+            label112.TabIndex = 1;
+            label112.Text = "Total MTD Late Time-In Count";
+            // 
+            // label110
+            // 
+            label110.AutoSize = true;
+            label110.Location = new Point(68, 109);
+            label110.Name = "label110";
+            label110.Size = new Size(183, 20);
+            label110.TabIndex = 1;
+            label110.Text = "Daily Average Book Count";
+            // 
+            // label111
+            // 
+            label111.AutoSize = true;
+            label111.Location = new Point(68, 152);
+            label111.Name = "label111";
+            label111.Size = new Size(140, 20);
+            label111.TabIndex = 1;
+            label111.Text = "Total Booked Count";
+            // 
+            // msTotalBookedCount
+            // 
+            msTotalBookedCount.AutoSize = true;
+            msTotalBookedCount.Location = new Point(314, 152);
+            msTotalBookedCount.Name = "msTotalBookedCount";
+            msTotalBookedCount.Size = new Size(17, 20);
+            msTotalBookedCount.TabIndex = 1;
+            msTotalBookedCount.Text = "0";
+            // 
+            // msMTDLateTimeInCount
+            // 
+            msMTDLateTimeInCount.AutoSize = true;
+            msMTDLateTimeInCount.Location = new Point(314, 272);
+            msMTDLateTimeInCount.Name = "msMTDLateTimeInCount";
+            msMTDLateTimeInCount.Size = new Size(17, 20);
+            msMTDLateTimeInCount.TabIndex = 1;
+            msMTDLateTimeInCount.Text = "0";
+            // 
+            // msBookCountToday
+            // 
+            msBookCountToday.AutoSize = true;
+            msBookCountToday.Location = new Point(314, 66);
+            msBookCountToday.Name = "msBookCountToday";
+            msBookCountToday.Size = new Size(17, 20);
+            msBookCountToday.TabIndex = 1;
+            msBookCountToday.Text = "0";
+            // 
+            // msMTDBookedCount
+            // 
+            msMTDBookedCount.AutoSize = true;
+            msMTDBookedCount.Location = new Point(314, 315);
+            msMTDBookedCount.Name = "msMTDBookedCount";
+            msMTDBookedCount.Size = new Size(17, 20);
+            msMTDBookedCount.TabIndex = 1;
+            msMTDBookedCount.Text = "0";
+            // 
+            // msDailyAverageBook
+            // 
+            msDailyAverageBook.AutoSize = true;
+            msDailyAverageBook.Location = new Point(314, 109);
+            msDailyAverageBook.Name = "msDailyAverageBook";
+            msDailyAverageBook.Size = new Size(17, 20);
+            msDailyAverageBook.TabIndex = 1;
+            msDailyAverageBook.Text = "0";
+            // 
+            // pnlMTDBookedCount
+            // 
+            pnlMTDBookedCount.Controls.Add(label101);
+            pnlMTDBookedCount.Controls.Add(label100);
+            pnlMTDBookedCount.Controls.Add(label99);
+            pnlMTDBookedCount.Controls.Add(label97);
+            pnlMTDBookedCount.Controls.Add(label95);
+            pnlMTDBookedCount.Controls.Add(tbcPresidentSuite);
+            pnlMTDBookedCount.Controls.Add(tbcStudioRoom);
+            pnlMTDBookedCount.Controls.Add(tbcDeluxeDoubleRoom);
+            pnlMTDBookedCount.Controls.Add(tbcStandardTwinRoom);
+            pnlMTDBookedCount.Controls.Add(tbcStandardDoubleRoom);
+            pnlMTDBookedCount.Controls.Add(tbcSingleRoom);
+            pnlMTDBookedCount.Controls.Add(monthNow);
+            pnlMTDBookedCount.Controls.Add(label94);
+            pnlMTDBookedCount.Controls.Add(label91);
+            pnlMTDBookedCount.Location = new Point(37, 121);
+            pnlMTDBookedCount.Name = "pnlMTDBookedCount";
+            pnlMTDBookedCount.Size = new Size(536, 413);
+            pnlMTDBookedCount.TabIndex = 14;
+            // 
+            // label101
+            // 
+            label101.AutoSize = true;
+            label101.Location = new Point(124, 341);
+            label101.Name = "label101";
+            label101.Size = new Size(107, 20);
+            label101.TabIndex = 1;
+            label101.Text = "President Suite";
+            // 
+            // label100
+            // 
+            label100.AutoSize = true;
+            label100.Location = new Point(124, 297);
+            label100.Name = "label100";
+            label100.Size = new Size(96, 20);
+            label100.TabIndex = 1;
+            label100.Text = "Studio Room";
+            // 
+            // label99
+            // 
+            label99.AutoSize = true;
+            label99.Location = new Point(124, 252);
+            label99.Name = "label99";
+            label99.Size = new Size(152, 20);
+            label99.TabIndex = 1;
+            label99.Text = "Deluxe Double Room";
+            // 
+            // label97
+            // 
+            label97.AutoSize = true;
+            label97.Location = new Point(124, 209);
+            label97.Name = "label97";
+            label97.Size = new Size(147, 20);
+            label97.TabIndex = 1;
+            label97.Text = "Standard Twin Room";
+            // 
+            // label95
+            // 
+            label95.AutoSize = true;
+            label95.Location = new Point(124, 166);
+            label95.Name = "label95";
+            label95.Size = new Size(166, 20);
+            label95.TabIndex = 1;
+            label95.Text = "Standard Double Room";
+            // 
+            // tbcPresidentSuite
+            // 
+            tbcPresidentSuite.AutoSize = true;
+            tbcPresidentSuite.Location = new Point(355, 341);
+            tbcPresidentSuite.Name = "tbcPresidentSuite";
+            tbcPresidentSuite.Size = new Size(17, 20);
+            tbcPresidentSuite.TabIndex = 1;
+            tbcPresidentSuite.Text = "0";
+            // 
+            // tbcStudioRoom
+            // 
+            tbcStudioRoom.AutoSize = true;
+            tbcStudioRoom.Location = new Point(355, 298);
+            tbcStudioRoom.Name = "tbcStudioRoom";
+            tbcStudioRoom.Size = new Size(17, 20);
+            tbcStudioRoom.TabIndex = 1;
+            tbcStudioRoom.Text = "0";
+            // 
+            // tbcDeluxeDoubleRoom
+            // 
+            tbcDeluxeDoubleRoom.AutoSize = true;
+            tbcDeluxeDoubleRoom.Location = new Point(355, 252);
+            tbcDeluxeDoubleRoom.Name = "tbcDeluxeDoubleRoom";
+            tbcDeluxeDoubleRoom.Size = new Size(17, 20);
+            tbcDeluxeDoubleRoom.TabIndex = 1;
+            tbcDeluxeDoubleRoom.Text = "0";
+            // 
+            // tbcStandardTwinRoom
+            // 
+            tbcStandardTwinRoom.AutoSize = true;
+            tbcStandardTwinRoom.Location = new Point(355, 209);
+            tbcStandardTwinRoom.Name = "tbcStandardTwinRoom";
+            tbcStandardTwinRoom.Size = new Size(17, 20);
+            tbcStandardTwinRoom.TabIndex = 1;
+            tbcStandardTwinRoom.Text = "0";
+            // 
+            // tbcStandardDoubleRoom
+            // 
+            tbcStandardDoubleRoom.AutoSize = true;
+            tbcStandardDoubleRoom.Location = new Point(355, 166);
+            tbcStandardDoubleRoom.Name = "tbcStandardDoubleRoom";
+            tbcStandardDoubleRoom.Size = new Size(17, 20);
+            tbcStandardDoubleRoom.TabIndex = 1;
+            tbcStandardDoubleRoom.Text = "0";
+            // 
+            // tbcSingleRoom
+            // 
+            tbcSingleRoom.AutoSize = true;
+            tbcSingleRoom.Location = new Point(355, 123);
+            tbcSingleRoom.Name = "tbcSingleRoom";
+            tbcSingleRoom.Size = new Size(17, 20);
+            tbcSingleRoom.TabIndex = 1;
+            tbcSingleRoom.Text = "0";
+            // 
+            // monthNow
+            // 
+            monthNow.AutoSize = true;
+            monthNow.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            monthNow.Location = new Point(74, 79);
+            monthNow.Name = "monthNow";
+            monthNow.Size = new Size(51, 28);
+            monthNow.TabIndex = 1;
+            monthNow.Text = "June";
+            // 
+            // label94
+            // 
+            label94.AutoSize = true;
+            label94.Location = new Point(124, 123);
+            label94.Name = "label94";
+            label94.Size = new Size(94, 20);
+            label94.TabIndex = 1;
+            label94.Text = "Single Room";
+            // 
+            // label91
+            // 
+            label91.AutoSize = true;
+            label91.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label91.Location = new Point(25, 20);
+            label91.Name = "label91";
+            label91.Size = new Size(293, 31);
+            label91.TabIndex = 0;
+            label91.Text = "MTD Total Booking Count";
             // 
             // label21
             // 
@@ -2196,6 +2767,24 @@
             label8.Size = new Size(106, 20);
             label8.TabIndex = 0;
             label8.Text = "Reports Panel";
+            // 
+            // label103
+            // 
+            label103.AutoSize = true;
+            label103.Location = new Point(341, 77);
+            label103.Name = "label103";
+            label103.Size = new Size(28, 20);
+            label103.TabIndex = 1;
+            label103.Text = "To:";
+            // 
+            // label102
+            // 
+            label102.AutoSize = true;
+            label102.Location = new Point(49, 77);
+            label102.Name = "label102";
+            label102.Size = new Size(46, 20);
+            label102.TabIndex = 1;
+            label102.Text = "From:";
             // 
             // label25
             // 
@@ -2368,549 +2957,6 @@
             label81.TabIndex = 115;
             label81.Text = "Guest ID:";
             // 
-            // pnlMTDBookedCount
-            // 
-            pnlMTDBookedCount.Controls.Add(label101);
-            pnlMTDBookedCount.Controls.Add(label100);
-            pnlMTDBookedCount.Controls.Add(label99);
-            pnlMTDBookedCount.Controls.Add(label97);
-            pnlMTDBookedCount.Controls.Add(label95);
-            pnlMTDBookedCount.Controls.Add(tbcPresidentSuite);
-            pnlMTDBookedCount.Controls.Add(tbcStudioRoom);
-            pnlMTDBookedCount.Controls.Add(tbcDeluxeDoubleRoom);
-            pnlMTDBookedCount.Controls.Add(tbcStandardTwinRoom);
-            pnlMTDBookedCount.Controls.Add(tbcStandardDoubleRoom);
-            pnlMTDBookedCount.Controls.Add(tbcSingleRoom);
-            pnlMTDBookedCount.Controls.Add(monthNow);
-            pnlMTDBookedCount.Controls.Add(label94);
-            pnlMTDBookedCount.Controls.Add(label91);
-            pnlMTDBookedCount.Location = new Point(37, 121);
-            pnlMTDBookedCount.Name = "pnlMTDBookedCount";
-            pnlMTDBookedCount.Size = new Size(536, 413);
-            pnlMTDBookedCount.TabIndex = 14;
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(44, 584);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1485, 269);
-            panel2.TabIndex = 14;
-            // 
-            // pnlAttendantBookingCount
-            // 
-            pnlAttendantBookingCount.Controls.Add(monthNow1);
-            pnlAttendantBookingCount.Controls.Add(label92);
-            pnlAttendantBookingCount.Controls.Add(label113);
-            pnlAttendantBookingCount.Controls.Add(label109);
-            pnlAttendantBookingCount.Controls.Add(label112);
-            pnlAttendantBookingCount.Controls.Add(label110);
-            pnlAttendantBookingCount.Controls.Add(label111);
-            pnlAttendantBookingCount.Controls.Add(msTotalBookedCount);
-            pnlAttendantBookingCount.Controls.Add(msMTDLateTimeInCount);
-            pnlAttendantBookingCount.Controls.Add(msBookCountToday);
-            pnlAttendantBookingCount.Controls.Add(msMTDBookedCount);
-            pnlAttendantBookingCount.Controls.Add(msDailyAverageBook);
-            pnlAttendantBookingCount.Location = new Point(605, 121);
-            pnlAttendantBookingCount.Name = "pnlAttendantBookingCount";
-            pnlAttendantBookingCount.Size = new Size(429, 413);
-            pnlAttendantBookingCount.TabIndex = 14;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(label133);
-            panel4.Controls.Add(label93);
-            panel4.Controls.Add(label132);
-            panel4.Controls.Add(label122);
-            panel4.Controls.Add(label131);
-            panel4.Controls.Add(label145);
-            panel4.Controls.Add(label139);
-            panel4.Controls.Add(roSingleRoom);
-            panel4.Controls.Add(label144);
-            panel4.Controls.Add(label138);
-            panel4.Controls.Add(label130);
-            panel4.Controls.Add(roStandardDoubleRoom);
-            panel4.Controls.Add(label143);
-            panel4.Controls.Add(label137);
-            panel4.Controls.Add(label129);
-            panel4.Controls.Add(label142);
-            panel4.Controls.Add(label136);
-            panel4.Controls.Add(roStandardTwinRoom);
-            panel4.Controls.Add(label141);
-            panel4.Controls.Add(label135);
-            panel4.Controls.Add(label140);
-            panel4.Controls.Add(roPresidentSuite);
-            panel4.Controls.Add(label134);
-            panel4.Controls.Add(roDeluxeDoubleRoom);
-            panel4.Controls.Add(roStudioRoom);
-            panel4.Location = new Point(1065, 121);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(463, 413);
-            panel4.TabIndex = 14;
-            // 
-            // label91
-            // 
-            label91.AutoSize = true;
-            label91.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label91.Location = new Point(25, 20);
-            label91.Name = "label91";
-            label91.Size = new Size(293, 31);
-            label91.TabIndex = 0;
-            label91.Text = "MTD Total Booking Count";
-            // 
-            // label92
-            // 
-            label92.AutoSize = true;
-            label92.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label92.Location = new Point(15, 20);
-            label92.Name = "label92";
-            label92.Size = new Size(106, 31);
-            label92.TabIndex = 0;
-            label92.Text = "My Stats";
-            // 
-            // label93
-            // 
-            label93.AutoSize = true;
-            label93.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label93.Location = new Point(30, 20);
-            label93.Name = "label93";
-            label93.Size = new Size(262, 31);
-            label93.TabIndex = 0;
-            label93.Text = "Rooms Occupied Today";
-            // 
-            // label94
-            // 
-            label94.AutoSize = true;
-            label94.Location = new Point(124, 123);
-            label94.Name = "label94";
-            label94.Size = new Size(94, 20);
-            label94.TabIndex = 1;
-            label94.Text = "Single Room";
-            // 
-            // label95
-            // 
-            label95.AutoSize = true;
-            label95.Location = new Point(124, 166);
-            label95.Name = "label95";
-            label95.Size = new Size(166, 20);
-            label95.TabIndex = 1;
-            label95.Text = "Standard Double Room";
-            // 
-            // label97
-            // 
-            label97.AutoSize = true;
-            label97.Location = new Point(124, 209);
-            label97.Name = "label97";
-            label97.Size = new Size(147, 20);
-            label97.TabIndex = 1;
-            label97.Text = "Standard Twin Room";
-            // 
-            // label99
-            // 
-            label99.AutoSize = true;
-            label99.Location = new Point(124, 252);
-            label99.Name = "label99";
-            label99.Size = new Size(152, 20);
-            label99.TabIndex = 1;
-            label99.Text = "Deluxe Double Room";
-            // 
-            // label100
-            // 
-            label100.AutoSize = true;
-            label100.Location = new Point(124, 297);
-            label100.Name = "label100";
-            label100.Size = new Size(96, 20);
-            label100.TabIndex = 1;
-            label100.Text = "Studio Room";
-            // 
-            // label101
-            // 
-            label101.AutoSize = true;
-            label101.Location = new Point(124, 341);
-            label101.Name = "label101";
-            label101.Size = new Size(107, 20);
-            label101.TabIndex = 1;
-            label101.Text = "President Suite";
-            // 
-            // tbcSingleRoom
-            // 
-            tbcSingleRoom.AutoSize = true;
-            tbcSingleRoom.Location = new Point(355, 123);
-            tbcSingleRoom.Name = "tbcSingleRoom";
-            tbcSingleRoom.Size = new Size(17, 20);
-            tbcSingleRoom.TabIndex = 1;
-            tbcSingleRoom.Text = "0";
-            // 
-            // tbcStandardDoubleRoom
-            // 
-            tbcStandardDoubleRoom.AutoSize = true;
-            tbcStandardDoubleRoom.Location = new Point(355, 166);
-            tbcStandardDoubleRoom.Name = "tbcStandardDoubleRoom";
-            tbcStandardDoubleRoom.Size = new Size(17, 20);
-            tbcStandardDoubleRoom.TabIndex = 1;
-            tbcStandardDoubleRoom.Text = "0";
-            // 
-            // tbcStandardTwinRoom
-            // 
-            tbcStandardTwinRoom.AutoSize = true;
-            tbcStandardTwinRoom.Location = new Point(355, 209);
-            tbcStandardTwinRoom.Name = "tbcStandardTwinRoom";
-            tbcStandardTwinRoom.Size = new Size(17, 20);
-            tbcStandardTwinRoom.TabIndex = 1;
-            tbcStandardTwinRoom.Text = "0";
-            // 
-            // tbcDeluxeDoubleRoom
-            // 
-            tbcDeluxeDoubleRoom.AutoSize = true;
-            tbcDeluxeDoubleRoom.Location = new Point(355, 252);
-            tbcDeluxeDoubleRoom.Name = "tbcDeluxeDoubleRoom";
-            tbcDeluxeDoubleRoom.Size = new Size(17, 20);
-            tbcDeluxeDoubleRoom.TabIndex = 1;
-            tbcDeluxeDoubleRoom.Text = "0";
-            // 
-            // tbcStudioRoom
-            // 
-            tbcStudioRoom.AutoSize = true;
-            tbcStudioRoom.Location = new Point(355, 298);
-            tbcStudioRoom.Name = "tbcStudioRoom";
-            tbcStudioRoom.Size = new Size(17, 20);
-            tbcStudioRoom.TabIndex = 1;
-            tbcStudioRoom.Text = "0";
-            // 
-            // tbcPresidentSuite
-            // 
-            tbcPresidentSuite.AutoSize = true;
-            tbcPresidentSuite.Location = new Point(355, 341);
-            tbcPresidentSuite.Name = "tbcPresidentSuite";
-            tbcPresidentSuite.Size = new Size(17, 20);
-            tbcPresidentSuite.TabIndex = 1;
-            tbcPresidentSuite.Text = "0";
-            // 
-            // monthNow
-            // 
-            monthNow.AutoSize = true;
-            monthNow.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            monthNow.Location = new Point(74, 79);
-            monthNow.Name = "monthNow";
-            monthNow.Size = new Size(51, 28);
-            monthNow.TabIndex = 1;
-            monthNow.Text = "June";
-            // 
-            // label109
-            // 
-            label109.AutoSize = true;
-            label109.Location = new Point(68, 66);
-            label109.Name = "label109";
-            label109.Size = new Size(140, 20);
-            label109.TabIndex = 1;
-            label109.Text = "Book Count (Today)";
-            // 
-            // label110
-            // 
-            label110.AutoSize = true;
-            label110.Location = new Point(68, 109);
-            label110.Name = "label110";
-            label110.Size = new Size(183, 20);
-            label110.TabIndex = 1;
-            label110.Text = "Daily Average Book Count";
-            // 
-            // label111
-            // 
-            label111.AutoSize = true;
-            label111.Location = new Point(68, 152);
-            label111.Name = "label111";
-            label111.Size = new Size(140, 20);
-            label111.TabIndex = 1;
-            label111.Text = "Total Booked Count";
-            // 
-            // label112
-            // 
-            label112.AutoSize = true;
-            label112.Location = new Point(68, 272);
-            label112.Name = "label112";
-            label112.Size = new Size(208, 20);
-            label112.TabIndex = 1;
-            label112.Text = "Total MTD Late Time-In Count";
-            // 
-            // label113
-            // 
-            label113.AutoSize = true;
-            label113.Location = new Point(70, 315);
-            label113.Name = "label113";
-            label113.Size = new Size(176, 20);
-            label113.TabIndex = 1;
-            label113.Text = "Total MTD Booked Count";
-            // 
-            // monthNow1
-            // 
-            monthNow1.AutoSize = true;
-            monthNow1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            monthNow1.Location = new Point(48, 216);
-            monthNow1.Name = "monthNow1";
-            monthNow1.Size = new Size(64, 31);
-            monthNow1.TabIndex = 0;
-            monthNow1.Text = "June";
-            // 
-            // msBookCountToday
-            // 
-            msBookCountToday.AutoSize = true;
-            msBookCountToday.Location = new Point(314, 66);
-            msBookCountToday.Name = "msBookCountToday";
-            msBookCountToday.Size = new Size(17, 20);
-            msBookCountToday.TabIndex = 1;
-            msBookCountToday.Text = "0";
-            // 
-            // msDailyAverageBook
-            // 
-            msDailyAverageBook.AutoSize = true;
-            msDailyAverageBook.Location = new Point(314, 109);
-            msDailyAverageBook.Name = "msDailyAverageBook";
-            msDailyAverageBook.Size = new Size(17, 20);
-            msDailyAverageBook.TabIndex = 1;
-            msDailyAverageBook.Text = "0";
-            // 
-            // msTotalBookedCount
-            // 
-            msTotalBookedCount.AutoSize = true;
-            msTotalBookedCount.Location = new Point(314, 152);
-            msTotalBookedCount.Name = "msTotalBookedCount";
-            msTotalBookedCount.Size = new Size(17, 20);
-            msTotalBookedCount.TabIndex = 1;
-            msTotalBookedCount.Text = "0";
-            // 
-            // msMTDBookedCount
-            // 
-            msMTDBookedCount.AutoSize = true;
-            msMTDBookedCount.Location = new Point(314, 315);
-            msMTDBookedCount.Name = "msMTDBookedCount";
-            msMTDBookedCount.Size = new Size(17, 20);
-            msMTDBookedCount.TabIndex = 1;
-            msMTDBookedCount.Text = "0";
-            // 
-            // msMTDLateTimeInCount
-            // 
-            msMTDLateTimeInCount.AutoSize = true;
-            msMTDLateTimeInCount.Location = new Point(314, 272);
-            msMTDLateTimeInCount.Name = "msMTDLateTimeInCount";
-            msMTDLateTimeInCount.Size = new Size(17, 20);
-            msMTDLateTimeInCount.TabIndex = 1;
-            msMTDLateTimeInCount.Text = "0";
-            // 
-            // label122
-            // 
-            label122.AutoSize = true;
-            label122.Location = new Point(62, 85);
-            label122.Name = "label122";
-            label122.Size = new Size(94, 20);
-            label122.TabIndex = 1;
-            label122.Text = "Single Room";
-            // 
-            // roSingleRoom
-            // 
-            roSingleRoom.AutoSize = true;
-            roSingleRoom.Location = new Point(293, 85);
-            roSingleRoom.Name = "roSingleRoom";
-            roSingleRoom.Size = new Size(17, 20);
-            roSingleRoom.TabIndex = 1;
-            roSingleRoom.Text = "0";
-            // 
-            // roStandardDoubleRoom
-            // 
-            roStandardDoubleRoom.AutoSize = true;
-            roStandardDoubleRoom.Location = new Point(293, 128);
-            roStandardDoubleRoom.Name = "roStandardDoubleRoom";
-            roStandardDoubleRoom.Size = new Size(17, 20);
-            roStandardDoubleRoom.TabIndex = 1;
-            roStandardDoubleRoom.Text = "0";
-            // 
-            // roStandardTwinRoom
-            // 
-            roStandardTwinRoom.AutoSize = true;
-            roStandardTwinRoom.Location = new Point(293, 171);
-            roStandardTwinRoom.Name = "roStandardTwinRoom";
-            roStandardTwinRoom.Size = new Size(17, 20);
-            roStandardTwinRoom.TabIndex = 1;
-            roStandardTwinRoom.Text = "0";
-            // 
-            // roDeluxeDoubleRoom
-            // 
-            roDeluxeDoubleRoom.AutoSize = true;
-            roDeluxeDoubleRoom.Location = new Point(293, 214);
-            roDeluxeDoubleRoom.Name = "roDeluxeDoubleRoom";
-            roDeluxeDoubleRoom.Size = new Size(17, 20);
-            roDeluxeDoubleRoom.TabIndex = 1;
-            roDeluxeDoubleRoom.Text = "0";
-            // 
-            // roStudioRoom
-            // 
-            roStudioRoom.AutoSize = true;
-            roStudioRoom.Location = new Point(293, 260);
-            roStudioRoom.Name = "roStudioRoom";
-            roStudioRoom.Size = new Size(17, 20);
-            roStudioRoom.TabIndex = 1;
-            roStudioRoom.Text = "0";
-            // 
-            // roPresidentSuite
-            // 
-            roPresidentSuite.AutoSize = true;
-            roPresidentSuite.Location = new Point(293, 303);
-            roPresidentSuite.Name = "roPresidentSuite";
-            roPresidentSuite.Size = new Size(17, 20);
-            roPresidentSuite.TabIndex = 1;
-            roPresidentSuite.Text = "0";
-            // 
-            // label129
-            // 
-            label129.AutoSize = true;
-            label129.Location = new Point(62, 128);
-            label129.Name = "label129";
-            label129.Size = new Size(166, 20);
-            label129.TabIndex = 1;
-            label129.Text = "Standard Double Room";
-            // 
-            // label130
-            // 
-            label130.AutoSize = true;
-            label130.Location = new Point(62, 171);
-            label130.Name = "label130";
-            label130.Size = new Size(147, 20);
-            label130.TabIndex = 1;
-            label130.Text = "Standard Twin Room";
-            // 
-            // label131
-            // 
-            label131.AutoSize = true;
-            label131.Location = new Point(62, 214);
-            label131.Name = "label131";
-            label131.Size = new Size(152, 20);
-            label131.TabIndex = 1;
-            label131.Text = "Deluxe Double Room";
-            // 
-            // label132
-            // 
-            label132.AutoSize = true;
-            label132.Location = new Point(62, 259);
-            label132.Name = "label132";
-            label132.Size = new Size(96, 20);
-            label132.TabIndex = 1;
-            label132.Text = "Studio Room";
-            // 
-            // label133
-            // 
-            label133.AutoSize = true;
-            label133.Location = new Point(62, 303);
-            label133.Name = "label133";
-            label133.Size = new Size(107, 20);
-            label133.TabIndex = 1;
-            label133.Text = "President Suite";
-            // 
-            // label134
-            // 
-            label134.AutoSize = true;
-            label134.Location = new Point(307, 260);
-            label134.Name = "label134";
-            label134.Size = new Size(15, 20);
-            label134.TabIndex = 1;
-            label134.Text = "/";
-            // 
-            // label135
-            // 
-            label135.AutoSize = true;
-            label135.Location = new Point(307, 214);
-            label135.Name = "label135";
-            label135.Size = new Size(15, 20);
-            label135.TabIndex = 1;
-            label135.Text = "/";
-            // 
-            // label136
-            // 
-            label136.AutoSize = true;
-            label136.Location = new Point(307, 303);
-            label136.Name = "label136";
-            label136.Size = new Size(15, 20);
-            label136.TabIndex = 1;
-            label136.Text = "/";
-            // 
-            // label137
-            // 
-            label137.AutoSize = true;
-            label137.Location = new Point(307, 171);
-            label137.Name = "label137";
-            label137.Size = new Size(15, 20);
-            label137.TabIndex = 1;
-            label137.Text = "/";
-            // 
-            // label138
-            // 
-            label138.AutoSize = true;
-            label138.Location = new Point(307, 128);
-            label138.Name = "label138";
-            label138.Size = new Size(15, 20);
-            label138.TabIndex = 1;
-            label138.Text = "/";
-            // 
-            // label139
-            // 
-            label139.AutoSize = true;
-            label139.Location = new Point(307, 85);
-            label139.Name = "label139";
-            label139.Size = new Size(15, 20);
-            label139.TabIndex = 1;
-            label139.Text = "/";
-            // 
-            // label140
-            // 
-            label140.AutoSize = true;
-            label140.Location = new Point(319, 260);
-            label140.Name = "label140";
-            label140.Size = new Size(25, 20);
-            label140.TabIndex = 1;
-            label140.Text = "25";
-            // 
-            // label141
-            // 
-            label141.AutoSize = true;
-            label141.Location = new Point(319, 214);
-            label141.Name = "label141";
-            label141.Size = new Size(25, 20);
-            label141.TabIndex = 1;
-            label141.Text = "25";
-            // 
-            // label142
-            // 
-            label142.AutoSize = true;
-            label142.Location = new Point(319, 303);
-            label142.Name = "label142";
-            label142.Size = new Size(25, 20);
-            label142.TabIndex = 1;
-            label142.Text = "12";
-            // 
-            // label143
-            // 
-            label143.AutoSize = true;
-            label143.Location = new Point(319, 171);
-            label143.Name = "label143";
-            label143.Size = new Size(25, 20);
-            label143.TabIndex = 1;
-            label143.Text = "25";
-            // 
-            // label144
-            // 
-            label144.AutoSize = true;
-            label144.Location = new Point(319, 128);
-            label144.Name = "label144";
-            label144.Size = new Size(25, 20);
-            label144.TabIndex = 1;
-            label144.Text = "25";
-            // 
-            // label145
-            // 
-            label145.AutoSize = true;
-            label145.Location = new Point(319, 85);
-            label145.Name = "label145";
-            label145.Size = new Size(25, 20);
-            label145.TabIndex = 1;
-            label145.Text = "25";
-            // 
             // HMSUI
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -2977,14 +3023,14 @@
             pnlInvoiceSummary.PerformLayout();
             pnlReports.ResumeLayout(false);
             pnlReports.PerformLayout();
-            addPersonInfo5.ResumeLayout(false);
-            addPersonInfo5.PerformLayout();
-            pnlMTDBookedCount.ResumeLayout(false);
-            pnlMTDBookedCount.PerformLayout();
-            pnlAttendantBookingCount.ResumeLayout(false);
-            pnlAttendantBookingCount.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            pnlAttendantBookingCount.ResumeLayout(false);
+            pnlAttendantBookingCount.PerformLayout();
+            pnlMTDBookedCount.ResumeLayout(false);
+            pnlMTDBookedCount.PerformLayout();
+            addPersonInfo5.ResumeLayout(false);
+            addPersonInfo5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -3250,5 +3296,9 @@
         private Label label135;
         private Label label140;
         private Label label134;
+        private DateTimePicker dateStart;
+        private DateTimePicker dateNow;
+        private Label label103;
+        private Label label102;
     }
 }

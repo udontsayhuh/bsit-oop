@@ -202,7 +202,7 @@ namespace Hotel_Management_System
                             if ((string)reader.GetValue(2) == "N/A")
                             {
                                 FullName.Add(reader.GetValue(0) + ", " + reader.GetValue(1));
-                                vGuestID.Add(reader.GetValue(3).ToString()) ;
+                                vGuestID.Add(reader.GetValue(3).ToString());
                             }
                             else
                             {
@@ -626,6 +626,8 @@ namespace Hotel_Management_System
 
         private void btnReports_Click(object sender, EventArgs e)
         {
+            dateNow.MaxDate = DateTime.Now;
+            dateStart.MaxDate = DateTime.Now;
             Toggle_Panel(pnlReports);
         }
 
@@ -644,7 +646,7 @@ namespace Hotel_Management_System
         {
             UpdateCustomerList();
             Toggle_Panel(pnlGuestinfo);
-            
+
         }
 
         private void btnInvoiceSummary_Click(object sender, EventArgs e)
@@ -794,13 +796,13 @@ namespace Hotel_Management_System
                     string query4 = "update t_RoomAvailability set Status = 'Occupied' where RoomID ='" + RoomID + "'";
                     string query9 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + recordID + "','" + Int32.Parse(transactionID.Text) + "','" + dateCheckIn.Value.ToString() + "','')";
                     connection.Open();
-                    
+
                     if (addPersonInfo1.Visible == true || addPersonInfo2.Visible == true || addPersonInfo3.Visible == true || addPersonInfo4.Visible == true)
                     {
                         if (addPersonInfo1.Visible == true)
                         {
                             string query5 = "insert into t_BookedGuest (TransactionID, GuestID, RoomID, BookingID, TransactionDate) values ('" + (Int32.Parse(transactionID.Text) + 1) + "', '" + Int32.Parse(p2GuestID.Text) + "', '" + RoomID + "', '" + Int32.Parse(bookingID.Text) + "', '" + DateTime.Now.ToString() + "')";
-                            string query51 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + (recordID + 1)+ "','" + (Int32.Parse(transactionID.Text) + 1) + "','" + dateCheckIn.Value.ToString() + "','Null')";
+                            string query51 = "insert into t_GuestStatus (RecordID, TransactionID, CheckIn, CheckOut) values ('" + (recordID + 1) + "','" + (Int32.Parse(transactionID.Text) + 1) + "','" + dateCheckIn.Value.ToString() + "','Null')";
                             using (SqliteCommand command = new SqliteCommand(query5, connection))
                             {
                                 command.ExecuteNonQuery();
@@ -850,7 +852,7 @@ namespace Hotel_Management_System
                             }
                         }
                     }
-                    
+
                     using (SqliteCommand command = new SqliteCommand(query, connection))
                     {
                         command.ExecuteNonQuery();
@@ -876,7 +878,7 @@ namespace Hotel_Management_System
                 }
                 MessageBox.Show("Room #" + cmbRoomNumber.SelectedValue + " Booked Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
                 BookSuccess();
-                
+
             }
 
         }
@@ -1165,7 +1167,7 @@ namespace Hotel_Management_System
 
                         using (SqliteDataReader reader = command.ExecuteReader())
                         {
-                            reader.Read();
+                            reader.Read();//bug no data exist
                             giFirstName.Text = reader.GetValue(1).ToString();
                             giMiddleName.Text = reader.GetValue(2).ToString();
                             giLastName.Text = reader.GetValue(3).ToString();
@@ -1180,15 +1182,23 @@ namespace Hotel_Management_System
                     connection.Close();
                 }
             }
-            
+
         }
+
+
         #endregion
 
         #region ReportsSummary
 
 
 
-
+        private void dateStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateStart.Value.Day.CompareTo(dateStart.Value.AddDays(30)) <= dateNow.MaxDate.Day)
+            {
+                dateNow.Value = dateStart.Value.AddDays(30);
+            }
+        }
 
         #endregion
 
