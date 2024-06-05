@@ -64,6 +64,7 @@ namespace Hotel_Management_System
             UpdateRoomNumberAvailability();
             UpdateRoomStatusID();
             UpdateRecordID();
+            MTDUpdateValues();
             PopulateRoomInformations();
             dateCheckIn.MinDate = DateTime.Now;
             dateCheckOut.MinDate = DateTime.Now;
@@ -77,6 +78,16 @@ namespace Hotel_Management_System
             roomInformation.Text = description[0];
             roomInclusion.Text = inclusion[0];
 
+        }
+        public void MTDUpdateValues()
+        {
+            using(SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                string query = "select ";
+                using(SqliteConnection command = new SqliteCommand())
+                connection.Close();
+            }
         }
         public void PopulateRoomsInformation()
         {
@@ -537,6 +548,9 @@ namespace Hotel_Management_System
             tabRoomTypes.SelectedIndex = 6;
 
         }
+        
+
+
         #region ClearingSection
         public void ClearRoomAvailabilityList()
         {
@@ -1188,10 +1202,8 @@ namespace Hotel_Management_System
 
         #endregion
 
+
         #region ReportsSummary
-
-
-
         private void dateStart_ValueChanged(object sender, EventArgs e)
         {
            TimeSpan difference = DateTime.Now.Date - dateStart.Value;
@@ -1210,7 +1222,11 @@ namespace Hotel_Management_System
                 dateNow.Value = DateTime.Today;
                 monthNow.Text = monthNow1.Text = dateStart.Value.Month.ToString();
             }
+            MTDUpdateValues();
         }
+
+        
+
 
 
         #endregion
