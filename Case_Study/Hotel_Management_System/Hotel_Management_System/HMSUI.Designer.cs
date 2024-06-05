@@ -857,7 +857,7 @@
             // 
             // dateCheckOut
             // 
-            dateCheckOut.CustomFormat = "MM/dd/yyyy";
+            dateCheckOut.CustomFormat = "MMMM dd    yyyy";
             dateCheckOut.Enabled = false;
             dateCheckOut.Format = DateTimePickerFormat.Custom;
             dateCheckOut.Location = new Point(932, 118);
@@ -880,7 +880,7 @@
             // 
             // dateCheckIn
             // 
-            dateCheckIn.CustomFormat = "MM/dd/yyyy";
+            dateCheckIn.CustomFormat = "MMMM dd    yyyy";
             dateCheckIn.Enabled = false;
             dateCheckIn.Format = DateTimePickerFormat.Custom;
             dateCheckIn.Location = new Point(541, 118);
@@ -902,9 +902,13 @@
             // phoneNumber
             // 
             phoneNumber.Location = new Point(514, 199);
+            phoneNumber.MaxLength = 12;
             phoneNumber.Name = "phoneNumber";
             phoneNumber.Size = new Size(228, 27);
             phoneNumber.TabIndex = 25;
+            phoneNumber.Text = "09";
+            phoneNumber.KeyDown += phoneNumber_KeyDown;
+            phoneNumber.KeyPress += phoneNumber_KeyPress;
             // 
             // label90
             // 
@@ -1009,6 +1013,7 @@
             // 
             // emailAddress
             // 
+            emailAddress.BackColor = SystemColors.Window;
             emailAddress.Location = new Point(236, 199);
             emailAddress.Name = "emailAddress";
             emailAddress.Size = new Size(228, 27);
@@ -1499,9 +1504,13 @@
             // p2PhoneNumber
             // 
             p2PhoneNumber.Location = new Point(292, 31);
+            p2PhoneNumber.MaxLength = 12;
             p2PhoneNumber.Name = "p2PhoneNumber";
             p2PhoneNumber.Size = new Size(228, 27);
             p2PhoneNumber.TabIndex = 121;
+            p2PhoneNumber.Text = "09";
+            p2PhoneNumber.KeyDown += p2PhoneNumber_KeyDown;
+            p2PhoneNumber.KeyPress += p2PhoneNumber_KeyPress;
             // 
             // label42
             // 
@@ -1618,9 +1627,13 @@
             // p3PhoneNumber
             // 
             p3PhoneNumber.Location = new Point(292, 29);
+            p3PhoneNumber.MaxLength = 12;
             p3PhoneNumber.Name = "p3PhoneNumber";
             p3PhoneNumber.Size = new Size(228, 27);
             p3PhoneNumber.TabIndex = 121;
+            p3PhoneNumber.Text = "09";
+            p3PhoneNumber.KeyDown += p3PhoneNumber_KeyDown;
+            p3PhoneNumber.KeyPress += p3PhoneNumber_KeyPress;
             // 
             // label53
             // 
@@ -1737,9 +1750,13 @@
             // p5ContactNumber
             // 
             p5ContactNumber.Location = new Point(292, 28);
+            p5ContactNumber.MaxLength = 12;
             p5ContactNumber.Name = "p5ContactNumber";
             p5ContactNumber.Size = new Size(228, 27);
             p5ContactNumber.TabIndex = 121;
+            p5ContactNumber.Text = "09";
+            p5ContactNumber.KeyDown += p5ContactNumber_KeyDown;
+            p5ContactNumber.KeyPress += p5ContactNumber_KeyPress;
             // 
             // label82
             // 
@@ -1856,9 +1873,13 @@
             // p4ContactNumber
             // 
             p4ContactNumber.Location = new Point(292, 27);
+            p4ContactNumber.MaxLength = 12;
             p4ContactNumber.Name = "p4ContactNumber";
             p4ContactNumber.Size = new Size(228, 27);
             p4ContactNumber.TabIndex = 121;
+            p4ContactNumber.Text = "09";
+            p4ContactNumber.KeyDown += p4ContactNumber_KeyDown;
+            p4ContactNumber.KeyPress += p4ContactNumber_KeyPress;
             // 
             // label59
             // 
@@ -2972,16 +2993,16 @@
             Controls.Add(btnMinimize);
             Controls.Add(btnClose);
             Controls.Add(pnlAttendant);
+            Controls.Add(pnlBook);
+            Controls.Add(pnlGuestinfo);
+            Controls.Add(pnlReports);
+            Controls.Add(pnlInvoiceSummary);
+            Controls.Add(pnlRoomInfo);
             Controls.Add(label33);
             Controls.Add(label35);
             Controls.Add(label32);
             Controls.Add(label34);
             Controls.Add(label25);
-            Controls.Add(pnlReports);
-            Controls.Add(pnlInvoiceSummary);
-            Controls.Add(pnlRoomInfo);
-            Controls.Add(pnlBook);
-            Controls.Add(pnlGuestinfo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "HMSUI";
             StartPosition = FormStartPosition.CenterScreen;

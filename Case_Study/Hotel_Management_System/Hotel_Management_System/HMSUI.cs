@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -81,11 +82,11 @@ namespace Hotel_Management_System
         }
         public void MTDUpdateValues()
         {
-            using(SqliteConnection connection = new SqliteConnection(connectionString))
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 string query = "select ";
-                using(SqliteConnection command = new SqliteCommand())
+                //using(SqliteConnection command = new SqliteCommand()) after you fix the textbox, this is where you left off, trying to add data on the count of the MTDs on startDate changed
                 connection.Close();
             }
         }
@@ -335,14 +336,12 @@ namespace Hotel_Management_System
                     }
                     connection.Close();
                 }
+                EmailFormatChecker(emailAddress);
             }
-            else
+            else if(check == "")
             {
                 guestID.Text = tempGuestID;
-                phoneNumber.Text = "";
-                firstName.Text = "";
-                middleName.Text = "";
-                lastName.Text = "";
+                EmailFormatChecker(emailAddress);
             }
 
         }
@@ -373,14 +372,13 @@ namespace Hotel_Management_System
                     }
                     connection.Close();
                 }
+                EmailFormatChecker(p2EmailAddress);
             }
-            else
+            else if (check == "")
             {
                 p2GuestID.Text = p2TempGuestID;
-                p2PhoneNumber.Text = "";
-                p2FirstName.Text = "";
-                p2MiddleName.Text = "";
-                p2LastName.Text = "";
+                EmailFormatChecker(p2EmailAddress);
+
             }
         }
         private void p3EmailAddress_Leave(object sender, EventArgs e)
@@ -410,14 +408,13 @@ namespace Hotel_Management_System
                     }
                     connection.Close();
                 }
+                EmailFormatChecker(p3EmailAddress);
             }
-            else
+            else if (check == "")
             {
                 p3GuestID.Text = p3TempGuestID;
-                p3PhoneNumber.Text = "";
-                p3FirstName.Text = "";
-                p3MiddleName.Text = "";
-                p3LastName.Text = "";
+                EmailFormatChecker(p3EmailAddress);
+
             }
         }
         private void p4EmailAddress_Leave(object sender, EventArgs e)
@@ -447,14 +444,12 @@ namespace Hotel_Management_System
                     }
                     connection.Close();
                 }
+                EmailFormatChecker(p4EmailAddress);
             }
-            else
+            else if (check == "")
             {
                 p4GuestID.Text = p4TempGuestID;
-                p4ContactNumber.Text = "";
-                p4FirstName.Text = "";
-                p4MiddleName.Text = "";
-                p4LastName.Text = "";
+                EmailFormatChecker(p4EmailAddress);
             }
         }
         private void p5EmailAddress_Leave(object sender, EventArgs e)
@@ -484,14 +479,13 @@ namespace Hotel_Management_System
                     }
                     connection.Close();
                 }
+                EmailFormatChecker(p5EmailAddress);
             }
-            else
+            else if (check == "")
             {
                 p5GuestID.Text = p5TempGuestID;
-                p5ContactNumber.Text = "";
-                p5FirstName.Text = "";
-                p5MiddleName.Text = "";
-                p5LastName.Text = "";
+                EmailFormatChecker(p5EmailAddress);
+
             }
         }
         public void PopulateRoomInformations()
@@ -535,7 +529,7 @@ namespace Hotel_Management_System
             firstName.Text = "";
             middleName.Text = "";
             lastName.Text = "";
-            phoneNumber.Text = "";
+            phoneNumber.Text = "09";
             tax.Text = "0";
             subTotal.Text = "0";
             totalPrice.Text = "0";
@@ -548,7 +542,7 @@ namespace Hotel_Management_System
             tabRoomTypes.SelectedIndex = 6;
 
         }
-        
+
 
 
         #region ClearingSection
@@ -570,7 +564,7 @@ namespace Hotel_Management_System
         public void ClearP2Info()
         {
             p2EmailAddress.Text = "";
-            p2PhoneNumber.Text = "";
+            p2PhoneNumber.Text = "09";
             p2FirstName.Text = "";
             p2MiddleName.Text = "";
             p2LastName.Text = "";
@@ -578,7 +572,7 @@ namespace Hotel_Management_System
         public void ClearP3Info()
         {
             p3EmailAddress.Text = "";
-            p3PhoneNumber.Text = "";
+            p3PhoneNumber.Text = "09";
             p3FirstName.Text = "";
             p3MiddleName.Text = "";
             p3LastName.Text = "";
@@ -586,7 +580,7 @@ namespace Hotel_Management_System
         public void ClearP4Info()
         {
             p4EmailAddress.Text = "";
-            p4ContactNumber.Text = "";
+            p4ContactNumber.Text = "09";
             p4FirstName.Text = "";
             p4MiddleName.Text = "";
             p4LastName.Text = "";
@@ -594,7 +588,7 @@ namespace Hotel_Management_System
         public void ClearP5Info()
         {
             p5EmailAddress.Text = "";
-            p5ContactNumber.Text = "";
+            p5ContactNumber.Text = "09";
             p5FirstName.Text = "";
             p5MiddleName.Text = "";
             p5LastName.Text = "";
@@ -1166,6 +1160,139 @@ namespace Hotel_Management_System
 
         #endregion
 
+
+        #region TextBoxFormatSection
+
+        #region PhoneNumberFormat
+
+        #region TextBoxContentController
+        private void PhoneNumberContentControl(object sender, KeyPressEventArgs e)
+        {
+            TextBox textbox = (TextBox)sender;
+            int cursorPos = textbox.SelectionStart;
+            char ch = e.KeyChar;
+            if ((e.KeyChar == 8 || e.KeyChar == 46) && cursorPos <= 2)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (!char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+        }
+        private void SuperTwoChars(object sender, KeyEventArgs e)
+        {
+            TextBox textbox = (TextBox)sender;
+            if (textbox.SelectionStart < 2 && (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete))
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
+        private void PatchLimits(TextBox textBox)
+        {
+            //This helper function took 2 hours to find in stackoverflow (:
+            textBox.KeyDown += SuperTwoChars;
+            textBox.KeyPress += PhoneNumberContentControl;
+        }
+        #endregion
+
+        private void phoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PatchLimits(phoneNumber);
+        }
+
+
+        private void p2PhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PatchLimits(p2PhoneNumber);
+        }
+
+
+        private void p3PhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PatchLimits(p3PhoneNumber);
+        }
+
+
+        private void p4ContactNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PatchLimits(p4ContactNumber);
+        }
+
+
+        private void p5ContactNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            PatchLimits(p5ContactNumber);
+        }
+
+        private void phoneNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            PatchLimits(phoneNumber);
+        }
+
+        private void p2PhoneNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            PatchLimits(p2PhoneNumber);
+        }
+
+        private void p3PhoneNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            PatchLimits(p3PhoneNumber);
+        }
+
+        private void p4ContactNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            PatchLimits(p4ContactNumber);
+        }
+
+        private void p5ContactNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            PatchLimits(p5ContactNumber);
+        }
+
+
+
+        #endregion
+
+        #region EmailAddressFormat
+        
+        private void EmailFormatChecker(TextBox textBox)
+        {
+            if (textBox.Text.Length > 0)
+            {
+                int counter = 0;
+                foreach (char letter in textBox.Text)
+                {
+                    if (letter == '@')
+                    {
+                        counter += 1;
+                    }
+                }
+                if (counter == 0)
+                {
+                    textBox.BackColor = Color.RosyBrown;
+                    btnNewBook.Enabled = false;
+                }
+                else if (counter == 1) 
+                {
+                    textBox.BackColor = SystemColors.Window;
+                    btnNewBook.Enabled = true;
+                }
+            }
+            else
+            {
+                btnNewBook.Enabled = true;
+                textBox.BackColor = SystemColors.Window;
+            }
+        }
+
+        #endregion
+
+
+        #endregion
+
         #endregion
 
         #region GuestInfoSection
@@ -1207,11 +1334,10 @@ namespace Hotel_Management_System
         #region ReportsSummary
         private void dateStart_ValueChanged(object sender, EventArgs e)
         {
-           TimeSpan difference = DateTime.Now.Date - dateStart.Value;
+            TimeSpan difference = DateTime.Now.Date - dateStart.Value;
             if (difference.TotalDays > 30)
             {
                 DateTime startOfMonth = new DateTime(dateStart.Value.Year, dateStart.Value.Month, 01);
-                monthNow.Text = monthNow1.Text = dateStart.Value.ToString("MMMM");
                 dateStart.Value = startOfMonth;
 
                 int daysInMonth = DateTime.DaysInMonth(dateStart.Value.Year, dateStart.Value.Month);
@@ -1221,12 +1347,16 @@ namespace Hotel_Management_System
             else
             {
                 dateNow.Value = DateTime.Today;
+                
                 monthNow.Text = monthNow1.Text = dateStart.Value.Month.ToString();
             }
+            monthNow.Text = monthNow1.Text = dateStart.Value.ToString("MMMM");
             MTDUpdateValues();
         }
-
         
+        
+        
+
 
 
 
