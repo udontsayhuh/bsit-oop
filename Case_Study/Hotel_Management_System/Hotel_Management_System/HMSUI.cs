@@ -1309,7 +1309,8 @@ namespace Hotel_Management_System
 
                         using (SqliteDataReader reader = command.ExecuteReader())
                         {
-                            reader.Read();//bug no data exist //Add more info to Database with dates from march and april
+                            
+                            reader.Read();
                             giFirstName.Text = reader.GetValue(1).ToString();
                             giMiddleName.Text = reader.GetValue(2).ToString();
                             giLastName.Text = reader.GetValue(3).ToString();
