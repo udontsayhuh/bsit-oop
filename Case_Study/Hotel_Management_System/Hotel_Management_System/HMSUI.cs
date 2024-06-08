@@ -1339,20 +1339,55 @@ namespace Hotel_Management_System
             if (difference.TotalDays > 30)
             {
                 DateTime startOfMonth = new DateTime(dateStart.Value.Year, dateStart.Value.Month, 01);
+                dateStart.MinDate = startOfMonth;
+                dateStart.MaxDate = DateTime.Now.Date;
                 dateStart.Value = startOfMonth;
 
                 int daysInMonth = DateTime.DaysInMonth(dateStart.Value.Year, dateStart.Value.Month);
                 DateTime endOfMonth = new DateTime(dateStart.Value.Year, dateStart.Value.Month, daysInMonth);
+                dateNow.MinDate = startOfMonth;
+                dateNow.MaxDate = endOfMonth;
                 dateNow.Value = endOfMonth;
-
-                
-
             }
             else
             {
-                dateNow.Value = DateTime.Today;
+                DateTime startOfMonth = new DateTime(dateStart.Value.Year, dateStart.Value.Month, 01);
+                dateNow.MaxDate = DateTime.Now.Date;
+                dateNow.MinDate = startOfMonth;
+                dateStart.Value = startOfMonth;
+                dateNow.Value = DateTime.Now.Date;
+            }
+            using(SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                string query = "select distinct RoomType, SUM(CASE WHEN DATE(TransactionDate) BETWEEN '"+dateStart.Value.ToString("yyyy-MM-dd")+ "' AND '"+dateNow.Value.ToString("yyyy-MM-dd")+"' THEN 1 ELSE 0 END) AS BookedCount from v_BookedRoomHistory group by RoomType";
+                connection.Open();
+                    using (SqliteCommand command = new SqliteCommand(query, connection)) { 
+                    
+                        using(SqliteDataReader reader = command.ExecuteReader())
+                        {
+                            List<Int64> BookedList = new List<Int64> { };
+                            Int64 sum =0;
+                            DataTable dataTable = new DataTable();
+                            while (reader.Read())
+                            {
+                                BookedList.Add(reader.GetInt64(1));
+                                sum += reader.GetInt64(1);
+                            }
+                            tbcDeluxeDoubleRoom.Text = BookedList[0].ToString();
+                            tbcPresidentSuite.Text = BookedList[1].ToString();
+                            tbcSingleRoom.Text = BookedList[2].ToString();
+                            tbcStandardDoubleRoom.Text = BookedList[3].ToString();
+                            tbcStandardTwinRoom.Text = BookedList[4].ToString();
+                            tbcStudioRoom.Text = BookedList[5].ToString();
+                            
+                        }
+
+                    }
+                    connection.Close();
+
                 
-                monthNow.Text = monthNow1.Text = dateStart.Value.Month.ToString();
+
+
             }
             monthNow.Text = monthNow1.Text = dateStart.Value.ToString("MMMM");
             MTDUpdateValues();
