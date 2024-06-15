@@ -67,6 +67,7 @@ namespace Hotel_Management_System
             UpdateRecordID();
             MTDUpdateValues();
             PopulateRoomInformations();
+            lblLoggedIn.Text = NameLog;
             dateCheckIn.MinDate = DateTime.Now;
             dateCheckOut.MinDate = DateTime.Now;
             lblDate.Text = DateTime.Now.Date.ToString("MM/dd/yyyy dddd");
