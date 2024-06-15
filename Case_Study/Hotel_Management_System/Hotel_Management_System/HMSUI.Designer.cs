@@ -2993,9 +2993,6 @@
             Controls.Add(btnMinimize);
             Controls.Add(btnClose);
             Controls.Add(pnlAttendant);
-            Controls.Add(pnlReports);
-            Controls.Add(pnlInvoiceSummary);
-            Controls.Add(pnlRoomInfo);
             Controls.Add(pnlBook);
             Controls.Add(pnlGuestinfo);
             Controls.Add(label33);
@@ -3003,6 +3000,9 @@
             Controls.Add(label32);
             Controls.Add(label34);
             Controls.Add(label25);
+            Controls.Add(pnlReports);
+            Controls.Add(pnlInvoiceSummary);
+            Controls.Add(pnlRoomInfo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "HMSUI";
             StartPosition = FormStartPosition.CenterScreen;
