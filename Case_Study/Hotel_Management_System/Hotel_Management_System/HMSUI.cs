@@ -1396,7 +1396,7 @@ namespace Hotel_Management_System
         
         
 
-
+        //4:55 Added new table on database to handle attendant booking count
 
 
         #endregion
